@@ -1,0 +1,62 @@
+6702|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6729|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6730|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6733|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6734|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6735|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6736|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6742|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6743|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6744|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6745|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6749|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6750|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6731|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6732|Porte|Entrer:Acheter:Vendre:Deverrouiller:Modifier le prix de vente|84:97:98:100:108
+6763|Enclo|Acceder:Acheter:Vendre:Modifier le prix de vente|175:176:177:178
+6766|Enclo|Acceder:Acheter:Vendre:Modifier le prix de vente|175:176:177:178
+6767|Enclo|Acceder:Acheter:Vendre:Modifier le prix de vente|175:176:177:178
+7000|Zaap|Utiliser:Sauvegarder|114:44
+7026|Zaap|Utiliser:Sauvegarder|114:44
+7029|Zaap|Utiliser:Sauvegarder|114:44
+7350|Coffre|Ouvrir:Deverrouiller|104:106
+7031|Zaapi|Se faire transporter|157
+7030|Zaapi|Se faire transporter|157
+7035|Liste des artisans|Consulter|170
+7020|Enclume magique|Reforger une Hache:Reforger une Pelle:Reforger une Epee:Reforger un Marteau:Reforger une Dague:Resculpter un Arc:Resculpter un Baton:Resculpter une Baguette|115:117:113:116:1:118:120:119
+7021|Concasseur Munster|Briser un Objet:Concasser des ressources|181:121
+7038|Atelier Magique|Ameliorer un Anneau:Ameliorer une Amulette|168:169
+7036|Machine a Coudre Magique|Ameliorer un Sac:Ameliorer un Chapeau:Ameliorer une Cape|167:166:165
+7037|Table Magique|Ameliorer des Bottes:Ameliorer une Ceinture|163:164
+7039|Atelier de Bricolage|Bricoler:Confectionner une clef|171:182
+7007|Concasseur|Moudre:Egrener|47:122
+7008|Atelier|Creer un Anneau|11
+7009|Atelier|Creer une Amulette|12
+7005|Meule|Polir une Pierre|48
+7002|Moule|Fondre|32
+7019|Alambic|Preparer une Potion|23
+7012|Enclume|Forger une Pelle:Forger une Hache:Forger une Faux:Forger une Epee:Forger une Dague:Forger un Marteau:Forger une Pioche:Reparer un Marteau:Reparer une Dague:Reparer une Epee:Reparer une Hache:Reparer une Pelle|21:65:66:20:18:19:67:144:142:145:143:146
+7013|Etabli|Sculpter un Baton:Sculpter un Arc:Sculpter une Baguette:Reparer une Baguette:Reparer un Baton:Reparer un Arc|17:15:16:148:147:149
+7001|Four|Faire des bonbons:Cuire du pain|109:27
+7003|Scie|Scier|101
+7025|Plan de Travail|Preparer|132
+7023|Plan de Travail|Preparer une viande|134
+7011|Table de confection|Confectionner des Bottes:Confectionner une Ceinture|13:14
+7016|Machine a Coudre|Coudre un Chapeau|63
+7015|Machine a Coudre|Coudre un Sac:Coudre une Cape|123:64
+7014|Machine a Coudre|Coudre un Chapeau|63
+7024|Plan de Travail|Vider|133
+7022|Plan de Travail|Preparer un poisson|135
+1862|Statue de classe|Se rendre a Incarnam|183
+1853|Statue de classe|Se rendre a Incarnam|183
+1845|Statue de classe|Se rendre a Incarnam|183
+1855|Statue de classe|Se rendre a Incarnam|183
+1856|Statue de classe|Se rendre a Incarnam|183
+1859|Statue de classe|Se rendre a Incarnam|183
+1860|Statue de classe|Se rendre a Incarnam|183
+1854|Statue de classe|Se rendre a Incarnam|183
+1857|Statue de classe|Se rendre a Incarnam|183
+1858|Statue de classe|Se rendre a Incarnam|183
+1861|Statue de classe|Se rendre a Incarnam|183
+2250|Statue de classe|Se rendre a Incarnam|183
+2319|Statue de classe|Se rendre a Incarnam|183

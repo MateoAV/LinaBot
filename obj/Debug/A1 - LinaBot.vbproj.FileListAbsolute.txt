@@ -1,0 +1,19 @@
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\A1 - LinaBot.exe.config
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\A1 - LinaBot.exe
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\A1 - LinaBot.pdb
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\A1 - LinaBot.xml
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1 - LinaBot.vbprojAssemblyReference.cache
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.Resources.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1 - LinaBot.vbproj.GenerateResource.cache
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1 - LinaBot.vbproj.CoreCompileInputs.cache
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1 - LinaBot.exe
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1 - LinaBot.xml
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1 - LinaBot.pdb
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\log4net.dll
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\ProxySocket.dll
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\SharpZipLib.dll
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\SwfDotNet.IO.dll
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\ProxySocket.xml
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1 - LinaBot.vbproj.CopyComplete
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmDiscord.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.LinaBot.resources

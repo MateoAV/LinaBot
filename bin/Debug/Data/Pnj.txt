@@ -1,0 +1,686 @@
+23|Charlotte
+26|Seline
+35|Laura Soho
+37|Amine
+38|Rish Claymore
+40|Filgar Feel
+41|Setag
+43|Epuop Tik
+45|Rigal Main Crochue
+47|Edrige Valling
+51|Kelog Korflex
+52|Azra Lazarus
+53|Farle Ingalsse
+54|Shika Ingalsse
+57|Bowisse
+58|Hanniboul Smisse
+62|Graham Finame
+66|Ralgout
+78|Gardien du Kanojedo
+80|Grizmine
+81|Linda Malibou
+82|Boude Spenssour
+83|Teransse Houlle
+89|Aria Knofob
+90|Mori Arty
+91|Simgood le marin
+94|Kwaker Vans
+95|Allen Dechakal
+97|Karim Katekit
+100|Banquier
+102|Salamon Rudy
+103|Ely Woullack
+104|Keck Auprune
+107|Lou Pachoups
+108|Ronsha
+109|Ness Laye
+110|Quincy Praïze
+111|Otho Laringo
+112|Ariz
+113|Teha Chicks
+114|Jimmy Rasta
+115|Aga Dou
+118|Heûl Leise
+119|Assistant d'Otomaï
+120|Max
+122|Ali Akelle
+123|Ozen Le sage
+125|Drogho Cralasar
+127|Harry Stote
+129|Eleveur de Dragoeuf
+132|Gregor Mendal
+133|Sosh
+134|Lily
+136|Lily
+139|Logel le Lenald
+140|Lilou la Lenald
+141|Wabbit du Matin Pewlant
+142|Logel le Lenald
+143|Wabbit du Midi Wayonnant
+144|Wabbit du Soiw Woulant
+145|Lenald des Temps Anciens
+146|Wob
+147|Gawde Wabbit
+151|Gropinson Cruaule
+153|Promoteur de l'agence Touriste
+154|Kib Roche
+155|Kanniboul cuisinier
+157|Employe de l'agence Touriste
+161|Kara Hibe
+162|Ortimus
+166|Uba Tesse
+168|Boff Chalon
+169|Vid Cheber
+170|Benn Zin
+173|Rotabla le berger triste
+174|Altaïr
+176|Hel Munster
+177|Altaïr
+178|Don Rouann
+180|Amayiro
+183|Oto Mustam
+184|Tarche
+185|Dame Cloude
+186|Niamuh Boulkier
+187|Shere Hacanon
+188|Finche Aticus
+189|Trev Pelsantery
+190|Rei Rosert
+191|Flora Retnie
+192|Hersa Griffe Sombre
+194|Torche
+197|Leonzi Trool
+198|Tabi de Grace Malcean
+199|Clara Daule
+201|Larry Poller
+204|Vicky Facheyon
+205|Maude Ere
+206|Erem Dran
+207|Larik Oubiac
+208|Nani Tago
+209|Gigi
+210|Neige
+211|Yvan Amarh
+212|Sen Eiser
+213|Galde Avout
+215|Capitaine Alrok
+216|Onnel Passepat
+217|Grace Malcean
+220|Anik Mech
+221|Moub Reicifitra
+223|Doug Tulvin
+227|Dike Tarak
+229|Marsel Leax
+230|Kaze koule
+233|Ture Inge
+236|Connie Vini
+237|Roca Charme
+239|Musa
+242|Mak Gahan
+243|Ivrogne anonyme
+244|Tavernier Tabasse
+245|Seci Ves
+246|Guerrier Brank Thoof
+247|Guerrier Seta Bnamron
+248|Guerrier Tink Berval
+249|Guerrier Kad Maxy
+250|Guerrier Jack Rottance
+251|Guerrier Haco Norss
+252|Guerrier Xale DuGros
+253|Guerrier Nager Nacmeil
+254|Guerrier Sivart Bicelk
+255|Guerrier Bishom Pot
+257|Capitaine Malfe
+258|Fryda Griffe-de-la-Nuit
+259|Rekojel
+261|Kazzy Duno
+262|Allen Tokar
+264|Rafaj
+265|Dante Sion
+266|Baal O'Char
+267|Diabalou
+268|Mimi Fista
+269|Vagabond
+271|Bout d'chair
+272|Roupi Chipon
+273|Tadosse
+274|Rucar
+277|Milone Corichel
+278|Artok
+279|Boulor
+280|Sotsiah Peh
+281|Gymy Ro
+282|ZolTAN
+283|Trysy
+284|Enamira
+285|Fulsura
+287|Tamiat
+288|Koli
+289|Sperwel
+290|Iakos
+291|Sanglier des plaines
+292|Tavernier Bagrutte
+293|Tavernier Alakarte
+297|Oshimo
+298|Nissacram
+301|Gringo
+302|Gringa
+303|Gringu
+304|Gringi
+307|Tabach le Greffier
+308|Aigurraf le Greffier
+309|Ybaul, Greffiere
+310|Kaffra Kyper
+312|Bruli Ounim
+313|Rika Charme
+314|Huta Wouite
+318|Danathor
+319|Rei Nisuc
+320|Trof Hapyus
+321|Krachan Porterr
+322|Kro Burk
+323|Jiaye Djaul
+324|Kwoker Djaul
+325|Ichassi Djaul
+326|Malicia Misere
+327|Reve Nocturne
+328|Aldir Atolmond
+329|Ranj The
+330|Capitaine Essacarf
+331|Houe Dapyus
+332|Goldo Arak
+334|Chevalier Nogard
+335|Sbab
+336|Capitaine Koda
+338|Chef Milicien
+339|Milicien
+341|Raaga
+343|Sentinelle Tevi Lup
+344|Sentinelle Chô Peleux
+345|Sentinelle Yourig Ella
+346|Sentinelle Eche Pediot
+347|Sentinelle Emide Routte
+355|Rimaraf
+356|Mer
+357|Puja Mustam
+358|Gardien Ace Bruth
+359|Ecureuil attachant
+360|Ecureuil savant
+361|Ecureuil seduisant
+362|Ecureuil ambulant
+363|Chevalier Fougarde
+364|Trojen Tihpor
+365|Mulic Bere
+366|Meneur Rocopal
+367|Domen
+373|Ecureuil miraculeux
+379|Brik Enbroc
+380|Frye Handiz
+383|Girle Pylote
+384|Chaki Triss
+386|Pousse-pousse
+387|Yan Chenap
+388|Efu Irtaface
+389|Mama Ayuto
+391|Mam Hikofre
+393|Yova Etna
+394|Marine Lond
+395|Dicenai Lond
+396|Faur Inkaisse
+397|Maxims
+398|Hinss Hairt
+399|Belguel Cul-Talon
+400|Krip Soue
+401|Bullie Duble
+402|Sû Benhir
+403|Frank Genis
+404|Miss Reeze Teurf
+405|Notend Less
+406|Fey Gnan
+407|Pat Pott
+408|Rudla Faurtune
+409|Ze Krow
+410|Ka Tuor
+411|Bouftocornus
+412|Longibouftus
+413|Bworkitus
+414|Dragominotorus
+415|Fleutus Riktus
+416|Gorko Casku
+417|Nours Eulbu
+418|Vylag Hoise
+419|Trool Farceur
+420|Trool Rieur
+421|Trool Blagueur
+423|Silimote Fougaris
+424|Tajide Ragalde
+425|Elisa Granite
+426|Eluhise Valing
+427|Rihine Plehouverte
+428|Sirmine Daguiero
+430|Felenie Grismina
+432|Emilie Yuh
+434|Orlando Peule
+437|Marlonebrando Peule
+438|Ricardo Peule
+439|Bernardo Peule
+440|Edmondo Peule
+441|Ninetainedo Peule
+442|Micado Peule
+443|Makdo Peule
+447|Wally Elconom
+448|Eilof Aledec
+449|Erty Trapchet
+450|Yke Harou
+451|Pleur Nycheuz
+452|Oz Dralett
+453|Marp
+454|Louc Drif
+455|Seria
+457|Soki
+458|Aida
+462|Shani Sings
+463|Sam Croa
+464|Tek Abir
+465|Yve Konpetmin
+467|Alit Elfminate
+468|Menge Paca
+470|Phite Pouque
+471|Allisteria
+472|Saketsu
+473|Montrakwartz
+474|Mon'Hawt'Wit'
+476|Jim Fleps
+477|Grand-mere
+478|Ztiv Oztin
+479|Nepra Lido
+480|Setsinbol
+481|Joe Pierlivet
+482|Deudoine
+483|Ticra
+484|Oli Venders
+485|Clint Pot
+486|Nibe Lulle
+487|Iolo Enchoua
+488|Trois-Fleurs
+489|Howard le Simaisrien
+490|Diver Birel
+492|Touh Flowa
+493|Clyde Peus
+494|Rok Elreuss
+495|Meow Moew
+496|Sadadi Sama
+497|Abrazelon Sixgriffe
+502|Seth Sourcet
+503|Enileda
+504|Leon Edehcub
+505|Gasdaure
+510|Ogivol Scalarcin
+515|Fouduglen l'Ecureuil
+516|Qil Bil
+520|Essiac d'Engrape
+522|Al Etsop
+524|Louse Degraine
+525|Mercenaire d'Astrub
+526|Mercenaire d'Astrub
+527|Mercenaire d'Astrub
+528|Mercenaire d'Astrub
+529|Bouftou apprivoise
+530|Bouftou apprivoise
+531|Bouftou apprivoise
+532|Bouftou apprivoise
+533|Bouftou apprivoise
+534|Uneul Nak
+535|Unortel Nak
+536|Unhorel Nak
+537|Unkouy Nak
+538|Gazpacho
+540|Gazogen
+541|Gazteropod
+542|Gazoline
+543|Ant Emicheun
+545|Gwenolaz Barnumuze
+546|Vendeur de Ressources d'Astrub
+547|Vendeur Forgeron d'Astrub
+548|Vendeur Sculpteur d'Astrub
+549|???
+550|Vendeur Mineur d'Astrub
+551|Vendeur Paysan d'Astrub
+552|Vendeur Cordonnier d'Astrub
+553|Vendeur Boucher d'Astrub
+554|Vendeur Bûcheron d'Astrub
+555|Vendeur Bijoutier d'Astrub
+557|Vendeur Alchimiste d'Astrub
+558|Emia Elliesol
+559|Vendeur Poissonnier d'Astrub
+560|Vendeur Tailleur d'Astrub
+561|Vendeur Boulanger d'Astrub
+562|Vendeur Pêcheur d'Astrub
+563|Vendeur Chasseur d'Astrub
+564|Unterix Unter
+567|Vendeur Forgeron de Bonta
+568|Vendeur Mineur de Bonta
+569|Vendeur Sculpteur de Bonta
+570|Vendeur Alchimiste de Bonta
+571|Vendeur Tailleur de Bonta
+572|Vendeur Bijoutier de Bonta
+573|Vendeur Cordonnier de Bonta
+574|Vendeur de Ressources de Bonta
+575|Vendeur Boulanger de Bonta
+576|Vendeur Paysan de Bonta
+577|Bish Fone
+578|Vendeur Bûcheron de Bonta
+580|Vendeur de Viande de Bonta
+581|Vendeur Forgeron de Brakmar
+582|Vendeur Mineur de Brakmar
+583|Vendeur Sculpteur de Brakmar
+584|Vendeur Alchimiste de Brakmar
+585|Vendeur Tailleur de Brakmar
+586|Vendeur Bijoutier de Brakmar
+587|Vendeur Cordonnier de Brakmar
+588|Vendeur de Ressources de Brakmar
+589|Vendeur Boulanger de Brakmar
+590|Vendeur Paysan de Brakmar
+591|Vendeur Bûcheron de Brakmar
+592|Vendeur de Viande de Brakmar
+593|Vendeur de Poisson de Brakmar
+594|Kana Petch
+596|Chipo Atufe
+597|Ygat Chouse
+599|Cirle Drawde
+600|Latem Sa
+601|Ahenn Peuh
+602|Esuellat
+603|Mercenaire d'Astrub
+604|Mercenaire d'Astrub
+605|Disciple mercenaire
+606|Gardien
+608|Krowbe Jondon
+609|Guy San Nolan
+613|Toyo Dzink
+614|Blouh Beryl
+615|Kernite
+616|Brookite Pyrite
+621|Garde Chopynwa
+622|Narber Dapiwa le Marchand
+623|Surivitna le Shaman
+625|Conseiller Boyowa
+626|Conseiller Legawa
+627|Conseiller Rinsdwa
+628|Conseiller Anshwa
+629|Conseiller Nougwa
+630|Assistant Shaman
+631|Fleurawa la Marchande
+632|Le Grandapan
+633|Ronald le Sage Lenald
+634|Maitre d'Akwadala
+636|Maitre de Feudala
+640|Wanald le Sage Lenald
+641|Maitre de Terrdala
+642|Maitre d'Aerdala
+645|Bouwada
+647|Poochan
+649|Lanma
+650|Sli
+651|Nakunne
+653|Gempa
+654|Maitre Pandasiman
+660|Soukawa le Marchand
+661|Bazarwa la Marchande
+662|Pladawa
+663|Binzawa le Marchand
+664|Maitre du Pandawushu
+665|Fourbyawa le Marchand
+666|Corserawa le Marchand
+667|Loudmerawa le Marin
+668|Capitaine Banwana
+669|Bobardawa le Marchand
+671|Camelotawa le Marchand
+675|Garde Tono Portwa
+676|Garde Toide Grocwayo
+678|Vendeur Bouclier de Pandala
+680|Elviana Tirips
+681|Stayfun Bonnawa
+682|Boyrun Pticou
+683|Ledrob Tercesec
+684|Divad Dleifrepok
+688|Marzwel le Gobelin
+691|Dollarawan Le Banquier
+692|Yenawa le Banquier
+693|Tourist
+694|Runago Gho
+695|Runoga Gha
+697|Penih Tencier
+698|Vendeur d'ames de Bonta
+699|Vendeur d'ames de Brakmar
+700|Garde Uboi Porefeu
+702|Tourista
+704|Narber Rihen Levihawa
+706|Mamowa
+707|Zamawa
+709|Berthawa
+711|Tavernier du Ripate
+712|Bworkie
+714|Vendeur Animaux de Bonta
+715|Vendeur Animaux de Brakmar
+716|Vendeur de Documents de Bonta
+717|Vendeur Documents de Brakmar
+718|Vendeur Runes de Bonta
+719|Vendeur Runes de Brakmar
+720|Vendeur Bricoleur de Bonta
+721|Vendeur Bricoleur de Brakmar
+722|Vendeur Milice de Bonta
+723|Milice de Brakmar
+725|Nowa
+726|Mage Ax
+727|Badufron chef mercenaire
+729|Acidrik Fenlapanse
+730|Nacf Virgil, vendeur de Parchemins
+732|Nistracolamus
+733|Arpagnagrobis
+734|Milicienne de Brakmar
+735|Milicienne de Bonta
+736|Edgg Komb
+738|Oyster
+740|Haraquiri
+741|Rocco Fidelio
+743|Verumacha
+745|Squale Lerouge
+746|Gemfe Labelle
+747|Degui Quetiristou
+748|Walak
+749|Alka Traz
+750|Luki Loushiano
+751|Guan Tanamault
+754|Gardien Koalak
+757|Maitre Koalak (105)
+758|Kakolak
+759|Frivolak
+760|Skeunk
+761|Rubise
+762|Emeraude
+763|Diamantine
+764|Saphira
+765|Liroye Merline
+766|Fidji Merline
+769|Jean-Sol Patre
+770|Nikos Monote
+771|Klako
+772|Krakotte
+774|Virgil
+779|Halda Moccione
+780|Mawy Ingalsse
+781|El Scarador
+783|Lorkos
+784|Fwoued
+785|George Cash
+786|Maitre des cles
+787|Sister Halliwell
+788|Takeshi No Pain
+789|Ziho
+790|Vendeur de runes
+791|Nopa Prespic
+792|Nopa Bouftou
+793|Nopa Bworker
+794|Nopa Abra
+797|Josette Taplane
+798|Capitaine Igloute
+799|Gardien du donjon des rats de Bonta
+800|Gardien du donjon des rats de Brakmar
+801|Snobin Parchume
+802|Dainde Porteplume
+803|Valcor
+804|Captain Starky
+805|Pietinor le bourrin
+806|Pielant
+807|Maskara
+808|Koka Dekolak
+809|Nounou Veaute
+810|Bouftouteater
+811|Metag Robill
+812|Vendeur de chapeaux
+813|Le maitre des clefs
+814|Pat Akess
+815|Chris de Naire
+816|Bricky Brock
+817|Kal Vissi
+818|Aperirel
+819|Monsieur El
+820|Madame El
+822|Marie Zoto
+823|Fred Austere
+824|Jorg Dy
+825|Pol Bokuz
+830|Feldz Paffe
+832|Bworkidais le paxifik
+834|Gobatchef
+835|Raxitik
+836|Gobiere Trokeur
+839|Pinta Gone
+842|Bworkepik
+843|Struk'toer Nhin
+844|Chef Bworkestre
+845|Gobriel
+846|Jice Aouaire
+847|Arietta Fiole
+848|Potan Nhin
+849|Contremaitre Ikul
+850|Poss'Ybel Nhin
+853|Gobmichet
+854|Capitaine des Kerubims
+855|Disskray Nhin
+856|Str'huit Nhin
+857|Posteur Nhin
+858|Pipelette Nhin
+859|Xelorat Masket
+860|Milicien Kerubim
+861|Milicien Kerubim
+862|Milicien Kerubim
+863|Paysan d'Incarnam
+864|Gilles Caper
+865|Galileo Maginifico
+866|Semper Idefix
+867|Tom Legeux
+868|Evayee Doureve
+869|Piou
+870|Tenva Lakruche
+871|Laura Thee
+872|Grobid Le Veteran Kerubim
+873|Milicien Kerubim
+874|Anta Brok
+875|Amache Ganymede
+876|Atape Ganymede
+878|Ayme Tairnaile
+879|Eek Mite
+880|Ecraz Nehofite
+881|Bûcheron d'Incarnam
+882|Chasseur d'Incarnam
+883|Pêcheur d'Incarnam
+884|Zaulie Portklais
+885|Matu Vuh
+886|Ma'ster Donge
+887|Marylork
+888|Avaule Ganymede
+889|Serveuse de Grobid
+890|Habitue de la taverne
+891|Lykhen Lesurviven
+893|Conseiller Yse Vewybad
+897|Intendant San Lavalss
+902|Noble de la cour
+903|Dame de la cour
+904|Prince d'Wa
+906|Bob Lenald
+913|Garde Montay
+914|Otomaï
+916|Trône d'Allister
+925|Capitaine Kradoc
+926|Professeur Fournesol
+927|Chevalier Noir et Rose
+928|Gardien du Pont de la Mort
+929|Polka Merer
+930|Docteur Nauh
+931|Paulette Pain-beche
+933|Docteur Morose
+934|Jeanne Morose
+935|Spitte Fayeur
+936|Flip Flap
+937|Crocodaille Dandi
+938|Kolibrie
+939|Kito
+940|Peggy la Porkass
+941|Tina Montini
+942|Capitaine Flams
+943|Muleze
+945|Razbitume
+946|Chachka
+952|Vendeur de parchemins
+954|Kroula
+957|Denis Brouillard
+958|Classman
+959|Craqueleur Poli Poli
+964|Tertofi Ablaru
+971|Norb
+978|Thanos
+983|Marquis
+1012|Kapi Taigne
+1034|Bibiblop
+1036|Ernesto Rouste
+1037|Lina Vortald
+1041|Morrie Gane
+1042|Raymond Santho
+1045|Eni Hoube
+1053|Vendeur de Dofus
+1054|Boumawa
+1076|Doro le Blak
+1077|Assistante d'Otomaï
+1080|Trok
+1088|Snori Nairb
+1090|Pandalida
+1091|Xelora Busai
+1092|Sabine
+1098|Ybur Effel
+1100|Riyou Tchevlakouk
+1103|Lelievwe Pale Pitane
+1104|Sim le Soft
+1108|Ecaline
+1109|Kate Woumane
+1110|Grimpill
+1111|Corbac
+1113|Gueurle
+1114|Garde de convoi
+1120|Jibworknouille
+1121|Thomas Sacre
+1127|Emma Sacre
+1140|Jissey Pandamme
+1158|Vendeur de capes
+1162|Pavu Papry
+1163|Klik Klak
+1165|Iturik
+1217|Norach
+1220|Vendeur Bricoleur d'Astrub
+1221|Vendeur Fees d'artifice
+1223|Fee Risette
+1228|Baramine
+1232|Felix Nowel
+1233|Zezette Nowel
+1234|Syn Jorge
