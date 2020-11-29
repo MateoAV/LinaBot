@@ -29,14 +29,6 @@
 
         End Try
 
-    End Sub
-
-    Private Sub DiscordBotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiscordBotToolStripMenuItem.Click
-
-        _FrmDiscord = New FrmDiscord
-        _FrmDiscord.ShowDialog()
-
-
         ChargeServeur()
 
         ChargeItems()
@@ -67,23 +59,31 @@
 
         LoadPersonage()
 
+
+    End Sub
+
+    Private Sub DiscordBotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiscordBotToolStripMenuItem.Click
+
+        _FrmDiscord = New FrmDiscord
+        _FrmDiscord.ShowDialog()
+
     End Sub
 
     Private Sub Ajouter_Un_Compte_Click(sender As Object, e As EventArgs) Handles Ajouter_Un_Compte.Click
 
-        '  AjouterUnCompte.Show()
+        FrmAjouterCompte.Show()
 
     End Sub
 
     Private Sub Charger_Un_Compte_Click(sender As Object, e As EventArgs) Handles Charger_Un_Compte.Click
 
-        '  ChargerUnCompte.Show()
+        FrmChargerCompte.Show()
 
     End Sub
 
     Private Sub Supprimer_Un_Compte_Click(sender As Object, e As EventArgs) Handles Supprimer_Un_Compte.Click
 
-        '  SupprimerUnCompte.Show()
+        FrmSupprimerCompte.Show()
 
     End Sub
 

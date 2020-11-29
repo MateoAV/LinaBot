@@ -6,14 +6,29 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9D7F7423-871C-4193-8DD5-EF9883A2D2BA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>A1___LinaBot.My.MyApplication</StartupObject>
-    <RootNamespace>A1___LinaBot</RootNamespace>
-    <AssemblyName>A1 - LinaBot</AssemblyName>
+    <StartupObject>LinaBot.My.MyApplication</StartupObject>
+    <RootNamespace>LinaBot</RootNamespace>
+    <AssemblyName>LinaBot</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,7 +37,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>A1 - LinaBot.xml</DocumentationFile>
+    <DocumentationFile>LinaBot.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +47,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>A1 - LinaBot.xml</DocumentationFile>
+    <DocumentationFile>LinaBot.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -64,6 +79,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -85,10 +101,26 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Amis\AmiInformation.vb" />
+    <Compile Include="Amis\FunctionAmi.vb" />
+    <Compile Include="Caracteristique\FrmCaracteristique.Designer.vb">
+      <DependentUpon>FrmCaracteristique.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Caracteristique\FrmCaracteristique.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Caracteristique\FunctionCaractéristique.vb" />
+    <Compile Include="Caracteristique\MdlCaractéristique.vb" />
     <Compile Include="Chargement\AllClass.vb" />
     <Compile Include="Chargement\Chargement.vb" />
     <Compile Include="Chargement\Divers.vb" />
     <Compile Include="Chargement\Variable.vb" />
+    <Compile Include="Connexion\Class_Connexion.vb" />
+    <Compile Include="Connexion\MdlConnexion.vb" />
+    <Compile Include="Echange\FunctionEchange.vb" />
+    <Compile Include="Echange\mdlEchange.vb" />
+    <Compile Include="Familier\FunctionFamilier.vb" />
+    <Compile Include="Familier\MdlFamilier.vb" />
     <Compile Include="Form\FrmDiscord.Designer.vb">
       <DependentUpon>FrmDiscord.vb</DependentUpon>
     </Compile>
@@ -100,6 +132,12 @@
     </Compile>
     <Compile Include="Form\FrmGroupe.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FrmUser.Designer.vb">
+      <DependentUpon>FrmUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FrmUser.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Form\Gestion Compte\FrmAjouterCompte.Designer.vb">
       <DependentUpon>FrmAjouterCompte.vb</DependentUpon>
@@ -126,10 +164,36 @@
       <DependentUpon>LinaBot.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Guilde\FrmGuilde.Designer.vb">
+      <DependentUpon>FrmGuilde.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Guilde\FrmGuilde.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Guilde\FunctionGuilde.vb" />
+    <Compile Include="Guilde\mdlGuilde.vb" />
+    <Compile Include="HotelDeVente\Class_HDV.vb" />
+    <Compile Include="HotelDeVente\mdlHDV.vb" />
+    <Compile Include="Inventaire\FrmInventaire.Designer.vb">
+      <DependentUpon>FrmInventaire.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inventaire\FrmInventaire.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Item\FunctionItem.vb" />
+    <Compile Include="Inventaire\mdlInventaire.vb" />
+    <Compile Include="Item\MdlItem.vb" />
+    <Compile Include="Map\FunctionMap.vb" />
+    <Compile Include="Map\Fonctions.vb" />
+    <Compile Include="Map\Maphandler.vb" />
+    <Compile Include="Map\Map_Data.vb" />
+    <Compile Include="Map\Pathfinding.vb" />
+    <Compile Include="Map\SwfUnpacker.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -144,10 +208,39 @@
     <Compile Include="Player\ElgSocketEventArgs.vb" />
     <Compile Include="Player\Player.vb" />
     <Compile Include="Player\PlayerVariable.vb" />
+    <Compile Include="Pnj\FunctionPnj.vb" />
+    <Compile Include="Pnj\PNJ_Information.vb" />
+    <Compile Include="Sort\FrmSort.Designer.vb">
+      <DependentUpon>FrmSort.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Sort\FrmSort.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sort\FunctionSort.vb" />
+    <Compile Include="Sort\MdlSort.vb" />
+    <Compile Include="Sort\UcSort.Designer.vb">
+      <DependentUpon>UcSort.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Sort\UcSort.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tchat\MdlCanal.vb" />
+    <Compile Include="Tchat\Tchat.vb" />
+    <Compile Include="Trajet\Trajet Lina.vb" />
+    <Compile Include="Trajet\TrajetExecution.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Caracteristique\FrmCaracteristique.resx">
+      <DependentUpon>FrmCaracteristique.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FrmDiscord.resx">
       <DependentUpon>FrmDiscord.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FrmGroupe.resx">
+      <DependentUpon>FrmGroupe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FrmUser.resx">
+      <DependentUpon>FrmUser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Gestion Compte\FrmAjouterCompte.resx">
       <DependentUpon>FrmAjouterCompte.vb</DependentUpon>
@@ -161,11 +254,23 @@
     <EmbeddedResource Include="Form\LinaBot.resx">
       <DependentUpon>LinaBot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Guilde\FrmGuilde.resx">
+      <DependentUpon>FrmGuilde.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventaire\FrmInventaire.resx">
+      <DependentUpon>FrmInventaire.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sort\FrmSort.resx">
+      <DependentUpon>FrmSort.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sort\UcSort.resx">
+      <DependentUpon>UcSort.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +285,117 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\Console.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\Tchat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\56px-Rose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\63px-Guildes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1292.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1294.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1296.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\2073.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\2200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\Ampoule Off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\Ampoule On.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\581.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1290.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\46.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\47.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\Neutre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1 %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1 %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1 %285%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\2182.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\2184.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\2186.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\2188.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\7 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1151.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\1155.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\Parchemin Off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\Parchemin On.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\Item\18\8000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Recolte\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 et x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

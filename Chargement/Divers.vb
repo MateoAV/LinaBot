@@ -1,4 +1,6 @@
-﻿Module Divers
+﻿Imports System.Net.Sockets, System.Net, Org.Mentalis.Network.ProxySocket
+
+Module Divers
 
     Private Delegate Sub dlgDivers()
     Private Delegate Function dlgFDivers()
@@ -8,7 +10,7 @@
         With Comptes(index)
 
             'Je donne l'index aussi dans le Panel_utilisateur
-            .FrmUser.Index = index '  .FrmUser.Index = compteur
+            .FrmUser.index = index '  .FrmUser.Index = compteur
 
             'Je nomme le Tab_Page par le nom du personnage.
             '  .FrmUser.GroupBoxName.Text = .Personnage.NomDuPersonnage
@@ -53,21 +55,17 @@
 
     Public Sub EcritureMessage(ByVal index As Integer, ByVal indice As String, ByVal message As String, ByVal couleur As Color)
 
-        With Comptes(index).FrmUser
+        With Comptes(index)
 
             Try
 
-                If .InvokeRequired Then
+                If .FrmUser.InvokeRequired Then
 
-                    .Invoke(New dlgDivers(Sub() EcritureMessage(index, indice, message, couleur)))
+                    .FrmUser.Invoke(New dlgDivers(Sub() EcritureMessage(index, indice, message, couleur)))
 
                 Else
 
-                    .RichTextBox1.SelectionColor = couleur
-
-                    .RichTextBox1.AppendText("[" & TimeOfDay & "] " & indice & " " & message & vbCrLf)
-
-                    .RichTextBox1.ScrollToCaret()
+                    .Tchat.Tchat.Add("[" & TimeOfDay & "] " & indice & " " & message, couleur)
 
                 End If
 
@@ -78,5 +76,170 @@
         End With
 
     End Sub
+    Public Sub EcritureMessageSocket(ByVal index As Integer, ByVal indice As String, ByVal message As String, ByVal couleur As Color)
+
+        With Comptes(index)
+
+            Try
+
+                If .FrmUser.InvokeRequired Then
+
+                    .FrmUser.Invoke(New dlgDivers(Sub() EcritureMessageSocket(index, indice, message, couleur)))
+
+                Else
+
+                    .SockSendRecv.Add("[" & TimeOfDay & "] " & indice & " " & message, couleur)
+
+                End If
+
+            Catch ex As Exception
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Function AsciiDecoder(ByVal msg As String) As String
+        Dim msgFinal As String = ""
+        Try
+
+            Dim iMax As Integer = msg.Length
+            Dim i As Integer = 0
+            While (i < iMax)
+                Dim caractC As Char = msg(i)
+                Dim caractI As Integer = Asc(caractC)
+                Dim nbLettreCode As Integer = 1
+                If (caractI And 128) = 0 Then
+                    msgFinal &= ChrW(caractI)
+                Else
+                    Dim temp As Integer = 64
+                    Dim codecPremLettre As Integer = 63
+                    While (caractI And temp)
+                        temp >>= 1
+                        codecPremLettre = codecPremLettre Xor temp
+                        nbLettreCode += 1
+                    End While
+                    codecPremLettre = codecPremLettre And 255
+                    Dim caractIFinal As Integer = caractI And codecPremLettre
+                    nbLettreCode -= 1
+                    i += 1
+                    While (nbLettreCode <> 0)
+                        caractC = msg(i)
+                        caractI = Asc(caractC)
+                        caractIFinal <<= 6
+                        caractIFinal = caractIFinal Or (caractI And 63)
+                        nbLettreCode -= 1
+                        i += 1
+                    End While
+                    msgFinal &= ChrW(caractIFinal)
+                End If
+                i += nbLettreCode
+            End While
+        Catch ex As Exception
+
+        End Try
+
+
+        Return msgFinal.Replace("%27", "'").Replace("%C3%A9", "é").Replace("%2C", ",").Replace("%3F", "?").Replace("%C3%A8", "é").Replace("%29", "]").Replace("%28", "[")
+    End Function 'Provient de Maxoubot.
+
+    Public Function ProxySocketUtilisateur(ipAnkama As String, portAnkama As Integer, proxyIP As String, proxyPort As Integer, nomUtilisateur As String, motDePasse As String) As Socket
+
+        Dim monProxy As ProxySocket = New ProxySocket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+
+        monProxy.ProxyEndPoint = New IPEndPoint(IPAddress.Parse(proxyIP), proxyPort)
+
+        If nomUtilisateur <> "" Then
+
+            monProxy.ProxyUser = nomUtilisateur
+            monProxy.ProxyPass = motDePasse
+
+        End If
+
+        monProxy.ProxyType = ProxyTypes.Socks5
+
+        monProxy.Connect(ipAnkama, portAnkama)
+
+        Return monProxy
+
+    End Function
+
+    Public Function CopyItem(ByVal index As Integer, ByVal dico As Dictionary(Of Integer, ClassItem)) As Dictionary(Of Integer, ClassItem)
+
+        With Comptes(index)
+
+            If .FrmUser.InvokeRequired Then
+
+                Return .FrmUser.Invoke(New dlgFDivers(Function() CopyItem(index, dico)))
+
+            Else
+
+                Dim newDico As New Dictionary(Of Integer, ClassItem)
+
+                For Each pair As KeyValuePair(Of Integer, ClassItem) In dico
+
+                    newDico.Add(pair.Key, pair.Value)
+
+                Next
+
+                Return newDico
+
+            End If
+
+        End With
+
+    End Function
+    Public Function CopyMap(ByVal index As Integer, ByVal dico As Dictionary(Of Integer, ClassEntite)) As Dictionary(Of Integer, ClassEntite)
+
+        With Comptes(index)
+
+            If .FrmUser.InvokeRequired Then
+
+                Return .FrmUser.Invoke(New dlgFDivers(Function() CopyMap(index, dico)))
+
+            Else
+
+                Dim newDico As New Dictionary(Of Integer, ClassEntite)
+
+                For Each pair As KeyValuePair(Of Integer, ClassEntite) In dico
+
+                    newDico.Add(pair.Key, pair.Value)
+
+                Next
+
+                Return newDico
+
+            End If
+
+        End With
+
+    End Function
+
+    Public Function CopyAmi(ByVal index As Integer, ByVal dico As Dictionary(Of String, ClassAmiInformation)) As Dictionary(Of String, ClassAmiInformation)
+
+        With Comptes(index)
+
+            If .FrmUser.InvokeRequired Then
+
+                Return .FrmUser.Invoke(New dlgFDivers(Function() CopyAmi(index, dico)))
+
+            Else
+
+                Dim newDico As New Dictionary(Of String, ClassAmiInformation)
+
+                For Each pair As KeyValuePair(Of String, ClassAmiInformation) In dico
+
+                    newDico.Add(pair.Key, pair.Value)
+
+                Next
+
+                Return newDico
+
+            End If
+
+        End With
+
+    End Function
 
 End Module

@@ -14,8 +14,8 @@
 71|Eniripsa|Femelle
 80|Iop|Mâle
 81|Iop|Femelle
-90|Crâ|Mâle
-91|Crâ|Femelle
+90|Cra|Mâle
+91|Cra|Femelle
 100|Sadida|Mâle
 101|Sadida|Femelle
 110|Sacrieur|Mâle

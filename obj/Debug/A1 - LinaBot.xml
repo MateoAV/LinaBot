@@ -8,19 +8,571 @@ A1 - LinaBot
 <members>
 <member name="T:A1___LinaBot.My.Resources.Resources">
 <summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
+  Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
 </summary>
 </member>
 <member name="P:A1___LinaBot.My.Resources.Resources.ResourceManager">
 <summary>
-  Returns the cached ResourceManager instance used by this class.
+  Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
 </summary>
 </member>
 <member name="P:A1___LinaBot.My.Resources.Resources.Culture">
 <summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
+  Remplace la propriété CurrentUICulture du thread actuel pour toutes
+  les recherches de ressources à l'aide de cette classe de ressource fortement typée.
 </summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources._8000">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Agiliter">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.AlignementNeutre">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Ami">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Ampoule_Off">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Ampoule_On">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Bontarien">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Brakmarien">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Caracteristique">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Chance">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Coeur">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Conquete">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Console">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Dragodinde">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Force">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Guilde">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Initiative">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Intelligence">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Inventaire">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Map">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Neutre">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.PA">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Parchemin_Off">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Parchemin_On">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.plus">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.PM">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Prospection">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Quete">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Sagesse">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Sort">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Tchat">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:A1___LinaBot.My.Resources.Resources.Vitaliter">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:A1___LinaBot.FunctionAmi.Ouvre(System.String,System.String)">
+ <summary>
+ Ouvre la liste d'ami/ennemi.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="choix">Choisis entre "Ami" et "Ennemi"</param>
+ <returns>
+ True = La liste est ouverte. <br/>
+ False = La liste n'est pas ouverte.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionAmi.Supprime(System.String,System.String,System.String)">
+ <summary>
+ Supprime le joueur de la liste d'ami/ennemi.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="pseudoNom">Le pseudo ou le nom de la personne.</param>
+ <param name="choix">Choisis entre "Ami" et "Ennemi"</param>
+ <returns>
+ True = Suppression réussie. <br/>
+ False = La suppression a échoué.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionAmi.Ajoute(System.String,System.String,System.String)">
+ <summary>
+ Ajoute un ami/ennemi.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="pseudoNom">Le pseudo ou le nom de la personne.</param>
+ <param name="choix">Choisis entre "Ami" et "Ennemi"</param>
+ <returns>
+ True = Ajout réussie. <br/>
+ False = Ajout échoué.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionAmi.Information(System.String,System.String,System.String)">
+ <summary>
+ Obtient les informations du joueur.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="pseudoNom">Le pseudo ou le nom de la personne.</param>
+ <param name="choix">Choisis entre "Ami" et "Ennemi"</param>
+ <returns>
+ True = Information obtenue. <br/>
+ False = aucune information obtenue.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionAmi.Rejoindre(System.String,System.String)">
+ <summary>
+ Rejoint un joueur directement sur la map (Incarnam)
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="nom">Nom du joueur.</param>
+ <returns>
+ True = Le bot a rejoint le joueur. <br/>
+ False = Le bot n'a pas réussie à rejoindre le joueur.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionAmi.Avertie(System.String,System.String)">
+ <summary>
+ Averti lors de la connexion d'un ami.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="ouiNon"></param>
+ <returns>
+ True = Le bot avertie via un message si un ami se connecte.. <br/>
+ False = Le bot n'avertie pas si un ami se connecte.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionAmi.IgnoreSupprime(System.String,System.String)">
+ <summary>
+ Ignore ou supprime un joueur de la liste des ignorés.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="pseudoNom">Le pseudo ou le nom de la personne.</param>
+ <returns>
+ True = Le bot ignore ou supprime le joueur de la liste des ignorés. <br/>
+ False = Le bot n'a pas réussi à ignoré ou supprimé le joueur de la liste des ignorés.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionCaractéristique.Up(System.String,System.String)">
+ <summary>
+ Permet de Up la caractéristique voulu.
+ </summary>
+ <param name="index">Indique le compte.</param>
+ <param name="caracteristique">Indique la caractéristique. Exemple : Vitalité, Sagesse, etc...</param>
+ <returns>Retourne 'True' s'il a Up, sinon 'False'</returns>
+</member>
+<member name="M:A1___LinaBot.FunctionCaractéristique.CaracteristiqueUpPossible(System.Int32,System.String)">
+ <summary>
+ Vérifier si le personnage a assé de point pour up la caractéristique.
+ </summary>
+ <param name="index">Indique le compte.</param>
+ <param name="caracteristique">Indique la caractéristique à vérifier.</param>
+ <returns>Retourne 'True' s'il peut Up la caractéristique, sinon 'False'</returns>
+</member>
+<member name="M:A1___LinaBot.FunctionCaractéristique.Return(System.String,System.String,System.String)">
+ <summary>
+ Retourne la valeur indiqué selon la caractéristique et le choix voulu.
+ </summary>
+ <param name="index">Indique le compte</param>
+ <param name="caracteristique">Indique la caractéristique. Exemple : Vitalité, Sagesse, etc...</param>
+ <param name="choix">Indique le choix : 'Base' , 'Equipement' , 'Dons' , 'Boosts' , 'Total'</param>
+ <returns>Retourne la valeur qui correspond à la caractéristique et au choix, sinon retourne '0'</returns>
+</member>
+<member name="M:A1___LinaBot.FunctionCaractéristique.Energie(System.String,System.String)">
+ <summary>
+ Retourne l'energie du personnage.
+ </summary>
+ <param name="index">Indique le compte.</param>
+ <param name="choix">'Actuelle' , 'Maximum' , 'Pr' (Pr = Pourcentage)</param>
+ <returns>Retourne la valeur selon le choix indiqué, sinon retourne '0'.</returns>
+</member>
+<member name="M:A1___LinaBot.FunctionCaractéristique.Niveau(System.String)">
+ <summary>
+ Retourne le niveau du personnage.
+ </summary>
+ <param name="index">Indique le compte.</param>
+ <returns>Retourne le niveau actuelle du personnage, sinon retourne 0.</returns>
+</member>
+<member name="M:A1___LinaBot.FunctionCaractéristique.Experience(System.String,System.String)">
+ <summary>
+ Retourne l'expèrience du personnage.
+ </summary>
+ <param name="index">Indique le compte.</param>
+ <param name="choix">'Actuelle' , 'Maximum' , 'Minimum' , 'Pr' (Pr = Pourcentage)</param>
+ <returns>Retourne la valeur selon le choix indiqué, sinon retourne '0'.</returns>
+</member>
+<member name="M:A1___LinaBot.FunctionCaractéristique.PointDeVie(System.String,System.String)">
+ <summary>
+ Permet d'avoir le nombre de point de vie du personnage.
+ </summary>
+ <param name="index">Indique le compte.</param>
+ <param name="choix">'Actuelle' , 'Maximum' , 'Pr'</param>
+ <returns>Retourne la valeur selon le choix indiqué, sinon retourne '0'.</returns>
+</member>
+<member name="M:A1___LinaBot.FunctionEchange.Echange(System.String,System.String)">
+ <summary>
+ Lance un echange avec le joueur.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="nom">Le nom du joueur à qui lancer la demande d'échange.</param>
+ <returns>
+ True = Si le bot a réussie à faire la demande d'échange. <br/>
+ False = Si le bot n'a pas réussie à faire la demande d'échange.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionEchange.RefuseArrete(System.String)">
+ <summary>
+ Refuse ou arrête la demande d'échange en cours.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <returns>
+ True = Si le bot a réussie à refuser la demande d'échange. <br/>
+ False = Si le bot n'a pas réussie à refuser la demande d'échange.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionEchange.Accepte(System.String)">
+ <summary>
+ Accepte la demande d'échange.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <returns>
+ True = Si le bot a accepté la demande d'échange. <br/>
+ False = Si le bot n'a pas réussie à accepter la demande d'échange.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionEchange.Kamas(System.String,System.String)">
+ <summary>
+ Mais la quantité de kamas dans l'échange.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="quantite">La quantité de kamas à mettre dans l'échange.</param>
+ <returns>
+ True = Si le bot a réussie à mettre les kamas dans l'échange. <br/>
+ False = Si le bot n'a pas réussie à mettre les kamas dans l'échange.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionEchange.Valide(System.String)">
+ <summary>
+ Valide l'échange en cours.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <returns>
+ True = Si le bot a validé l'échange. <br/>
+ False = Si le bot n'a pas réussie à valider l'échange.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionItem.Supprime(System.String,System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
+ <summary>
+ Permet la suppression d'un item contenue dans l'inventaire du joueur.
+ </summary>
+ <param name="index">Indique le numéro bot.</param>
+ <param name="nom">Nom/ID de l'item.</param>
+ <param name="quantite">La quantité à supprimer (de base 999.999).</param>
+ <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être supprimer.</param>
+ <returns>
+ True = Le bot a bien supprimé l'item. <br/>
+ False = Le bot n'a pas réussi à supprimer l'item.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionItem.Retire(System.String,System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
+ <summary>
+ Permet de retirer un item contenue dans la banque/coffre/échange/HDV/Etc...
+ </summary>
+ <param name="index">Indique le numéro bot.</param>
+ <param name="nom">Nom/ID de l'item.</param>
+ <param name="quantite">La quantité à retirer (de base 999.999).</param>
+ <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être retiré.</param>
+ <returns>
+ True = Le bot a bien retiré l'item. <br/>
+ False = Le bot n'a pas réussi à retirer l'item.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionItem.Depose(System.String,System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
+ <summary>
+ Permet de déposer un item en Banque/Echange/Coffre/Etc...
+ </summary>
+ <param name="index">Indique le numéro bot.</param>
+ <param name="nom">Nom/ID de l'item.</param>
+ <param name="quantite">La quantité à déposer (de base 999.999).</param>
+ <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être déposé.</param>
+ <returns>
+ True = Le bot a bien retiré l'item. <br/>
+ False = Le bot n'a pas réussi à retirer l'item.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionItem.Existe(System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
+ <summary>
+ Retourne un boolean si l'item existe ou non.
+ </summary>
+ <param name="index">Indique le numéro bot.</param>
+ <param name="nom">Nom/ID de l'item.</param>
+ <param name="caracteristique">Les caractéristiques que doit avoir l'item.</param>
+ <returns>
+ True = L'item existe dans l'inventaire. <br/>
+ False = L'item n'existe pas dans l'inventaire.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionItem.Equipe(System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
+ <summary>
+ Equipe une item selon le nom/ID et les caractéristiques.
+ </summary>
+ <param name="index">Indique le numéro bot.</param>
+ <param name="nom">Nom/ID de l'item.</param>
+ <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être equipé.</param>
+ <returns>
+ True = L'item est équipé. <br/>
+ False = L'item n'est pas équipé.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionItem.RetourneEquipementCatégorie(System.String,System.Int32)">
+ <summary>
+ Retourne le numéro pour savoir ou est équipé l'item.
+ </summary>
+ <param name="index">Indique le numéro bot.</param>
+ <param name="Categorie">La catégorie de l'item (amulette, anneaux, bottes, etc...)</param>
+ <returns>
+ Retourne le numéro pour savoir où est équipé l'item, si rien, retourne -1.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionItem.Desequipe(System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
+ <summary>
+ Déséquipe un item.
+ </summary>
+ <param name="index">Indique le numéro bot.</param>
+ <param name="nom">Nom/ID de l'item.</param>
+ <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être déséquipé.</param>
+ <returns>
+ True = L'item est déséquipé. <br/>
+ False = L'item n'est pas déséquipé.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionItem.Jette(System.String,System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
+ <summary>
+ Jétte un objet au sol.
+ </summary>
+ <param name="index">Indique le numéro bot.</param>
+ <param name="nom">Nom/ID de l'item.</param>
+ <param name="quantité">La quantité à jeter (de base 999.999).</param>
+ <param name="caractéristique">Les caractéristiques que doit avoir l'item pour être jeté.</param>
+ <returns>
+ True = Le bot a bien jeté l'item. <br/>
+ False = Le bot n'a pas réussi à jeter l'item.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionItem.Utilise(System.String,System.String)">
+ <summary>
+ Utilise un objet de l'inventaire.
+ </summary>
+ <param name="index">Indique le numéro bot.</param>
+ <param name="nom">Nom/ID de l'item.</param>
+ <returns>
+ True = Le bot a bien utilisé l'item. <br/>
+ False = Le bot n'a pas réussi à utiliser l'item.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionMap.ID(System.Int32,System.Int32)">
+ <summary>
+ Compare 2 IDs de map.
+ </summary>
+ <param name="index">Le numéro du bot.</param>
+ <param name="mapID">La map ID à vérifier, Exemple : 7411</param>
+ <returns>True = La MapID correspond à celle du bot. <br/>
+ False = La MapID ne correspond pas à celle du bot.</returns>
+</member>
+<member name="M:A1___LinaBot.FunctionMap.Deplacement(System.Int32,System.String,System.Int32,System.Int32)">
+ <summary>
+ Déplace le bot sur une cellule/Direction indiqué.
+ </summary>
+ <param name="celluleDirection">Indique la direction ou la cellule où doit aller le bot.</param>
+ <param name="delaiMinimum">Temps d'attente minimum avant de pouvoir faire une autre action.</param>
+ <param name="delaiMaximum">Temps d'attente maximum avant de pouvoir faire une autre action.</param>
+ <returns>True = Le déplacement a réussi. <br/> 
+ False = Le déplacement a échoué.</returns>
+ 
+</member>
+<member name="M:A1___LinaBot.All_CallBack.Connexion_Game(System.Boolean)">
+ <summary>
+ Se connecte / Se deconnecte
+ </summary>
+ <param name="Active">Active ou desactive la socket</param>
+ <remarks>METHODE A REVOIR</remarks>
+</member>
+<member name="M:A1___LinaBot.All_CallBack.CallBackConnect(System.IAsyncResult,Org.Mentalis.Network.ProxySocket.ProxySocket)">
+ <summary>
+ Callback de connexion vers le serveur
+ </summary>
+ <param name="async"></param>
+ <remarks></remarks>
+</member>
+<member name="M:A1___LinaBot.All_CallBack.CallBackDisconnect(System.IAsyncResult)">
+ <summary>
+ Callback declenché à la deconnexion
+ </summary>
+ <param name="async"></param>
+ <remarks></remarks>
+</member>
+<member name="M:A1___LinaBot.All_CallBack.CallBackSender(System.IAsyncResult)">
+ <summary>
+ Callback d'envoi des données
+ </summary>
+ <param name="async"></param>
+ <remarks></remarks>
+</member>
+<member name="M:A1___LinaBot.All_CallBack.#ctor(System.String,System.Int32,System.Boolean,System.String,System.String,System.String,System.String)">
+ <summary>
+ Constructeur par defaut
+ </summary>
+ <param name="Hote"></param>
+ <param name="Port"></param>
+ <remarks></remarks>
+</member>
+<member name="M:A1___LinaBot.All_CallBack.Dispose(System.Boolean)">
+ <summary>
+ IDisposable
+ </summary>
+ <param name="disposing"></param>
+ <remarks></remarks>
+</member>
+<member name="M:A1___LinaBot.FunctionPnj.Parler(System.String,System.String)">
+ <summary>
+ Parler a un pnj présent sur la map.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="nom">Le nom ou l'ID du Pnj a parler.</param>
+ <returns>
+ True = Si le bot est en dialogue. <br/>
+ False = Le bot n'a pas réussi à parler au Pnj.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionPnj.Reponse(System.String,System.String)">
+ <summary>
+ Donne une reponse au Pnj.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="phrase">La phrase à donner au Pnj pour lui répondre.</param>
+ <returns>
+ True = Le bot a bien réussi a répondre au Pnj. <br/>
+ False = Le bot n'a pas réussi a répondre au pnj.
+ </returns>
+</member>
+<member name="M:A1___LinaBot.FunctionPnj.Quitte(System.String)">
+ <summary>
+ Quitte le dialogue en cours avec le pnj.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <returns>
+ True = Le bot a bien quitter le dialogue en cours. <br/>
+ False = Le bot n'a pas réussi à quitter le dialogue en cours.
+ </returns>
 </member>
 </members>
 </doc>

@@ -17,3 +17,13 @@ C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\bin\Debug\ProxySocket.xml
 C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1 - LinaBot.vbproj.CopyComplete
 C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmDiscord.resources
 C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.LinaBot.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmAjouterCompte.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmChargerCompte.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmSupprimerCompte.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmUser.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmCaracteristique.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmGroupe.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmSort.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.UcSort.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmInventaire.resources
+C:\Users\jessy\Desktop\A1 - LinaBot\A1 - LinaBot\obj\Debug\A1___LinaBot.FrmGuilde.resources

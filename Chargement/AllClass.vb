@@ -7,6 +7,8 @@
 
 End Class
 
+#Region "Personnage"
+
 Public Class ClassPersonnage
 
     Public NomDeCompte As String
@@ -28,6 +30,7 @@ Public Class ClassPersonnage
     Public Régénération As Integer
     Public CapitalCaractéristique As Integer
     Public CapitalSort As Integer
+    Public Vivant As Boolean
     Public Expérience As New ClassExpérience
     Public Pods As New ClassPods
     Public Energie As New ClassEnergie
@@ -79,57 +82,8 @@ Public Class ClassPersonnage
     {"resistance feu pvp pr", New ClassCaractéristique}
 }
     Public Dragodinde As New ClassDragodindeEquipé
-End Class
-
-#Region "Dragodinde"
-
-Public Class ClassDragodindeEquipé
-
-    Public Equipé As Boolean = False
-    Public XpDonnee As Integer
-    Public Information As New ClassDragodinde
-
-End Class
-
-Public Class ClassDragodinde
-
-    Public IdUnique As Integer
-    Public ID As Integer
-    Public ArbreGénéalogique As String
-    Public Capacité1, Capacité2 As String
-    Public Nom, NomDragodinde As String
-    Public Sexe As String
-    Public ExpActuelle As Integer
-    Public ExpMinimum As Integer
-    Public ExpMaximum As Integer
-    Public Niveau As Integer
-    Public Montable As Boolean
-    Public Endurance, EnduranceMax As Integer
-    Public Maturité, MaturitéMax As Integer
-    Public Energie, EnergieMax As Integer
-    Public Amour, AmourMax As Integer
-    Public Agressivité, Equilibré, Serein As Integer
-    Public Fécondation As String
-    Public Fatigue, FatigueMax As Integer
-    Public Reproduction, ReproductionMax As Integer
-    Public PodsActuelle, PodsMaximum As Integer
-    Public Caractéristique As New ClassItemCaractéristique
-
-End Class
-
-#End Region
-
-
-
-
-Public Class ClassInteraction
-
-    Public Cellule As Integer
-    Public Sprite As Integer
-    Public Nom As String
-    Public Information As String
-    Public Action As New Dictionary(Of String, Integer)
-
+    Public EnEchange As Boolean
+    Public InvitationEchange As Boolean
 End Class
 
 Public Class ClassCaractéristique
@@ -174,6 +128,60 @@ Public Class ClassPods
     Public Pourcentage As Integer
 
 End Class
+
+Public Class ClassDragodindeEquipé
+
+    Public Equipé As Boolean = False
+    Public XpDonnee As Integer
+    Public Information As New ClassDragodinde
+    Public EnInventaire As Boolean
+
+End Class
+#End Region
+
+#Region "Dragodinde"
+
+
+
+Public Class ClassDragodinde
+
+    Public IdUnique As Integer
+    Public ID As Integer
+    Public ArbreGénéalogique As String
+    Public Capacité1, Capacité2 As String
+    Public Nom, NomDragodinde As String
+    Public Sexe As String
+    Public ExpActuelle As Integer
+    Public ExpMinimum As Integer
+    Public ExpMaximum As Integer
+    Public Niveau As Integer
+    Public Montable As Boolean
+    Public Endurance, EnduranceMax As Integer
+    Public Maturité, MaturitéMax As Integer
+    Public Energie, EnergieMax As Integer
+    Public Amour, AmourMax As Integer
+    Public Agressivité, Equilibré, Serein As Integer
+    Public Fécondation As String
+    Public Fatigue, FatigueMax As Integer
+    Public Reproduction, ReproductionMax As Integer
+    Public PodsActuelle, PodsMaximum As Integer
+    Public Caractéristique As New ClassItemCaractéristique
+
+End Class
+
+#End Region
+
+Public Class ClassInteraction
+
+    Public Cellule As Integer
+    Public Sprite As Integer
+    Public Nom As String
+    Public Information As String
+    Public Action As New Dictionary(Of String, Integer)
+
+End Class
+
+
 
 Public Class ClassItem
 
@@ -254,7 +262,17 @@ Public Class ClassItemCaractéristique
 
 End Class
 
-Public Class ClassCanal
+#Region "Tchat"
+
+Public Class ClassTchat
+
+    Public Canal As New ClassTchatCanal
+    Public Tchat As New Dictionary(Of String, Color)
+    Public BloqueTchat As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+
+End Class
+
+Public Class ClassTchatCanal
 
     Public Information As Boolean
     Public Général As Boolean
@@ -265,6 +283,9 @@ Public Class ClassCanal
     Public Commerce As Boolean
 
 End Class
+
+#End Region
+
 
 Public Class ClassSort
 
@@ -301,6 +322,25 @@ End Class
 
 #Region "Map"
 
+Public Class ClassMap
+
+    Public Largeur As Integer
+    Public Hauteur As Integer
+    Public Handler(1280) As Cell
+    Public PathTotal As String
+    Public ID As Integer
+    Public StopDeplacement As Boolean
+    Public Haut, Bas, Gauche, Droite As Integer
+    Public EnDeplacement As Boolean
+    Public Coordonnees As String
+    Public Map_Viewer_BitMap_All, Map_Viewer_BitMap As New Bitmap(1000, 1000)
+    Public MapListeCelluleLeft(1024), MapListeCelluleTop(1024), MapListeCelluleRight(1024), MapListeCelluleDown(1024) As Point
+    Public Entite As New Dictionary(Of Integer, ClassEntite)
+    Public Objet As New Dictionary(Of Integer, ClassMapObjet)
+    Public Interaction As New Dictionary(Of Integer, ClassInteraction)
+
+End Class
+
 Public Class ClassMapObjet
 
     Public Cellule As Integer
@@ -312,7 +352,7 @@ Public Class ClassMapObjet
 
 End Class
 
-Public Class ClassMap
+Public Class ClassEntite
 
     Public IDUnique As Integer
     Public Cellule As Integer
@@ -463,6 +503,9 @@ Public Class ClassGuilde
     Public ExpMinimum As String
     Public ExpMaximum As String
     Public ExpActuelle As String
+    Public EnGuilde As Boolean
+    Public Invitation As Boolean
+    Public JoueurQuiInvite, JoueurQuiEstInvite As String
     Public Membre As New Dictionary(Of String, ClassGuildeJoueur)
     Public Percepteur As ClassGuildePercepteur
     Public Enclos As New Dictionary(Of String, ClassGuildeEnclos)
@@ -579,9 +622,22 @@ End Class
 
 #End Region
 
-#Region "HDV"
 
-Public Class ClassHDV
+
+#Region "Pnj"
+
+Public Class ClassPnj
+
+    Public EnDialogue As Boolean
+    Public EnHdvAchat, EnHdvVente As Boolean
+    Public BloquePnj As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+    Public Reponse As New List(Of Integer)
+    Public IdReponse As Integer
+    Public HotelDeVente As New ClassPnjHdv
+
+End Class
+
+Public Class ClassPnjHdv
 
     Public Quantiter1, Quantiter10, Quantiter100 As Boolean
     Public ListeIdCatégorie As New List(Of Integer)
@@ -604,6 +660,52 @@ Public Class ClassHDVItem
     Public TempsRestant As Integer
     Public Prix As Integer
     Public Quantiter As Integer
+
+End Class
+
+#End Region
+
+#Region "Echange"
+
+Public Class ClassEchange
+
+    Public Moi As New ClassEchangeAll
+    Public Lui As New ClassEchangeAll
+    Public BloqueEchange As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+
+End Class
+
+Public Class ClassEchangeAll
+
+    Public Inventaire As New Dictionary(Of Integer, ClassItem)
+    Public Kamas As Integer
+    Public Valider As Boolean
+
+End Class
+
+#End Region
+
+#Region "Ami"
+
+Public Class ClassAmi
+
+    Public Ami As New Dictionary(Of String, ClassAmiInformation)
+    Public Ennemi As New Dictionary(Of String, ClassAmiInformation)
+    Public Ignore As New Dictionary(Of String, ClassAmiInformation)
+    Public BloqueAmi As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+
+End Class
+
+Public Class ClassAmiInformation
+
+    Public Pseudo As String
+    Public EnAmi As Boolean
+    Public Nom As String
+    Public Niveau As String
+    Public Alignement As String
+    Public Classe As String
+    Public Sex As String
+    Public ClasseSex As String
 
 End Class
 

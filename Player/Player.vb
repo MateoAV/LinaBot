@@ -113,11 +113,13 @@ Public Class Player
 
                 Else  'Loger
 
-                    With FrmUser.RichTextBox2
-                        .SelectionColor = Color.Red
-                        .AppendText("[" & TimeOfDay & "] " & "Send : " & e.Message.Replace(Chr(10), "").Replace(Chr(0), "") & vbCrLf)
-                        .ScrollToCaret()
-                    End With
+                    If SockSendRecv.Count > 600 Then
+
+                        SockSendRecv.Clear()
+
+                    End If
+
+                    SockSendRecv.Add("[" & TimeOfDay & "] " & "Send : " & e.Message.Replace(Chr(10), "").Replace(Chr(0), ""), Color.Red)
 
                 End If
 
@@ -144,191 +146,207 @@ Public Class Player
                 Else
 
                     'Loger
-                    With FrmUser.RichTextBox2
-                        .SelectionColor = Color.Cyan
-                        .AppendText("[" & TimeOfDay & "] " & "Recv : " & e.Message & vbCrLf)
-                        .ScrollToCaret()
-                    End With
+                    If SockSendRecv.Count > 600 Then
+
+                        SockSendRecv.Clear()
+
+                    End If
+
+                    SockSendRecv.Add("[" & TimeOfDay & "] " & "Recv : " & e.Message, Color.Cyan)
 
                     If e.Message <> "" Then
 
                         'Selection des infos
                         Select Case e.Message(0)
 
-                                Case "A"
+                            Case "A"
 
-                                    Select Case e.Message(1)
+                                Select Case e.Message(1)
 
-                                        Case "B" ' AB
+                                    Case "B" ' AB
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "E" ' ABE
+                                            Case "E" ' ABE
 
-                                                    BloqueCaractéristique.Set()
-                                                    EcritureMessage(Index, "[Dofus]", "Impossible de up la caractéristique.", Color.Red)
+                                                BloqueCaracteristique.Set()
+                                                EcritureMessage(Index, "[Dofus]", "Impossible de up la caractéristique.", Color.Red)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "AB", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "AB", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "c" ' Ac
+                                    Case "c" ' Ac
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "0" ' Ac0
+                                            Case "0" ' Ac0
 
-                                                    ' Utilisation inconnu
+                                                ' Utilisation inconnu
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Ac", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Ac", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "d" ' Ad
+                                    Case "d" ' Ad
 
-                                            GiPseudo(Index, e.Message)
+                                        GiPseudo(Index, e.Message)
 
-                                        Case "f" ' Af
+                                    Case "f" ' Af
 
-                                            GiFileAttenteAuthentification(Index, e.Message)
+                                        GiFileAttenteAuthentification(Index, e.Message)
 
-                                        Case "H" ' AH
+                                    Case "H" ' AH
 
-                                            GiReçoisServeur(Index, e.Message)
+                                        GiReçoisServeur(Index, e.Message)
 
-                                        Case "L" ' AL
+                                    Case "L" ' AL
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "K" ' ALK
+                                            Case "K" ' ALK
 
-                                                    GiReceptionPersonnage(Index, e.Message)
+                                                GiReceptionPersonnage(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "AL", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "AL", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "l" ' Al
+                                    Case "l" ' Al
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "E" 'AlE
+                                            Case "E" 'AlE
 
-                                                    'Je déconnecte le bot.
-                                                    If MITM Then
+                                                'Je déconnecte le bot.
+                                                If MITM Then
 
-                                                        Client.Close()
+                                                    Client.Close()
 
-                                                    End If
+                                                End If
 
-                                                    Socket_Authentification.Connexion_Game(False)
+                                                Socket_Authentification.Connexion_Game(False)
 
-                                                    Select Case e.Message(3)
+                                                Select Case e.Message(3)
 
-                                                        Case "a" 'AlEa
+                                                    Case "a" 'AlEa
 
-                                                            EcritureMessage(Index, "[Dofus]", "Déjà en connexion.", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "Déjà en connexion.", Color.Red)
 
-                                                        Case "b" 'AlEb
+                                                    Case "b" 'AlEb
 
-                                                            EcritureMessage(Index, "[Dofus]", "Votre compte à été banni.", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "Votre compte à été banni.", Color.Red)
 
-                                                        Case "c" 'AlEc
+                                                    Case "c" 'AlEc
 
-                                                            EcritureMessage(Index, "[Dofus]", "Vous êtes déjà connécté au serveur du jeu.", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "Vous êtes déjà connécté au serveur du jeu.", Color.Red)
 
-                                                        Case "d" 'AlEd
+                                                    Case "d" 'AlEd
 
-                                                            EcritureMessage(Index, "[Dofus]", "Vous avez déconnecté une personne utilisant le compte.", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "Vous avez déconnecté une personne utilisant le compte.", Color.Red)
 
-                                                        Case "f" 'AlEf
+                                                    Case "f" 'AlEf
 
-                                                            EcritureMessage(Index, "[Dofus]", "Mauvais mot de passe.", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "Mauvais mot de passe.", Color.Red)
 
-                                                        Case "k" 'AlEk
+                                                    Case "k" 'AlEk
 
-                                                            'AlEk Jour | Heure | Minute
+                                                        'AlEk Jour | Heure | Minute
 
-                                                            Dim Separation() As String = Split(Mid(e.Message, 5), "|")
+                                                        Dim Separation() As String = Split(Mid(e.Message, 5), "|")
 
-                                                            'Le like me permet de regarde si le résultat correspond à chaque séparation.
-                                                            If "1" = Separation(0) Like (Separation(1) Like Separation(2)) Then
+                                                        'Le like me permet de regarde si le résultat correspond à chaque séparation.
+                                                        If "1" = Separation(0) Like (Separation(1) Like Separation(2)) Then
 
-                                                                EcritureMessage(Index, "[Dofus]", "Compte invalide, si vous avez 1j 1h 1m, il s'agît d'une IP bannie définitivement" & vbCrLf & "il vous suffit de changer d'IP pour régler le problème.", Color.Red)
+                                                            EcritureMessage(Index, "[Dofus]", "Compte invalide, si vous avez 1j 1h 1m, il s'agît d'une IP bannie définitivement" & vbCrLf & "il vous suffit de changer d'IP pour régler le problème.", Color.Red)
 
-                                                            Else
+                                                        Else
 
-                                                                EcritureMessage(Index, "[Dofus]", "Ton compte est invalide pendant " & Separation(0) & " Jour(s) " & Separation(1) & " Heure(s) " & Separation(2) & " Minute(s)'.", Color.Red)
+                                                            EcritureMessage(Index, "[Dofus]", "Ton compte est invalide pendant " & Separation(0) & " Jour(s) " & Separation(1) & " Heure(s) " & Separation(2) & " Minute(s)'.", Color.Red)
 
-                                                            End If
+                                                        End If
 
-                                                        Case "n" 'AlEn
+                                                    Case "n" 'AlEn
 
-                                                            EcritureMessage(Index, "[Dofus]", "La connexion ne sait pas faite corréctement.", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "La connexion ne sait pas faite corréctement.", Color.Red)
 
-                                                        Case "p" 'AlEp
+                                                    Case "p" 'AlEp
 
-                                                            EcritureMessage(Index, "[Dofus]", "Votre compte n'est pas valide.", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "Votre compte n'est pas valide.", Color.Red)
 
-                                                        Case "s" 'AlEs
+                                                    Case "s" 'AlEs
 
-                                                            EcritureMessage(Index, "[Dofus]", "Le Pseudo est déjà utilisé, veuillez en choisir un autre.", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "Le Pseudo est déjà utilisé, veuillez en choisir un autre.", Color.Red)
 
-                                                        Case "v" 'AlEv1.30.1
+                                                    Case "v" 'AlEv1.30.1
 
-                                                            EcritureMessage(Index, "[Dofus]", "La version de DOFUS installée est invalide pour ce serveur. Pour accéder au jeu, la version '" & Mid(e.Message, 5) & "' est nécessaire.", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "La version de DOFUS installée est invalide pour ce serveur. Pour accéder au jeu, la version '" & Mid(e.Message, 5) & "' est nécessaire.", Color.Red)
 
-                                                            GiVersion(Index, e.Message)
+                                                        GiVersion(Index, e.Message)
 
-                                                        Case "w" 'AlEw
+                                                    Case "w" 'AlEw
 
-                                                            EcritureMessage(Index, "[Dofus]", "Le serveur est complet. (Vous n'étes donc plus abonnée)", Color.Red)
+                                                        EcritureMessage(Index, "[Dofus]", "Le serveur est complet. (Vous n'étes donc plus abonnée)", Color.Red)
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Unknow", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Unknow", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                                Case "K" ' AlK
+                                            Case "K" ' AlK
 
-                                                    Select Case e.Message(3)
+                                                Select Case e.Message(3)
 
-                                                        Case "0" ' AlK0
+                                                    Case "0" ' AlK0
 
-                                                            If MITM = False Then
+                                                        If MITM = False Then
 
-                                                                Send("Ax")
+                                                            Send("Ax")
 
-                                                            End If
+                                                        End If
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "AlK", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "AlK", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Al", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Al", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "Q" ' AQ
+                                    Case "N" ' AN
 
-                                            GiQuestionSecréte(Index, e.Message)
+                                        Select Case e.Message(2)
 
-                                        Case "q" ' Aq
+                                            Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ' AN2
 
-                                            GiFileAttenteJeu(Index, e.Message)
+                                                GiNiveauUp(Index, e.Message)
 
-                                        Case "R" ' AR
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "AN", e.Message)
+
+                                        End Select
+
+                                    Case "Q" ' AQ
+
+                                        GiQuestionSecréte(Index, e.Message)
+
+                                    Case "q" ' Aq
+
+                                        GiFileAttenteJeu(Index, e.Message)
+
+                                    Case "R" ' AR
 
                                      'AR 6bk 
                                     'AR 6bk (ou autre) = les droits du personnage, genre échanger, défi, agresser etc.
@@ -336,108 +354,107 @@ Public Class Player
                                     '(NON FINI)
                                    ' Statut_Information_Peronnage_Autorisation(iIndex, Base36ToDec(Mid(e.Message, 3)))
 
-                                        Case "S" ' AS
+                                    Case "S" ' AS
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "K" ' ASK
+                                            Case "K" ' ASK
 
-                                                    If MITM = False Then
+                                                Connecté = True
+                                                EnConnexion = False
 
-                                                        Send("GC1")
+                                                If MITM = False Then
 
-                                                    End If
+                                                    Send("GC1")
 
-                                                    Connecté = True
-                                                    EnConnexion = False
+                                                End If
 
-                                                    GiInventaire(Index, e.Message)
+                                                GiInventaire(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "AS", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "AS", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "s" ' As
+                                    Case "s" ' As
 
-                                            GiCaractéristique(Index, e.Message)
+                                        GiCaractéristique(Index, e.Message)
 
-                                        Case "T" ' AT
+                                    Case "T" ' AT
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "E" ' ATE
+                                            Case "E" ' ATE
 
-                                                    EcritureMessage(Index, "(Dofus)", "Connexion interrompue avec le serveur." & vbCrLf &
+                                                EcritureMessage(Index, "(Dofus)", "Connexion interrompue avec le serveur." & vbCrLf &
                                                                                   "Votre connexion est trop lente ou instable.", Color.Red)
 
-                                                    If MITM Then
+                                                If MITM Then
 
-                                                        Client.Close()
+                                                    Client.Close()
 
-                                                    End If
+                                                End If
 
-                                                    Socket_Authentification.Connexion_Game(False)
+                                                Socket_Authentification.Connexion_Game(False)
 
-                                                Case "K" 'ATK
+                                            Case "K" 'ATK
 
-                                                    Select Case e.Message(3)
+                                                Select Case e.Message(3)
 
-                                                        Case "0" 'ATK0
+                                                    Case "0" 'ATK0
 
-                                                            If MITM = False Then
+                                                        If MITM = False Then
 
-                                                                Send("Ak0")
-                                                                Send("AV")
+                                                            Send("Ak0")
+                                                            Send("AV")
 
-                                                            End If
+                                                        End If
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "ATK", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "ATK", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                            End Select
+                                        End Select
 
-                                        Case "V"
+                                    Case "V"
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "0" 'AV0
+                                            Case "0" 'AV0
 
-                                                    If MITM = False Then
+                                                If MITM = False Then
 
-                                                        Send("Agfr")
-                                                        'Socket.Envoyer("AiCode") = ? 
-                                                        Send("AL")
-                                                        Send("Af")
+                                                    Send("Agfr")
+                                                    'Socket.Envoyer("AiCode") = ? 
+                                                    Send("AL")
+                                                    Send("Af")
 
-                                                    End If
+                                                End If
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "AV", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "AV", e.Message)
 
-                                            End Select
+                                        End Select
 
+                                    Case "X" ' AX
 
-                                        Case "X" ' AX
+                                        Select Case e.Message(2)
 
-                                            Select Case e.Message(2)
+                                            Case "E" ' AXE  
 
-                                                Case "E" ' AXE  
+                                                Select Case e.Message(3)
 
-                                                    Select Case e.Message(3)
+                                                    Case "d"
 
-                                                        Case "d"
+                                                        EcritureMessage(Index, "[Dofus]", "Serveur : En sauvegarde.", Color.Red)
 
-                                                            EcritureMessage(Index, "[Dofus]", "Serveur : En sauvegarde.", Color.Red)
+                                                    Case "f" ' AXEf
 
-                                                        Case "f" ' AXEf
-
-                                                            EcritureMessage(Index, "[Dofus]",
+                                                        EcritureMessage(Index, "[Dofus]",
                                                     "Serveur : COMPLET" & vbCrLf &
                                                     "Nombre maximum de joueurs atteint." & vbCrLf & vbCrLf &
                                                     "Pour bénéficier d'un accès prioritaire aux serveurs, nous vous invitons à vous abonner.
@@ -445,362 +462,364 @@ Public Class Player
                                                      télécharger et vous connecter sur les serveurs Dofus 2.0, qui proposent un plus grand nombre
                                                      de place pour accueillir les joueurs !", Color.Red)
 
-                                                            If MITM Then
+                                                        If MITM Then
 
-                                                                Client.Close()
+                                                            Client.Close()
 
-                                                            End If
+                                                        End If
 
-                                                            Socket_Authentification.Connexion_Game(False)
+                                                        Socket_Authentification.Connexion_Game(False)
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "AXE", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "AXE", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                                Case "K" ' AXK
+                                            Case "K" ' AXK
 
-                                                    GiServeurIpPortTicket(Index, e.Message)
+                                                GiServeurIpPortTicket(Index, e.Message)
 
-                                                    Exit Sub
+                                                Exit Sub
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "AX", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "AX", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "x" ' Ax
+                                    Case "x" ' Ax
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "K" ' AxK
+                                            Case "K" ' AxK
 
-                                                    GiSelectionServeur(Index, e.Message)
+                                                GiSelectionServeur(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Ax", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Ax", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "Y" ' AY
+                                    Case "Y" ' AY
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "K" ' AYK
+                                            Case "K" ' AYK
 
-                                                    GiServeurIpPortTicket(Index, e.Message)
+                                                GiServeurIpPortTicket(Index, e.Message)
 
-                                                    Exit Sub
+                                                Exit Sub
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "AY", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "AY", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case Else
+                                    Case Else
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "A", e.Message)
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "A", e.Message)
 
-                                    End Select
+                                End Select
 
-                                Case "a"
+                            Case "a"
 
-                                    Select Case e.Message(1)
+                                Select Case e.Message(1)
 
-                                        Case "l" ' al
+                                    Case "l" ' al
 
                                 ' al|270;0|49;1|etc....
                                 ' Inconnu
 
-                                        Case "m"
+                                    Case "m"
 
-                                            'am478|2|1
+                                        'am478|2|1
 
-                                        Case Else
+                                    Case Else
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "a", e.Message)
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "a", e.Message)
 
-                                    End Select
+                                End Select
 
-                                Case "B"
+                            Case "B"
 
-                                    Select Case e.Message(1)
+                                Select Case e.Message(1)
 
-                                        Case "D" ' BD
+                                    Case "D" ' BD
 
                                     ' BD650|8|6
                                     ' Donne l'année + le moi + le jour.
 
-                                        Case "N" ' BN
+                                    Case "N" ' BN
 
                                     'Info bien reçu
 
-                                        Case "p" ' Bp
+                                    Case "p" ' Bp
 
                                     ' ?
 
-                                        Case "T" ' BT
+                                    Case "T" ' BT
 
                                     'BT1599467490555
                                     ' ?
 
-                                        Case "W" ' BW
+                                    Case "W" ' BW
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "K" ' BWK
+                                            Case "K" ' BWK
 
-                                                    GiAmiEnnemiInformation(Index, e.Message)
+                                                GiAmiEnnemiInformation(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "BW", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "BW", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "X" ' BX
+                                    Case "X" ' BX
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case ";" ' BX;
+                                            Case ";" ' BX;
 
-                                                    Select Case e.Message(3)
+                                                Select Case e.Message(3)
 
-                                                        Case "1" ' BX;1
+                                                    Case "1" ' BX;1
 
-                                                            Select Case e.Message(4)
+                                                        Select Case e.Message(4)
 
-                                                                Case ";" ' BX;1;
+                                                            Case ";" ' BX;1;
 
-                                                                    If MITM = False Then
+                                                                If MITM = False Then
 
-                                                                        Send("BX" & (Personnage.ID + 14))
+                                                                    Send("BX" & (Personnage.ID + 14))
 
-                                                                    End If
+                                                                End If
 
-                                                                Case Else
+                                                            Case Else
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "BX;1", e.Message)
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "BX;1", e.Message)
 
-                                                            End Select
+                                                        End Select
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "BX;", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "BX;", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                                Case "|" ' BX|
+                                            Case "|" ' BX|
 
-                                                    Select Case e.Message(3)
+                                                Select Case e.Message(3)
 
-                                                        Case "+" ' BX|+
+                                                    Case "+" ' BX|+
 
-                                                            'BX|+337;6;0;30177576;Tacaci;9;90^100;0;1,0,0,30177744;790000;fff8f9;600000;b4,2412~16~8,1965,1f40,;1;;;Spanish Please;8,8i,1m,9zldr;0;;
-                                                            If MITM = False Then
+                                                        'BX|+337;6;0;30177576;Tacaci;9;90^100;0;1,0,0,30177744;790000;fff8f9;600000;b4,2412~16~8,1965,1f40,;1;;;Spanish Please;8,8i,1m,9zldr;0;;
+                                                        If MITM = False Then
 
-                                                                Send("BX" & Personnage.ID)
+                                                            Send("BX" & Personnage.ID)
 
-                                                            End If
+                                                        End If
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "B", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "B", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "BX", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "BX", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "Z" ' BZ
+                                    Case "Z" ' BZ
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case ";" ' BZ;
+                                            Case ";" ' BZ;
 
-                                                    Select Case e.Message(2)
+                                                Select Case e.Message(2)
 
-                                                        Case "1" ' BZ;1
+                                                    Case "1" ' BZ;1
 
-                                                            Select Case e.Message(2)
+                                                        Select Case e.Message(2)
 
-                                                                Case ";" ' BZ;1;
+                                                            Case ";" ' BZ;1;
 
-                                                                    If MITM = False Then
+                                                                If MITM = False Then
 
-                                                                        Send("BZ" & (Personnage.ID + 305))
-                                                                        'ou Send("BZ" & Personnage.ID)
-                                                                    End If
+                                                                    Send("BZ" & (Personnage.ID + 305))
+                                                                    'ou Send("BZ" & Personnage.ID)
 
-                                                                Case Else
+                                                                End If
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "BZ;1", e.Message)
+                                                            Case Else
 
-                                                            End Select
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "BZ;1", e.Message)
 
-                                                        Case Else
+                                                        End Select
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "BZ;", e.Message)
+                                                    Case Else
 
-                                                    End Select
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "BZ;", e.Message)
 
-                                                Case Else
+                                                End Select
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "BZ", e.Message)
+                                            Case Else
 
-                                            End Select
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "BZ", e.Message)
 
-                                        Case Else
+                                        End Select
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "B", e.Message)
+                                    Case Else
 
-                                    End Select
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "B", e.Message)
 
-                                Case "b"
+                                End Select
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "b", e.Message)
+                            Case "b"
 
-                                Case "C"
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "b", e.Message)
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "C", e.Message)
+                            Case "C"
 
-                                Case "c"
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "C", e.Message)
 
-                                    Select Case e.Message(1)
+                            Case "c"
 
-                                        Case "C" ' cC
+                                Select Case e.Message(1)
 
-                                            Select Case e.Message(2)
+                                    Case "C" ' cC
 
-                                                Case "+" ' cC+
+                                        Select Case e.Message(2)
 
-                                                    GiCanalDofus(Index, e.Message)
+                                            Case "+" ' cC+
 
-                                                Case "-" ' cC-
+                                                GiCanalDofus(Index, e.Message)
 
-                                                    GiCanalDofus(Index, e.Message)
+                                            Case "-" ' cC-
 
-                                                Case Else
+                                                GiCanalDofus(Index, e.Message)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "cC", e.Message)
+                                            Case Else
 
-                                            End Select
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "cC", e.Message)
 
-                                        Case "M" ' cM
+                                        End Select
 
-                                            Select Case e.Message(2)
+                                    Case "M" ' cM
 
-                                                Case "K" ' cMK
+                                        Select Case e.Message(2)
 
-                                                    GiDofusTchat(Index, e.Message)
+                                            Case "K" ' cMK
 
-                                                Case Else
+                                                GiDofusTchat(Index, e.Message)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "cM", e.Message)
+                                            Case Else
 
-                                            End Select
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "cM", e.Message)
 
-                                        Case Else
+                                        End Select
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "c", e.Message)
+                                    Case Else
 
-                                    End Select
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "c", e.Message)
 
-                                Case "D"
+                                End Select
 
-                                    Select Case e.Message(1)
+                            Case "D"
 
-                                        Case "C" ' DC
+                                Select Case e.Message(1)
 
-                                            Select Case e.Message(2)
+                                    Case "C" ' DC
 
-                                                Case "K" ' DCK
+                                        Select Case e.Message(2)
 
-                                                    GiPnjDialogue(Index, e.Message)
+                                            Case "K" ' DCK
 
-                                                Case "E" ' DCE
+                                                GiPnjDialogue(Index, e.Message)
 
-                                                    EnDialogue = True
-                                                    BloqueDialogue.Set()
-                                                    EcritureMessage(Index, "[Dofus]", "Vous êtes déjà en dialogue.", Color.Red)
+                                            Case "E" ' DCE
 
-                                                Case Else
+                                                Pnj.EnDialogue = True
+                                                Pnj.BloquePnj.Set()
+                                                EcritureMessage(Index, "[Dofus]", "Vous êtes déjà en dialogue.", Color.Red)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "DC", e.Message)
+                                            Case Else
 
-                                            End Select
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "DC", e.Message)
 
-                                        Case "Q" ' DQ
+                                        End Select
 
-                                            GiPnjQuestionRéponse(Index, e.Message)
+                                    Case "Q" ' DQ
 
-                                        Case "V" ' DV
+                                        GiPnjQuestionReponse(Index, e.Message)
 
-                                            EnDialogue = False
-                                            fPnjRéponse.Clear()
-                                            fDialogueRéponse = 0
-                                            BloqueDialogue.Set()
+                                    Case "V" ' DV
 
-                                        Case Else
+                                        Pnj.EnDialogue = False
+                                        Pnj.Reponse.Clear()
+                                        Pnj.IdReponse = 0
+                                        Pnj.BloquePnj.Set()
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "D", e.Message)
+                                    Case Else
 
-                                    End Select
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "D", e.Message)
 
-                                Case "d"
+                                End Select
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "d", e.Message)
+                            Case "d"
 
-                                Case "E"
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "d", e.Message)
 
-                                    Select Case e.Message(1)
+                            Case "E"
 
-                                        Case "b" ' Eb
+                                Select Case e.Message(1)
 
-                                            Select Case e.Message(2)
+                                    Case "b" ' Eb
 
-                                                Case ";" ' Eb;
+                                        Select Case e.Message(2)
 
-                                                    Select Case e.Message(3)
+                                            Case ";" ' Eb;
 
-                                                        Case ";" ' Eb;1
+                                                Select Case e.Message(3)
 
-                                                            Select Case e.Message(4)
+                                                    Case ";" ' Eb;1
 
-                                                                Case ";" ' Eb;1;
+                                                        Select Case e.Message(4)
 
-                                                                    If MITM = False Then
+                                                            Case ";" ' Eb;1;
 
-                                                                        Send("Eb" & (Personnage.ID + 3958))
-                                                                        'OU  Send("Eb" & (Personnage.ID + 14))
-                                                                    End If
+                                                                If MITM = False Then
 
-                                                                Case Else
+                                                                    Send("Eb" & (Personnage.ID + 3958))
+                                                                    'OU  Send("Eb" & (Personnage.ID + 14))
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Eb;1", e.Message)
+                                                                End If
 
-                                                            End Select
+                                                            Case Else
 
-                                                        Case Else
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Eb;1", e.Message)
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Eb;", e.Message)
+                                                        End Select
 
-                                                    End Select
+                                                    Case Else
 
-                                                Case Else
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Eb;", e.Message)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Eb", e.Message)
+                                                End Select
 
-                                            End Select
+                                            Case Else
 
-                                        Case "C" ' EC
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Eb", e.Message)
+
+                                        End Select
+
+                                    Case "C" ' EC
 
                                         Select Case e.Message(2)
 
@@ -810,7 +829,8 @@ Public Class Player
 
                                                     Case "0" ' ECK0
 
-                                                        EnHDV = True
+
+                                                        'EnHDV = True
 
                                                     Case "1" ' ECK1
 
@@ -820,19 +840,19 @@ Public Class Player
 
                                                                 Case "0" ' ECK10
 
-                                                                    EnHDV = True
+                                                                    Pnj.EnHdvVente = True
                                                                     EcritureMessage(Index, "[Dofus]", "Vous êtes en vente avec le PNJ.", Color.Green)
                                                                     GiHotelDeVenteAcheterVendre(Index, e.Message)
 
                                                                 Case "1" ' ECK11
 
-                                                                    EnHDV = True
+                                                                    Pnj.EnHdvAchat = True
                                                                     EcritureMessage(Index, "[Dofus]", "Vous êtes en achat avec le PNJ.", Color.Green)
                                                                     GiHotelDeVenteAcheterVendre(Index, e.Message)
 
                                                                 Case "5" ' ECK15
 
-                                                                    EnBanque = True
+                                                                    Personnage.Dragodinde.EnInventaire = True
                                                                     EcritureMessage(Index, "[Dofus]", "Vous êtes dans l'inventaire de la monture.", Color.Green)
 
                                                                 Case Else
@@ -843,18 +863,18 @@ Public Class Player
 
                                                         Else
 
-                                                            EnEchange = True
-                                                            BloqueEchange.Set()
+                                                            ' EnEchange = True
+                                                            ' BloqueEchange.Set()
 
                                                         End If
 
                                                     Case "5" ' ECK5
 
-                                                        EnBanque = True
+                                                       ' EnBanque = True
 
                                                     Case "8" ' ECK8|-88
 
-                                                        EnBanque = True 'Percepteur
+                                                        ' EnBanque = True 'Percepteur
 
                                                     Case Else
 
@@ -870,616 +890,594 @@ Public Class Player
 
                                     Case "H" ' EH
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "L" ' EHL
+                                            Case "L" ' EHL
 
-                                                    GiHotelDeVenteItemID(Index, e.Message)
+                                                   ' GiHotelDeVenteItemID(Index, e.Message)
 
-                                                Case "l" ' EHl
+                                            Case "l" ' EHl
 
-                                                    GiHotelDeVenteItemChoisi(Index, e.Message)
+                                                  '  GiHotelDeVenteItemChoisi(Index, e.Message)
 
-                                                Case "P" ' EHP
+                                            Case "P" ' EHP
 
-                                                    GiHotelDeVentePrixMoyen(Index, e.Message)
+                                                '   GiHotelDeVentePrixMoyen(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "EH", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EH", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "K" ' EK
+                                    Case "K" ' EK
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "0" ' EK0
+                                            Case "0" ' EK0
 
-                                                    GiEchangeValideInvalide(Index, e.Message)
+                                                GiEchangeValideInvalide(Index, e.Message)
 
-                                                Case "1" ' EK1
+                                            Case "1" ' EK1
 
-                                                    GiEchangeValideInvalide(Index, e.Message)
+                                                GiEchangeValideInvalide(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "EK", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EK", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "L" ' EL
+                                    Case "L" ' EL
 
-                                            If e.Message <> "EL" Then
+                                        If e.Message <> "EL" Then
 
                                             Select Case e.Message(2)
 
                                                 Case "O" ' ELO
 
-                                                    FrmUser.DataGridView_Banque.Rows.Clear()
-                                                    GiItemAjoute(Index, e.Message.Replace("EL", "").Replace("O", ""), FrmUser.DataGridView_Banque)
+                                                    'Banque, Coffre, Percepteur
+                                                    GiItemAjoute(Index, e.Message.Replace("EL", "").Replace("O", ""), Echange.Moi.Inventaire)
 
                                                 Case Else
 
-                                                    If EnHDV Then
+                                                    '   If EnHDV Then
 
-                                                        GiHotelDeVenteItemEnVente(Index, e.Message)
+                                                    '      GiHotelDeVenteItemEnVente(Index, e.Message)
 
-                                                    Else
+                                                    '   Else
 
-                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "EL", e.Message)
+                                                    '      ErreurFichier(Index, Personnage.NomDuPersonnage, "EL", e.Message)
 
-                                                    End If
+                                                    '  End If
 
                                             End Select
 
                                         Else
 
-                                                HdvInfo.ListeItem.Clear()
+                                            'HdvInfo.ListeItem.Clear()
 
-                                            End If
+                                        End If
 
-                                        Case "M" ' EM
+                                    Case "M" ' EM
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "K" ' EMK
+                                            Case "K" ' EMK
 
-                                                    Select Case e.Message(3)
+                                                Select Case e.Message(3)
 
-                                                        Case "G" ' EMKG
+                                                    Case "G" ' EMKG
 
-                                                            EcritureMessage(Index, "[Dofus]", "Vous avez déposé " & Mid(e.Message, 5) & " kamas.", Color.Green)
-
-                                                            If EnEchange Then
-
-                                                            GiEchangeKamasMoi(Index, e.Message)
-
-                                                        End If
+                                                        EcritureMessage(Index, "[Dofus]", "Vous avez déposé " & Mid(e.Message, 5) & " kamas.", Color.Green)
+                                                        GiEchangeKamasMoi(Index, e.Message)
 
                                                     Case "O" ' EMKO
 
-                                                            Select Case e.Message(4)
+                                                        Select Case e.Message(4)
 
-                                                                Case "+" ' EMKO+
+                                                            Case "+" ' EMKO+
 
-                                                                If EnEchange Then
-
-                                                                    GiEchangeAjouteItemMoi(Index, e.Message)
-
-                                                                End If
+                                                                GiEchangeAjouteItemMoi(Index, e.Message)
 
                                                             Case "-" ' EMKO-
 
-                                                                If EnEchange Then
-
-                                                                    GiEchangeSupprimeItemMoi(Index, e.Message)
-
-                                                                End If
+                                                                GiEchangeSupprimeItemMoi(Index, e.Message)
 
                                                             Case Else
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "EMKO", e.Message)
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EMKO", e.Message)
 
-                                                            End Select
+                                                        End Select
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "EMK", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "EMK", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "EM", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EM", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "m" ' Em
+                                    Case "m" ' Em
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "K" ' EmK
+                                            Case "K" ' EmK
 
-                                                    Select Case e.Message(3)
+                                                Select Case e.Message(3)
 
-                                                        Case "G" ' EmKG
+                                                    Case "G" ' EmKG
 
-                                                            EcritureMessage(Index, "[Dofus]", "Il a déposé " & Mid(e.Message, 5) & " kamas.", Color.Green)
+                                                        EcritureMessage(Index, "[Dofus]", "Il a déposé " & Mid(e.Message, 5) & " kamas.", Color.Green)
+                                                        GiEchangeKamasLui(Index, e.Message)
 
-                                                            If EnEchange Then
+                                                    Case "O" ' EmKO
 
-                                                            GiEchangeKamasLui(Index, e.Message)
+                                                        Select Case e.Message(4)
 
-                                                        End If
+                                                            Case "+" ' EmKO+
 
-                                                        Case "O" ' EmKO
-
-                                                            Select Case e.Message(4)
-
-                                                                Case "+" ' EmKO+
-
-                                                                If EnEchange Then
-
-                                                                    GiEchangeAjouteItemLui(Index, e.Message)
-
-                                                                End If
+                                                                GiEchangeAjouteItemLui(Index, e.Message)
 
                                                             Case "-" ' EmKO-
 
-                                                                If EnEchange Then
+                                                                GiEchangeSupprimeItemLui(Index, e.Message)
 
-                                                                    GiEchangeSupprimeItemLui(Index, e.Message)
+                                                            Case Else
+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EmKO", e.Message)
+
+                                                        End Select
+
+                                                    Case "+" ' EmK+
+
+                                                          '  If EnHDV Then
+
+                                                            '    GiHotelDeVenteItemMisEnVente(Index, e.Message)
+
+                                                           ' End If
+
+                                                    Case "-" ' EmK-
+
+                                                        '  If EnHDV Then
+
+                                                        '      GiHotelDeVenteRetireItemMisEnVente(Index, e.Message)
+
+                                                        '  End If
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "EmK", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Em", e.Message)
+
+                                        End Select
+
+                                    Case "R" ' ER
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' ERK
+
+                                                GiEchangeRecu(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "ER", e.Message)
+
+                                        End Select
+
+                                    Case "s" ' Es
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' EsK
+
+                                                Select Case e.Message(3)
+
+                                                    Case "G" ' EsKG
+
+                                                        GiEchangeKamasMoi(Index, e.Message)
+
+                                                    Case "O" ' EsKO
+
+                                                        Select Case e.Message(4)
+
+                                                            Case "+" ' EsKO+
+
+                                                                '    If EnBanque Then
+
+                                                                '    GiBanqueAjouteItem(Index, e.Message, FrmUser.DataGridView_Banque)
+
+                                                               ' End If
+
+                                                            Case "-" ' EsKO-
+
+                                                                '     If EnBanque Then
+
+                                                                '     GiBanqueSupprimeItem(Index, e.Message, FrmUser.DataGridView_Banque)
+
+                                                                '  End If
+
+                                                            Case Else
+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EsKO", e.Message)
+
+                                                        End Select
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "EsK", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Es", e.Message)
+
+                                        End Select
+
+                                    Case "V" ' EV
+
+                                        If e.Message = "EV" Then
+
+                                            '    If EnEchange Then
+
+                                            '        EcritureMessage(Index, "[Dofus]", "Echange annulé", Color.Red)
+
+                                            '   End If
+
+                                            '    EnBanque = False
+                                            '   EnEchange = False
+                                            '    EnInvitationEchange = False
+                                            '    EnHDV = False
+                                            '    HdvInfo.ListeItem.Clear()
+                                            '    BloqueInteraction.Set()
+                                            '    BloqueEchange.Set()
+                                            '    BloqueHDV.Set()
+
+                                        Else
+
+                                            If e.Message = "EVa" Then
+
+                                                EcritureMessage(Index, "[Dofus]", "Echange effectué", Color.Red)
+
+                                                '     EnEchange = False
+                                                '    BloqueEchange.Set()
+
+                                            Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EV", e.Message)
+
+                                            End If
+
+                                        End If
+
+                                    Case "v" ' Ev
+
+                                        Select Case e.Message(2)
+
+                                            Case "G" ' EvG
+
+                                                Select Case e.Message(3)
+
+                                                    Case "1" ' EvG1
+
+                                                        Select Case e.Message(4)
+
+                                                            Case "|" ' EvG1|
+
+                                                                If MITM = False Then
+
+                                                                    Send("Ev" & (Personnage.ID + 2))
 
                                                                 End If
 
                                                             Case Else
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "EmKO", e.Message)
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EvG1", e.Message)
 
-                                                            End Select
+                                                        End Select
 
-                                                        Case "+" ' EmK+
+                                                    Case Else
 
-                                                            If EnHDV Then
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "EvG", e.Message)
 
-                                                                GiHotelDeVenteItemMisEnVente(Index, e.Message)
+                                                End Select
 
-                                                            End If
+                                            Case "1" ' Ev1
 
-                                                        Case "-" ' EmK-
+                                                Select Case e.Message(3)
 
-                                                            If EnHDV Then
+                                                    Case ";" ' Ev1;
 
-                                                                GiHotelDeVenteRetireItemMisEnVente(Index, e.Message)
+                                                        Select Case e.Message(4)
 
-                                                            End If
+                                                            Case "5" ' Ev1;5
 
-                                                        Case Else
+                                                                Select Case e.Message(5)
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "EmK", e.Message)
+                                                                    Case "0" ' Ev1;50
 
-                                                    End Select
+                                                                        Select Case e.Message(6)
 
-                                                Case Else
+                                                                            Case "1" ' Ev1;501
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Em", e.Message)
+                                                                                Select Case e.Message(7)
 
-                                            End Select
+                                                                                    Case ";" ' Ev1;501;
 
-                                        Case "R" ' ER
+                                                                                        If MITM = False Then
 
-                                            Select Case e.Message(2)
+                                                                                            'Ev1;501;1234567;384,10800
+                                                                                            Send("Ev" & Personnage.ID)
 
-                                                Case "K" ' ERK
+                                                                                        End If
 
-                                                    GiEchangeRecu(Index, e.Message)
+                                                                                    Case Else
 
-                                                Case Else
+                                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1;501", e.Message)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "ER", e.Message)
+                                                                                End Select
 
-                                            End Select
+                                                                            Case Else
 
-                                        Case "s" ' Es
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1;50", e.Message)
 
-                                            Select Case e.Message(2)
+                                                                        End Select
 
-                                                Case "K" ' EsK
+                                                                    Case Else
 
-                                                    Select Case e.Message(3)
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1;5", e.Message)
 
-                                                        Case "O" ' EsKO
+                                                                End Select
 
-                                                            Select Case e.Message(4)
+                                                            Case Else
 
-                                                                Case "+" ' EsKO+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1;", e.Message)
 
-                                                                    If EnBanque Then
+                                                        End Select
 
-                                                                    GiBanqueAjouteItem(Index, e.Message, FrmUser.DataGridView_Banque)
+                                                    Case Else
 
-                                                                End If
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1", e.Message)
 
-                                                                Case "-" ' EsKO-
+                                                End Select
 
-                                                                    If EnBanque Then
+                                            Case Else
 
-                                                                    GiBanqueSupprimeItem(Index, e.Message, FrmUser.DataGridView_Banque)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev", e.Message)
 
-                                                                End If
+                                        End Select
 
-                                                                Case Else
+                                    Case "W" ' EW
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "EsKO", e.Message)
+                                        Select Case e.Message(2)
 
-                                                            End Select
+                                            Case "+" ' EW+
 
-                                                        Case Else
+                                                If e.Message.Length > 3 Then
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "EsK", e.Message)
-
-                                                    End Select
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Es", e.Message)
-
-                                            End Select
-
-                                        Case "V" ' EV
-
-                                            If e.Message = "EV" Then
-
-                                                If EnEchange Then
-
-                                                    EcritureMessage(Index, "[Dofus]", "Echange annulé", Color.Red)
-
-                                                End If
-
-                                                EnBanque = False
-                                                EnEchange = False
-                                                EnInvitationEchange = False
-                                                EnHDV = False
-                                                HdvInfo.ListeItem.Clear()
-                                                BloqueInteraction.Set()
-                                                BloqueEchange.Set()
-                                                BloqueHDV.Set()
-
-                                            Else
-
-                                                If e.Message = "EVa" Then
-
-                                                    EcritureMessage(Index, "[Dofus]", "Echange effectué", Color.Red)
-
-                                                    EnEchange = False
-                                                    BloqueEchange.Set()
+                                                    ' EW+ 0123456   |
+                                                    ' EW+ ID tchatJoueur |
+                                                    'Inconnu
 
                                                 Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "EV", e.Message)
+                                                    'GiMétierModePublic(Index, e.Message)
 
                                                 End If
 
-                                            End If
+                                            Case "-" ' EW-
 
-                                        Case "v" ' Ev
+                                                If e.Message.Length > 3 Then
 
-                                            Select Case e.Message(2)
 
-                                                Case "G" ' EvG
+                                                Else
 
-                                                    Select Case e.Message(3)
+                                                    '  GiMétierModePublic(Index, e.Message)
 
-                                                        Case "1" ' EvG1
+                                                End If
 
-                                                            Select Case e.Message(4)
+                                            Case Else
 
-                                                                Case "|" ' EvG1|
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EW", e.Message)
 
-                                                                    If MITM = False Then
+                                        End Select
 
-                                                                        Send("Ev" & (Personnage.ID + 2))
+                                    Case Else
 
-                                                                    End If
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "E", e.Message)
 
-                                                                Case Else
+                                End Select
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "EvG1", e.Message)
+                            Case "e"
 
-                                                            End Select
+                                Select Case e.Message(1)
 
-                                                        Case Else
+                                    Case "L" ' eL
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "EvG", e.Message)
+                                        'eL7808|0 = Inconnu
 
-                                                    End Select
+                                    Case Else
 
-                                                Case "1" ' Ev1
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "e", e.Message)
 
-                                                    Select Case e.Message(3)
+                                End Select
 
-                                                        Case ";" ' Ev1;
+                            Case "F"
 
-                                                            Select Case e.Message(4)
+                                Select Case e.Message(1)
 
-                                                                Case "5" ' Ev1;5
+                                    Case "A" ' FA
 
-                                                                    Select Case e.Message(5)
+                                        Select Case e.Message(2)
 
-                                                                        Case "0" ' Ev1;50
+                                            Case "K" ' FAK
 
-                                                                            Select Case e.Message(6)
+                                                'GiAmiEnnemiAjoute(Index, e.Message)
 
-                                                                                Case "1" ' Ev1;501
+                                            Case Else
 
-                                                                                    Select Case e.Message(7)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "FA", e.Message)
 
-                                                                                        Case ";" ' Ev1;501;
+                                        End Select
 
-                                                                                            If MITM = False Then
+                                    Case "L" ' FL
 
-                                                                                                'Ev1;501;1234567;384,10800
-                                                                                                Send("Ev" & Personnage.ID)
+                                          '  GiAmiEnnemi(Index, e.Message)
 
-                                                                                            End If
+                                    Case "O" ' FO
 
-                                                                                        Case Else
+                                        Select Case e.Message(2)
 
-                                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1;501", e.Message)
+                                            Case "-" ' FO- 
 
-                                                                                    End Select
+                                                '  AmiAvertie = False
 
-                                                                                Case Else
+                                                EcritureMessage(Index, "[Dofus]", "Vous serai pas avertie lors de la connexion d'un ami.", Color.Green)
 
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1;50", e.Message)
+                                            Case "+" ' FO+
 
-                                                                            End Select
+                                                'AmiAvertie = True
 
-                                                                        Case Else
+                                                EcritureMessage(Index, "[Dofus]", "Vous serai avertie lors de la connexion d'un ami.", Color.Green)
 
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1;5", e.Message)
+                                            Case Else
 
-                                                                    End Select
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "FO", e.Message)
 
-                                                                Case Else
+                                        End Select
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1;", e.Message)
+                                    Case Else
 
-                                                            End Select
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "F", e.Message)
 
-                                                        Case Else
+                                End Select
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev1", e.Message)
+                            Case "f"
 
-                                                    End Select
+                                Select Case e.Message(1)
 
-                                                Case Else
+                                    Case "C" ' fC
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Ev", e.Message)
+                                        Select Case CInt(e.Message(2).ToString)
 
-                                            End Select
+                                            Case "0" ' fC0
 
-                                        Case "W" ' EW
+                                                EcritureMessage(Index, "[Dofus]", "Il n'y a aucun combat en cours actuellement sur la map.", Color.Green)
 
-                                            Select Case e.Message(2)
+                                                    'MapSpectateur = False
 
-                                                Case "+" ' EW+
+                                            Case > 0 ' fC1
 
-                                                    If e.Message.Length > 3 Then
+                                                EcritureMessage(Index, "[Dofus]", "Il y a des combats en cours actuellement sur la map.", Color.Green)
 
-                                                        ' EW+ 0123456   |
-                                                        ' EW+ ID tchatJoueur |
-                                                        'Inconnu
+                                                '   MapSpectateur = True
 
-                                                    Else
+                                            Case Else
 
-                                                        GiMétierModePublic(Index, e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "fC", e.Message)
 
-                                                    End If
+                                        End Select
 
-                                                Case "-" ' EW-
+                                    Case Else
 
-                                                    If e.Message.Length > 3 Then
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "f", e.Message)
 
+                                End Select
 
-                                                    Else
+                            Case "G"
 
-                                                        GiMétierModePublic(Index, e.Message)
+                                Select Case e.Message(1)
 
-                                                    End If
+                                    Case "A" ' GA
 
-                                                Case Else
+                                        Select Case e.Message(2)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "EW", e.Message)
+                                            Case "0" ' GA0
 
-                                            End Select
+                                                Select Case e.Message(3)
 
-                                        Case Else
+                                                    Case ";" ' GA0;
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "E", e.Message)
+                                                        Select Case e.Message(4)
 
-                                    End Select
+                                                            Case "1" ' GA0;1
 
-                                Case "e"
+                                                                Select Case e.Message(5)
 
-                                    Select Case e.Message(1)
+                                                                    Case ";" ' GA0;1;
 
-                                        Case "L" ' eL
+                                                                        GiMapDeplacementEntite(Index, e.Message)
 
-                                            'eL7808|0 = Inconnu
+                                                                    Case Else
 
-                                        Case Else
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;1", e.Message)
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "e", e.Message)
+                                                                End Select
 
-                                    End Select
+                                                            Case "5" ' GA0;5
 
-                                Case "F"
+                                                                Select Case e.Message(5)
 
-                                    Select Case e.Message(1)
+                                                                    Case "0" ' GA0;50
 
-                                        Case "A" ' FA
+                                                                        Select Case e.Message(6)
 
-                                            Select Case e.Message(2)
+                                                                            Case "1" ' GA0;501
 
-                                                Case "K" ' FAK
+                                                                                Select Case e.Message(7)
 
-                                                    GiAmiEnnemiAjoute(Index, e.Message)
+                                                                                    Case ";" ' GA0;501;
 
-                                                Case Else
+                                                                                        'GiRécolteEnCours(Index, e.Message)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "FA", e.Message)
+                                                                                    Case Else
 
-                                            End Select
+                                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;501", e.Message)
 
-                                        Case "L" ' FL
+                                                                                End Select
 
-                                            GiAmiEnnemi(Index, e.Message)
+                                                                            Case Else
 
-                                        Case "O" ' FO
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;50", e.Message)
 
-                                            Select Case e.Message(2)
+                                                                        End Select
 
-                                                Case "-" ' FO- 
+                                                                    Case Else
 
-                                                    AmiAvertie = False
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;5", e.Message)
 
-                                                    EcritureMessage(Index, "[Dofus]", "Vous serai pas avertie lors de la connexion d'un ami.", Color.Green)
+                                                                End Select
 
-                                                Case "+" ' FO+
+                                                            Case Else
 
-                                                    AmiAvertie = True
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;", e.Message)
 
-                                                    EcritureMessage(Index, "[Dofus]", "Vous serai avertie lors de la connexion d'un ami.", Color.Green)
+                                                        End Select
 
-                                                Case Else
+                                                    Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "FO", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0", e.Message)
 
-                                            End Select
+                                                End Select
 
-                                        Case Else
+                                            Case "1" ' GA1
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "F", e.Message)
+                                                Select Case e.Message(3)
 
-                                    End Select
+                                                    Case ";" ' GA1;
 
-                                Case "f"
-
-                                    Select Case e.Message(1)
-
-                                        Case "C" ' fC
-
-                                            Select Case CInt(e.Message(2).ToString)
-
-                                                Case "0" ' fC0
-
-                                                    EcritureMessage(Index, "[Dofus]", "Il n'y a aucun combat en cours actuellement sur la map.", Color.Green)
-
-                                                    MapSpectateur = False
-
-                                                Case > 0 ' fC1
-
-                                                    EcritureMessage(Index, "[Dofus]", "Il y a des combats en cours actuellement sur la map.", Color.Green)
-
-                                                    MapSpectateur = True
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "fC", e.Message)
-
-                                            End Select
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "f", e.Message)
-
-                                    End Select
-
-                                Case "G"
-
-                                    Select Case e.Message(1)
-
-                                        Case "A" ' GA
-
-                                            Select Case e.Message(2)
-
-                                                Case "0" ' GA0
-
-                                                    Select Case e.Message(3)
-
-                                                        Case ";" ' GA0;
-
-                                                            Select Case e.Message(4)
-
-                                                                Case "1" ' GA0;1
-
-                                                                    Select Case e.Message(5)
-
-                                                                        Case ";" ' GA0;1;
-
-                                                                            GiMapDéplacementEntité(Index, e.Message)
-
-                                                                        Case Else
-
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;1", e.Message)
-
-                                                                    End Select
-
-                                                                Case "5" ' GA0;5
-
-                                                                    Select Case e.Message(5)
-
-                                                                        Case "0" ' GA0;50
-
-                                                                            Select Case e.Message(6)
-
-                                                                                Case "1" ' GA0;501
-
-                                                                                    Select Case e.Message(7)
-
-                                                                                        Case ";" ' GA0;501;
-
-                                                                                            GiRécolteEnCours(Index, e.Message)
-
-                                                                                        Case Else
-
-                                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;501", e.Message)
-
-                                                                                    End Select
-
-                                                                                Case Else
-
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;50", e.Message)
-
-                                                                            End Select
-
-                                                                        Case Else
-
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;5", e.Message)
-
-                                                                    End Select
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0;", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA0", e.Message)
-
-                                                    End Select
-
-                                                Case "1" ' GA1
-
-                                                    Select Case e.Message(3)
-
-                                                        Case ";" ' GA1;
-
-                                                            Select Case e.Message(4)
+                                                        Select Case e.Message(4)
 
                                                             Case "4" ' GA1;4
 
@@ -1487,7 +1485,7 @@ Public Class Player
 
                                                                     Case ";" ' GA1;4;
 
-                                                                        GiMapDéplacementEntitéEscalié(Index, e.Message)
+                                                                        GiMapDeplacementEntiteEscalie(Index, e.Message)
 
                                                                     Case Else
 
@@ -1497,759 +1495,759 @@ Public Class Player
 
                                                             Case "5" ' GA1;5
 
-                                                                    Select Case e.Message(5)
+                                                                Select Case e.Message(5)
 
-                                                                        Case "0" ' GA1;50
+                                                                    Case "0" ' GA1;50
 
-                                                                            Select Case e.Message(6)
+                                                                        Select Case e.Message(6)
 
-                                                                                Case "1" ' GA1;501
+                                                                            Case "1" ' GA1;501
 
-                                                                                    Select Case e.Message(7)
+                                                                                Select Case e.Message(7)
 
-                                                                                        Case ";" ' GA1;501;
+                                                                                    Case ";" ' GA1;501;
 
-                                                                                            GiRécolteEnCours(Index, e.Message)
+                                                                                        'GiRécolteEnCours(Index, e.Message)
 
-                                                                                        Case Else
+                                                                                    Case Else
 
-                                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA1;501", e.Message)
+                                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA1;501", e.Message)
 
-                                                                                    End Select
+                                                                                End Select
 
-                                                                                Case Else
+                                                                            Case Else
 
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA1;50", e.Message)
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA1;50", e.Message)
 
-                                                                            End Select
+                                                                        End Select
 
-                                                                        Case Else
+                                                                    Case Else
 
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA1;5", e.Message)
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA1;5", e.Message)
 
-                                                                    End Select
+                                                                End Select
 
-                                                                Case Else
+                                                            Case Else
 
                                                                 ErreurFichier(Index, Personnage.NomDuPersonnage, "GA1;", e.Message)
 
                                                         End Select
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                                Case ";" ' GA;
+                                            Case ";" ' GA;
 
-                                                    Select Case e.Message(3)
+                                                Select Case e.Message(3)
 
-                                                        Case "0" ' GA;0
+                                                    Case "0" ' GA;0
 
-                                                            If _Send <> "" Then
+                                                        If _Send <> "" Then
 
-                                                                Send(_Send)
+                                                            Send(_Send)
 
-                                                                _Send = ""
+                                                            _Send = ""
 
-                                                            End If
+                                                        End If
 
-                                                            PathTotal = ""
-                                                            EnDéplacement = False
-                                                            BloqueDéplacement.Set()
+                                                        Map.PathTotal = ""
+                                                        Map.EnDeplacement = False
+                                                        BloqueDeplacement.Set()
 
-                                                        Case "1" ' GA;1
+                                                    Case "1" ' GA;1
 
-                                                            Select Case e.Message(4)
+                                                        Select Case e.Message(4)
 
-                                                                Case "0" ' GA;10
+                                                            Case "0" ' GA;10
 
-                                                                    Select Case e.Message(5)
+                                                                Select Case e.Message(5)
 
-                                                                        Case "0" ' GA;100
+                                                                    Case "0" ' GA;100
 
-                                                                            Select Case e.Message(6)
+                                                                        Select Case e.Message(6)
 
-                                                                                Case ";" ' GA;100;
+                                                                            Case ";" ' GA;100;
 
-                                                                                    GiCombatRetirePdv(Index, e.Message)
+                                                                                'GiCombatRetirePdv(Index, e.Message)
 
-                                                                                Case Else
+                                                                            Case Else
 
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;100", e.Message)
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;100", e.Message)
 
-                                                                            End Select
+                                                                        End Select
 
-                                                                        Case "2" ' GA;102
+                                                                    Case "2" ' GA;102
 
-                                                                            GiCombatPAUtilisé(Index, e.Message)
+                                                                          '  GiCombatPAUtilisé(Index, e.Message)
 
-                                                                        Case "3" ' GA;103
+                                                                    Case "3" ' GA;103
 
-                                                                            Select Case e.Message(6)
+                                                                        Select Case e.Message(6)
 
-                                                                                Case ";" ' GA;103;
+                                                                            Case ";" ' GA;103;
 
-                                                                                    GiMortJoueurMobs(Index, e.Message)
+                                                                                'GiMortJoueurMobs(Index, e.Message)
 
-                                                                                Case Else
+                                                                            Case Else
 
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;103", e.Message)
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;103", e.Message)
 
-                                                                            End Select
+                                                                        End Select
 
-                                                                        Case Else
+                                                                    Case Else
 
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;10", e.Message)
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;10", e.Message)
 
-                                                                    End Select
+                                                                End Select
 
-                                                                Case "1" ' GA;11
+                                                            Case "1" ' GA;11
 
-                                                                    Select Case e.Message(5)
+                                                                Select Case e.Message(5)
 
-                                                                        Case "6" ' GA;116
+                                                                    Case "6" ' GA;116
 
-                                                                            GiCombatPOPerdu(Index, e.Message)
+                                                                        '    GiCombatPOPerdu(Index, e.Message)
 
-                                                                        Case "7" ' GA;117
+                                                                    Case "7" ' GA;117
 
-                                                                            GiCombatPOGagné(Index, e.Message)
+                                                                        '  GiCombatPOGagné(Index, e.Message)
 
-                                                                        Case Else
+                                                                    Case Else
 
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;11", e.Message)
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;11", e.Message)
 
-                                                                    End Select
+                                                                End Select
 
-                                                                Case "2" ' GA,12
+                                                            Case "2" ' GA,12
 
-                                                                    Select Case e.Message(5)
+                                                                Select Case e.Message(5)
 
-                                                                        Case "9" ' GA,129
+                                                                    Case "9" ' GA,129
 
-                                                                            Select Case e.Message(6)
+                                                                        Select Case e.Message(6)
 
-                                                                                Case ";" ' GA,129;
+                                                                            Case ";" ' GA,129;
 
-                                                                                    GiCombatPMPerdu(Index, e.Message)
+                                                                                'GiCombatPMPerdu(Index, e.Message)
 
-                                                                                Case Else
+                                                                            Case Else
 
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;129", e.Message)
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;129", e.Message)
 
-                                                                            End Select
+                                                                        End Select
 
-                                                                        Case Else
+                                                                    Case Else
 
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;12", e.Message)
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;12", e.Message)
 
-                                                                    End Select
+                                                                End Select
 
-                                                                Case ";" ' GA;1;
+                                                            Case ";" ' GA;1;
 
-                                                                    GiMapDéplacementEntité(Index, e.Message)
+                                                                GiMapDeplacementEntite(Index, e.Message)
 
-                                                                Case Else
+                                                            Case Else
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;1", e.Message)
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;1", e.Message)
 
-                                                            End Select
+                                                        End Select
 
-                                                        Case "2" ' GA;2
+                                                    Case "2" ' GA;2
 
                                                 'GA;2;1234567;
                                                 'Quand je change de map.
                                                 'Inutile, car on passe par le GDM
 
-                                                        Case "3" ' GA;3
+                                                    Case "3" ' GA;3
 
-                                                            Select Case e.Message(4)
+                                                        Select Case e.Message(4)
 
-                                                                Case "0" ' GA;30 
+                                                            Case "0" ' GA;30 
 
-                                                                    Select Case e.Message(5)
+                                                                Select Case e.Message(5)
 
-                                                                        Case "0" ' GA;300
+                                                                    Case "0" ' GA;300
 
-                                                                            Select Case e.Message(6)
+                                                                        Select Case e.Message(6)
 
-                                                                                Case ";" ' GA;300;
+                                                                            Case ";" ' GA;300;
 
-                                                                                    GiCombatSortNormal(Index, e.Message)
+                                                                                '  GiCombatSortNormal(Index, e.Message)
 
-                                                                                Case Else
+                                                                            Case Else
 
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;300", e.Message)
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;300", e.Message)
 
-                                                                            End Select
+                                                                        End Select
 
-                                                                        Case "1" ' GA;301
+                                                                    Case "1" ' GA;301
 
-                                                                            GiCombatSortCoupCritique(Index, e.Message)
+                                                                        'GiCombatSortCoupCritique(Index, e.Message)
 
-                                                                        Case Else
+                                                                    Case Else
 
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;30", e.Message)
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;30", e.Message)
 
-                                                                    End Select
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;3", e.Message)
-
-                                                            End Select
-
-                                                        Case "9" ' GA;9
-
-                                                            Select Case e.Message(4)
-
-                                                                Case "0" ' GA;90
-
-                                                                    Select Case e.Message(5)
-
-                                                                        Case "0" ' GA;900
-
-                                                                            Select Case e.Message(6)
-
-                                                                                Case ";" ' GA;900;
-
-                                                                                    GiDefiRecu(Index, e.Message)
-
-                                                                                Case Else
-
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;900", e.Message)
-
-                                                                            End Select
-
-                                                                        Case "1"
-
-                                                                            Select Case e.Message(6)
-
-                                                                                Case ";" ' GA;901;
-
-                                                                                    GiDefiAccepter(Index, e.Message)
-
-                                                                                Case Else
-
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;901", e.Message)
-
-                                                                            End Select
-
-                                                                        Case "2"
-
-                                                                            Select Case e.Message(6)
-
-                                                                                Case ";" ' GA;902;
-
-                                                                                    GiDefiRefuser(Index, e.Message)
-
-                                                                                Case Else
-
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;902", e.Message)
-
-                                                                            End Select
-
-                                                                        Case "5" ' GA;905
-
-                                                                            Select Case e.Message(6)
-
-                                                                                Case ";" ' GA;905;
-
-                                                                                    GiCombatEntrer(Index, e.Message)
-
-                                                                                Case Else
-
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;905", e.Message)
-
-                                                                            End Select
-
-                                                                        Case Else
-
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;90", e.Message)
-
-                                                                    End Select
-
-                                                                Case "5" ' GA;95
-
-                                                                    Select Case e.Message(5)
-
-                                                                        Case "0" ' GA;950
-
-                                                                            Select Case e.Message(6)
-
-                                                                                Case ";" ' GA;950;
-
-                                                                                    CombatEtat(Index, e.Message)
-
-                                                                                Case Else
-
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;905", e.Message)
-
-                                                                            End Select
-
-                                                                        Case Else
-
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;90", e.Message)
-
-                                                                    End Select
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;9", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;", e.Message)
-
-                                                    End Select
-
-                                                Case "F"
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
-
-                                                            Task.Run(Sub() GiCombatAction(Index, e.Message))
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GAF", e.Message)
-
-                                                    End Select
-
-                                                Case "S" ' GAS
-
-                                                    'GAS 1234567
-                                                    'GAS id unique
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GA", e.Message)
-
-                                            End Select
-
-                                        Case "a" ' Ga
-
-                                            Select Case e.Message(2)
-
-                                                Case "F" ' GaF
-
-                                                    Select Case e.Message(2)
-
-                                                        Case "|" ' GaF|
-
-                                                            If MITM = False Then
-
-                                                                Send("Ga" & ((Personnage.ID * 2) + 11))
-
-                                                            End If
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GaF", e.Message)
-
-                                                    End Select
-
-                                                Case "0" ' Ga0
-
-                                                    Select Case e.Message(3)
-
-                                                        Case ";" ' Ga0;
-
-                                                            Select Case e.Message(4)
-
-                                                                Case "1" ' Ga0;1
-
-                                                                    Select Case e.Message(5)
-
-                                                                        Case ";" ' Ga0;1;
-
-                                                                            'Ga0;1;1234567;aaLcgbdgRchi
-                                                                            If MITM = False Then
-
-                                                                                Send("Ga" & Split(e.Message, ";")(2))
-
-                                                                            End If
-
-                                                                        Case Else
-
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Ga0;1", e.Message)
-
-                                                                    End Select
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Ga0;", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Ga0", e.Message)
-
-                                                    End Select
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Ga", e.Message)
-
-                                            End Select
-
-                                        Case "B" ' GB
-
-                                            Select Case e.Message(2)
-
-                                                Case "1" ' GB1
-
-                                                    Select Case e.Message(3)
-
-                                                        Case ";" ' GB1;
-
-                                                            Select Case e.Message(4)
-
-                                                                Case "5" ' GB1;5
-
-                                                                    Select Case e.Message(5)
-
-                                                                        Case "0" ' GB1;50
-
-                                                                            Select Case e.Message(6)
-
-                                                                                Case "1" ' GB1;501
-
-                                                                                    Select Case e.Message(7)
-
-                                                                                        Case ";" ' GB1;501;
-
-                                                                                            If MITM = False Then
-
-                                                                                                Send("GB" & Personnage.ID)
-
-                                                                                            End If
-
-                                                                                        Case Else
-
-                                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1;501", e.Message)
-
-                                                                                    End Select
-
-                                                                                Case Else
-
-                                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1;50", e.Message)
-
-                                                                            End Select
-
-                                                                        Case Else
-
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1;5", e.Message)
-
-                                                                    End Select
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1;", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1", e.Message)
-
-                                                    End Select
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GB", e.Message)
-
-                                            End Select
-
-                                        Case "C" ' GC
-
-                                            Select Case e.Message(2)
-
-                                                Case "K" ' GCK
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "|" ' GCK|
-
-                                                            Select Case e.Message(4)
-
-                                                                Case "1" ' GCK|1
-
-                                                                    Select Case e.Message(5)
-
-                                                                        Case "|" ' GCK|1|
-
-                                                                            ' GCK|1|Linaculer
-                                                                            ' ?
-                                                                        Case Else
-
-                                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GCK|1", e.Message)
-
-                                                                    End Select
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GCK|", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GCK", e.Message)
-
-                                                    End Select
-
-                                                Case "E" ' GCE
-
-                                                    ' ?
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GC", e.Message)
-
-                                            End Select
-
-                                        Case "D" ' GD
-
-                                            If e.Message = "GD" Then
-
-                                                If MITM = False Then
-
-                                                    Send("GD" & Personnage.ID)
-
-                                                End If
-
-                                            Else
-
-                                                Select Case e.Message(2)
-
-                                                    Case "F" ' GDF
-
-                                                        GiInteractionEnJeu(Index, e.Message)
-
-                                                    Case "K" ' GDK
-
-                                                        If e.Message = "GDK" Then
-
-                                                            ' Inconnu
-
-                                                        Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GD", e.Message)
-
-                                                        End If
-
-                                                    Case "M" ' GDM
-
-                                                        Select Case e.Message(3)
-
-                                                            Case "|" ' GDM|
-
-                                                                GiMapData(Index, e.Message)
+                                                                End Select
 
                                                             Case Else
 
-                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GDM", e.Message)
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;3", e.Message)
 
                                                         End Select
 
-                                                    Case "O" ' GDO
+                                                    Case "9" ' GA;9
 
-                                                        Select Case e.Message(3)
+                                                        Select Case e.Message(4)
 
-                                                            Case "+" ' GDO+
+                                                            Case "0" ' GA;90
 
-                                                                GiMapAjouteObjet(Index, e.Message)
+                                                                Select Case e.Message(5)
 
-                                                            Case "-" ' GDO-
+                                                                    Case "0" ' GA;900
 
-                                                                GiMapSupprimeObjet(Index, e.Message)
+                                                                        Select Case e.Message(6)
+
+                                                                            Case ";" ' GA;900;
+
+                                                                                'GiDefiRecu(Index, e.Message)
+
+                                                                            Case Else
+
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;900", e.Message)
+
+                                                                        End Select
+
+                                                                    Case "1"
+
+                                                                        Select Case e.Message(6)
+
+                                                                            Case ";" ' GA;901;
+
+                                                                                'GiDefiAccepter(Index, e.Message)
+
+                                                                            Case Else
+
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;901", e.Message)
+
+                                                                        End Select
+
+                                                                    Case "2"
+
+                                                                        Select Case e.Message(6)
+
+                                                                            Case ";" ' GA;902;
+
+                                                                                'GiDefiRefuser(Index, e.Message)
+
+                                                                            Case Else
+
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;902", e.Message)
+
+                                                                        End Select
+
+                                                                    Case "5" ' GA;905
+
+                                                                        Select Case e.Message(6)
+
+                                                                            Case ";" ' GA;905;
+
+                                                                                'GiCombatEntrer(Index, e.Message)
+
+                                                                            Case Else
+
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;905", e.Message)
+
+                                                                        End Select
+
+                                                                    Case Else
+
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;90", e.Message)
+
+                                                                End Select
+
+                                                            Case "5" ' GA;95
+
+                                                                Select Case e.Message(5)
+
+                                                                    Case "0" ' GA;950
+
+                                                                        Select Case e.Message(6)
+
+                                                                            Case ";" ' GA;950;
+
+                                                                                'CombatEtat(Index, e.Message)
+
+                                                                            Case Else
+
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;905", e.Message)
+
+                                                                        End Select
+
+                                                                    Case Else
+
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;90", e.Message)
+
+                                                                End Select
 
                                                             Case Else
 
-                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GDO", e.Message)
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;9", e.Message)
 
                                                         End Select
 
                                                     Case Else
 
-                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GD", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GA;", e.Message)
 
                                                 End Select
 
+                                            Case "F"
+
+                                                Select Case e.Message(3)
+
+                                                    Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+
+                                                        '  Task.Run(Sub() GiCombatAction(Index, e.Message))
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GAF", e.Message)
+
+                                                End Select
+
+                                            Case "S" ' GAS
+
+                                                'GAS 1234567
+                                                'GAS id unique
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GA", e.Message)
+
+                                        End Select
+
+                                    Case "a" ' Ga
+
+                                        Select Case e.Message(2)
+
+                                            Case "F" ' GaF
+
+                                                Select Case e.Message(2)
+
+                                                    Case "|" ' GaF|
+
+                                                        If MITM = False Then
+
+                                                            Send("Ga" & ((Personnage.ID * 2) + 11))
+
+                                                        End If
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GaF", e.Message)
+
+                                                End Select
+
+                                            Case "0" ' Ga0
+
+                                                Select Case e.Message(3)
+
+                                                    Case ";" ' Ga0;
+
+                                                        Select Case e.Message(4)
+
+                                                            Case "1" ' Ga0;1
+
+                                                                Select Case e.Message(5)
+
+                                                                    Case ";" ' Ga0;1;
+
+                                                                        'Ga0;1;1234567;aaLcgbdgRchi
+                                                                        If MITM = False Then
+
+                                                                            Send("Ga" & Split(e.Message, ";")(2))
+
+                                                                        End If
+
+                                                                    Case Else
+
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Ga0;1", e.Message)
+
+                                                                End Select
+
+                                                            Case Else
+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Ga0;", e.Message)
+
+                                                        End Select
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Ga0", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Ga", e.Message)
+
+                                        End Select
+
+                                    Case "B" ' GB
+
+                                        Select Case e.Message(2)
+
+                                            Case "1" ' GB1
+
+                                                Select Case e.Message(3)
+
+                                                    Case ";" ' GB1;
+
+                                                        Select Case e.Message(4)
+
+                                                            Case "5" ' GB1;5
+
+                                                                Select Case e.Message(5)
+
+                                                                    Case "0" ' GB1;50
+
+                                                                        Select Case e.Message(6)
+
+                                                                            Case "1" ' GB1;501
+
+                                                                                Select Case e.Message(7)
+
+                                                                                    Case ";" ' GB1;501;
+
+                                                                                        If MITM = False Then
+
+                                                                                            Send("GB" & Personnage.ID)
+
+                                                                                        End If
+
+                                                                                    Case Else
+
+                                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1;501", e.Message)
+
+                                                                                End Select
+
+                                                                            Case Else
+
+                                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1;50", e.Message)
+
+                                                                        End Select
+
+                                                                    Case Else
+
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1;5", e.Message)
+
+                                                                End Select
+
+                                                            Case Else
+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1;", e.Message)
+
+                                                        End Select
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GB1", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GB", e.Message)
+
+                                        End Select
+
+                                    Case "C" ' GC
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' GCK
+
+                                                Select Case e.Message(3)
+
+                                                    Case "|" ' GCK|
+
+                                                        Select Case e.Message(4)
+
+                                                            Case "1" ' GCK|1
+
+                                                                Select Case e.Message(5)
+
+                                                                    Case "|" ' GCK|1|
+
+                                                                        ' GCK|1|Linaculer
+                                                                        ' ?
+                                                                    Case Else
+
+                                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GCK|1", e.Message)
+
+                                                                End Select
+
+                                                            Case Else
+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GCK|", e.Message)
+
+                                                        End Select
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GCK", e.Message)
+
+                                                End Select
+
+                                            Case "E" ' GCE
+
+                                                ' ?
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GC", e.Message)
+
+                                        End Select
+
+                                    Case "D" ' GD
+
+                                        If e.Message = "GD" Then
+
+                                            If MITM = False Then
+
+                                                Send("GD" & Personnage.ID)
+
                                             End If
 
-                                        Case "d" ' Gd
+                                        Else
 
                                             Select Case e.Message(2)
 
-                                                Case "O" ' GdO
+                                                Case "F" ' GDF
+
+                                                        'GiInteractionEnJeu(Index, e.Message)
+
+                                                Case "K" ' GDK
+
+                                                    If e.Message = "GDK" Then
+
+                                                        ' Inconnu
+
+                                                    Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GD", e.Message)
+
+                                                    End If
+
+                                                Case "M" ' GDM
 
                                                     Select Case e.Message(3)
 
-                                                        Case "K" ' GdOK
+                                                        Case "|" ' GDM|
 
-                                                            GiCombatChallengeRéussi(Index, e.Message)
+                                                            GiMapData(Index, e.Message)
 
                                                         Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GdO", e.Message)
+                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GDM", e.Message)
 
                                                     End Select
 
-                                                Case "K" ' GdK
+                                                Case "O" ' GDO
 
                                                     Select Case e.Message(3)
 
-                                                        Case "O" ' GdKO
+                                                        Case "+" ' GDO+
 
-                                                            GiCombatChallengeEchoué(Index, e.Message)
+                                                            GiMapAjouteObjet(Index, e.Message)
 
-                                                        Case Else
+                                                        Case "-" ' GDO-
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GdK", e.Message)
-
-                                                    End Select
-
-
-                                                Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ' Gdx
-
-                                                    GiCombatChallengeReçu(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Gd", e.Message)
-
-                                            End Select
-
-                                        Case "E" ' GE
-
-                                            GiCombatFin(Index, e.Message)
-
-                                        Case "I" ' GI
-
-                                            Select Case e.Message(2)
-
-                                                Case "C" ' GIC
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "|" ' GIC|
-
-                                                            GiCombatPhasePlacement(Index, e.Message)
+                                                            GiMapSupprimeObjet(Index, e.Message)
 
                                                         Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GIC", e.Message)
-
-                                                    End Select
-
-                                                Case "E" ' GIE
-
-                                                    'GIE112;ID_Receveur;Nbr_Booste;;;;Nbr_Tour;ID_Sort    
-                                                    'Indique les effets de sort en jeu.
-                                                    'Inutile de le faire, car les booste je les affiche déjà avec  GA;112;2594870;2594870,6,6 
-                                                    'Permet de l'afficher en jeu.
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GI", e.Message)
-
-                                            End Select
-
-                                        Case "J" ' GJ
-
-                                            Select Case e.Message(2)
-
-                                                Case "K" ' GJK
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "2" ' GJK2
-
-                                                            GiCombatTempsPréparation(Index, e.Message)
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GJK", e.Message)
+                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GDO", e.Message)
 
                                                     End Select
 
                                                 Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GJ", e.Message)
+                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GD", e.Message)
 
                                             End Select
 
-                                        Case "M" ' GM
+                                        End If
 
-                                            Select Case e.Message(2)
+                                    Case "d" ' Gd
 
-                                                Case "|" ' GM|
+                                        Select Case e.Message(2)
 
-                                                    Select Case e.Message(3)
+                                            Case "O" ' GdO
 
-                                                        Case "+", "~" ' GM|+
+                                                Select Case e.Message(3)
 
-                                                            GiMapAjouteEntité(Index, e.Message)
+                                                    Case "K" ' GdOK
 
-                                                        Case "-"
+                                                        'GiCombatChallengeRéussi(Index, e.Message)
 
-                                                            GiMapSupprimeEntité(Index, e.Message)
+                                                    Case Else
 
-                                                        Case Else
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GdO", e.Message)
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GM|", e.Message)
+                                                End Select
 
-                                                    End Select
+                                            Case "K" ' GdK
 
-                                                Case Else
+                                                Select Case e.Message(3)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GM", e.Message)
+                                                    Case "O" ' GdKO
 
-                                            End Select
+                                                        'GiCombatChallengeEchoué(Index, e.Message)
 
-                                        Case "P" ' GP
+                                                    Case Else
 
-                                            GiPlacementCase(Index, e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GdK", e.Message)
 
-                                        Case "R" ' GR
+                                                End Select
 
-                                            Select Case e.Message(2)
 
-                                                Case "1" ' GR1
+                                            Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ' Gdx
 
-                                                    GiCombatPrêt(Index, e.Message)
+                                                ' GiCombatChallengeReçu(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GR", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Gd", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "S" ' GS
+                                    Case "E" ' GE
 
-                                            If e.Message <> "GS" Then
+                                            'GiCombatFin(Index, e.Message)
 
-                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GS", e.Message)
+                                    Case "I" ' GI
 
-                                            Else
+                                        Select Case e.Message(2)
 
-                                                'GS  = ?
+                                            Case "C" ' GIC
 
-                                            End If
+                                                Select Case e.Message(3)
 
-                                        Case "T" ' GT
+                                                    Case "|" ' GIC|
 
-                                            Select Case e.Message(2)
+                                                        '  GiCombatPhasePlacement(Index, e.Message)
 
-                                                Case "F" ' GTF
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GIC", e.Message)
+
+                                                End Select
+
+                                            Case "E" ' GIE
+
+                                                'GIE112;ID_Receveur;Nbr_Booste;;;;Nbr_Tour;ID_Sort    
+                                                'Indique les effets de sort en jeu.
+                                                'Inutile de le faire, car les booste je les affiche déjà avec  GA;112;2594870;2594870,6,6 
+                                                'Permet de l'afficher en jeu.
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GI", e.Message)
+
+                                        End Select
+
+                                    Case "J" ' GJ
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' GJK
+
+                                                Select Case e.Message(3)
+
+                                                    Case "2" ' GJK2
+
+                                                        'GiCombatTempsPréparation(Index, e.Message)
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GJK", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GJ", e.Message)
+
+                                        End Select
+
+                                    Case "M" ' GM
+
+                                        Select Case e.Message(2)
+
+                                            Case "|" ' GM|
+
+                                                Select Case e.Message(3)
+
+                                                    Case "+", "~" ' GM|+
+
+                                                        GiMapAjouteEntite(Index, e.Message)
+
+                                                    Case "-"
+
+                                                        GiMapSupprimeEntite(Index, e.Message)
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GM|", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GM", e.Message)
+
+                                        End Select
+
+                                    Case "P" ' GP
+
+                                           ' GiPlacementCase(Index, e.Message)
+
+                                    Case "R" ' GR
+
+                                        Select Case e.Message(2)
+
+                                            Case "1" ' GR1
+
+                                                'GiCombatPrêt(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GR", e.Message)
+
+                                        End Select
+
+                                    Case "S" ' GS
+
+                                        If e.Message <> "GS" Then
+
+                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GS", e.Message)
+
+                                        Else
+
+                                            'GS  = ?
+
+                                        End If
+
+                                    Case "T" ' GT
+
+                                        Select Case e.Message(2)
+
+                                            Case "F" ' GTF
                                          'GTF-1
                                         'Tour pass
                                             '  If fMap.ContainsKey(Mid(Message, 4)) Then
@@ -2258,502 +2256,553 @@ Public Class Player
 
                                             'End If
 
-                                                Case "L" ' GTL
+                                            Case "L" ' GTL
+
+                                                Select Case e.Message(3)
+
+                                                    Case "|" ' GTL|
+
+                                                        'GiCombatOrdreTour(Index, e.Message)
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GTL", e.Message)
+
+                                                End Select
+
+                                            Case "M" ' GTM
+
+                                                Select Case e.Message(3)
+
+                                                    Case "|" ' GTM|
+
+                                                        '  GiCombatInformationTour(Index, e.Message)
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "GTM", e.Message)
+
+                                                End Select
+
+                                            Case "R" ' GTR
+
+                                                  '  GiCombatTourPassé(Index, e.Message)
+
+                                            Case "S" ' GTS
+
+                                                '   GiCombatTourActuel(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GT", e.Message)
+
+                                        End Select
+
+                                    Case "t" ' Gt
+
+                                          '  GiCombatLancer(Index, e.Message)
+
+                                    Case "V" ' GV
+
+                                        If e.Message = "GV" Then
+
+                                            '  EnDefi = False
+                                            '  BloqueDefi.Set()
+                                            '  DefiIdDemandeur = Nothing
+                                            '  EnCombatDefi = False
+
+                                        Else
+
+                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GV", e.Message)
+
+                                        End If
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "G", e.Message)
+
+                                End Select
+
+                            Case "g"
+
+                                Select Case e.Message(1)
+
+                                    Case "H" ' gH
+
+                                        Select Case e.Message(2)
+
+                                            Case "E" ' gHE
+
+                                                Select Case e.Message(3)
+
+                                                    Case "y" ' gHEy
+
+                                                        EcritureMessage(Index, "[Dofus]", "Impossible de poser le percepteur maintenant, il doit se reposer.", Color.Red)
+                                                        'BloqueGuilde.Set()
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "gHE", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "gH", e.Message)
+
+                                        End Select
+
+                                    Case "I" ' gI
+
+                                        Select Case e.Message(2)
+
+                                            Case "B" ' gIB
+
+                                                    'GiGuildePersonnalisation(Index, e.Message)
+
+                                            Case "F" ' gIF
+
+                                                   ' GiGuildeEnclos(Index, e.Message)
+
+                                            Case "G" ' gIG
+
+                                                  '  GiGuildeExp(Index, e.Message)
+
+                                            Case "H" ' gIH
+
+                                                Select Case e.Message(3)
+
+                                                    Case "+" ' gIH+
+
+                                                        'GiGuildeMaison(Index, e.Message)
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "gIH", e.Message)
+
+                                                End Select
+
+                                            Case "M" ' gIM
+
+                                                Select Case e.Message(3)
+
+                                                    Case "+" ' gIM+
+
+                                                            'GuildeMembresAjoute(Index, e.Message)
+
+                                                    Case "-" ' gIM-
+
+                                                        ' GuildeMembreSupprime(Index, e.Message)
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "gIM", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "gI", e.Message)
+
+                                        End Select
+
+                                    Case "J" ' gJ
+
+                                        Select Case e.Message(2)
+
+                                            Case "E" ' gJE
+
+                                                  '  GiGuildeInvitationEnCoursRefuse(Index, e.Message)
+
+                                            Case "K" ' gJK
+
+                                                Select Case e.Message(3)
+
+                                                    Case "a" ' gJKa
+
+                                                        'GiGuildeInvitationEnCoursAccepte(Index, e.Message)
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "gJK", e.Message)
+
+                                                End Select
+
+                                            Case "R" ' gJR
+
+                                                  '  GiGuildeInvitationEnCours(Index, e.Message)
+
+                                            Case "r" ' gJr
+
+                                                'GiGuildeInvitationEnCoursInformation(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "gJ", e.Message)
+
+                                        End Select
+
+                                    Case "K" ' gK
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' gKK
+
+                                                '   GiGuildeJoueurExclut(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "gK", e.Message)
+
+                                        End Select
+
+                                    Case "S" ' gS
+
+                                            'GiGuildeInformation(Index, e.Message)
+
+                                    Case "T" ' gT
+
+                                        Select Case e.Message(2)
+
+                                            Case "R" ' gTR
+
+                                                  '  GiGuildePercepteurRetire(Index, e.Message)
+
+                                            Case "S" ' gTS
+
+                                                '  GiGuildePercepteurPosee(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "gT", e.Message)
+
+                                        End Select
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "g", e.Message)
+
+                                End Select
+
+                            Case "H"
+
+                                Select Case e.Message(1)
+
+                                    Case "C" ' HC
+
+                                        EnAuthentification = True
+                                        GiConnexionServeurAuthentification(Index, e.Message)
+
+                                    Case "G" ' HG
+
+                                        EnAuthentification = False
+                                        GiConnexionServeurJeu(Index)
+
+                                        Exit Sub
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "H", e.Message)
+
+                                End Select
+
+                            Case "h"
+
+                                Select Case e.Message(1)
+
+                                    Case "L" ' hL
+
+                                        Select Case e.Message(2)
+
+                                            Case "+" ' hL+
+
+                                                '  GiMaMaison(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "hL", e.Message)
+
+                                        End Select
+
+                                    Case "P" ' hP
+
+                                        'GiMaisonMap(Index, e.Message)
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "h", e.Message)
+
+                                End Select
+
+                            Case "I"
+
+                                Select Case e.Message(1)
+
+                                    Case "A" ' IA
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' IAK
+
+                                                Select Case e.Message(3)
+
+                                                    Case "O" ' IAKO
+
+                                                        Select Case e.Message(4)
+
+                                                            Case "+" ' IAKO+
+
+                                                                If MITM = False Then
+
+                                                                    Send("IA" & (Personnage.ID + 25018))
+
+                                                                End If
+
+                                                            Case Else
+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "IAKO", e.Message)
+
+                                                        End Select
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "IAK", e.Message)
+
+                                                End Select
+
+                                            Case ";" ' IA;
+
+                                                Select Case e.Message(3)
+
+                                                    Case "1" ' IA;1
+
+                                                        Select Case e.Message(4)
+
+                                                            Case ";" ' IA;1;
+
+                                                                If MITM = False Then
+
+                                                                    Send("IA" & ((Personnage.ID * 2) + 14))
+
+                                                                End If
+
+                                                            Case Else
+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "IA;1", e.Message)
+
+                                                        End Select
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "IA;", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "IA", e.Message)
+
+                                        End Select
+
+                                    Case "C" ' IC
+
+                                            'GiGroupeSuivreCoordonnées(Index, e.Message)
+
+                                    Case "L" ' IL
+
+                                        Select Case e.Message(2)
+
+                                            Case "F" ' ILF
+
+                                                GiPdvRestauré(Index, e.Message)
+
+                                            Case "S" ' ILS
+
+                                                GiRégénérationSeconde(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "IL", e.Message)
+
+                                        End Select
+
+                                    Case "m" ' Im
+
+                                          '  GiDofusInformation(Index, e.Message)
+
+                                    Case "Q" ' IQ
+
+                                        'RécolteDrop(Index, e.Message)
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "I", e.Message)
+
+                                End Select
+
+                            Case "i"
+
+                                Select Case e.Message(1)
+
+                                    Case "L" ' iL
+
+                                           ' GiAmiEnnemi(Index, e.Message)
+
+                                    Case "A" ' iA
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' iAK
+
+                                                'GiAmiEnnemiAjoute(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "iA", e.Message)
+
+                                        End Select
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "i", e.Message)
+
+                                End Select
+
+                            Case "J"
+
+                                Select Case e.Message(1)
+
+                                    Case "N" ' JN
+
+                                          '  GiMétierUp(Index, e.Message)
+
+                                    Case "O" ' JO
+
+                                           ' GiMétierOption(Index, e.Message)
+
+                                    Case "R" ' JR
+
+                                         '   GiMétierSupprime(Index, e.Message)
+
+                                    Case "S" ' JS
+
+                                        Select Case e.Message(2)
+
+                                            Case "|" ' JS|
+
+                                                '  GiMétierInformation(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "J", e.Message)
+
+                                        End Select
+
+                                    Case "X" ' JX
+
+                                        Select Case e.Message(2)
+
+                                            Case "|" ' JX|
+
+                                                'GiMétierExpèrience(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "J", e.Message)
+
+                                        End Select
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "J", e.Message)
+
+                                End Select
+
+                            Case "j"
+
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "j", e.Message)
+
+                            Case "K"
+
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "K", e.Message)
+
+                            Case "k"
+
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "k", e.Message)
+
+                            Case "L"
+
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "L", e.Message)
+
+                            Case "l"
+
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "l", e.Message)
+
+                            Case "M"
+
+                                Select Case e.Message(1)
+
+                                    Case "0" ' M0
+
+                                        Select Case e.Message(2)
+
+                                            Case "1" ' M01
+
+                                                If e.Message = "M01" Then
+
+                                                    EcritureMessage(Index, "[Dofus]", "Connexion interrompue avec le serveur." & vbCrLf &
+                                                                                  "Tu es resté trop longtemps inactif.", Color.Red)
+
+                                                    If MITM Then
+
+                                                        Client.Close()
+
+                                                    End If
+
+                                                    Socket.Connexion_Game(False)
+
+                                                Else
 
                                                     Select Case e.Message(3)
 
-                                                        Case "|" ' GTL|
+                                                        Case "3" ' M013
 
-                                                            GiCombatOrdreTour(Index, e.Message)
 
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GTL", e.Message)
-
-                                                    End Select
-
-                                                Case "M" ' GTM
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "|" ' GTM|
-
-                                                            GiCombatInformationTour(Index, e.Message)
 
                                                         Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "GTM", e.Message)
+                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "M01", e.Message)
 
                                                     End Select
 
-                                                Case "R" ' GTR
+                                                End If
 
-                                                    GiCombatTourPassé(Index, e.Message)
+                                            Case "2" ' M02
 
-                                                Case "S" ' GTS
+                                                Select Case e.Message(3)
 
-                                                    GiCombatTourActuel(Index, e.Message)
+                                                    Case "7" ' M027
 
-                                                Case Else
+                                                        EcritureMessage(Index, "[Dofus]", "Connexion interrompue avec le serveur." & vbCrLf & "Ce serveur est complet. Seuls les comptes possédant déjà un personnage sur ce serveur peuvent s'y connecter.", Color.Red)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "GT", e.Message)
+                                                        Socket_Authentification.Connexion_Game(False)
 
-                                            End Select
+                                                    Case Else
 
-                                        Case "t" ' Gt
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "M02", e.Message)
 
-                                            GiCombatLancer(Index, e.Message)
+                                                End Select
 
-                                        Case "V" ' GV
+                                            Case "3" ' M03
 
-                                            If e.Message = "GV" Then
+                                                Select Case e.Message(3)
 
-                                                EnDefi = False
-                                                BloqueDefi.Set()
-                                                DefiIdDemandeur = Nothing
-                                                EnCombatDefi = False
-
-                                            Else
-
-                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "GV", e.Message)
-
-                                            End If
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "G", e.Message)
-
-                                    End Select
-
-                                Case "g"
-
-                                    Select Case e.Message(1)
-
-                                        Case "H" ' gH
-
-                                            Select Case e.Message(2)
-
-                                                Case "E" ' gHE
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "y" ' gHEy
-
-                                                            EcritureMessage(Index, "[Dofus]", "Impossible de poser le percepteur maintenant, il doit se reposer.", Color.Red)
-                                                            BloqueGuilde.Set()
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "gHE", e.Message)
-
-                                                    End Select
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "gH", e.Message)
-
-                                            End Select
-
-                                        Case "I" ' gI
-
-                                            Select Case e.Message(2)
-
-                                                Case "B" ' gIB
-
-                                                    GiGuildePersonnalisation(Index, e.Message)
-
-                                                Case "F" ' gIF
-
-                                                    GiGuildeEnclos(Index, e.Message)
-
-                                                Case "G" ' gIG
-
-                                                    GiGuildeExp(Index, e.Message)
-
-                                                Case "H" ' gIH
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "+" ' gIH+
-
-                                                            GiGuildeMaison(Index, e.Message)
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "gIH", e.Message)
-
-                                                    End Select
-
-                                                Case "M" ' gIM
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "+" ' gIM+
-
-                                                            GuildeMembresAjoute(Index, e.Message)
-
-                                                        Case "-" ' gIM-
-
-                                                            GuildeMembreSupprime(Index, e.Message)
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "gIM", e.Message)
-
-                                                    End Select
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "gI", e.Message)
-
-                                            End Select
-
-                                        Case "J" ' gJ
-
-                                            Select Case e.Message(2)
-
-                                                Case "E" ' gJE
-
-                                                    GiGuildeInvitationEnCoursRefuse(Index, e.Message)
-
-                                                Case "K" ' gJK
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "a" ' gJKa
-
-                                                            GiGuildeInvitationEnCoursAccepte(Index, e.Message)
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "gJK", e.Message)
-
-                                                    End Select
-
-                                                Case "R" ' gJR
-
-                                                    GiGuildeInvitationEnCours(Index, e.Message)
-
-                                                Case "r" ' gJr
-
-                                                    GiGuildeInvitationEnCoursInformation(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "gJ", e.Message)
-
-                                            End Select
-
-                                        Case "K" ' gK
-
-                                            Select Case e.Message(2)
-
-                                                Case "K" ' gKK
-
-                                                    GiGuildeJoueurExclut(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "gK", e.Message)
-
-                                            End Select
-
-                                        Case "S" ' gS
-
-                                            GiGuildeInformation(Index, e.Message)
-
-                                        Case "T" ' gT
-
-                                            Select Case e.Message(2)
-
-                                                Case "R" ' gTR
-
-                                                    GiGuildePercepteurRetire(Index, e.Message)
-
-                                                Case "S" ' gTS
-
-                                                    GiGuildePercepteurPosee(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "gT", e.Message)
-
-                                            End Select
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "g", e.Message)
-
-                                    End Select
-
-                                Case "H"
-
-                                    Select Case e.Message(1)
-
-                                        Case "C" ' HC
-
-                                            EnAuthentification = True
-                                            GiConnexionServeurAuthentification(Index, e.Message)
-
-                                        Case "G" ' HG
-
-                                            EnAuthentification = False
-                                            GiConnexionServeurJeu(Index)
-
-                                            Exit Sub
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "H", e.Message)
-
-                                    End Select
-
-                                Case "h"
-
-                                    Select Case e.Message(1)
-
-                                        Case "L" ' hL
-
-                                            Select Case e.Message(2)
-
-                                                Case "+" ' hL+
-
-                                                    GiMaMaison(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "hL", e.Message)
-
-                                            End Select
-
-                                        Case "P" ' hP
-
-                                            GiMaisonMap(Index, e.Message)
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "h", e.Message)
-
-                                    End Select
-
-                                Case "I"
-
-                                    Select Case e.Message(1)
-
-                                        Case "A" ' IA
-
-                                            Select Case e.Message(2)
-
-                                                Case "K" ' IAK
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "O" ' IAKO
-
-                                                            Select Case e.Message(4)
-
-                                                                Case "+" ' IAKO+
-
-                                                                    If MITM = False Then
-
-                                                                        Send("IA" & (Personnage.ID + 25018))
-
-                                                                    End If
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "IAKO", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "IAK", e.Message)
-
-                                                    End Select
-
-                                                Case ";" ' IA;
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "1" ' IA;1
-
-                                                            Select Case e.Message(4)
-
-                                                                Case ";" ' IA;1;
-
-                                                                    If MITM = False Then
-
-                                                                        Send("IA" & ((Personnage.ID * 2) + 14))
-
-                                                                    End If
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "IA;1", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "IA;", e.Message)
-
-                                                    End Select
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "IA", e.Message)
-
-                                            End Select
-
-                                        Case "C" ' IC
-
-                                            GiGroupeSuivreCoordonnées(Index, e.Message)
-
-                                        Case "L" ' IL
-
-                                            Select Case e.Message(2)
-
-                                                Case "F" ' ILF
-
-                                                    GiPdvRestauré(Index, e.Message)
-
-                                                Case "S" ' ILS
-
-                                                    GiRégénérationSeconde(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "IL", e.Message)
-
-                                            End Select
-
-                                        Case "m" ' Im
-
-                                            GiDofusInformation(Index, e.Message)
-
-                                        Case "Q" ' IQ
-
-                                            RécolteDrop(Index, e.Message)
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "I", e.Message)
-
-                                    End Select
-
-                                Case "i"
-
-                                    Select Case e.Message(1)
-
-                                        Case "L" ' iL
-
-                                            GiAmiEnnemi(Index, e.Message)
-
-                                        Case "A" ' iA
-
-                                            Select Case e.Message(2)
-
-                                                Case "K" ' iAK
-
-                                                    GiAmiEnnemiAjoute(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "iA", e.Message)
-
-                                            End Select
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "i", e.Message)
-
-                                    End Select
-
-                                Case "J"
-
-                                    Select Case e.Message(1)
-
-                                        Case "N" ' JN
-
-                                            GiMétierUp(Index, e.Message)
-
-                                        Case "O" ' JO
-
-                                            GiMétierOption(Index, e.Message)
-
-                                        Case "R" ' JR
-
-                                            GiMétierSupprime(Index, e.Message)
-
-                                        Case "S" ' JS
-
-                                            Select Case e.Message(2)
-
-                                                Case "|" ' JS|
-
-                                                    GiMétierInformation(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "J", e.Message)
-
-                                            End Select
-
-                                        Case "X" ' JX
-
-                                            Select Case e.Message(2)
-
-                                                Case "|" ' JX|
-
-                                                    GiMétierExpèrience(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "J", e.Message)
-
-                                            End Select
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "J", e.Message)
-
-                                    End Select
-
-                                Case "j"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "j", e.Message)
-
-                                Case "K"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "K", e.Message)
-
-                                Case "k"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "k", e.Message)
-
-                                Case "L"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "L", e.Message)
-
-                                Case "l"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "l", e.Message)
-
-                                Case "M"
-
-                                    Select Case e.Message(1)
-
-                                        Case "0" ' M0
-
-                                            Select Case e.Message(2)
-
-                                                Case "1" ' M01
-
-                                                    If e.Message = "M01" Then
+                                                    Case "1" ' M031
 
                                                         EcritureMessage(Index, "[Dofus]", "Connexion interrompue avec le serveur." & vbCrLf &
-                                                                                  "Tu es resté trop longtemps inactif.", Color.Red)
+                                                                        "Connexion refusé." & vbCrLf &
+                                                                        "Le serveur de jeu n'a pas reçu les informations d'authentification suite à votre identification." & vbCrLf &
+                                                                        "Réessayer, si le problème persiste, contactez votre admistrateur réseau ou votre FAI, il s'agit probablement d'une redirection erronée due à un mauvais paramétrage DNS.", Color.Red)
 
                                                         If MITM Then
 
@@ -2761,128 +2810,77 @@ Public Class Player
 
                                                         End If
 
-                                                        Socket.Connexion_Game(False)
+                                                        Socket_Authentification.Connexion_Game(False)
 
-                                                    Else
+                                                    Case Else
 
-                                                        Select Case e.Message(3)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "M03", e.Message)
 
-                                                            Case "3" ' M013
+                                                End Select
 
+                                            Case Else
 
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "M0", e.Message)
 
-                                                            Case Else
+                                        End Select
 
-                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "M01", e.Message)
+                                    Case Else
 
-                                                        End Select
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, e.Message(0), e.Message)
 
-                                                    End If
+                                End Select
 
-                                                Case "2" ' M02
+                            Case "m"
 
-                                                    Select Case e.Message(3)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "m", e.Message)
 
-                                                        Case "7" ' M027
+                            Case "N"
 
-                                                            EcritureMessage(Index, "[Dofus]", "Connexion interrompue avec le serveur." & vbCrLf & "Ce serveur est complet. Seuls les comptes possédant déjà un personnage sur ce serveur peuvent s'y connecter.", Color.Red)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "N", e.Message)
 
-                                                            Socket_Authentification.Connexion_Game(False)
+                            Case "n"
 
-                                                        Case Else
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "n", e.Message)
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "M02", e.Message)
+                            Case "O"
 
-                                                    End Select
+                                Select Case e.Message(1)
 
-                                                Case "3" ' M03
+                                    Case "A" ' OA
 
-                                                    Select Case e.Message(3)
+                                        Select Case e.Message(2)
 
-                                                        Case "1" ' M031
+                                            Case "E" ' OAE
 
-                                                            EcritureMessage(Index, "[Dofus]", "Connexion interrompue avec le serveur." & vbCrLf &
-                                                                        "Connexion refusé." & vbCrLf &
-                                                                        "Le serveur de jeu n'a pas reçu les informations d'authentification suite à votre identification." & vbCrLf &
-                                                                        "Réessayer, si le problème persiste, contactez votre admistrateur réseau ou votre FAI, il s'agit probablement d'une redirection erronée due à un mauvais paramétrage DNS.", Color.Red)
+                                                Select Case e.Message(3)
 
-                                                            If MITM Then
+                                                    Case "F"
 
-                                                                Client.Close()
+                                                        EcritureMessage(Index, "[Inventaire]", "Ton Inventaire est plein.", Color.Red)
 
-                                                            End If
+                                                    Case "A"
 
-                                                            Socket_Authentification.Connexion_Game(False)
+                                                        EcritureMessage(Index, "[Dofus]", "Déjà équipé !.", Color.Red)
 
-                                                        Case Else
+                                                    Case "L"
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "M03", e.Message)
+                                                        EcritureMessage(Index, "[Equipement]", "Ton niveau est trop faible pour equiper cet objet.", Color.Red)
 
-                                                    End Select
+                                                    Case Else
 
-                                                Case Else
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "OAE", e.Message)
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "M0", e.Message)
+                                                End Select
 
-                                            End Select
+                                                   ' BloqueItem.Set()
 
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, e.Message(0), e.Message)
-
-                                    End Select
-
-                                Case "m"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "m", e.Message)
-
-                                Case "N"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "N", e.Message)
-
-                                Case "n"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "n", e.Message)
-
-                                Case "O"
-
-                                    Select Case e.Message(1)
-
-                                        Case "A" ' OA
-
-                                            Select Case e.Message(2)
-
-                                                Case "E" ' OAE
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "F"
-
-                                                            EcritureMessage(Index, "[Inventaire]", "Ton Inventaire est plein.", Color.Red)
-
-                                                        Case "A"
-
-                                                            EcritureMessage(Index, "[Dofus]", "Déjà équipé !.", Color.Red)
-
-                                                        Case "L"
-
-                                                            EcritureMessage(Index, "[Equipement]", "Ton niveau est trop faible pour equiper cet objet.", Color.Red)
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "OAE", e.Message)
-
-                                                    End Select
-
-                                                    BloqueItem.Set()
-
-                                                Case "K" ' OAK
+                                            Case "K" ' OAK
 
                                                 Select Case e.Message(3)
 
                                                     Case "O" ' OAKO
 
-                                                        GiItemAjoute(Index, e.Message.Replace("OAKO", ""), FrmUser.DataGridView_Inventaire)
+                                                        GiItemAjoute(Index, e.Message.Replace("OAKO", ""), Inventaire)
 
                                                     Case Else
 
@@ -2892,693 +2890,693 @@ Public Class Player
 
                                             Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "OA", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "OA", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "a" ' Oa
+                                    Case "a" ' Oa
 
-                                            GiPlayerChangeEquipment(Index, e.Message)
+                                        GiPlayerChangeEquipment(Index, e.Message)
 
-                                        Case "C" ' OC
+                                    Case "C" ' OC
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "O" ' OCO
+                                            Case "O" ' OCO
 
-                                                    GiInventoryChangedCharacteristic(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "OC", e.Message)
-
-                                            End Select
-
-                                        Case "k" ' Ok
-
-                                            Select Case e.Message(2)
-
-                                                Case "F" ' OkF
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "|" ' OkF|
-
-                                                            If MITM = False Then
-
-                                                                Send("Ok" & Personnage.ID)
-
-                                                            End If
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "OkF", e.Message)
-
-                                                    End Select
-
-                                                Case "K" ' OkK
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "O" ' OkKO
-
-                                                            Select Case e.Message(4)
-
-                                                                Case "-" ' OkKO-
-
-                                                                    If MITM = False Then
-
-                                                                        Send("Ok" & (Personnage.ID + 3))
-
-                                                                    End If
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "OkKO", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "OkK", e.Message)
-
-                                                    End Select
-
-                                                Case "|" ' Ok|
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "+" ' Ok|+
-
-                                                            If MITM = False Then
-
-                                                                'Ok|+233;0;0;1234567;Linaculer;3;30^100;0;0,0,0,12345678;ffffff;1f07b5;0;,9aa,9a9,,;0;;;;;0;;
-                                                                Send("Ok" & Personnage.ID)
-
-                                                            End If
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Ok|", e.Message)
-
-                                                    End Select
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Ok", e.Message)
-
-                                            End Select
-
-                                        Case "M" ' OM
-
-                                            GiEquipement(Index, e.Message)
-
-                                        Case "Q" ' OQ
-
-                                            GiInventaireQuantité(Index, e.Message)
-
-                                        Case "R" ' OR
-
-                                            GiInventaireItemSupprime(Index, e.Message)
-
-                                        Case "S" ' OS
-
-                                            Select Case e.Message(2)
-
-                                                Case "+" ' OS+
-
-                                                    GiBonusEquipementAjoute(Index, e.Message)
-
-                                                Case "-" ' OS-
-
-                                                    GiBonusEquipementSupprime(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "OS", e.Message)
-
-                                            End Select
-
-                                        Case "T" ' OT
-
-                                            GiEquipementMétier(Index, e.Message)
-
-                                        Case "w" ' Ow
-
-                                            GiPods(Index, e.Message)
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "O", e.Message)
-
-                                    End Select
-
-                                Case "o"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "o", e.Message)
-
-                                Case "P"
-
-                                    Select Case e.Message(1)
-
-                                        Case "a" ' Pa
-
-                                            Select Case e.Message(2)
-
-                                                Case ";" ' Pa;
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "1" ' Pa;1
-
-                                                            Select Case e.Message(4)
-
-                                                                Case ";" ' Pa;1;
-
-                                                                    If MITM = False Then
-
-                                                                        Send("Pa" & (Personnage.ID + 28549))
-
-                                                                    End If
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Pa;1", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Pa;", e.Message)
-
-                                                    End Select
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Pa", e.Message)
-
-                                            End Select
-
-                                        Case "B" ' PB
-
-                                            Select Case e.Message(2)
-
-                                                Case ";" ' PB;
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "1" ' PB;1
-
-                                                            Select Case e.Message(4)
-
-                                                                Case ";" ' PB;1;
-
-                                                                    If MITM = False Then
-
-                                                                        Send("PB" & (Personnage.ID * 2))
-
-                                                                    End If
-
-                                                                Case Else
-
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "PB;1", e.Message)
-
-                                                            End Select
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "PB;", e.Message)
-
-                                                    End Select
-
-                                                Case "|" ' PB|
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "+" ' PB|+
-
-                                                            If MITM = False Then
-
-                                                                'PB|+37;0;0;1234567;Linaculer;9;90^100;0;0,0,0,1234567;-1;-1;-1;215b,,,,;0;;;;;0;;
-
-                                                                Send("PB" & (Personnage.ID + 305))
-
-                                                            End If
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "PB|", e.Message)
-
-                                                    End Select
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "PB", e.Message)
-
-                                            End Select
-
-                                        Case "C" ' PC
-
-                                            Select Case e.Message(2)
-
-                                                Case "K" ' PCK
-
-                                                    GiGroupeRejoint(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "PC", e.Message)
-
-                                            End Select
-
-                                        Case "F" ' PF
-
-                                            Select Case e.Message(2)
-
-                                                Case "K" ' PFK
-
-                                                    GiGroupeSuivezTous(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "PF", e.Message)
-
-                                            End Select
-
-                                        Case "I" ' PI
-
-                                            Select Case e.Message(2)
-
-                                                Case "E" ' PIE
-
-                                                    Select Case e.Message(3)
-
-                                                        Case "a" ' PIEa
-
-                                                            EnInvitationGroupe = False
-                                                            BloqueGroupe.Set()
-                                                            EcritureMessage(Index, "[Dofus]", "Impossible, ce joueur fait déjà partie d'un groupe.", Color.Red)
-
-                                                        Case Else
-
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "PIE", e.Message)
-
-                                                    End Select
-
-                                                Case "K" ' PIK
-
-                                                    GiGroupeRecoitInvitation(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "PI", e.Message)
-
-                                            End Select
-
-                                        Case "L" ' PL
-
-                                            ' PL 1234567
-                                            ' PL id chef
-                                            GroupeChefID = Mid(e.Message, 3)
-
-                                        Case "M" ' PM
-
-                                            Select Case e.Message(2)
-
-                                                Case "+" ' PM+
-
-                                                    GiGroupeAjouteMembre(Index, e.Message)
-
-                                                Case "-" ' PM-
-
-                                                    GiGroupeSupprimeMembre(Index, e.Message)
-
-                                                Case "~" ' PM~
-
-                                                    GiGroupeModifieMembre(Index, e.Message)
-
-                                                Case Else
-
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "PM", e.Message)
-
-                                            End Select
-
-                                        Case "R" ' PR
-
-                                            EnInvitationGroupe = False
-                                            BloqueGroupe.Set()
-
-                                        Case "V"
-
-                                            GiGroupeQuitte(Index, e.Message)
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "P", e.Message)
-
-                                    End Select
-
-                                Case "p"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "p", e.Message)
-
-                                Case "Q"
-
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, e.Message(0), e.Message)
-
-                                Case "q"
-
-                                    Select Case e.Message
-
-                                        Case "qpong"
-
-                                            'Temps en ms du délai entre moi et le serveur.
-
-                                        Case Else
-
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "q", e.Message)
-
-                                    End Select
-
-                                Case "R"
-
-                                    Select Case e.Message(1)
-
-                                        Case "e" ' Re
-
-                                            Select Case e.Message(2)
-
-                                            Case "+" ' Re+
-
-                                                MaMonture.Equiper = True
-                                                GiDragodindeEncloEtableEquipé(Index, e.Message, FrmUser.DataGridViewDragodindeMaMonture)
-
-                                            Case "-" ' Re-
-
-                                                MaMonture.Equiper = False
-                                                FrmUser.DataGridViewDragodindeMaMonture.Rows.Clear()
+                                                GiInventoryChangedCharacteristic(Index, e.Message)
 
                                             Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Re", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "OC", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "p" ' Rp
+                                    Case "k" ' Ok
 
-                                            GiEncloMap(Index, e.Message)
+                                        Select Case e.Message(2)
 
-                                        Case "r" ' Rr
+                                            Case "F" ' OkF
 
-                                            Select Case e.Message(2)
+                                                Select Case e.Message(3)
 
-                                                Case "+" ' Rr+
+                                                    Case "|" ' OkF|
 
-                                                    GiDragodindeMonterDesendu(Index, e.Message)
+                                                        If MITM = False Then
 
-                                                Case "-" ' Rr-
+                                                            Send("Ok" & Personnage.ID)
 
-                                                    GiDragodindeMonterDesendu(Index, e.Message)
+                                                        End If
 
-                                                Case Else
+                                                    Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Rr", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "OkF", e.Message)
 
-                                            End Select
+                                                End Select
 
-                                        Case "x" ' Rx
+                                            Case "K" ' OkK
 
-                                            GiDragodindeExperienceDonnee(Index, e.Message)
+                                                Select Case e.Message(3)
 
-                                        Case Else
+                                                    Case "O" ' OkKO
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, e.Message(0), e.Message)
+                                                        Select Case e.Message(4)
 
-                                    End Select
+                                                            Case "-" ' OkKO-
 
-                                Case "r"
+                                                                If MITM = False Then
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "r", e.Message)
+                                                                    Send("Ok" & (Personnage.ID + 3))
 
-                                Case "S"
+                                                                End If
 
-                                    Select Case e.Message(1)
+                                                            Case Else
 
-                                        Case "L" ' SL
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "OkKO", e.Message)
 
-                                            Select Case e.Message(2).ToString
+                                                        End Select
 
-                                                Case "o" ' SLo
+                                                    Case Else
 
-                                                    Select Case e.Message(3)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "OkK", e.Message)
 
-                                                        Case "+" ' SLo+
+                                                End Select
+
+                                            Case "|" ' Ok|
+
+                                                Select Case e.Message(3)
+
+                                                    Case "+" ' Ok|+
+
+                                                        If MITM = False Then
+
+                                                            'Ok|+233;0;0;1234567;Linaculer;3;30^100;0;0,0,0,12345678;ffffff;1f07b5;0;,9aa,9a9,,;0;;;;;0;;
+                                                            Send("Ok" & Personnage.ID)
+
+                                                        End If
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Ok|", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Ok", e.Message)
+
+                                        End Select
+
+                                    Case "M" ' OM
+
+                                        GiEquipement(Index, e.Message)
+
+                                    Case "Q" ' OQ
+
+                                        GiInventaireQuantité(Index, e.Message)
+
+                                    Case "R" ' OR
+
+                                        GiInventaireItemSupprime(Index, e.Message)
+
+                                    Case "S" ' OS
+
+                                        Select Case e.Message(2)
+
+                                            Case "+" ' OS+
+
+                                                GiBonusEquipementAjoute(Index, e.Message)
+
+                                            Case "-" ' OS-
+
+                                                GiBonusEquipementSupprime(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "OS", e.Message)
+
+                                        End Select
+
+                                    Case "T" ' OT
+
+                                        GiEquipementMétier(Index, e.Message)
+
+                                    Case "w" ' Ow
+
+                                        GiPods(Index, e.Message)
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "O", e.Message)
+
+                                End Select
+
+                            Case "o"
+
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "o", e.Message)
+
+                            Case "P"
+
+                                Select Case e.Message(1)
+
+                                    Case "a" ' Pa
+
+                                        Select Case e.Message(2)
+
+                                            Case ";" ' Pa;
+
+                                                Select Case e.Message(3)
+
+                                                    Case "1" ' Pa;1
+
+                                                        Select Case e.Message(4)
+
+                                                            Case ";" ' Pa;1;
+
+                                                                If MITM = False Then
+
+                                                                    Send("Pa" & (Personnage.ID + 28549))
+
+                                                                End If
+
+                                                            Case Else
+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Pa;1", e.Message)
+
+                                                        End Select
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Pa;", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Pa", e.Message)
+
+                                        End Select
+
+                                    Case "B" ' PB
+
+                                        Select Case e.Message(2)
+
+                                            Case ";" ' PB;
+
+                                                Select Case e.Message(3)
+
+                                                    Case "1" ' PB;1
+
+                                                        Select Case e.Message(4)
+
+                                                            Case ";" ' PB;1;
+
+                                                                If MITM = False Then
+
+                                                                    Send("PB" & (Personnage.ID * 2))
+
+                                                                End If
+
+                                                            Case Else
+
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "PB;1", e.Message)
+
+                                                        End Select
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "PB;", e.Message)
+
+                                                End Select
+
+                                            Case "|" ' PB|
+
+                                                Select Case e.Message(3)
+
+                                                    Case "+" ' PB|+
+
+                                                        If MITM = False Then
+
+                                                            'PB|+37;0;0;1234567;Linaculer;9;90^100;0;0,0,0,1234567;-1;-1;-1;215b,,,,;0;;;;;0;;
+
+                                                            Send("PB" & (Personnage.ID + 305))
+
+                                                        End If
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "PB|", e.Message)
+
+                                                End Select
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "PB", e.Message)
+
+                                        End Select
+
+                                    Case "C" ' PC
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' PCK
+
+                                                ' GiGroupeRejoint(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "PC", e.Message)
+
+                                        End Select
+
+                                    Case "F" ' PF
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' PFK
+
+                                                'GiGroupeSuivezTous(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "PF", e.Message)
+
+                                        End Select
+
+                                    Case "I" ' PI
+
+                                        Select Case e.Message(2)
+
+                                            Case "E" ' PIE
+
+                                                Select Case e.Message(3)
+
+                                                    Case "a" ' PIEa
+
+                                                        ' EnInvitationGroupe = False
+                                                        'BloqueGroupe.Set()
+                                                        EcritureMessage(Index, "[Dofus]", "Impossible, ce joueur fait déjà partie d'un groupe.", Color.Red)
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "PIE", e.Message)
+
+                                                End Select
+
+                                            Case "K" ' PIK
+
+                                                ' GiGroupeRecoitInvitation(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "PI", e.Message)
+
+                                        End Select
+
+                                    Case "L" ' PL
+
+                                            ' PL 1234567
+                                            ' PL id chef
+                                          '  GroupeChefID = Mid(e.Message, 3)
+
+                                    Case "M" ' PM
+
+                                        Select Case e.Message(2)
+
+                                            Case "+" ' PM+
+
+                                                  '  GiGroupeAjouteMembre(Index, e.Message)
+
+                                            Case "-" ' PM-
+
+                                                   ' GiGroupeSupprimeMembre(Index, e.Message)
+
+                                            Case "~" ' PM~
+
+                                                '  GiGroupeModifieMembre(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "PM", e.Message)
+
+                                        End Select
+
+                                    Case "R" ' PR
+
+                                         '   EnInvitationGroupe = False
+                                          '  BloqueGroupe.Set()
+
+                                    Case "V"
+
+                                        'GiGroupeQuitte(Index, e.Message)
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "P", e.Message)
+
+                                End Select
+
+                            Case "p"
+
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "p", e.Message)
+
+                            Case "Q"
+
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, e.Message(0), e.Message)
+
+                            Case "q"
+
+                                Select Case e.Message
+
+                                    Case "qpong"
+
+                                        'Temps en ms du délai entre moi et le serveur.
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "q", e.Message)
+
+                                End Select
+
+                            Case "R"
+
+                                Select Case e.Message(1)
+
+                                    Case "e" ' Re
+
+                                        Select Case e.Message(2)
+
+                                            Case "+" ' Re+
+
+                                              '  MaMonture.Equiper = True
+                                               ' GiDragodindeEncloEtableEquipé(Index, e.Message, FrmUser.DataGridViewDragodindeMaMonture)
+
+                                            Case "-" ' Re-
+
+                                                ' MaMonture.Equiper = False
+                                                'FrmUser.DataGridViewDragodindeMaMonture.Rows.Clear()
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Re", e.Message)
+
+                                        End Select
+
+                                    Case "p" ' Rp
+
+                                           ' GiEncloMap(Index, e.Message)
+
+                                    Case "r" ' Rr
+
+                                        Select Case e.Message(2)
+
+                                            Case "+" ' Rr+
+
+                                                    'GiDragodindeMonterDesendu(Index, e.Message)
+
+                                            Case "-" ' Rr-
+
+                                                '   GiDragodindeMonterDesendu(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Rr", e.Message)
+
+                                        End Select
+
+                                    Case "x" ' Rx
+
+                                        ' GiDragodindeExperienceDonnee(Index, e.Message)
+
+                                    Case Else
+
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, e.Message(0), e.Message)
+
+                                End Select
+
+                            Case "r"
+
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "r", e.Message)
+
+                            Case "S"
+
+                                Select Case e.Message(1)
+
+                                    Case "L" ' SL
+
+                                        Select Case e.Message(2).ToString
+
+                                            Case "o" ' SLo
+
+                                                Select Case e.Message(3)
+
+                                                    Case "+" ' SLo+
 
                                                     'Inconnu
                                                     ' SLo+
 
-                                                        Case "-"
+                                                    Case "-"
 
-                                                            Sort.Clear()
+                                                        Sort.Clear()
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "SLo", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "SLo", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                                Case > 0
+                                            Case > 0
 
-                                                    GiSortAjoute(Index, e.Message)
+                                                GiSortAjoute(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "SL", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "SL", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "l" ' Sl
+                                    Case "l" ' Sl
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case ";" ' Sl;
+                                            Case ";" ' Sl;
 
-                                                    Select Case e.Message(3)
+                                                Select Case e.Message(3)
 
-                                                        Case "1" ' Sl;1
+                                                    Case "1" ' Sl;1
 
-                                                            Select Case e.Message(4)
+                                                        Select Case e.Message(4)
 
-                                                                Case ";" ' Sl;1;
+                                                            Case ";" ' Sl;1;
 
-                                                                    If MITM = False Then
+                                                                If MITM = False Then
 
-                                                                        Send("Sl" & Personnage.ID)
-                                                                        'ou   Send("Sl" & (Personnage.ID + 50))
-                                                                    End If
+                                                                    Send("Sl" & Personnage.ID)
+                                                                    'ou   Send("Sl" & (Personnage.ID + 50))
+                                                                End If
 
-                                                                Case Else
+                                                            Case Else
 
-                                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Sl;1", e.Message)
+                                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Sl;1", e.Message)
 
-                                                            End Select
+                                                        End Select
 
-                                                        Case Else
+                                                    Case Else
 
-                                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Sl;", e.Message)
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Sl;", e.Message)
 
-                                                    End Select
+                                                End Select
 
-                                                Case "|"
+                                            Case "|"
 
-                                                    If MITM = False Then
+                                                If MITM = False Then
 
-                                                        Send("Sl" & ((Personnage.ID * 2) + 108))
+                                                    Send("Sl" & ((Personnage.ID * 2) + 108))
 
-                                                    End If
+                                                End If
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Sl", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Sl", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case "U" ' SU
+                                    Case "U" ' SU
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "K" ' SUK
+                                            Case "K" ' SUK
 
-                                                    GiSortUp(Index, e.Message)
+                                                GiSortUp(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "SU", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "SU", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case Else
+                                    Case Else
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "S", e.Message)
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "S", e.Message)
 
-                                    End Select
+                                End Select
 
-                                Case "s"
+                            Case "s"
 
-                                    Select Case e.Message(1)
+                                Select Case e.Message(1)
 
-                                        Case "L" ' sL
+                                    Case "L" ' sL
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "+" ' sL+
+                                            Case "+" ' sL+
 
-                                                    GiMesCoffres(Index, e.Message)
+                                                'GiMesCoffres(Index, e.Message)
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "sL", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "sL", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case Else
+                                    Case Else
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "s", e.Message)
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "s", e.Message)
 
-                                    End Select
+                                End Select
 
-                                Case "T"
+                            Case "T"
 
-                                    Select Case e.Message(1)
+                                Select Case e.Message(1)
 
-                                        Case "T"
+                                    Case "T"
 
-                                            Select Case e.Message(2).ToString
+                                        Select Case e.Message(2).ToString
 
-                                                Case > 0
+                                            Case > 0
 
-                                                    ' TT32
+                                                ' TT32
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "TT", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "TT", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case Else
+                                    Case Else
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, e.Message(0), e.Message)
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, e.Message(0), e.Message)
 
-                                    End Select
+                                End Select
 
-                                Case "t"
+                            Case "t"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "t", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "t", e.Message)
 
-                                Case "U"
+                            Case "U"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "U", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "U", e.Message)
 
-                                Case "u"
+                            Case "u"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "u", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "u", e.Message)
 
-                                Case "V"
+                            Case "V"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "V", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "V", e.Message)
 
-                                Case "v"
+                            Case "v"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "v", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "v", e.Message)
 
-                                Case "W"
+                            Case "W"
 
-                                    Select Case e.Message(1)
+                                Select Case e.Message(1)
 
-                                        Case "C" ' WC
+                                    Case "C" ' WC
 
-                                            GiZaapInformation(Index, e.Message)
+                                         '   GiZaapInformation(Index, e.Message)
 
-                                        Case "V"
+                                    Case "V"
 
-                                            If e.Message = "WV" Then
+                                        If e.Message = "WV" Then
 
-                                                EnInteraction = False
-                                                BloqueInteraction.Set()
+                                            '      EnInteraction = False
+                                            '     BloqueInteraction.Set()
 
-                                            Else
+                                        Else
 
-                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "WV", e.Message)
+                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "WV", e.Message)
 
-                                            End If
+                                        End If
 
-                                        Case Else
+                                    Case Else
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "W", e.Message)
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "W", e.Message)
 
-                                    End Select
+                                End Select
 
-                                Case "w"
+                            Case "w"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "w", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "w", e.Message)
 
-                                Case "X"
+                            Case "X"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "X", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "X", e.Message)
 
-                                Case "x"
+                            Case "x"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "x", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "x", e.Message)
 
-                                Case "Y"
+                            Case "Y"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Y", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Y", e.Message)
 
-                                Case "y"
+                            Case "y"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "y", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "y", e.Message)
 
-                                Case "Z"
+                            Case "Z"
 
-                                    Select Case e.Message(1)
+                                Select Case e.Message(1)
 
-                                        Case "S" ' ZS
+                                    Case "S" ' ZS
 
-                                            Select Case e.Message(2)
+                                        Select Case e.Message(2)
 
-                                                Case "0" ' ZS0
+                                            Case "0" ' ZS0
 
-                                                    Personnage.Alignement = "Neutre"
+                                                Personnage.Alignement = "Neutre"
 
-                                                Case "1" ' ZS1
+                                            Case "1" ' ZS1
 
-                                                    Personnage.Alignement = "Bontarien"
+                                                Personnage.Alignement = "Bontarien"
 
-                                                Case "2" ' ZS2
+                                            Case "2" ' ZS2
 
-                                                    Personnage.Alignement = "Brakmarien"
+                                                Personnage.Alignement = "Brakmarien"
 
-                                                Case Else
+                                            Case Else
 
-                                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "ZS", e.Message)
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "ZS", e.Message)
 
-                                            End Select
+                                        End Select
 
-                                        Case Else
+                                    Case Else
 
-                                            ErreurFichier(Index, Personnage.NomDuPersonnage, "Z", e.Message)
+                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "Z", e.Message)
 
-                                    End Select
+                                End Select
 
-                                Case "z"
+                            Case "z"
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "z", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "z", e.Message)
 
-                                Case Else
+                            Case Else
 
-                                    ErreurFichier(Index, Personnage.NomDuPersonnage, "Unknow", e.Message)
+                                ErreurFichier(Index, Personnage.NomDuPersonnage, "Unknow", e.Message)
 
-                            End Select
+                        End Select
 
                     End If
 
@@ -3612,13 +3610,15 @@ Public Class Player
 
         If Message <> "" Then
 
+            bloqueur.Set()
+
             Select Case Message.ToString.Replace(vbLf, Nothing)
 
                 Case "GKK0", "GKK1"
 
-                    EnDéplacement = False
-                    StopDéplacement = False
-                    BloqueDéplacement.Set()
+                    Map.EnDeplacement = False
+                    Map.StopDeplacement = False
+                    BloqueDeplacement.Set()
 
             End Select
 
@@ -3771,11 +3771,11 @@ Public Class Player
 
         If EnAuthentification Then
 
-            Socket_Authentification.Envoyer(message)
+            Socket_Authentification.Envoyer(message, wait)
 
         ElseIf Connecté OrElse EnConnexion Then
 
-            Socket.Envoyer(message)
+            Socket.Envoyer(message, wait)
 
         End If
 
