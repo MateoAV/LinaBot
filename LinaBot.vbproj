@@ -6,29 +6,14 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9D7F7423-871C-4193-8DD5-EF9883A2D2BA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>LinaBot.My.MyApplication</StartupObject>
-    <RootNamespace>LinaBot</RootNamespace>
-    <AssemblyName>LinaBot</AssemblyName>
+    <StartupObject>A1___LinaBot.My.MyApplication</StartupObject>
+    <RootNamespace>A1___LinaBot</RootNamespace>
+    <AssemblyName>A1 - LinaBot</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>LinaBot.xml</DocumentationFile>
+    <DocumentationFile>A1 - LinaBot.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -47,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>LinaBot.xml</DocumentationFile>
+    <DocumentationFile>A1 - LinaBot.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -102,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Amis\AmiInformation.vb" />
+    <Compile Include="Amis\FrmAmi.Designer.vb">
+      <DependentUpon>FrmAmi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Amis\FrmAmi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Amis\FunctionAmi.vb" />
     <Compile Include="Caracteristique\FrmCaracteristique.Designer.vb">
       <DependentUpon>FrmCaracteristique.vb</DependentUpon>
@@ -119,8 +110,6 @@
     <Compile Include="Connexion\MdlConnexion.vb" />
     <Compile Include="Echange\FunctionEchange.vb" />
     <Compile Include="Echange\mdlEchange.vb" />
-    <Compile Include="Familier\FunctionFamilier.vb" />
-    <Compile Include="Familier\MdlFamilier.vb" />
     <Compile Include="Form\FrmDiscord.Designer.vb">
       <DependentUpon>FrmDiscord.vb</DependentUpon>
     </Compile>
@@ -172,8 +161,6 @@
     </Compile>
     <Compile Include="Guilde\FunctionGuilde.vb" />
     <Compile Include="Guilde\mdlGuilde.vb" />
-    <Compile Include="HotelDeVente\Class_HDV.vb" />
-    <Compile Include="HotelDeVente\mdlHDV.vb" />
     <Compile Include="Inventaire\FrmInventaire.Designer.vb">
       <DependentUpon>FrmInventaire.vb</DependentUpon>
     </Compile>
@@ -183,17 +170,19 @@
     <Compile Include="Item\FunctionItem.vb" />
     <Compile Include="Inventaire\mdlInventaire.vb" />
     <Compile Include="Item\MdlItem.vb" />
+    <Compile Include="Maison\FunctionMaison.vb" />
+    <Compile Include="Maison\MdlMaison.vb" />
     <Compile Include="Map\FunctionMap.vb" />
     <Compile Include="Map\Fonctions.vb" />
     <Compile Include="Map\Maphandler.vb" />
     <Compile Include="Map\Map_Data.vb" />
     <Compile Include="Map\Pathfinding.vb" />
     <Compile Include="Map\SwfUnpacker.vb" />
+    <Compile Include="Metier\MdlMétier.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -208,8 +197,10 @@
     <Compile Include="Player\ElgSocketEventArgs.vb" />
     <Compile Include="Player\Player.vb" />
     <Compile Include="Player\PlayerVariable.vb" />
-    <Compile Include="Pnj\FunctionPnj.vb" />
-    <Compile Include="Pnj\PNJ_Information.vb" />
+    <Compile Include="1 - Pnj\FunctionPnj.vb" />
+    <Compile Include="1 - Pnj\mdlPnj.vb" />
+    <Compile Include="Recolte\Class_Récolte.vb" />
+    <Compile Include="Recolte\mdlRecolte.vb" />
     <Compile Include="Sort\FrmSort.Designer.vb">
       <DependentUpon>FrmSort.vb</DependentUpon>
     </Compile>
@@ -230,6 +221,9 @@
     <Compile Include="Trajet\TrajetExecution.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Amis\FrmAmi.resx">
+      <DependentUpon>FrmAmi.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Caracteristique\FrmCaracteristique.resx">
       <DependentUpon>FrmCaracteristique.vb</DependentUpon>
     </EmbeddedResource>
@@ -382,20 +376,6 @@
   <ItemGroup>
     <None Include="bin\Debug\Image\Item\18\8000.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Recolte\" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 et x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -741,13 +741,11 @@ Public Class Player
 
                                             Case "K" ' DCK
 
-                                                GiPnjDialogue(Index, e.Message)
+                                                GiPnjParlerDialogue(Index, e.Message)
 
                                             Case "E" ' DCE
 
-                                                Pnj.EnDialogue = True
-                                                Pnj.BloquePnj.Set()
-                                                EcritureMessage(Index, "[Dofus]", "Vous êtes déjà en dialogue.", Color.Red)
+                                                GiPnjParlerDejaEnDialogue(Index, e.Message)
 
                                             Case Else
 
@@ -757,14 +755,11 @@ Public Class Player
 
                                     Case "Q" ' DQ
 
-                                        GiPnjQuestionReponse(Index, e.Message)
+                                        GiPnjParlerQuestionReponse(Index, e.Message)
 
                                     Case "V" ' DV
 
-                                        Pnj.EnDialogue = False
-                                        Pnj.Reponse.Clear()
-                                        Pnj.IdReponse = 0
-                                        Pnj.BloquePnj.Set()
+                                        GiPnjParlerFinDialogue(Index, e.Message)
 
                                     Case Else
 
@@ -779,6 +774,20 @@ Public Class Player
                             Case "E"
 
                                 Select Case e.Message(1)
+
+                                    Case "B" ' EB
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' EBK
+
+                                                GiPnjAcheterVendreAchatReussi(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "EB", e.Message)
+
+                                        End Select
 
                                     Case "b" ' Eb
 
@@ -827,10 +836,9 @@ Public Class Player
 
                                                 Select Case e.Message(3)
 
-                                                    Case "0" ' ECK0
+                                                    Case "0" ' ECK0 ' Pnj Acheter/Vendre
 
-
-                                                        'EnHDV = True
+                                                        Pnj.EnAcheterVendre = True
 
                                                     Case "1" ' ECK1
 
@@ -840,18 +848,15 @@ Public Class Player
 
                                                                 Case "0" ' ECK10
 
-                                                                    Pnj.EnHdvVente = True
-                                                                    EcritureMessage(Index, "[Dofus]", "Vous êtes en vente avec le PNJ.", Color.Green)
-                                                                    GiHotelDeVenteAcheterVendre(Index, e.Message)
+                                                                    GiPnjHotelDeVenteAcheterVendre(Index, e.Message)
 
                                                                 Case "1" ' ECK11
 
-                                                                    Pnj.EnHdvAchat = True
-                                                                    EcritureMessage(Index, "[Dofus]", "Vous êtes en achat avec le PNJ.", Color.Green)
-                                                                    GiHotelDeVenteAcheterVendre(Index, e.Message)
+                                                                    GiPnjHotelDeVenteAcheterVendre(Index, e.Message)
 
                                                                 Case "5" ' ECK15
 
+                                                                    Echange.Numero = 15
                                                                     Personnage.Dragodinde.EnInventaire = True
                                                                     EcritureMessage(Index, "[Dofus]", "Vous êtes dans l'inventaire de la monture.", Color.Green)
 
@@ -863,18 +868,26 @@ Public Class Player
 
                                                         Else
 
-                                                            ' EnEchange = True
-                                                            ' BloqueEchange.Set()
+                                                            Echange.EnEchange = True
+                                                            Echange.Numero = 1
+                                                            Echange.BloqueEchange.Set()
 
                                                         End If
 
-                                                    Case "5" ' ECK5
+                                                    Case "2" '  ECK2
 
-                                                       ' EnBanque = True
+                                                        Pnj.EnEchange = True
+                                                        Pnj.Bloque.Set()
 
-                                                    Case "8" ' ECK8|-88
+                                                    Case "5" ' ECK5 ' Banque/Coffre
 
-                                                        ' EnBanque = True 'Percepteur
+                                                        Echange.EnEchange = True
+                                                        Echange.Numero = 5
+
+                                                    Case "8" ' ECK8|-88 ' Percepteur
+
+                                                        Echange.EnEchange = True
+                                                        Echange.Numero = 8
 
                                                     Case Else
 
@@ -894,15 +907,29 @@ Public Class Player
 
                                             Case "L" ' EHL
 
-                                                   ' GiHotelDeVenteItemID(Index, e.Message)
+                                                GiPnjHotelDeVenteAcheterItemID(Index, e.Message)
 
                                             Case "l" ' EHl
 
-                                                  '  GiHotelDeVenteItemChoisi(Index, e.Message)
+                                                GiPnjHotelDeVenteAcheterItemChoisi(Index, e.Message)
 
                                             Case "P" ' EHP
 
-                                                '   GiHotelDeVentePrixMoyen(Index, e.Message)
+                                                GiPnjHotelDeVentePrixMoyen(Index, e.Message)
+
+                                            Case "S" ' EHS
+
+                                                Select Case e.Message(3)
+
+                                                    Case "E" ' EHSE
+
+                                                        GiPnjHotelDeVenteAcheterRechercheEchoue(Index, e.Message)
+
+                                                    Case Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "EHS", e.Message)
+
+                                                End Select
 
                                             Case Else
 
@@ -941,21 +968,25 @@ Public Class Player
 
                                                 Case Else
 
-                                                    '   If EnHDV Then
+                                                    If Pnj.EnVendre Then
 
-                                                    '      GiHotelDeVenteItemEnVente(Index, e.Message)
+                                                        GiPnjHotelDeVenteItemEnVente(Index, e.Message)
 
-                                                    '   Else
+                                                    ElseIf Pnj.EnAcheterVendre Then
 
-                                                    '      ErreurFichier(Index, Personnage.NomDuPersonnage, "EL", e.Message)
+                                                        GiPnjAcheterVendreItemEnVente(Index, e.Message)
 
-                                                    '  End If
+                                                    Else
+
+                                                        ErreurFichier(Index, Personnage.NomDuPersonnage, "EL", e.Message)
+
+                                                    End If
 
                                             End Select
 
                                         Else
 
-                                            'HdvInfo.ListeItem.Clear()
+                                            Pnj.Vendre.ListeItem.Clear()
 
                                         End If
 
@@ -1035,19 +1066,19 @@ Public Class Player
 
                                                     Case "+" ' EmK+
 
-                                                          '  If EnHDV Then
+                                                        If Pnj.EnVendre Then
 
-                                                            '    GiHotelDeVenteItemMisEnVente(Index, e.Message)
+                                                            GiPnjHotelDeVenteItemMisEnVente(Index, e.Message)
 
-                                                           ' End If
+                                                        End If
 
                                                     Case "-" ' EmK-
 
-                                                        '  If EnHDV Then
+                                                        If Pnj.EnVendre Then
 
-                                                        '      GiHotelDeVenteRetireItemMisEnVente(Index, e.Message)
+                                                            GiPnjHotelDeVenteRetireItemMisEnVente(Index, e.Message)
 
-                                                        '  End If
+                                                        End If
 
                                                     Case Else
 
@@ -1075,6 +1106,20 @@ Public Class Player
 
                                         End Select
 
+                                    Case "S" ' ES
+
+                                        Select Case e.Message(2)
+
+                                            Case "K" ' ESK
+
+                                                GiPnjAcheterVendreVenteReussi(Index, e.Message)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "ES", e.Message)
+
+                                        End Select
+
                                     Case "s" ' Es
 
                                         Select Case e.Message(2)
@@ -1093,19 +1138,19 @@ Public Class Player
 
                                                             Case "+" ' EsKO+
 
-                                                                '    If EnBanque Then
+                                                                If Echange.EnEchange Then
 
-                                                                '    GiBanqueAjouteItem(Index, e.Message, FrmUser.DataGridView_Banque)
+                                                                    GiEchangeAjouteItemMoi(Index, e.Message)
 
-                                                               ' End If
+                                                                End If
 
                                                             Case "-" ' EsKO-
 
-                                                                '     If EnBanque Then
+                                                                If Echange.EnEchange Then
 
-                                                                '     GiBanqueSupprimeItem(Index, e.Message, FrmUser.DataGridView_Banque)
+                                                                    GiEchangeSupprimeItemMoi(Index, e.Message)
 
-                                                                '  End If
+                                                                End If
 
                                                             Case Else
 
@@ -1129,20 +1174,24 @@ Public Class Player
 
                                         If e.Message = "EV" Then
 
-                                            '    If EnEchange Then
+                                            If Echange.EnEchange OrElse Pnj.EnEchange = False Then
 
-                                            '        EcritureMessage(Index, "[Dofus]", "Echange annulé", Color.Red)
+                                                EcritureMessage(Index, "[Dofus]", "Echange annulé", Color.Red)
 
-                                            '   End If
+                                            End If
 
-                                            '    EnBanque = False
-                                            '   EnEchange = False
-                                            '    EnInvitationEchange = False
-                                            '    EnHDV = False
-                                            '    HdvInfo.ListeItem.Clear()
-                                            '    BloqueInteraction.Set()
-                                            '    BloqueEchange.Set()
-                                            '    BloqueHDV.Set()
+                                            With Pnj
+
+                                                .EnAcheterVendre = False
+                                                .AcheterVendre.Clear()
+                                                .EnAcheter = False
+                                                .Acheter.ListeItem.Clear()
+                                                .EnVendre = False
+                                                .Vendre.ListeItem.Clear()
+                                                .EnEchange = False
+                                                .Bloque.Set()
+
+                                            End With
 
                                         Else
 
@@ -1150,8 +1199,8 @@ Public Class Player
 
                                                 EcritureMessage(Index, "[Dofus]", "Echange effectué", Color.Red)
 
-                                                '     EnEchange = False
-                                                '    BloqueEchange.Set()
+                                                Echange.EnEchange = False
+                                                Echange.BloqueEchange.Set()
 
                                             Else
 
@@ -1272,7 +1321,7 @@ Public Class Player
 
                                                 Else
 
-                                                    'GiMétierModePublic(Index, e.Message)
+                                                    GiMetierModePublic(Index, e.Message)
 
                                                 End If
 
@@ -1283,7 +1332,7 @@ Public Class Player
 
                                                 Else
 
-                                                    '  GiMétierModePublic(Index, e.Message)
+                                                    GiMetierModePublic(Index, e.Message)
 
                                                 End If
 
@@ -1323,7 +1372,7 @@ Public Class Player
 
                                             Case "K" ' FAK
 
-                                                'GiAmiEnnemiAjoute(Index, e.Message)
+                                                GiAmiEnnemiAjoute(Index, e.Message)
 
                                             Case Else
 
@@ -1331,9 +1380,24 @@ Public Class Player
 
                                         End Select
 
+                                    Case "D" ' FD
+
+                                        Select Case e.Message(2)
+
+                                            Case "K"
+
+                                                Ami.BloqueAmi.Set()
+                                                EcritureMessage(Index, "[Dofus]", "Tu viens de perdre un ami.", Color.Green)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "FD", e.Message)
+
+                                        End Select
+
                                     Case "L" ' FL
 
-                                          '  GiAmiEnnemi(Index, e.Message)
+                                        GiAmiEnnemi(Index, e.Message)
 
                                     Case "O" ' FO
 
@@ -1341,13 +1405,13 @@ Public Class Player
 
                                             Case "-" ' FO- 
 
-                                                '  AmiAvertie = False
+                                                Ami.Avertie = False
 
                                                 EcritureMessage(Index, "[Dofus]", "Vous serai pas avertie lors de la connexion d'un ami.", Color.Green)
 
                                             Case "+" ' FO+
 
-                                                'AmiAvertie = True
+                                                Ami.Avertie = True
 
                                                 EcritureMessage(Index, "[Dofus]", "Vous serai avertie lors de la connexion d'un ami.", Color.Green)
 
@@ -1375,13 +1439,13 @@ Public Class Player
 
                                                 EcritureMessage(Index, "[Dofus]", "Il n'y a aucun combat en cours actuellement sur la map.", Color.Green)
 
-                                                    'MapSpectateur = False
+                                                Map.Spectateur = False
 
                                             Case > 0 ' fC1
 
                                                 EcritureMessage(Index, "[Dofus]", "Il y a des combats en cours actuellement sur la map.", Color.Green)
 
-                                                '   MapSpectateur = True
+                                                Map.Spectateur = True
 
                                             Case Else
 
@@ -2516,7 +2580,7 @@ Public Class Player
 
                                             Case "+" ' hL+
 
-                                                '  GiMaMaison(Index, e.Message)
+                                                GiMaMaison(Index, e.Message)
 
                                             Case Else
 
@@ -2526,7 +2590,7 @@ Public Class Player
 
                                     Case "P" ' hP
 
-                                        'GiMaisonMap(Index, e.Message)
+                                        GiMaisonMap(Index, e.Message)
 
                                     Case Else
 
@@ -2644,23 +2708,38 @@ Public Class Player
 
                                 Select Case e.Message(1)
 
-                                    Case "L" ' iL
-
-                                           ' GiAmiEnnemi(Index, e.Message)
-
                                     Case "A" ' iA
 
                                         Select Case e.Message(2)
 
                                             Case "K" ' iAK
 
-                                                'GiAmiEnnemiAjoute(Index, e.Message)
+                                                GiAmiEnnemiAjoute(Index, e.Message)
 
                                             Case Else
 
                                                 ErreurFichier(Index, Personnage.NomDuPersonnage, "iA", e.Message)
 
                                         End Select
+
+                                    Case "D"
+
+                                        Select Case e.Message(2)
+
+                                            Case "K"
+
+                                                Ami.BloqueAmi.Set()
+                                                EcritureMessage(Index, "[Dofus]", "L'ennemi a été effacé, la paix gagne une bataille.", Color.Green)
+
+                                            Case Else
+
+                                                ErreurFichier(Index, Personnage.NomDuPersonnage, "iD", e.Message)
+
+                                        End Select
+
+                                    Case "L" ' iL
+
+                                        GiAmiEnnemi(Index, e.Message)
 
                                     Case Else
 

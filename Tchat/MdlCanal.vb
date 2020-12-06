@@ -478,9 +478,9 @@
 
                         Case "068"
 
-                            EcritureMessage(index, "[Dofus]", "Lot acheté.", Color.Green)
+                            .Pnj.Bloque.Set()
 
-                           ' .BloqueHDV.Set()
+                            EcritureMessage(index, "[Dofus]", "Lot acheté.", Color.Green)
 
                         Case "040"
 

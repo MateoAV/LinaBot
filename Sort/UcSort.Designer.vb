@@ -89,7 +89,7 @@ Partial Class UcSort
         '
         'ButtonSort
         '
-        Me.ButtonSort.BackgroundImage = Global.LinaBot.My.Resources.Resources.plus
+        Me.ButtonSort.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.plus
         Me.ButtonSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonSort.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonSort.ForeColor = System.Drawing.Color.White

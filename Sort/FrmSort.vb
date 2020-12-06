@@ -26,11 +26,7 @@
 
         With Comptes(index)
 
-            If .Connecté Then
-
-                RemoveHandler .Socket.Reception, AddressOf Reception
-
-            End If
+            RemoveHandler .Socket.Reception, AddressOf Reception
 
         End With
 

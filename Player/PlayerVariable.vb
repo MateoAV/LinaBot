@@ -57,12 +57,13 @@ Partial Class Player
 
     'Métier
     Public Metier As New Dictionary(Of String, ClassMétier)
+    Public Recolte As New ClassRecolte
 
     'Guilde
     Public Guilde As New ClassGuilde
 
     'Pnj
-    Public Pnj As New ClassPnj
+    Public Pnj As New CPnj
 
     'Echange
     Public Echange As New ClassEchange

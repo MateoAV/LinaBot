@@ -82,8 +82,9 @@ Public Class ClassPersonnage
     {"resistance feu pvp pr", New ClassCaractéristique}
 }
     Public Dragodinde As New ClassDragodindeEquipé
-    Public EnEchange As Boolean
     Public InvitationEchange As Boolean
+    Public InteractionCellule As Integer
+
 End Class
 
 Public Class ClassCaractéristique
@@ -333,6 +334,7 @@ Public Class ClassMap
     Public Haut, Bas, Gauche, Droite As Integer
     Public EnDeplacement As Boolean
     Public Coordonnees As String
+    Public Spectateur As Boolean
     Public Map_Viewer_BitMap_All, Map_Viewer_BitMap As New Bitmap(1000, 1000)
     Public MapListeCelluleLeft(1024), MapListeCelluleTop(1024), MapListeCelluleRight(1024), MapListeCelluleDown(1024) As Point
     Public Entite As New Dictionary(Of Integer, ClassEntite)
@@ -624,51 +626,13 @@ End Class
 
 
 
-#Region "Pnj"
-
-Public Class ClassPnj
-
-    Public EnDialogue As Boolean
-    Public EnHdvAchat, EnHdvVente As Boolean
-    Public BloquePnj As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
-    Public Reponse As New List(Of Integer)
-    Public IdReponse As Integer
-    Public HotelDeVente As New ClassPnjHdv
-
-End Class
-
-Public Class ClassPnjHdv
-
-    Public Quantiter1, Quantiter10, Quantiter100 As Boolean
-    Public ListeIdCatégorie As New List(Of Integer)
-    Public ListeIdItem As New List(Of Integer)
-    Public Taxe As Integer
-    Public NiveauMax As Integer
-    Public NbrItemVendable As Integer
-    Public HeureMax As Integer
-    Public PrixMoyen As Integer
-    Public ListeItem As New Dictionary(Of Integer, ClassHDVItem)
-
-End Class
-
-Public Class ClassHDVItem
-
-    Public IDUnique As Integer
-    Public Caracteristique As New ClassItemCaractéristique
-    Public Prix1, Prix10, Prix100 As Integer
-    Public IdObjet As Integer
-    Public TempsRestant As Integer
-    Public Prix As Integer
-    Public Quantiter As Integer
-
-End Class
-
-#End Region
 
 #Region "Echange"
 
 Public Class ClassEchange
 
+    Public Numero As Integer
+    Public EnEchange As Boolean
     Public Moi As New ClassEchangeAll
     Public Lui As New ClassEchangeAll
     Public BloqueEchange As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
@@ -692,6 +656,7 @@ Public Class ClassAmi
     Public Ami As New Dictionary(Of String, ClassAmiInformation)
     Public Ennemi As New Dictionary(Of String, ClassAmiInformation)
     Public Ignore As New Dictionary(Of String, ClassAmiInformation)
+    Public Avertie As Boolean
     Public BloqueAmi As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
 
 End Class
@@ -699,13 +664,25 @@ End Class
 Public Class ClassAmiInformation
 
     Public Pseudo As String
-    Public EnAmi As Boolean
+    Public Connecte As Boolean
     Public Nom As String
     Public Niveau As String
     Public Alignement As String
     Public Classe As String
     Public Sex As String
     Public ClasseSex As String
+
+End Class
+
+#End Region
+
+#Region "Recolte"
+
+Public Class ClassRecolte
+
+    Public BloqueRecolte As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+    Public EnRecolte As Boolean
+    Public NumeroRecolte As Integer
 
 End Class
 

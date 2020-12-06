@@ -279,7 +279,7 @@ Partial Class FrmUser
         '
         'ButtonPlugInIA
         '
-        Me.ButtonPlugInIA.BackgroundImage = Global.LinaBot.My.Resources.Resources.Tchat
+        Me.ButtonPlugInIA.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Tchat
         Me.ButtonPlugInIA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonPlugInIA.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonPlugInIA.ForeColor = System.Drawing.Color.White
@@ -291,7 +291,7 @@ Partial Class FrmUser
         '
         'ButtonCaracteristique
         '
-        Me.ButtonCaracteristique.BackgroundImage = Global.LinaBot.My.Resources.Resources.Caracteristique
+        Me.ButtonCaracteristique.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Caracteristique
         Me.ButtonCaracteristique.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonCaracteristique.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonCaracteristique.ForeColor = System.Drawing.Color.White
@@ -303,7 +303,7 @@ Partial Class FrmUser
         '
         'Button2
         '
-        Me.Button2.BackgroundImage = Global.LinaBot.My.Resources.Resources.Sort
+        Me.Button2.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Sort
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button2.ForeColor = System.Drawing.Color.White
@@ -315,7 +315,7 @@ Partial Class FrmUser
         '
         'Button3
         '
-        Me.Button3.BackgroundImage = Global.LinaBot.My.Resources.Resources.Inventaire
+        Me.Button3.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Inventaire
         Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button3.ForeColor = System.Drawing.Color.White
@@ -327,7 +327,7 @@ Partial Class FrmUser
         '
         'Button4
         '
-        Me.Button4.BackgroundImage = Global.LinaBot.My.Resources.Resources.Quete
+        Me.Button4.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Quete
         Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button4.ForeColor = System.Drawing.Color.White
@@ -339,7 +339,7 @@ Partial Class FrmUser
         '
         'Button5
         '
-        Me.Button5.BackgroundImage = Global.LinaBot.My.Resources.Resources.Map
+        Me.Button5.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Map
         Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button5.ForeColor = System.Drawing.Color.White
@@ -351,7 +351,7 @@ Partial Class FrmUser
         '
         'Button6
         '
-        Me.Button6.BackgroundImage = Global.LinaBot.My.Resources.Resources.Ami
+        Me.Button6.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Ami
         Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button6.ForeColor = System.Drawing.Color.White
@@ -363,7 +363,7 @@ Partial Class FrmUser
         '
         'Button7
         '
-        Me.Button7.BackgroundImage = Global.LinaBot.My.Resources.Resources.Guilde
+        Me.Button7.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Guilde
         Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button7.ForeColor = System.Drawing.Color.White
@@ -375,7 +375,7 @@ Partial Class FrmUser
         '
         'Button8
         '
-        Me.Button8.BackgroundImage = Global.LinaBot.My.Resources.Resources.Dragodinde
+        Me.Button8.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Dragodinde
         Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button8.ForeColor = System.Drawing.Color.White
@@ -387,7 +387,7 @@ Partial Class FrmUser
         '
         'Button9
         '
-        Me.Button9.BackgroundImage = Global.LinaBot.My.Resources.Resources.Conquete
+        Me.Button9.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Conquete
         Me.Button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button9.ForeColor = System.Drawing.Color.White
@@ -399,7 +399,7 @@ Partial Class FrmUser
         '
         'Button10
         '
-        Me.Button10.BackgroundImage = Global.LinaBot.My.Resources.Resources.Console
+        Me.Button10.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Console
         Me.Button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button10.ForeColor = System.Drawing.Color.White
@@ -411,7 +411,7 @@ Partial Class FrmUser
         '
         'ButtonFamilier
         '
-        Me.ButtonFamilier.BackgroundImage = Global.LinaBot.My.Resources.Resources._8000
+        Me.ButtonFamilier.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources._8000
         Me.ButtonFamilier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonFamilier.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonFamilier.ForeColor = System.Drawing.Color.White
@@ -423,7 +423,7 @@ Partial Class FrmUser
         '
         'ButtonIA
         '
-        Me.ButtonIA.BackgroundImage = Global.LinaBot.My.Resources.Resources.Ampoule_Off
+        Me.ButtonIA.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.Ampoule_Off
         Me.ButtonIA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonIA.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonIA.ForeColor = System.Drawing.Color.White

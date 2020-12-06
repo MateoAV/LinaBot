@@ -27,7 +27,7 @@
                             If separate.Length > 1 Then
 
                                 .Pseudo = separate(0)
-                                .EnAmi = separate(1)
+                                .Connecte = separate(1)
                                 .Nom = separate(2)
                                 .Niveau = separate(3)
 
@@ -120,7 +120,7 @@
                             Else
 
                                 .Pseudo = separate(0)
-                                .EnAmi = False
+                                .Connecte = False
                                 .Nom = ""
                                 .Niveau = ""
                                 .Sex = ""

@@ -2,187 +2,187 @@
 <doc>
 <assembly>
 <name>
-LinaBot
+A1 - LinaBot
 </name>
 </assembly>
 <members>
-<member name="T:LinaBot.My.Resources.Resources">
+<member name="T:A1___LinaBot.My.Resources.Resources">
 <summary>
   Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.ResourceManager">
+<member name="P:A1___LinaBot.My.Resources.Resources.ResourceManager">
 <summary>
   Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Culture">
+<member name="P:A1___LinaBot.My.Resources.Resources.Culture">
 <summary>
   Remplace la propriété CurrentUICulture du thread actuel pour toutes
   les recherches de ressources à l'aide de cette classe de ressource fortement typée.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources._8000">
+<member name="P:A1___LinaBot.My.Resources.Resources._8000">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Agiliter">
+<member name="P:A1___LinaBot.My.Resources.Resources.Agiliter">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.AlignementNeutre">
+<member name="P:A1___LinaBot.My.Resources.Resources.AlignementNeutre">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Ami">
+<member name="P:A1___LinaBot.My.Resources.Resources.Ami">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Ampoule_Off">
+<member name="P:A1___LinaBot.My.Resources.Resources.Ampoule_Off">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Ampoule_On">
+<member name="P:A1___LinaBot.My.Resources.Resources.Ampoule_On">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Bontarien">
+<member name="P:A1___LinaBot.My.Resources.Resources.Bontarien">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Brakmarien">
+<member name="P:A1___LinaBot.My.Resources.Resources.Brakmarien">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Caracteristique">
+<member name="P:A1___LinaBot.My.Resources.Resources.Caracteristique">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Chance">
+<member name="P:A1___LinaBot.My.Resources.Resources.Chance">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Coeur">
+<member name="P:A1___LinaBot.My.Resources.Resources.Coeur">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Conquete">
+<member name="P:A1___LinaBot.My.Resources.Resources.Conquete">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Console">
+<member name="P:A1___LinaBot.My.Resources.Resources.Console">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Dragodinde">
+<member name="P:A1___LinaBot.My.Resources.Resources.Dragodinde">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Force">
+<member name="P:A1___LinaBot.My.Resources.Resources.Force">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Guilde">
+<member name="P:A1___LinaBot.My.Resources.Resources.Guilde">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Initiative">
+<member name="P:A1___LinaBot.My.Resources.Resources.Initiative">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Intelligence">
+<member name="P:A1___LinaBot.My.Resources.Resources.Intelligence">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Inventaire">
+<member name="P:A1___LinaBot.My.Resources.Resources.Inventaire">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Map">
+<member name="P:A1___LinaBot.My.Resources.Resources.Map">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Neutre">
+<member name="P:A1___LinaBot.My.Resources.Resources.Neutre">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.PA">
+<member name="P:A1___LinaBot.My.Resources.Resources.PA">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Parchemin_Off">
+<member name="P:A1___LinaBot.My.Resources.Resources.Parchemin_Off">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Parchemin_On">
+<member name="P:A1___LinaBot.My.Resources.Resources.Parchemin_On">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.plus">
+<member name="P:A1___LinaBot.My.Resources.Resources.plus">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.PM">
+<member name="P:A1___LinaBot.My.Resources.Resources.PM">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Prospection">
+<member name="P:A1___LinaBot.My.Resources.Resources.Prospection">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Quete">
+<member name="P:A1___LinaBot.My.Resources.Resources.Quete">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Sagesse">
+<member name="P:A1___LinaBot.My.Resources.Resources.Sagesse">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Sort">
+<member name="P:A1___LinaBot.My.Resources.Resources.Sort">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Tchat">
+<member name="P:A1___LinaBot.My.Resources.Resources.Tchat">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:LinaBot.My.Resources.Resources.Vitaliter">
+<member name="P:A1___LinaBot.My.Resources.Resources.Vitaliter">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="M:LinaBot.FunctionAmi.Ouvre(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionAmi.Ouvre(System.String,System.String)">
  <summary>
  Ouvre la liste d'ami/ennemi.
  </summary>
@@ -193,7 +193,7 @@ LinaBot
  False = La liste n'est pas ouverte.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionAmi.Supprime(System.String,System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionAmi.Supprime(System.String,System.String,System.String)">
  <summary>
  Supprime le joueur de la liste d'ami/ennemi.
  </summary>
@@ -205,7 +205,7 @@ LinaBot
  False = La suppression a échoué.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionAmi.Ajoute(System.String,System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionAmi.Ajoute(System.String,System.String,System.String)">
  <summary>
  Ajoute un ami/ennemi.
  </summary>
@@ -217,7 +217,7 @@ LinaBot
  False = Ajout échoué.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionAmi.Information(System.String,System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionAmi.Information(System.String,System.String,System.String)">
  <summary>
  Obtient les informations du joueur.
  </summary>
@@ -229,7 +229,7 @@ LinaBot
  False = aucune information obtenue.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionAmi.Rejoindre(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionAmi.Rejoindre(System.String,System.String)">
  <summary>
  Rejoint un joueur directement sur la map (Incarnam)
  </summary>
@@ -240,7 +240,7 @@ LinaBot
  False = Le bot n'a pas réussie à rejoindre le joueur.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionAmi.Avertie(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionAmi.Avertie(System.String,System.String)">
  <summary>
  Averti lors de la connexion d'un ami.
  </summary>
@@ -251,7 +251,7 @@ LinaBot
  False = Le bot n'avertie pas si un ami se connecte.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionAmi.IgnoreSupprime(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionAmi.IgnoreSupprime(System.String,System.String)">
  <summary>
  Ignore ou supprime un joueur de la liste des ignorés.
  </summary>
@@ -262,7 +262,7 @@ LinaBot
  False = Le bot n'a pas réussi à ignoré ou supprimé le joueur de la liste des ignorés.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionCaractéristique.Up(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionCaractéristique.Up(System.String,System.String)">
  <summary>
  Permet de Up la caractéristique voulu.
  </summary>
@@ -270,7 +270,7 @@ LinaBot
  <param name="caracteristique">Indique la caractéristique. Exemple : Vitalité, Sagesse, etc...</param>
  <returns>Retourne 'True' s'il a Up, sinon 'False'</returns>
 </member>
-<member name="M:LinaBot.FunctionCaractéristique.CaracteristiqueUpPossible(System.Int32,System.String)">
+<member name="M:A1___LinaBot.FunctionCaractéristique.CaracteristiqueUpPossible(System.Int32,System.String)">
  <summary>
  Vérifier si le personnage a assé de point pour up la caractéristique.
  </summary>
@@ -278,7 +278,7 @@ LinaBot
  <param name="caracteristique">Indique la caractéristique à vérifier.</param>
  <returns>Retourne 'True' s'il peut Up la caractéristique, sinon 'False'</returns>
 </member>
-<member name="M:LinaBot.FunctionCaractéristique.Return(System.String,System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionCaractéristique.Return(System.String,System.String,System.String)">
  <summary>
  Retourne la valeur indiqué selon la caractéristique et le choix voulu.
  </summary>
@@ -287,7 +287,7 @@ LinaBot
  <param name="choix">Indique le choix : 'Base' , 'Equipement' , 'Dons' , 'Boosts' , 'Total'</param>
  <returns>Retourne la valeur qui correspond à la caractéristique et au choix, sinon retourne '0'</returns>
 </member>
-<member name="M:LinaBot.FunctionCaractéristique.Energie(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionCaractéristique.Energie(System.String,System.String)">
  <summary>
  Retourne l'energie du personnage.
  </summary>
@@ -295,14 +295,14 @@ LinaBot
  <param name="choix">'Actuelle' , 'Maximum' , 'Pr' (Pr = Pourcentage)</param>
  <returns>Retourne la valeur selon le choix indiqué, sinon retourne '0'.</returns>
 </member>
-<member name="M:LinaBot.FunctionCaractéristique.Niveau(System.String)">
+<member name="M:A1___LinaBot.FunctionCaractéristique.Niveau(System.String)">
  <summary>
  Retourne le niveau du personnage.
  </summary>
  <param name="index">Indique le compte.</param>
  <returns>Retourne le niveau actuelle du personnage, sinon retourne 0.</returns>
 </member>
-<member name="M:LinaBot.FunctionCaractéristique.Experience(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionCaractéristique.Experience(System.String,System.String)">
  <summary>
  Retourne l'expèrience du personnage.
  </summary>
@@ -310,7 +310,7 @@ LinaBot
  <param name="choix">'Actuelle' , 'Maximum' , 'Minimum' , 'Pr' (Pr = Pourcentage)</param>
  <returns>Retourne la valeur selon le choix indiqué, sinon retourne '0'.</returns>
 </member>
-<member name="M:LinaBot.FunctionCaractéristique.PointDeVie(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionCaractéristique.PointDeVie(System.String,System.String)">
  <summary>
  Permet d'avoir le nombre de point de vie du personnage.
  </summary>
@@ -318,7 +318,7 @@ LinaBot
  <param name="choix">'Actuelle' , 'Maximum' , 'Pr'</param>
  <returns>Retourne la valeur selon le choix indiqué, sinon retourne '0'.</returns>
 </member>
-<member name="M:LinaBot.FunctionEchange.Echange(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionEchange.Echange(System.String,System.String)">
  <summary>
  Lance un echange avec le joueur.
  </summary>
@@ -329,7 +329,7 @@ LinaBot
  False = Si le bot n'a pas réussie à faire la demande d'échange.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionEchange.RefuseArrete(System.String)">
+<member name="M:A1___LinaBot.FunctionEchange.RefuseArrete(System.String)">
  <summary>
  Refuse ou arrête la demande d'échange en cours.
  </summary>
@@ -339,7 +339,7 @@ LinaBot
  False = Si le bot n'a pas réussie à refuser la demande d'échange.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionEchange.Accepte(System.String)">
+<member name="M:A1___LinaBot.FunctionEchange.Accepte(System.String)">
  <summary>
  Accepte la demande d'échange.
  </summary>
@@ -349,7 +349,7 @@ LinaBot
  False = Si le bot n'a pas réussie à accepter la demande d'échange.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionEchange.Kamas(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionEchange.Kamas(System.String,System.String)">
  <summary>
  Mais la quantité de kamas dans l'échange.
  </summary>
@@ -360,7 +360,7 @@ LinaBot
  False = Si le bot n'a pas réussie à mettre les kamas dans l'échange.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionEchange.Valide(System.String)">
+<member name="M:A1___LinaBot.FunctionEchange.Valide(System.String)">
  <summary>
  Valide l'échange en cours.
  </summary>
@@ -370,7 +370,7 @@ LinaBot
  False = Si le bot n'a pas réussie à valider l'échange.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Supprime(System.String,System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:A1___LinaBot.FunctionItem.Supprime(System.String,System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
  <summary>
  Permet la suppression d'un item contenue dans l'inventaire du joueur.
  </summary>
@@ -383,7 +383,7 @@ LinaBot
  False = Le bot n'a pas réussi à supprimer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Retire(System.String,System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:A1___LinaBot.FunctionItem.Retire(System.String,System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
  <summary>
  Permet de retirer un item contenue dans la banque/coffre/échange/HDV/Etc...
  </summary>
@@ -396,7 +396,7 @@ LinaBot
  False = Le bot n'a pas réussi à retirer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Depose(System.String,System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:A1___LinaBot.FunctionItem.Depose(System.String,System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
  <summary>
  Permet de déposer un item en Banque/Echange/Coffre/Etc...
  </summary>
@@ -409,7 +409,7 @@ LinaBot
  False = Le bot n'a pas réussi à retirer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Existe(System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:A1___LinaBot.FunctionItem.Existe(System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
  <summary>
  Retourne un boolean si l'item existe ou non.
  </summary>
@@ -421,7 +421,7 @@ LinaBot
  False = L'item n'existe pas dans l'inventaire.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Equipe(System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:A1___LinaBot.FunctionItem.Equipe(System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
  <summary>
  Equipe une item selon le nom/ID et les caractéristiques.
  </summary>
@@ -433,7 +433,7 @@ LinaBot
  False = L'item n'est pas équipé.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.RetourneEquipementCatégorie(System.String,System.Int32)">
+<member name="M:A1___LinaBot.FunctionItem.RetourneEquipementCatégorie(System.String,System.Int32)">
  <summary>
  Retourne le numéro pour savoir ou est équipé l'item.
  </summary>
@@ -443,7 +443,7 @@ LinaBot
  Retourne le numéro pour savoir où est équipé l'item, si rien, retourne -1.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Desequipe(System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:A1___LinaBot.FunctionItem.Desequipe(System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
  <summary>
  Déséquipe un item.
  </summary>
@@ -455,7 +455,7 @@ LinaBot
  False = L'item n'est pas déséquipé.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Jette(System.String,System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:A1___LinaBot.FunctionItem.Jette(System.String,System.String,System.String,A1___LinaBot.ClassItemCaractéristique)">
  <summary>
  Jétte un objet au sol.
  </summary>
@@ -468,7 +468,7 @@ LinaBot
  False = Le bot n'a pas réussi à jeter l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Utilise(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionItem.Utilise(System.String,System.String)">
  <summary>
  Utilise un objet de l'inventaire.
  </summary>
@@ -479,7 +479,7 @@ LinaBot
  False = Le bot n'a pas réussi à utiliser l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionMap.ID(System.Int32,System.Int32)">
+<member name="M:A1___LinaBot.FunctionMap.ID(System.Int32,System.Int32)">
  <summary>
  Compare 2 IDs de map.
  </summary>
@@ -488,7 +488,7 @@ LinaBot
  <returns>True = La MapID correspond à celle du bot. <br/>
  False = La MapID ne correspond pas à celle du bot.</returns>
 </member>
-<member name="M:LinaBot.FunctionMap.Deplacement(System.Int32,System.String,System.Int32,System.Int32)">
+<member name="M:A1___LinaBot.FunctionMap.Deplacement(System.Int32,System.String,System.Int32,System.Int32)">
  <summary>
  Déplace le bot sur une cellule/Direction indiqué.
  </summary>
@@ -499,35 +499,35 @@ LinaBot
  False = Le déplacement a échoué.</returns>
  
 </member>
-<member name="M:LinaBot.All_CallBack.Connexion_Game(System.Boolean)">
+<member name="M:A1___LinaBot.All_CallBack.Connexion_Game(System.Boolean)">
  <summary>
  Se connecte / Se deconnecte
  </summary>
  <param name="Active">Active ou desactive la socket</param>
  <remarks>METHODE A REVOIR</remarks>
 </member>
-<member name="M:LinaBot.All_CallBack.CallBackConnect(System.IAsyncResult,Org.Mentalis.Network.ProxySocket.ProxySocket)">
+<member name="M:A1___LinaBot.All_CallBack.CallBackConnect(System.IAsyncResult,Org.Mentalis.Network.ProxySocket.ProxySocket)">
  <summary>
  Callback de connexion vers le serveur
  </summary>
  <param name="async"></param>
  <remarks></remarks>
 </member>
-<member name="M:LinaBot.All_CallBack.CallBackDisconnect(System.IAsyncResult)">
+<member name="M:A1___LinaBot.All_CallBack.CallBackDisconnect(System.IAsyncResult)">
  <summary>
  Callback declenché à la deconnexion
  </summary>
  <param name="async"></param>
  <remarks></remarks>
 </member>
-<member name="M:LinaBot.All_CallBack.CallBackSender(System.IAsyncResult)">
+<member name="M:A1___LinaBot.All_CallBack.CallBackSender(System.IAsyncResult)">
  <summary>
  Callback d'envoi des données
  </summary>
  <param name="async"></param>
  <remarks></remarks>
 </member>
-<member name="M:LinaBot.All_CallBack.#ctor(System.String,System.Int32,System.Boolean,System.String,System.String,System.String,System.String)">
+<member name="M:A1___LinaBot.All_CallBack.#ctor(System.String,System.Int32,System.Boolean,System.String,System.String,System.String,System.String)">
  <summary>
  Constructeur par defaut
  </summary>
@@ -535,14 +535,14 @@ LinaBot
  <param name="Port"></param>
  <remarks></remarks>
 </member>
-<member name="M:LinaBot.All_CallBack.Dispose(System.Boolean)">
+<member name="M:A1___LinaBot.All_CallBack.Dispose(System.Boolean)">
  <summary>
  IDisposable
  </summary>
  <param name="disposing"></param>
  <remarks></remarks>
 </member>
-<member name="M:LinaBot.FunctionPnj.Parler(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionPnj.Parler(System.String,System.String)">
  <summary>
  Parler a un pnj présent sur la map.
  </summary>
@@ -553,7 +553,7 @@ LinaBot
  False = Le bot n'a pas réussi à parler au Pnj.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.Reponse(System.String,System.String)">
+<member name="M:A1___LinaBot.FunctionPnj.Reponse(System.String,System.String)">
  <summary>
  Donne une reponse au Pnj.
  </summary>
@@ -564,7 +564,7 @@ LinaBot
  False = Le bot n'a pas réussi a répondre au pnj.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.Quitte(System.String)">
+<member name="M:A1___LinaBot.FunctionPnj.Quitte(System.String)">
  <summary>
  Quitte le dialogue en cours avec le pnj.
  </summary>

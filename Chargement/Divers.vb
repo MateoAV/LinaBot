@@ -242,4 +242,45 @@ Module Divers
 
     End Function
 
+    ''' <summary>
+    ''' Retourne l'ID ou la categorie de l'item.
+    ''' </summary>
+    ''' <param name="index">Indique le numéro du bot.</param>
+    ''' <param name="nomID">Le nom de l'item ou son ID.</param>
+    ''' <param name="choix">l'un des choix suivant : <br/>
+    ''' ID = Retourne l'ID de l'item.
+    ''' Categorie = Retourne la categorie de l'item.</param>
+    ''' <returns>
+    ''' Retourne l'ID ou la categorie selon le nom ou l'ID de l'item.
+    ''' </returns>
+    Public Function RetourneItemNomIdCategorie(ByVal index As Integer, ByVal nomID As String, ByVal choix As String) As String
+
+        With Comptes(index)
+
+            For Each pair As sItems In VarItems.Values
+
+                If pair.Nom.ToLower = nomID.ToLower OrElse pair.ID = nomID Then
+
+                    Select Case choix.ToLower
+
+                        Case "id"
+
+                            Return pair.ID
+
+                        Case "categorie", "categori"
+
+                            Return pair.Catégorie
+
+                    End Select
+
+                End If
+
+            Next
+
+        End With
+
+        Return ""
+
+    End Function
+
 End Module
