@@ -35,10 +35,10 @@ Module Divers
             EcritureMessage(index, "[Erreur]", "Une erreur est survenue, veuillez envoyez les fichiers qui se trouve dans le dossier 'Erreur' à l'administrateur.", Color.Red)
 
             'Si le dossier erreur n'existe pas, alors je le créer
-            If Not IO.Directory.Exists(Application.StartupPath & "\Allprobleme") Then IO.Directory.CreateDirectory(Application.StartupPath & "\Allprobleme")
+            If Not IO.Directory.Exists(Application.StartupPath & "\AllErreur") Then IO.Directory.CreateDirectory(Application.StartupPath & "\AllErreur")
 
             'J'ouvre le fichier pour y écrire se que je souhaite
-            Dim swEcriture As New IO.StreamWriter(Application.StartupPath + "\Allprobleme/" & nomJoueur & "_" & nomErreur & ".txt")
+            Dim swEcriture As New IO.StreamWriter(Application.StartupPath + "\AllErreur/" & nomJoueur & "_" & nomErreur & ".txt")
 
             swEcriture.WriteLine(erreur)
 
