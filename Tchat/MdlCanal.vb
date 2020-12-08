@@ -16,7 +16,7 @@
                     'cC Active/Désactive Les canaux
 
                     'Le "+" ou le "-" indique si les canaux suivant l'opérateur sont activé ou non.
-                    Dim checked As Boolean = Mid(data, 3, 1)
+                    Dim checked As Boolean = If(Mid(data, 3, 1) = "+", True, False)
 
                     With .Tchat.Canal
 

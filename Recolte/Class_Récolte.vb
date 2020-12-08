@@ -50,11 +50,11 @@ Public Class Class_Récolte
 
                     Case "lin", "chanvre"
 
-                        If .Metier.ContainsKey("alchimiste") AndAlso .Metier("alchimiste").ItemEquipé Then
+                        If .Metier.Metier.ContainsKey("alchimiste") AndAlso .Metier.Metier("alchimiste").ItemEquipé Then
 
                             ._Send &= .Map.Interaction(celluleRecolte).Action("cueillir")
 
-                        ElseIf .Metier.ContainsKey("paysan") AndAlso .Metier("paysan").ItemEquipé Then
+                        ElseIf .Metier.Metier.ContainsKey("paysan") AndAlso .Metier.Metier("paysan").ItemEquipé Then
 
                             ._Send &= .Map.Interaction(celluleRecolte).Action("faucher")
 

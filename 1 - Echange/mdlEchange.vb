@@ -11,7 +11,7 @@
 
                 Dim separateData As String() = Split(Mid(data, 4), "|")
 
-                .Personnage.InvitationEchange = True
+                .Echange.EnInvitation = True
 
                 If separateData(0) <> .Personnage.ID Then
 
@@ -78,11 +78,13 @@
 
             End Try
 
-            .Echange.BloqueEchange.Set()
+            .Echange.Bloque.Set()
 
         End With
 
     End Sub
+
+#Region "Lui"
 
     Sub GiEchangeAjouteItemLui(ByVal index As Integer, ByVal data As String)
 
@@ -172,6 +174,10 @@
 
     End Sub
 
+#End Region
+
+#Region "Moi"
+
     Sub GiEchangeAjouteItemMoi(ByVal index As Integer, ByVal data As String)
 
         With Comptes(index)
@@ -238,6 +244,10 @@
 
     End Sub
 
+#End Region
+
+#Region "Kamas"
+
     Sub GiEchangeKamasLui(ByVal index As Integer, ByVal data As String)
 
         With Comptes(index)
@@ -281,10 +291,34 @@
 
             End Try
 
-            .Echange.BloqueEchange.Set()
+            .Echange.Bloque.Set()
 
         End With
 
     End Sub
 
+#End Region
+
 End Module
+
+#Region "Echange"
+
+Public Class CEchange
+
+    Public Numero As Integer
+    Public EnEchange, EnInvitation As Boolean
+    Public Moi As New CEchangeAll
+    Public Lui As New CEchangeAll
+    Public Bloque As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+
+End Class
+
+Public Class CEchangeAll
+
+    Public Inventaire As New Dictionary(Of Integer, ClassItem)
+    Public Kamas As Integer
+    Public Valider As Boolean
+
+End Class
+
+#End Region

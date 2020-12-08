@@ -82,7 +82,6 @@ Public Class ClassPersonnage
     {"resistance feu pvp pr", New ClassCaractéristique}
 }
     Public Dragodinde As New ClassDragodindeEquipé
-    Public InvitationEchange As Boolean
     Public InteractionCellule As Integer
 
 End Class
@@ -340,6 +339,7 @@ Public Class ClassMap
     Public Entite As New Dictionary(Of Integer, ClassEntite)
     Public Objet As New Dictionary(Of Integer, ClassMapObjet)
     Public Interaction As New Dictionary(Of Integer, ClassInteraction)
+    Public Bloque As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
 
 End Class
 
@@ -382,7 +382,16 @@ End Class
 
 #End Region
 
-Public Class ClassMétier
+#Region "Métier"
+
+Public Class CMetier
+
+    Public Metier As New Dictionary(Of String, CMetierInformation)
+    Public Bloque As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+
+End Class
+
+Public Class CMetierInformation
 
     Public Nom As String
     Public ID As Integer
@@ -398,11 +407,11 @@ Public Class ClassMétier
     Public NombreIngrédientMinimum As Integer
     Public ModePublic As Boolean
 
-    Public AtelierRessource As New Dictionary(Of String, ClassMétierAtelierRessource)
+    Public AtelierRessource As New Dictionary(Of String, CMetierAtelierRessource)
 
 End Class
 
-Public Class ClassMétierAtelierRessource
+Public Class CMetierAtelierRessource
 
     Public Nom As String
     Public ID As Integer
@@ -412,6 +421,9 @@ Public Class ClassMétierAtelierRessource
     Public TempsRéussite As Integer
 
 End Class
+
+#End Region
+
 
 Public Class ClassMaison
 
@@ -426,6 +438,7 @@ Public Class ClassMaison
     Public Coordonnées As String
     Public Prix As Integer
     Public Code As Integer
+    Public Coffre As New Dictionary(Of Integer, ClassCoffre)
 
 End Class
 
@@ -625,29 +638,6 @@ End Class
 #End Region
 
 
-
-
-#Region "Echange"
-
-Public Class ClassEchange
-
-    Public Numero As Integer
-    Public EnEchange As Boolean
-    Public Moi As New ClassEchangeAll
-    Public Lui As New ClassEchangeAll
-    Public BloqueEchange As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
-
-End Class
-
-Public Class ClassEchangeAll
-
-    Public Inventaire As New Dictionary(Of Integer, ClassItem)
-    Public Kamas As Integer
-    Public Valider As Boolean
-
-End Class
-
-#End Region
 
 #Region "Ami"
 

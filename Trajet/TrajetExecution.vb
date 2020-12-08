@@ -302,7 +302,7 @@ Module TrajetExecution
 
                         Case "quitte"
 
-                            newPnj.Quitte(index)
+                           ' newPnj.Quitte(index)
 
                         Case "reponse"
 
@@ -352,16 +352,6 @@ Module TrajetExecution
 
                             MsgBox("Action inconnu, vérifier bien d'avoir les mots correctement orthographié et que la function existe." & vbCrLf &
                                    laLigne)
-
-                    End Select
-
-                Case "familier"
-
-                    Dim newFamilier As New FunctionFamilier
-
-                    Select Case separate(1).ToLower
-
-                        Case "nourrit"
 
                     End Select
 

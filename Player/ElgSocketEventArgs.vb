@@ -32,7 +32,6 @@ Public Class All_CallBack
     Public Event Deconnexion(ByVal Sender As Object, ByVal Message As Socket_EventArgs)
     Public Event Reception(ByVal Sender As Object, ByVal Message As Socket_EventArgs)
     Public Event Envoie(ByVal Sender As Object, ByVal Message As Socket_EventArgs)
-
     Public ReadOnly Property LaSocket() As Socket '  Public ReadOnly Property LaSocket() As Socket
     Public Property Hote() As String
     Public Property Port() As Integer

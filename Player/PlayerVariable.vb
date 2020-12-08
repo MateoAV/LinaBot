@@ -56,7 +56,8 @@ Partial Class Player
     Public BloqueDragodinde As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
 
     'Métier
-    Public Metier As New Dictionary(Of String, ClassMétier)
+
+    Public Metier As New CMetier
     Public Recolte As New ClassRecolte
 
     'Guilde
@@ -66,11 +67,14 @@ Partial Class Player
     Public Pnj As New CPnj
 
     'Echange
-    Public Echange As New ClassEchange
+    Public Echange As New CEchange
 
     'Ami
     Public Ami As New ClassAmi
 
     'Tchat
     Public Tchat As New ClassTchat
+
+    Public Maison As New ClassMaison
+
 End Class

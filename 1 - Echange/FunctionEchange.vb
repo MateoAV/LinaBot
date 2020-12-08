@@ -15,21 +15,25 @@
 
             Try
 
-                For Each pair As KeyValuePair(Of Integer, ClassEntite) In .Map.Entite
+                If .Echange.EnEchange = False Then
+
+                    For Each pair As KeyValuePair(Of Integer, ClassEntite) In .Map.Entite
 
                     If pair.Value.Nom.ToLower = nom.ToLower Then
 
-                        .Echange.BloqueEchange.Reset()
+                            .Echange.Bloque.Reset()
 
-                        .Send("ER1|" & pair.Key)
+                            .Send("ER1|" & pair.Key)
 
-                        .Echange.BloqueEchange.WaitOne(15000)
+                            .Echange.Bloque.WaitOne(15000)
 
-                        Return .Personnage.EnEchange
+                            Return .Echange.EnEchange
 
-                    End If
+                        End If
 
-                Next
+                    Next
+
+                End If
 
             Catch ex As Exception
 
@@ -58,13 +62,13 @@
 
             Try
 
-                If .Personnage.EnEchange OrElse .Personnage.InvitationEchange Then
+                If .Echange.EnEchange OrElse .Echange.EnInvitation Then
 
-                    .Echange.BloqueEchange.Reset()
+                    .Echange.Bloque.Reset()
 
                     .Send("EV")
 
-                    Return .Echange.BloqueEchange.WaitOne(15000)
+                    Return .Echange.Bloque.WaitOne(15000)
 
                 End If
 
@@ -95,13 +99,15 @@
 
             Try
 
-                If .Personnage.InvitationEchange Then
+                If .Echange.EnInvitation Then
 
-                    .Echange.BloqueEchange.Reset()
+                    .Echange.Bloque.Reset()
 
                     .Send("EA")
 
-                    Return .Echange.BloqueEchange.WaitOne(15000)
+                    .Echange.Bloque.WaitOne(15000)
+
+                    Return .Echange.EnEchange
 
                 End If
 
@@ -135,11 +141,11 @@
 
                 If quantite > .Personnage.Kamas Then quantite = .Personnage.Kamas
 
-                .Echange.BloqueEchange.Reset()
+                .Echange.Bloque.Reset()
 
                 .Send("EMG" & quantite)
 
-                Return .Echange.BloqueEchange.WaitOne(15000)
+                Return .Echange.Bloque.WaitOne(15000)
 
             Catch ex As Exception
 
@@ -168,15 +174,15 @@
 
             Try
 
-                If .Personnage.EnEchange Then
+                If .Echange.EnEchange Then
 
-                .Echange.BloqueEchange.Reset()
+                    .Echange.Bloque.Reset()
 
-                .Send("EK")
+                    .Send("EK")
 
-                Return .Echange.BloqueEchange.WaitOne(15000)
+                    Return .Echange.Bloque.WaitOne(15000)
 
-            End If
+                End If
 
             Catch ex As Exception
 

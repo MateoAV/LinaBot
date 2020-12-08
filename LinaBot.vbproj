@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9D7F7423-871C-4193-8DD5-EF9883A2D2BA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>A1___LinaBot.My.MyApplication</StartupObject>
-    <RootNamespace>A1___LinaBot</RootNamespace>
-    <AssemblyName>A1 - LinaBot</AssemblyName>
+    <StartupObject>LinaBot.My.MyApplication</StartupObject>
+    <RootNamespace>LinaBot</RootNamespace>
+    <AssemblyName>LinaBot</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>A1 - LinaBot.xml</DocumentationFile>
+    <DocumentationFile>LinaBot.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>A1 - LinaBot.xml</DocumentationFile>
+    <DocumentationFile>LinaBot.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -86,30 +86,30 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Amis\AmiInformation.vb" />
-    <Compile Include="Amis\FrmAmi.Designer.vb">
+    <Compile Include="1 - Amis\AmiInformation.vb" />
+    <Compile Include="1 - Amis\FrmAmi.Designer.vb">
       <DependentUpon>FrmAmi.vb</DependentUpon>
     </Compile>
-    <Compile Include="Amis\FrmAmi.vb">
+    <Compile Include="1 - Amis\FrmAmi.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Amis\FunctionAmi.vb" />
-    <Compile Include="Caracteristique\FrmCaracteristique.Designer.vb">
+    <Compile Include="1 - Amis\FunctionAmi.vb" />
+    <Compile Include="1 - Caracteristique\FrmCaracteristique.Designer.vb">
       <DependentUpon>FrmCaracteristique.vb</DependentUpon>
     </Compile>
-    <Compile Include="Caracteristique\FrmCaracteristique.vb">
+    <Compile Include="1 - Caracteristique\FrmCaracteristique.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Caracteristique\FunctionCaractéristique.vb" />
-    <Compile Include="Caracteristique\MdlCaractéristique.vb" />
+    <Compile Include="1 - Caracteristique\FunctionCaractéristique.vb" />
+    <Compile Include="1 - Caracteristique\MdlCaractéristique.vb" />
     <Compile Include="Chargement\AllClass.vb" />
     <Compile Include="Chargement\Chargement.vb" />
     <Compile Include="Chargement\Divers.vb" />
     <Compile Include="Chargement\Variable.vb" />
     <Compile Include="Connexion\Class_Connexion.vb" />
     <Compile Include="Connexion\MdlConnexion.vb" />
-    <Compile Include="Echange\FunctionEchange.vb" />
-    <Compile Include="Echange\mdlEchange.vb" />
+    <Compile Include="1 - Echange\FunctionEchange.vb" />
+    <Compile Include="1 - Echange\mdlEchange.vb" />
     <Compile Include="Form\FrmDiscord.Designer.vb">
       <DependentUpon>FrmDiscord.vb</DependentUpon>
     </Compile>
@@ -178,11 +178,13 @@
     <Compile Include="Map\Map_Data.vb" />
     <Compile Include="Map\Pathfinding.vb" />
     <Compile Include="Map\SwfUnpacker.vb" />
-    <Compile Include="Metier\MdlMétier.vb" />
+    <Compile Include="1 - Metier\FunctionMetier.vb" />
+    <Compile Include="1 - Metier\MdlMétier.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -221,10 +223,10 @@
     <Compile Include="Trajet\TrajetExecution.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Amis\FrmAmi.resx">
+    <EmbeddedResource Include="1 - Amis\FrmAmi.resx">
       <DependentUpon>FrmAmi.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Caracteristique\FrmCaracteristique.resx">
+    <EmbeddedResource Include="1 - Caracteristique\FrmCaracteristique.resx">
       <DependentUpon>FrmCaracteristique.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FrmDiscord.resx">

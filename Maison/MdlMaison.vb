@@ -70,13 +70,13 @@
 
                     End With
 
-                    If .Coffre.ContainsKey(separate(0)) Then
+                    If .Maison.Coffre.ContainsKey(separate(0)) Then
 
-                        .Coffre(separate(0)) = varCoffre
+                        .Maison.Coffre(separate(0)) = varCoffre
 
                     Else
 
-                        .Coffre.Add(separate(0), varCoffre)
+                        .Maison.Coffre.Add(separate(0), varCoffre)
 
                     End If
 
@@ -125,8 +125,8 @@
                     .EnGuilde = False
                     .Propriétaire = separateData(0)
                     .CellulePorte = VarMaison(id).CellulePorte
-                    .MapID = Comptes(index).MapID
-                    .Coordonnées = Comptes(index).Coordonnées
+                    .MapID = Comptes(index).Map.ID
+                    .Coordonnées = Comptes(index).Map.Coordonnees
                     .Prix = 0
                     .Code = 0
 
@@ -173,7 +173,7 @@
 
                     If separate(0) = "hP : " & id Then
 
-                        ligneFinal &= "hP : " & id & " | Porte : " & VarMaison(id).CellulePorte & " | Map : " & .Coordonnées & " | Mapid : " & .MapID & " | Nom : " & VarMaison(id).Nom & vbCrLf
+                        ligneFinal &= "hP : " & id & " | Porte : " & VarMaison(id).CellulePorte & " | Map : " & .Map.Coordonnees & " | Mapid : " & .Map.ID & " | Nom : " & VarMaison(id).Nom & vbCrLf
 
                     Else
 
@@ -227,7 +227,7 @@
             'Puis je ferme le fichier.
             swLecture.Close()
 
-            ligneFinal &= "hP : " & id & " | Porte : 0 | Map : " & .Coordonnées & " | Mapid : " & .MapID & " | Nom : Maison"
+            ligneFinal &= "hP : " & id & " | Porte : 0 | Map : " & .Map.Coordonnees & " | Mapid : " & .Map.ID & " | Nom : Maison"
 
             'J'ouvre le fichier pour y écrire se que je souhaite
             Dim Sw_Ecriture As New IO.StreamWriter(Application.StartupPath + "\Data/Maison.txt")

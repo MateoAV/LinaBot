@@ -242,6 +242,32 @@ Module Divers
 
     End Function
 
+    Public Function CopyInteraction(ByVal index As Integer, ByVal dico As Dictionary(Of Integer, ClassInteraction)) As Dictionary(Of Integer, ClassInteraction)
+
+        With Comptes(index)
+
+            If .FrmUser.InvokeRequired Then
+
+                Return .FrmUser.Invoke(New dlgFDivers(Function() CopyInteraction(index, dico)))
+
+            Else
+
+                Dim newDico As New Dictionary(Of Integer, ClassInteraction)
+
+                For Each pair As KeyValuePair(Of Integer, ClassInteraction) In dico
+
+                    newDico.Add(pair.Key, pair.Value)
+
+                Next
+
+                Return newDico
+
+            End If
+
+        End With
+
+    End Function
+
     ''' <summary>
     ''' Retourne l'ID ou la categorie de l'item.
     ''' </summary>

@@ -467,7 +467,7 @@ Partial Class FrmCaracteristique
         'PictureBox7
         '
         Me.PictureBox7.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox7.Image = Global.A1___LinaBot.My.Resources.Resources.Vitaliter
+        Me.PictureBox7.Image = Global.LinaBot.My.Resources.Resources.Vitaliter
         Me.PictureBox7.Location = New System.Drawing.Point(443, 361)
         Me.PictureBox7.Name = "PictureBox7"
         Me.PictureBox7.Size = New System.Drawing.Size(30, 30)
@@ -478,7 +478,7 @@ Partial Class FrmCaracteristique
         'PictureBox6
         '
         Me.PictureBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox6.Image = Global.A1___LinaBot.My.Resources.Resources.Prospection
+        Me.PictureBox6.Image = Global.LinaBot.My.Resources.Resources.Prospection
         Me.PictureBox6.Location = New System.Drawing.Point(443, 290)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(30, 30)
@@ -489,7 +489,7 @@ Partial Class FrmCaracteristique
         'PictureBox5
         '
         Me.PictureBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox5.Image = Global.A1___LinaBot.My.Resources.Resources.Initiative
+        Me.PictureBox5.Image = Global.LinaBot.My.Resources.Resources.Initiative
         Me.PictureBox5.Location = New System.Drawing.Point(443, 254)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(30, 30)
@@ -500,7 +500,7 @@ Partial Class FrmCaracteristique
         'PictureBox4
         '
         Me.PictureBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox4.Image = Global.A1___LinaBot.My.Resources.Resources.PM
+        Me.PictureBox4.Image = Global.LinaBot.My.Resources.Resources.PM
         Me.PictureBox4.Location = New System.Drawing.Point(443, 218)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(30, 30)
@@ -511,7 +511,7 @@ Partial Class FrmCaracteristique
         'PictureBox3
         '
         Me.PictureBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox3.Image = Global.A1___LinaBot.My.Resources.Resources.PA
+        Me.PictureBox3.Image = Global.LinaBot.My.Resources.Resources.PA
         Me.PictureBox3.Location = New System.Drawing.Point(443, 182)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(30, 30)
@@ -522,7 +522,7 @@ Partial Class FrmCaracteristique
         'PictureBox2
         '
         Me.PictureBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox2.Image = Global.A1___LinaBot.My.Resources.Resources.Coeur
+        Me.PictureBox2.Image = Global.LinaBot.My.Resources.Resources.Coeur
         Me.PictureBox2.Location = New System.Drawing.Point(443, 146)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(30, 30)
@@ -532,7 +532,7 @@ Partial Class FrmCaracteristique
         '
         'PictureBoxAlignement
         '
-        Me.PictureBoxAlignement.Image = Global.A1___LinaBot.My.Resources.Resources.AlignementNeutre
+        Me.PictureBoxAlignement.Image = Global.LinaBot.My.Resources.Resources.AlignementNeutre
         Me.PictureBoxAlignement.Location = New System.Drawing.Point(443, 6)
         Me.PictureBoxAlignement.Name = "PictureBoxAlignement"
         Me.PictureBoxAlignement.Size = New System.Drawing.Size(75, 75)
@@ -579,7 +579,7 @@ Partial Class FrmCaracteristique
         'PictureBox8
         '
         Me.PictureBox8.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox8.Image = Global.A1___LinaBot.My.Resources.Resources.Sagesse
+        Me.PictureBox8.Image = Global.LinaBot.My.Resources.Resources.Sagesse
         Me.PictureBox8.Location = New System.Drawing.Point(443, 397)
         Me.PictureBox8.Name = "PictureBox8"
         Me.PictureBox8.Size = New System.Drawing.Size(30, 30)
@@ -614,7 +614,7 @@ Partial Class FrmCaracteristique
         'PictureBox9
         '
         Me.PictureBox9.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox9.Image = Global.A1___LinaBot.My.Resources.Resources.Force
+        Me.PictureBox9.Image = Global.LinaBot.My.Resources.Resources.Force
         Me.PictureBox9.Location = New System.Drawing.Point(443, 433)
         Me.PictureBox9.Name = "PictureBox9"
         Me.PictureBox9.Size = New System.Drawing.Size(30, 30)
@@ -649,7 +649,7 @@ Partial Class FrmCaracteristique
         'PictureBox10
         '
         Me.PictureBox10.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox10.Image = Global.A1___LinaBot.My.Resources.Resources.Intelligence
+        Me.PictureBox10.Image = Global.LinaBot.My.Resources.Resources.Intelligence
         Me.PictureBox10.Location = New System.Drawing.Point(443, 469)
         Me.PictureBox10.Name = "PictureBox10"
         Me.PictureBox10.Size = New System.Drawing.Size(30, 30)
@@ -684,7 +684,7 @@ Partial Class FrmCaracteristique
         'PictureBox11
         '
         Me.PictureBox11.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox11.Image = Global.A1___LinaBot.My.Resources.Resources.Chance
+        Me.PictureBox11.Image = Global.LinaBot.My.Resources.Resources.Chance
         Me.PictureBox11.Location = New System.Drawing.Point(443, 505)
         Me.PictureBox11.Name = "PictureBox11"
         Me.PictureBox11.Size = New System.Drawing.Size(30, 30)
@@ -719,7 +719,7 @@ Partial Class FrmCaracteristique
         'PictureBox12
         '
         Me.PictureBox12.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.PictureBox12.Image = Global.A1___LinaBot.My.Resources.Resources.Agiliter
+        Me.PictureBox12.Image = Global.LinaBot.My.Resources.Resources.Agiliter
         Me.PictureBox12.Location = New System.Drawing.Point(443, 541)
         Me.PictureBox12.Name = "PictureBox12"
         Me.PictureBox12.Size = New System.Drawing.Size(30, 30)
@@ -759,7 +759,7 @@ Partial Class FrmCaracteristique
         'ButtonVitaliter
         '
         Me.ButtonVitaliter.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ButtonVitaliter.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.plus
+        Me.ButtonVitaliter.BackgroundImage = Global.LinaBot.My.Resources.Resources.plus
         Me.ButtonVitaliter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonVitaliter.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonVitaliter.ForeColor = System.Drawing.Color.White
@@ -773,7 +773,7 @@ Partial Class FrmCaracteristique
         'ButtonSagesse
         '
         Me.ButtonSagesse.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ButtonSagesse.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.plus
+        Me.ButtonSagesse.BackgroundImage = Global.LinaBot.My.Resources.Resources.plus
         Me.ButtonSagesse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonSagesse.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonSagesse.ForeColor = System.Drawing.Color.White
@@ -787,7 +787,7 @@ Partial Class FrmCaracteristique
         'ButtonForce
         '
         Me.ButtonForce.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ButtonForce.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.plus
+        Me.ButtonForce.BackgroundImage = Global.LinaBot.My.Resources.Resources.plus
         Me.ButtonForce.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonForce.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonForce.ForeColor = System.Drawing.Color.White
@@ -801,7 +801,7 @@ Partial Class FrmCaracteristique
         'ButtonIntelligence
         '
         Me.ButtonIntelligence.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ButtonIntelligence.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.plus
+        Me.ButtonIntelligence.BackgroundImage = Global.LinaBot.My.Resources.Resources.plus
         Me.ButtonIntelligence.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonIntelligence.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonIntelligence.ForeColor = System.Drawing.Color.White
@@ -815,7 +815,7 @@ Partial Class FrmCaracteristique
         'ButtonChance
         '
         Me.ButtonChance.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ButtonChance.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.plus
+        Me.ButtonChance.BackgroundImage = Global.LinaBot.My.Resources.Resources.plus
         Me.ButtonChance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonChance.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonChance.ForeColor = System.Drawing.Color.White
@@ -829,7 +829,7 @@ Partial Class FrmCaracteristique
         'ButtonAgiliter
         '
         Me.ButtonAgiliter.BackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ButtonAgiliter.BackgroundImage = Global.A1___LinaBot.My.Resources.Resources.plus
+        Me.ButtonAgiliter.BackgroundImage = Global.LinaBot.My.Resources.Resources.plus
         Me.ButtonAgiliter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonAgiliter.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonAgiliter.ForeColor = System.Drawing.Color.White

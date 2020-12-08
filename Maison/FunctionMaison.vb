@@ -4,7 +4,7 @@
 
         With Comptes(index)
 
-            For Each Pair As ClassInteraction In CopyDicoInteraction(index, .Interaction).Values
+            For Each Pair As ClassInteraction In CopyInteraction(index, .Map.Interaction).Values
 
                 If Pair.Nom.ToLower = "coffre" Then
 
@@ -16,14 +16,14 @@
 
                             ._Send = "GA500" & Pair.Cellule & ";" & PairValue.Value
 
-                            .InteractionCellID = Pair.Cellule
+                            .Personnage.InteractionCellule = Pair.Cellule
 
-                            .BloqueInteraction.Reset()
+                            .Map.Bloque.Reset()
 
-                            Dim newMap As New Class_Map
-                            newMap.Déplacement(index, Pair.Cellule)
+                            Dim newMap As New FunctionMap
+                            newMap.Deplacement(index, Pair.Cellule)
 
-                            Return .BloqueInteraction.WaitOne(15000)
+                            Return .Map.Bloque.WaitOne(15000)
 
                         End If
 
@@ -43,11 +43,15 @@
 
         With Comptes(index)
 
-            .BloqueInteraction.Reset()
+            If .Echange.EnEchange Then
 
-            .Send("EV")
+                .Map.Bloque.Reset()
 
-            Return .BloqueInteraction.WaitOne(15000)
+                .Send("EV")
+
+                Return .Map.Bloque.WaitOne(15000)
+
+            End If
 
         End With
 

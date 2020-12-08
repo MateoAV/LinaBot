@@ -197,15 +197,15 @@
 
             If data.Length > 2 Then
 
-                If .Metier.ContainsKey(VarMétier(Mid(data, 3)).Nom) Then
+                If .Metier.Metier.ContainsKey(VarMétier(Mid(data, 3)).Nom) Then
 
-                    .Metier(VarMétier(Mid(data, 3)).Nom).ItemEquipé = True
+                    .Metier.Metier(VarMétier(Mid(data, 3)).Nom).ItemEquipé = True
 
                 End If
 
             Else
 
-                For Each pair As ClassMétier In .Metier.Values
+                For Each pair As CMetierInformation In .Metier.Metier.Values
 
                     pair.ItemEquipé = False
 

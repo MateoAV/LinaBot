@@ -225,11 +225,11 @@ Public Class Player
                                             Case "E" 'AlE
 
                                                 'Je déconnecte le bot.
-                                                If MITM Then
+                                                'If MITM Then
 
-                                                    Client.Close()
+                                                'Client.Close()
 
-                                                End If
+                                                'End If
 
                                                 Socket_Authentification.Connexion_Game(False)
 
@@ -868,9 +868,14 @@ Public Class Player
 
                                                         Else
 
-                                                            Echange.EnEchange = True
-                                                            Echange.Numero = 1
-                                                            Echange.BloqueEchange.Set()
+                                                            With Echange
+
+                                                                .EnEchange = True
+                                                                .EnInvitation = False
+                                                                .Numero = 1
+                                                                .Bloque.Set()
+
+                                                            End With
 
                                                         End If
 
@@ -1193,14 +1198,41 @@ Public Class Player
 
                                             End With
 
+                                            With Echange
+
+                                                .EnEchange = False
+                                                .EnInvitation = False
+                                                .Bloque.Set()
+                                                .Lui.Inventaire.Clear()
+                                                .Lui.Kamas = 0
+                                                .Lui.Valider = False
+                                                .Moi.Inventaire.Clear()
+                                                .Moi.Kamas = 0
+                                                .Moi.Valider = False
+                                                .Numero = 0
+
+                                            End With
+
                                         Else
 
                                             If e.Message = "EVa" Then
 
-                                                EcritureMessage(Index, "[Dofus]", "Echange effectué", Color.Red)
+                                                With Echange
 
-                                                Echange.EnEchange = False
-                                                Echange.BloqueEchange.Set()
+                                                    .EnEchange = False
+                                                    .EnInvitation = False
+                                                    .Bloque.Set()
+                                                    .Lui.Inventaire.Clear()
+                                                    .Lui.Kamas = 0
+                                                    .Lui.Valider = False
+                                                    .Moi.Inventaire.Clear()
+                                                    .Moi.Kamas = 0
+                                                    .Moi.Valider = False
+                                                    .Numero = 0
+
+                                                End With
+
+                                                EcritureMessage(Index, "[Dofus]", "Echange effectué", Color.Red)
 
                                             Else
 
@@ -3662,7 +3694,6 @@ Public Class Player
                     If MITM Then
 
                         Try
-
 
                             Dim _bufferClient() As Byte = Encoding.ASCII.GetBytes(e.Message.ToString & vbNullChar)
                             Client.BeginSend(_bufferClient, 0, _bufferClient.Length, SocketFlags.None, New AsyncCallback(AddressOf SendCallBack), Client)

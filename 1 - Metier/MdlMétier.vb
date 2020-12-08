@@ -1,6 +1,6 @@
 ﻿Module MdlMétier
 
-    Public Sub GiMetierModePublic(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierModePublic(ByVal index As Integer, ByVal data As String)
 
         With Comptes(index)
 
@@ -8,7 +8,7 @@
 
                 'EW + OU -
 
-                For Each Pair As KeyValuePair(Of String, ClassMétier) In .Métier
+                For Each Pair As KeyValuePair(Of String, CMetierInformation) In .Metier.Metier
 
                     With Pair.Value
 
@@ -34,13 +34,13 @@
 
             End Try
 
-            .BloqueMétier.Set()
+            .Metier.Bloque.Set()
 
         End With
 
     End Sub
 
-    Public Sub GiMétierInformation(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierInformation(ByVal index As Integer, ByVal data As String)
 
         With Comptes(index)
 
@@ -59,20 +59,20 @@
 
                     separate = Split(separate(1), ",")
 
-                    Dim newMétier As New ClassMétier
+                    Dim newMétier As New CMetierInformation
 
                     With newMétier
 
                         .ID = idJob
                         .Nom = VarMétier(idJob).Nom
 
-                        .AtelierRessource = New Dictionary(Of String, ClassMétierAtelierRessource)
+                        .AtelierRessource = New Dictionary(Of String, CMetierAtelierRessource)
 
                         For a = 0 To separate.Count - 1
 
                             Dim separateCraft As String() = Split(separate(a), "~")
 
-                            Dim newMétierAtelierRessource As New ClassMétierAtelierRessource
+                            Dim newMétierAtelierRessource As New CMetierAtelierRessource
 
                             With newMétierAtelierRessource
 
@@ -99,9 +99,9 @@
 
                     End With
 
-                    If .Métier.ContainsKey(newMétier.Nom.ToLower) Then
+                    If .Metier.Metier.ContainsKey(newMétier.Nom.ToLower) Then
 
-                        With .Métier(newMétier.Nom.ToLower)
+                        With .Metier.Metier(newMétier.Nom.ToLower)
 
                             newMétier.ExpérienceActuelle = .ExpérienceActuelle
                             newMétier.ExpérienceMaximum = .ExpérienceMaximum
@@ -116,11 +116,11 @@
 
                         End With
 
-                        .Métier(newMétier.Nom.ToLower) = newMétier
+                        .Metier.Metier(newMétier.Nom.ToLower) = newMétier
 
                     Else
 
-                        .Métier.Add(newMétier.Nom.ToLower, newMétier)
+                        .Metier.Metier.Add(newMétier.Nom.ToLower, newMétier)
 
                     End If
 
@@ -136,7 +136,7 @@
 
     End Sub
 
-    Public Sub GiMétierUp(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierUp(ByVal index As Integer, ByVal data As String)
 
         With Comptes(index)
 
@@ -149,9 +149,9 @@
 
                 Dim separateData As String() = Split(data, "|")
 
-                If .Métier.ContainsKey(VarMétier(separateData(0)).Nom.ToLower) Then
+                If .Metier.Metier.ContainsKey(VarMétier(separateData(0)).Nom.ToLower) Then
 
-                    .Métier(VarMétier(separateData(0)).Nom.ToLower).Niveau = separateData(1)
+                    .Metier.Metier(VarMétier(separateData(0)).Nom.ToLower).Niveau = separateData(1)
 
                 End If
 
@@ -167,7 +167,7 @@
 
     End Sub
 
-    Public Sub GiMétierExpèrience(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierExperience(ByVal index As Integer, ByVal data As String)
 
         With Comptes(index)
 
@@ -184,9 +184,9 @@
 
                     If separate(4) < 0 Then separate(4) = separate(3)
 
-                    If .Métier.ContainsKey(VarMétier(separate(0)).Nom.ToLower) Then
+                    If .Metier.Metier.ContainsKey(VarMétier(separate(0)).Nom.ToLower) Then
 
-                        With .Métier(VarMétier(separate(0)).Nom.ToLower)
+                        With .Metier.Metier(VarMétier(separate(0)).Nom.ToLower)
 
                             .Niveau = separate(1)
                             .ExpérienceMinimum = separate(2)
@@ -209,7 +209,7 @@
 
     End Sub
 
-    Public Sub GiMétierOption(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierOption(ByVal index As Integer, ByVal data As String)
 
         With Comptes(index)
 
@@ -222,7 +222,7 @@
 
                 Dim separateData As String() = Split(data, "|")
 
-                For Each pair As KeyValuePair(Of String, ClassMétier) In .Métier
+                For Each pair As KeyValuePair(Of String, CMetierInformation) In .Metier.Metier
 
                     If CInt(separateData(0)) = 0 Then
 
@@ -274,11 +274,13 @@
 
             End Try
 
+            .Metier.Bloque.Set()
+
         End With
 
     End Sub
 
-    Public Sub GiMétierSupprime(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierSupprime(ByVal index As Integer, ByVal data As String)
 
         With Comptes(index)
 
@@ -289,9 +291,9 @@
 
                 data = Mid(data, 3)
 
-                If .Métier.ContainsKey(VarMétier(data).Nom.ToLower) Then
+                If .Metier.Metier.ContainsKey(VarMétier(data).Nom.ToLower) Then
 
-                    .Métier.Remove(VarMétier(data).Nom.ToLower)
+                    .Metier.Metier.Remove(VarMétier(data).Nom.ToLower)
 
                 End If
 
@@ -302,6 +304,8 @@
                 ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMétierSupprime", data & vbCrLf & ex.Message)
 
             End Try
+
+            .Metier.Bloque.Set()
 
         End With
 

@@ -111,7 +111,6 @@
 
     End Function
 
-
     Private Sub StopDéplacement(ByVal index As Integer)
 
         With Comptes(index)
@@ -133,5 +132,84 @@
         End With
 
     End Sub
+
+    ''' <summary>
+    ''' Change l'orientation du personnage sur la carte.
+    ''' </summary>
+    ''' <param name="index">Indique le numéro du bot.</param>
+    ''' <param name="monOrientation">L'orientation à avoir : <br/>
+    ''' Nord , NordEst , NordOuest , Sud , SudEst , SudOuest , Est , Ouest</param>
+    ''' <returns></returns>
+    Public Function ChangerOrientation(ByVal index As Integer, ByVal monOrientation As String) As Boolean
+
+        With Comptes(index)
+
+            Try
+
+                If .EnCombat = False AndAlso .Recolte.EnRecolte = False Then
+
+                    .Map.Bloque.Reset()
+
+                    .Socket.Envoyer("eD" & .Personnage.ID & "|" & Orientation(monOrientation))
+
+                    Return .Map.Bloque.WaitOne(15000)
+
+                End If
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "ChangerOrientation", ex.Message)
+
+            End Try
+
+            Return False
+
+        End With
+
+    End Function
+
+    Public Function Orientation(ByVal choix As String) As String
+
+        Select Case choix.ToLower
+
+            Case "0", "est"
+
+                Return If(IsNumeric(choix), "est", "0")
+
+            Case "1", "sudest"
+
+                Return If(IsNumeric(choix), "sudest", "1")
+
+            Case "2", "sud"
+
+                Return If(IsNumeric(choix), "sud", "2")
+
+            Case "3", "sudouest"
+
+                Return If(IsNumeric(choix), "sudouest", "3")
+
+            Case "4", "ouest"
+
+                Return If(IsNumeric(choix), "ouest", "4")
+
+            Case "5", "nordouest"
+
+                Return If(IsNumeric(choix), "nordouest", "5")
+
+            Case "6", "nord"
+
+                Return If(IsNumeric(choix), "nord", "6")
+
+            Case "7", "nordest"
+
+                Return If(IsNumeric(choix), "nordest", "7")
+
+            Case Else
+
+                Return If(IsNumeric(choix), "sud", "2")
+
+        End Select
+
+    End Function
 
 End Class
