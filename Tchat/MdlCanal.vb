@@ -31,11 +31,11 @@
 
                                 Case "*" 'Communs/Défaut
 
-                                    .Général = checked
+                                    .General = checked
 
                                 Case "#" ', "$", "p" 'groupe/privée/équipe
 
-                                    .GroupePrivéeEquipe = checked
+                                    .GroupePriveeEquipe = checked
 
                                 Case "%" 'guilde
 
@@ -102,14 +102,20 @@
 
                             EcritureMessage(index, "[Combat]", Separation(1) & " vient de se reconnecter en combat.", Color.Red)
 
-                            .EnCombat = True
+                            .Combat.EnCombat = True
+
+                        Case "1171" 'Im1171;1~9~19
+                            Separation = Split(Separation(1), "~")
+                            EcritureMessage(index, "[Combat]", "Impossible de lancer ce sort : Vous avez une portée de " & Separation(0) & " à " & Separation(1) & " et vous visez à " & Separation(2) & " !", Color.Red)
+
+                            .Combat.Bloque.Set()
 
                         Case "1170" 'Im1170;0~4
 
                             'Je sépare les informations via ce signe "~"
                             Separation = Split(Separation(1), "~")
                             EcritureMessage(index, "[Combat]", "Vous avez '" & Separation(0) & "' PA, hors il vous en faut minimum '" & Separation(1) & "' PA pour lancer ce sort.", Color.Red)
-
+                            .Combat.Bloque.Set()
                         Case "1168" 'Im1168;1
 
                             EcritureMessage(index, "[Dofus]", "Vous ne pouvez pas poser plus de " & Separation(1) & " percepteur(s) par zone.", Color.Red)
@@ -236,7 +242,7 @@
                         Case "034" 'Im034;60 
 
                             EcritureMessage(index, "[Familier]", "Tu as perdu " & Separation(1) & " points d'énergie.", Color.Red)
-                            .EnCombat = False
+                            .Combat.EnCombat = False
 
                         Case "022" 'Im022;1~1568
 
@@ -281,11 +287,11 @@
                         Case "1175"
 
                             EcritureMessage(index, "[Combat]", "Impossible de lancer ce sort actuellement.", Color.Red)
-
+                            .Combat.Bloque.Set()
                         Case "1174"
 
                             EcritureMessage(index, "[Combat]", "Un obstacle géne le passage.", Color.Red)
-
+                            .Combat.Bloque.Set()
                         Case "1165"
 
                             EcritureMessage(index, "[Dofus]", "La sauvegarde du serveur est terminée. L'accès au serveur est de nouveau possible. Merci de votre compréhension.", Color.Red)
@@ -309,7 +315,7 @@
 
                         Case "1117"
 
-                            .BloqueDragodinde.Set()
+                            .Dragodinde.Bloque.Set()
                             EcritureMessage(index, "[Dofus]", "Impossible d'être sur une monture à l'intérieur d'une maison.", Color.Red)
 
                         Case "1105"
@@ -358,29 +364,13 @@
 
                             EcritureMessage(index, "[Dofus]", "Demande d'aide annulée...", Color.Green)
 
-                         '   If .DicoCombatLancer.ContainsKey(.IdUnique) Then
-
-                              '  Dim newCombatLancer As Player.sCombatLancer = .DicoCombatLancer(.IdUnique)
-
-                              '  newCombatLancer.Aide = False
-
-                               ' .DicoCombatLancer(.IdUnique) = newCombatLancer
-
-                           ' End If
+                            .Combat.Aide = False
 
                         Case "0103"
 
                             EcritureMessage(index, "[Dofus]", "Demande d'aide signalée...", Color.Green)
 
-                           ' If .DicoCombatLancer.ContainsKey(.IdUnique) Then
-
-                              '  Dim newCombatLancer As Player.sCombatLancer = .DicoCombatLancer(.IdUnique)
-
-                               ' newCombatLancer.Aide = True
-
-                              '  .DicoCombatLancer(.IdUnique) = newCombatLancer
-
-                         '   End If
+                            .Combat.Aide = True
 
                         Case "189"
 
@@ -422,57 +412,25 @@
 
                             EcritureMessage(index, "[Combat]", "L'équipe accepte de nouveau des personnages supplémentaires.", Color.Red)
 
-                         '   If .DicoCombatLancer.ContainsKey(.IdUnique) Then
-
-                              '  Dim newCombatLancer As Player.sCombatLancer = .DicoCombatLancer(.IdUnique)
-
-                            '    newCombatLancer.Cadenas = False
-
-                             '   .DicoCombatLancer(.IdUnique) = newCombatLancer
-
-                          '  End If
+                            .Combat.Cadenas = False
 
                         Case "095"
 
                             EcritureMessage(index, "[Combat]", "L'équipe n'accepte plus de personnages supplémentaires.", Color.Red)
 
-                            '   If .DicoCombatLancer.ContainsKey(.IdUnique) Then
-                            '
-                           ' Dim newCombatLancer As Player.sCombatLancer = .DicoCombatLancer(.IdUnique)
-
-                           '     newCombatLancer.Cadenas = True
-
-                          '      .DicoCombatLancer(.IdUnique) = newCombatLancer
-
-                         '   End If
+                            .Combat.Cadenas = True
 
                         Case "094"
 
                             EcritureMessage(index, "[Combat]", "L'équipe accepte les membres de tous les groupes.", Color.Red)
 
-                          '  If .DicoCombatLancer.ContainsKey(.IdUnique) Then
-
-                               ' Dim newCombatLancer As Player.sCombatLancer = .DicoCombatLancer(.IdUnique)
-
-                               ' newCombatLancer.Groupe = False
-
-                               ' .DicoCombatLancer(.IdUnique) = newCombatLancer
-
-                           ' End If
+                            .Combat.Groupe = False
 
                         Case "093"
 
                             EcritureMessage(index, "[Combat]", "L'équipe n'accepte désormais que les membres du groupe du personnage principal.", Color.Red)
 
-                          '  If .DicoCombatLancer.ContainsKey(.IdUnique) Then
-
-                             '   Dim newCombatLancer As Player.sCombatLancer = .DicoCombatLancer(.IdUnique)
-
-                              '  newCombatLancer.Groupe = True
-
-                               ' .DicoCombatLancer(.IdUnique) = newCombatLancer
-
-                          '  End If
+                            .Combat.Groupe = True
 
                         Case "073"
 
@@ -486,13 +444,13 @@
 
                             EcritureMessage(index, "[Combat]", "Le mode 'spectateur' est désactivé.", Color.Red)
 
-                          '  .CombatSpectateur = False
+                            .Combat.Spectateur = True
 
                         Case "039"
 
                             EcritureMessage(index, "[Combat]", "Le mode 'spectateur' est activé.", Color.Red)
 
-                          '  .CombatSpectateur = True
+                            .Combat.Spectateur = False
 
                         Case "037"
 
@@ -627,3 +585,27 @@
     End Sub
 
 End Module
+
+#Region "Class"
+
+Public Class CTchat
+
+    Public Canal As New CTchatCanal
+    Public Tchat As New Dictionary(Of String, Color)
+    Public BloqueTchat As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+
+End Class
+
+Public Class CTchatCanal
+
+    Public Information As Boolean
+    Public General As Boolean
+    Public GroupePriveeEquipe As Boolean
+    Public Guilde As Boolean
+    Public Alignement As Boolean
+    Public Recrutement As Boolean
+    Public Commerce As Boolean
+
+End Class
+
+#End Region

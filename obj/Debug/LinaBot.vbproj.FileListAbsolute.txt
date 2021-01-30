@@ -58,3 +58,4 @@ C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\LinaBot.xml
 C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.exe
 C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.xml
 C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.pdb
+C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.OptionBot.resources

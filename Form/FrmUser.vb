@@ -1,16 +1,33 @@
 ﻿Public Class FrmUser
 
     Public index As Integer
-
+    Private Delegate Sub DlgFrmUser()
 
     Private Sub ConnecterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConnecterToolStripMenuItem.Click
 
         With Comptes(index)
 
+            '  Dim newd As New FunctionAmi
+            '  Dim info As Reflection.MethodInfo() = GetType(FunctionAmi).GetMethods
+            '  Dim para As String() = {"1", "8", "8"}
+            '  For i = 0 To info.Count - 1
+            '      If info(i).Name = "Supprime" Then
+            '          Dim eug = info(1).Invoke(newd, para)
+            '      End If
+            '  Next
+
+
+            'FONCTIONNE
+            ' Dim newd As New FunctionAmi
+            ' Dim info As Reflection.MethodInfo = GetType(FunctionAmi).GetMethod("Ouvre")
+            ' Dim eug = info.Invoke(newd, {"0", "o"})
+
+
+
+
             .MITM = True
             .Main()
-
-            .AppMITM = Shell(LinaBot.PathMITM & "/Dofus.exe", AppWinStyle.NormalNoFocus)
+            .AppMITM = Shell(LinaBot.PathMITM & "/Dofus Retro.exe", AppWinStyle.NormalNoFocus)
 
         End With
 
@@ -74,7 +91,7 @@
 
         With Comptes(index)
 
-            If .EnCombat = False AndAlso .Connecté Then
+            If .Combat.EnCombat = False AndAlso .Connecté Then
 
                 With ProgressBarVitaliter
 
@@ -172,6 +189,158 @@
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+
+    End Sub
+
+    Private Sub FrmUser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        With Comptes(index)
+
+            ChargementOption(index)
+
+        End With
+
+    End Sub
+
+
+
+    Private Sub ButtonIA_Click(sender As Object, e As EventArgs) Handles ButtonIA.Click
+
+        With Comptes(index)
+
+            ButtonIA.BackgroundImage = My.Resources.Ampoule_Off
+
+            Dim Ouverture_Fichier As New OpenFileDialog
+
+            If Ouverture_Fichier.ShowDialog = 1 Then
+
+                Task.Run(Sub() IAChargement(index, Ouverture_Fichier.FileName))
+
+                ButtonIA.BackgroundImage = My.Resources.Ampoule_On
+
+            End If
+
+        End With
+
+    End Sub
+
+    Private Sub Button_Option_Click(sender As Object, e As EventArgs) Handles Button_Option.Click
+
+        'appelle un frm pour fairte les options.
+        Dim newOption As New OptionBot
+        newOption.Index = index
+        newOption.Show()
+
+    End Sub
+
+    Private Sub ButtonDll_Click(sender As Object, e As EventArgs) Handles ButtonDll.Click
+
+        'Charge Autant de Dll Voulu.
+        With Comptes(index)
+
+            If InvokeRequired Then
+
+                Invoke(New DlgFrmUser(Sub() ButtonDll_Click(Nothing, Nothing)))
+
+            Else
+
+                Try
+
+                    If .ThreadDll IsNot Nothing AndAlso .ThreadDll.IsAlive Then
+
+                        .ThreadDll.Abort()
+
+                        ButtonDll.BackgroundImage = My.Resources.DllBlue
+
+                        Return
+
+                    End If
+
+                    Dim Ouverture_Fichier As New OpenFileDialog
+
+                    If Ouverture_Fichier.ShowDialog = 1 Then
+
+                        Dim path As String = Ouverture_Fichier.FileName
+                        Dim a As System.Reflection.Assembly = System.Reflection.Assembly.LoadFile(path)
+                        Dim nomDLL As String = Split(a.ManifestModule.Name, ".")(0)
+                        Dim nomClass = a.ExportedTypes(0).Name
+                        Dim monType = a.ExportedTypes(0).UnderlyingSystemType
+                        Dim lesSubs() = monType.GetMethods
+                        Dim nomSub As String = lesSubs(0).Name
+                        Dim mytype As Type = a.GetType(nomDLL.Replace(" ", "_") & "." & nomClass)
+
+                        .ThreadDll = New Threading.Thread(Sub() LaunchPath(mytype.GetMethod(nomSub), Activator.CreateInstance(mytype))) With {.IsBackground = True}
+                        .ThreadDll.Start()
+
+                        ButtonDll.BackgroundImage = My.Resources.DllRed
+
+                    Else
+
+                        ButtonDll.BackgroundImage = My.Resources.DllBlue
+
+                    End If
+
+                Catch ex As Exception
+
+                    MsgBox(ex.Message)
+
+                End Try
+
+            End If
+
+        End With
+
+    End Sub
+
+    Private Sub LaunchPath(mymethod As System.Reflection.MethodInfo, obj As Object)
+
+        Try
+
+            mymethod.Invoke(obj, {index})
+
+        Catch ex As Exception
+
+            MsgBox(ex.Message)
+
+        End Try
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) 
+
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        Task.Run(Sub() Comptes(index).Socket.Envoyer(TextBox1.Text))
+    End Sub
+
+    Dim compteur1, compteur2 As Integer
+
+    Private Sub RichTextBox2_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox2.TextChanged
+
+        If compteur2 > 600 Then
+
+            RichTextBox2.Text = ""
+
+        End If
+
+        compteur2 += 1
+
+    End Sub
+
+    Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
+
+        If compteur1 > 300 Then
+
+            RichTextBox1.Text = ""
+
+        End If
+
+        compteur1 += 1
 
     End Sub
 

@@ -104,44 +104,52 @@ Friend Class Pathfinding
 
         With Comptes(index)
 
-            If .Map.Handler(nCellEnd).active = False Then
+            Try
 
-                Return ""
 
-            End If
+                If .Map.Handler(nCellEnd).active = False Then
 
-            'A REFAIRE
+                    Return ""
 
-            mapLargeur = If(.Map.Largeur = 0, 15, .Map.Largeur)
-            EviteChangeur = Not enCombat
-            MapHandler = .Map.Handler
-			  InitializeCells()
-            loadCell()
-            fight = .EnCombat
+                End If
 
-            If fight Then
+                'A REFAIRE
 
-                nombreDePM = If(nbrPM = 9999, If(.Map.Entite.ContainsKey(.Personnage.ID), .Map.Entite(.Personnage.ID).Combat.PM, 3), nbrPM)
+                mapLargeur = If(.Map.Largeur = 0, 15, .Map.Largeur)
+                EviteChangeur = Not enCombat
+                MapHandler = .Map.Handler
+                InitializeCells()
+                loadCell()
+                fight = .Combat.EnCombat
 
-            Else
+                If fight Then
 
-                nombreDePM = nbrPM
+                    nombreDePM = If(nbrPM = 9999, If(.Map.Entite.ContainsKey(.Personnage.ID), .Combat.Entite(.Personnage.ID).PM, 3), nbrPM)
 
-            End If
-            LoadSprites(nCellEnd)
+                Else
 
-            If fight Then
-                ' LoadEntity(CopyListView(index, .FrmUser.ListViewMap), nCellEnd, .CaseActuel)
-            Else
-                'ANTI AGRO ICI
-            End If
+                    nombreDePM = nbrPM
 
-            closelist.Remove(nCellEnd)
-            Dim returnPath As String = Findpath(.Map.Entite(.Personnage.ID).Cellule, nCellEnd)
+                End If
+                LoadSprites(nCellEnd)
 
-            .Map.PathTotal = returnPath
+                If fight Then
+                    ' LoadEntity(CopyListView(index, .FrmUser.ListViewMap), nCellEnd, .CaseActuel)
+                Else
+                    'ANTI AGRO ICI
+                End If
 
-            Return cleanPath(returnPath)
+                closelist.Remove(nCellEnd)
+                Dim returnPath As String = Findpath(.Map.Entite(.Personnage.ID).Cellule, nCellEnd)
+
+                .Map.PathTotal = returnPath
+
+                Return cleanPath(returnPath)
+            Catch ex As Exception
+
+            End Try
+
+            Return ""
 
         End With
     End Function

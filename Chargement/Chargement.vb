@@ -1,8 +1,124 @@
 ﻿Module Chargement
 
+    Public Sub ChargementOption(index As Integer)
+
+        With Comptes(index)
+
+            If IO.File.Exists(Application.StartupPath & "\Compte\Options/" & .Personnage.NomDeCompte & "_" & .Personnage.NomDuPersonnage & ".txt") Then
+
+                'Je lis le fichier.
+                Dim swLecture As New IO.StreamReader(Application.StartupPath & "\Compte\Options/" & .Personnage.NomDeCompte & "_" & .Personnage.NomDuPersonnage & ".txt")
+
+                Do Until swLecture.EndOfStream
+
+                    Dim Ligne As String = swLecture.ReadLine
+
+                    If Ligne <> "" Then
+
+                        Dim separateLigne As String() = Split(Ligne, "|")
+
+                        Select Case separateLigne(0).ToLower
+
+                            Case "proxy"
+
+                                .Proxy = CBool(separateLigne(1))
+                                .ProxyIp = separateLigne(2)
+                                .ProxyPort = separateLigne(3)
+                                .ProxyNdc = separateLigne(4)
+                                .ProxyMdp = separateLigne(5)
+
+                            Case "caracteristique"
+
+                                Dim separateCaracteristique As String() = Split(separateLigne(2), ":")
+
+                                With .Caracteristique.Option
+
+                                    Select Case separateLigne(1).ToLower
+
+                                        Case "vitaliter"
+
+                                            With .Vitaliter
+
+                                                .Minimum = separateCaracteristique(0)
+                                                .Maximum = separateCaracteristique(1)
+                                                .Prioriter = separateCaracteristique(2)
+
+                                            End With
+
+                                        Case "sagesse"
+
+                                            With .Sagesse
+
+                                                .Minimum = separateCaracteristique(0)
+                                                .Maximum = separateCaracteristique(1)
+                                                .Prioriter = separateCaracteristique(2)
+
+                                            End With
+
+                                        Case "force"
+
+                                            With .Force
+
+                                                .Minimum = separateCaracteristique(0)
+                                                .Maximum = separateCaracteristique(1)
+                                                .Prioriter = separateCaracteristique(2)
+
+                                            End With
+
+                                        Case "agiliter"
+
+                                            With .Agiliter
+
+                                                .Minimum = separateCaracteristique(0)
+                                                .Maximum = separateCaracteristique(1)
+                                                .Prioriter = separateCaracteristique(2)
+
+                                            End With
+
+                                        Case "chance"
+
+                                            With .Chance
+
+                                                .Minimum = separateCaracteristique(0)
+                                                .Maximum = separateCaracteristique(1)
+                                                .Prioriter = separateCaracteristique(2)
+
+                                            End With
+
+                                        Case "intelligence"
+
+                                            With .Intelligence
+
+                                                .Minimum = separateCaracteristique(0)
+                                                .Maximum = separateCaracteristique(1)
+                                                .Prioriter = separateCaracteristique(2)
+
+                                            End With
+
+                                    End Select
+
+                                End With
+
+                        End Select
+
+                    End If
+
+                Loop
+
+                'Puis je ferme le fichier.
+                swLecture.Close()
+
+            End If
+
+        End With
+
+    End Sub
+
     Public Sub ChargeServeur()
 
         Try
+
+            VarServeur.Clear()
 
             'J'ouvre et je lis le fichier.
             Dim swLecture As New IO.StreamReader(Application.StartupPath + "\Data/Serveur.txt")
@@ -119,7 +235,7 @@
                         'ID Sort | Level | Nom | PO min max | PA | Nombre de lancer par tour | Nombre de lancer par tour par joueur | Nombre de tour entre 2 lancé | PO Modifiable | Ligne de vue
                         '| Lancer en ligne | Cellule Libre | Echec fini tour | Zone du sort | Champ d'action 'X/L/Z/N" | Next level
 
-                        Dim _varSort As New ClassSort
+                        Dim _varSort As New CSort
 
                         With _varSort
 
@@ -153,7 +269,7 @@
 
                         Else
 
-                            VarSort.Add(separate(0), New Dictionary(Of Integer, ClassSort) From
+                            VarSort.Add(separate(0), New Dictionary(Of Integer, CSort) From
                                          {{
                                          separate(1), _varSort
                                          }})
@@ -530,52 +646,62 @@
 
     End Sub
 
-    Public Sub ChargeMétier()
+    Public Sub ChargeMetier()
 
-        '  Try
+        Try
 
-        VarMétier.Clear()
+            VarMetier.Clear()
 
-        Dim swReading As New IO.StreamReader("Data/Métier.txt")
+            Dim swReading As New IO.StreamReader("Data/Metier.txt")
 
-        Do Until swReading.EndOfStream
+            Do Until swReading.EndOfStream
 
-            Dim Line As String = swReading.ReadLine
+                Dim Line As String = swReading.ReadLine
 
-            If Line <> "" Then
+                If Line <> "" Then
 
-                Dim separate() As String = Split(Line.ToLower, "|")
+                    Dim separate() As String = Split(Line.ToLower, "|")
 
-                Dim varJob As New sMétier
+                    Dim varJob As New sMetier
 
-                With varJob
+                    With varJob
 
-                    .IdJob = separate(0)
-                    .Nom = separate(1)
-                    .Workshop = New Dictionary(Of Integer, String())
+                        .ID = separate(0)
+                        .Nom = separate(1)
+                        .AtelierRessource = New Dictionary(Of Integer, sMetierAtelierRessource)
 
-                    For i = 2 To separate.Count - 1
+                        For i = 2 To separate.Count - 1
 
-                        Dim separateJob As String() = Split(separate(i), ":")
+                            Dim separateJob As String() = Split(separate(i), ":")
 
-                        .Workshop.Add(separateJob(0), {separateJob(1), separateJob(2)})
+                            Dim newsMetierAtelierRessource As New sMetierAtelierRessource
 
-                    Next
+                            With newsMetierAtelierRessource
 
-                End With
+                                .ID = separateJob(0)
+                                .Nom = separateJob(1)
+                                .Action = separateJob(2)
 
-                VarMétier.Add(separate(0), varJob)
+                            End With
 
-            End If
-        Loop
+                            .AtelierRessource.Add(separateJob(0), newsMetierAtelierRessource)
 
-        swReading.Close()
+                        Next
 
-        '  Catch ex As Exception
+                    End With
 
-        'ErreurFichier("LoadMetier", ex.Message)
+                    VarMetier.Add(separate(0), varJob)
 
-        ' End Try
+                End If
+            Loop
+
+            swReading.Close()
+
+        Catch ex As Exception
+
+            ErreurFichier(0, "Unknow", "LoadMetier", ex.Message)
+
+        End Try
 
     End Sub
 
@@ -594,24 +720,48 @@
 
                 Dim varPet As New sFamilier
 
+                If VarFamilier.ContainsKey(separate(0)) Then
+
+                    varPet = VarFamilier(separate(0))
+
+                End If
+
                 With varPet
 
-                    Dim separateData As String() = Split(separate(2), ",")
+                    .Nom = separate(1)
 
-                    .NourritureId = New List(Of Integer)
+                    Dim separateData As String() = Split(separate(3), ",")
+
+                    If VarFamilier.ContainsKey(separate(0)) Then
+
+                        .Caracteristique = VarFamilier(separate(0)).Caracteristique
+
+                    Else
+
+                        .Caracteristique = New Dictionary(Of String, List(Of Integer))
+
+                    End If
 
                     For a = 0 To separateData.Count - 1
 
-                        .NourritureId.Add(separateData(a))
+                        If .Caracteristique.ContainsKey(separate(2).ToLower) Then
+
+                            .Caracteristique(separate(2).ToLower).Add(separateData(a))
+
+                        Else
+
+                            .Caracteristique.Add(separate(2).ToLower, New List(Of Integer) From {separateData(a)})
+
+                        End If
 
                     Next
 
-                    separateData = Split(separate(3), ",")
+                    separateData = Split(separate(4), ",")
 
                     .CapacitéNormal = separateData(0)
                     .CapacitéMax = separateData(1)
 
-                    separateData = Split(separate(4), ",")
+                    separateData = Split(separate(5), ",")
 
                     .IntervalRepasMin = separateData(0)
                     .IntervalRepasMax = separateData(1)
@@ -620,11 +770,11 @@
 
                 If Not VarFamilier.ContainsKey(separate(0)) Then ' IdFamilier
 
-                    VarFamilier.Add(separate(0), New Dictionary(Of String, sFamilier) From {{separate(1), varPet}})
+                    VarFamilier.Add(separate(0), varPet)
 
                 Else 'Il contient l'ID
 
-                    VarFamilier(separate(0)).Add(separate(1), varPet)
+                    VarFamilier(separate(0)) = varPet
 
                 End If
 

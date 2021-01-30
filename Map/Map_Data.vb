@@ -2,7 +2,7 @@
 
 #Region "Chargement Map"
 
-    Sub GiMapData(ByVal index As Integer, ByVal data As String)
+    Sub GiMapData(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -11,7 +11,7 @@
                 'GDM | 534    | 0706131721 | 755220465939692F276671264132675c756345246c4b463b43427a3a4d38556e3c722a356362224e343d3423333e722c3f3a7a4e23553555672c733d602062454e3d474b20633c6335763e63682c43554937222f79333f253235346863387a287039474d4070302532357d586327675668752a3b6a24622962426e78787373512c5853515626536239367320643c53 
                 'GDM | ID Map | Indice     | Clef
 
-                .Map = New ClassMap
+                .Map = New CMap
 
                 Dim separateData As String() = Split(data, "|")
 
@@ -20,7 +20,11 @@
 
                 LoadMapInGame(index, separateData(1), separateData(2), separateData(3))
 
-                If .MITM = False Then .Send("GI")
+                ' If .MITM = False Then
+
+                .Send("GI")
+
+                ' End If
 
                 .Map.EnDeplacement = False
                 ._Send = ""
@@ -130,7 +134,7 @@
 
                     If VarInteraction.ContainsKey(spritesHandler(i).layerObject2Num) Then
 
-                        Dim newInteraction As New ClassInteraction
+                        Dim newInteraction As New CInteraction
 
                         With newInteraction
 
@@ -178,57 +182,70 @@
 
                     Dim separate As String() = Split(separateData(i), ";")
 
-                    Dim newMap As New ClassEntite
+                    Dim newMap As New CEntite
+                    Dim newCombat As New CCombatEntite
 
                     With newMap
 
                         .Cellule = separate(0)
                         .IDUnique = separate(3)
+                        .Orientation = separate(1)
+                        .IDCategorie = separate(5)
 
                         Select Case separate(5)
 
                             Case -1 ' Mobs (en combat)
 
-                                ' GM|+ 369     ; 1 ; 0 ; -1        ; 149     ; -2      ; 1571^95 ; 2          ; -1 ; -1 ; -1 ; 0 , 0 , 0 , 0 ; 18       ; 5  ; 3  ; 1 
-                                ' GM|+ Cellule ; ? ; ? ; id Unique ; Id Mobs ; indice  ; ?       ; Level mobs ; ?  ; ?  ; ?  ; ? , ? , ? , ? ; Vitalité ; PA ; PM ; ? 
+                                ' GM|+ 369     ; 1           ; 0 ; -1        ; 149     ; -2      ; 1571^95 ; 2          ; -1 ; -1 ; -1 ; 0 , 0 , 0 , 0 ; 18       ; 5  ; 3  ; 1 
+                                ' GM|+ Cellule ; Orientation ; ? ; id Unique ; Id Mobs ; indice  ; ?       ; Level mobs ; ?  ; ?  ; ?  ; ? , ? , ? , ? ; Vitalité ; PA ; PM ; ? 
 
                                 .Nom = VarMobs(separate(4))(CInt(separate(7) - 1)).Nom
                                 .Niveau = VarMobs(separate(4))(CInt(separate(7) - 1)).Niveau
                                 .ID = separate(4)
-                                .Combat.Vitalité = separate(12)
-                                .Combat.PA = separate(13)
-                                .Combat.PM = separate(14)
-                                .Combat.RésistanceNeutre = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceNeutre
-                                .Combat.RésistanceTerre = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceTerre
-                                .Combat.RésistanceFeu = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceFeu
-                                .Combat.RésistanceEau = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceEau
-                                .Combat.RésistanceAir = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceAir
-                                .Combat.EsquivePA = VarMobs(separate(4))(CInt(separate(7) - 1)).EsquivePA
-                                .Combat.EsquivePM = VarMobs(separate(4))(CInt(separate(7) - 1)).EsquivePM
+
+                                With newCombat
+
+                                    .Vitalite = separate(12)
+                                    .PA = separate(13)
+                                    .PM = separate(14)
+                                    .ResistanceNeutre = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceNeutre
+                                    .ResistanceTerre = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceTerre
+                                    .ResistanceFeu = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceFeu
+                                    .ResistanceEau = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceEau
+                                    .ResistanceAir = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceAir
+                                    .EsquivePA = VarMobs(separate(4))(CInt(separate(7) - 1)).EsquivePA
+                                    .EsquivePM = VarMobs(separate(4))(CInt(separate(7) - 1)).EsquivePM
+
+                                End With
 
                             Case -2 ' Mobs en combat
 
-                                ' GM|+ 369     ; 1 ; 0 ; -1        ; 149     ; -2      ; 1571^95 ; 2          ; -1 ; -1 ; -1 ; 0 , 0 , 0 , 0 ; 18       ; 5  ; 3  ; 1 
-                                ' GM|+ Cellule ; ? ; ? ; id Unique ; Id Mobs ; indice  ; ?       ; Level mobs ; ?  ; ?  ; ?  ; ? , ? , ? , ? ; Vitalité ; PA ; PM ; ? 
+                                ' GM|+ 369     ; 1           ; 0 ; -1        ; 149     ; -2      ; 1571^95 ; 2          ; -1 ; -1 ; -1 ; 0 , 0 , 0 , 0 ; 18       ; 5  ; 3  ; 1 
+                                ' GM|+ Cellule ; Orientation ; ? ; id Unique ; Id Mobs ; indice  ; ?       ; Level mobs ; ?  ; ?  ; ?  ; ? , ? , ? , ? ; Vitalité ; PA ; PM ; ? 
 
                                 .Nom = VarMobs(separate(4))(CInt(separate(7) - 1)).Nom
                                 .Niveau = VarMobs(separate(4))(CInt(separate(7) - 1)).Niveau
                                 .ID = separate(4)
-                                .Combat.Vitalité = separate(12)
-                                .Combat.PA = separate(13)
-                                .Combat.PM = separate(14)
-                                .Combat.RésistanceNeutre = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceNeutre
-                                .Combat.RésistanceTerre = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceTerre
-                                .Combat.RésistanceFeu = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceFeu
-                                .Combat.RésistanceEau = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceEau
-                                .Combat.RésistanceAir = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceAir
-                                .Combat.EsquivePA = VarMobs(separate(4))(CInt(separate(7) - 1)).EsquivePA
-                                .Combat.EsquivePM = VarMobs(separate(4))(CInt(separate(7) - 1)).EsquivePM
+
+                                With newCombat
+
+                                    .Vitalite = separate(12)
+                                    .PA = separate(13)
+                                    .PM = separate(14)
+                                    .ResistanceNeutre = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceNeutre
+                                    .ResistanceTerre = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceTerre
+                                    .ResistanceFeu = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceFeu
+                                    .ResistanceEau = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceEau
+                                    .ResistanceAir = VarMobs(separate(4))(CInt(separate(7) - 1)).RésistanceAir
+                                    .EsquivePA = VarMobs(separate(4))(CInt(separate(7) - 1)).EsquivePA
+                                    .EsquivePM = VarMobs(separate(4))(CInt(separate(7) - 1)).EsquivePM
+
+                                End With
 
                             Case -3 ' Mobs (Hors combat)
 
-                                ' GM|+ 439     ; 5 ; 21      ; -2     ; 198     , 241     ; -3     ;1135^110,1138^100 ; 36 , 32 ; -1       , -1       , -1       ;0,0,0,0;-1,-1,-1;0,0,0,0; 
-                                ' GM|+ Cellule ; ? ; Etoile% ; ID Map ; ID Mobs , Id Mobs ; Entité ;                  ; Lv , Lv ; Couleur1 , Couleur2 , Couleur3 ;?,?,?,?;Couleur1,etc... 
+                                ' GM|+ 439     ; 5           ; 21      ; -2     ; 198     , 241     ; -3     ;1135^110,1138^100 ; 36 , 32 ; -1       , -1       , -1       ;0,0,0,0;-1,-1,-1;0,0,0,0; 
+                                ' GM|+ Cellule ; Orientation ; Etoile% ; ID Map ; ID Mobs , Id Mobs ; Entité ;                  ; Lv , Lv ; Couleur1 , Couleur2 , Couleur3 ;?,?,?,?;Couleur1,etc... 
 
                                 .Nom = NomMobs(separate(4))
                                 .ID = separate(4)
@@ -237,19 +254,20 @@
 
                             Case -4 ' Pnj-------------------
 
-                                ' GM|+ 152     ; 3 ; 0        ;-1      ; 100    ; -4     ; 9048^100 ; 0  ; -1 ; -1 ; e7b317 ;   ,   ,   ,   ,   ;   ; 0 |
-                                ' GM|+ Cellule ; ? ; Etoiles% ; ID Map ; ID PNJ ; Entité ; ?        ; Lv ; ?  ; ?  ; ?      ; ? , ? , ? , ? , ? ; ? ; ? | Next PNJ
+                                ' GM|+ 152     ; 3           ; 0        ;-1      ; 100    ; -4     ; 9048^100 ; 0  ; -1 ; -1 ; e7b317 ;   ,   ,   ,   ,   ;   ; 0 |
+                                ' GM|+ Cellule ; Orientation ; Etoiles% ; ID Map ; ID PNJ ; Entité ; ?        ; Lv ; ?  ; ?  ; ?      ; ? , ? , ? , ? , ? ; ? ; ? | Next PNJ
 
                                 .Nom = VarPnj(separate(4))
                                 .Niveau = separate(7)
                                 .ID = separate(4)
                                 .Etoile = separate(2)
                                 .IDUnique = separate(3)
+                                .Classe = "Pnj"
 
                             Case -5 ' Mode marchand
 
-                                ' GM|+ 412     ; 3 ; 0       ; -82    ; Blackarne ; -5     ; 60^100        ; 0  ; 0 ; -1 ; 22e4 , 27c7   , 22ac , 1cf7     , 27c6     ; Awesomes   ; c , 77f73 , 1m , 5w3r4 ; 0
-                                ' GM|+ Cellule ; ? ; Etoiles ; ID Map ; Nom       ; Entité ; Classe + sexe ; Lv ; ? ; ?  ; Cac  , Coiffe , Cape , Familier , Bouclier ; Nom guilde ; ? , ?     , ?  , ?     ; ID Sprite Sac du mode marchand
+                                ' GM|+ 412     ; 3           ; 0       ; -82    ; Blackarne ; -5     ; 60^100        ; 0  ; 0 ; -1 ; 22e4 , 27c7   , 22ac , 1cf7     , 27c6     ; Awesomes   ; c , 77f73 , 1m , 5w3r4 ; 0
+                                ' GM|+ Cellule ; Orientation ; Etoiles ; ID Map ; Nom       ; Entité ; Classe + sexe ; Lv ; ? ; ?  ; Cac  , Coiffe , Cape , Familier , Bouclier ; Nom guilde ; ? , ?     , ?  , ?     ; ID Sprite Sac du mode marchand
 
                                 'ID Sprite Sac (se que le marchand vend) 
                                 ' 0 = Tout
@@ -324,8 +342,8 @@
 
                             Case -10 ' Prisme
 
-                        ' GM|+ 256     ; 1 ; 0      ; -4     ; 1111 ; -10    ; 8101^90 ; 2 ; 4 ; 1
-                        ' GM|+ Cellule ; ? ; Etoile ; ID Map ; Nom  ; Entité ; Sprite  ; ? ; ? ; ?
+                        ' GM|+ 256     ; 1           ; 0      ; -4     ; 1111 ; -10    ; 8101^90 ; 2 ; 4 ; 1
+                        ' GM|+ Cellule ; Orientation ; Etoile ; ID Map ; Nom  ; Entité ; Sprite  ; ? ; ? ; ?
 
                         ' .Name = If(separate(4) = 1111, "Prisme Bontârien", "Prise Brâkmarien") ' Nom
                        ' .Information = "Niveau : " & separate(7) & vbCrLf &
@@ -334,18 +352,18 @@
                             Case > 0 ' Joueur
 
                                 ' Hors Combat
-                                ' GM|+ 156     ; 7 ; 0 ; 0123456   ; Linaculer ; 9       ; 90^100      ; 0                          ; 0          , 0 , 0 , 1234567           ; -1       ; -1       ; -1       ;     , 2412~16~7                  , 2411~17~15               ,          ,          ; 0   ;   ;   ;           ;                 ; 0 ;    ;   | Next tchatJoueur
-                                ' GM|~ 300     ; 1 ; 0 ; 0123456   ; linaculer ; 9       ; 90^100      ; 0                          ; 0          , 0 , 0 , 1234567           ; 0        ; 1eeb13   ; 0        ; b4  , 2412~16~18                 , 2411~17~19               ,          ,          ; 1   ;   ;   ; Chernobil ; f,9zldr,x,6k26u ; 0 ; 88 ;
-                                ' GM|+ Cellule ; ? ; ? ; Id Unique ; Nom       ; ID Race ; Classe+sexe ; Combat (Equipe bleu/rouge) ; Alignement , ? , ? , ID Unique + Level ; Couleur1 ; Couleur2 ; Couleur3 ; Cac , Coiffe (ID Objet~Lv~Forme) , Cape (ID Objet~Lv~Forme) , Familier , Bouclier ; ?   ; ? ; ? ; Guilde    ; ?               ; ? ; ?  ; ?  
+                                ' GM|+ 156     ; 7           ; 0 ; 0123456   ; Linaculer ; 9       ; 90^100      ; 0                          ; 0          , 0 , 0 , 1234567           ; -1       ; -1       ; -1       ;     , 2412~16~7                  , 2411~17~15               ,          ,          ; 0   ;   ;   ;           ;                 ; 0 ;    ;   | Next tchatJoueur
+                                ' GM|~ 300     ; 1           ; 0 ; 0123456   ; linaculer ; 9       ; 90^100      ; 0                          ; 0          , 0 , 0 , 1234567           ; 0        ; 1eeb13   ; 0        ; b4  , 2412~16~18                 , 2411~17~19               ,          ,          ; 1   ;   ;   ; Chernobil ; f,9zldr,x,6k26u ; 0 ; 88 ;
+                                ' GM|+ Cellule ; Orientation ; ? ; Id Unique ; Nom       ; ID Race ; Classe+sexe ; Combat (Equipe bleu/rouge) ; Alignement , ? , ? , ID Unique + Level ; Couleur1 ; Couleur2 ; Couleur3 ; Cac , Coiffe (ID Objet~Lv~Forme) , Cape (ID Objet~Lv~Forme) , Familier , Bouclier ; ?   ; ? ; ? ; Guilde    ; ?               ; ? ; ?  ; ?  
                                 ' En combat 
-                                ' GM|+ 105     ; 1 ; 0 ; 0123456   ; Linaculer ; 9       ; 90^100      ; 0                          ; 99 ; 0          , 0 , 0 , 1234567           ; -1       ; -1       ; -1       ; 241 , 1bea                       , 6ab                      ,          ,          ; 672      ; 7  ; 3  ; 0           ; 1          ; 0        ; 2         ; 0        ; 77         ; 77         ; 0 ;   ;                         
-                                ' GM|+ Cellule ; ? ; ? ; Id Unique ; Nom       ; ID Race ; Classe+sexe ; Combat (Equipe bleu/rouge) ; Lv ; Alignement , ? , ? , ID Unique + Level ; Couleur1 ; Couleur2 ; Couleur3 ; Cac , Coiffe (ID Objet~Lv~Forme) , Cape (ID Objet~Lv~Forme) , Familier , Bouclier ; Vitalité ; PA ; PM ; %Rés neutre ; %Rés Terre ; %Rés feu ; %Rés Eau  ; %Res air ; Esquive PA ; Esquive PM ; ? ; ? ; ? 
+                                ' GM|+ 105     ; 1           ; 0 ; 0123456   ; Linaculer ; 9       ; 90^100      ; 0                          ; 99 ; 0          , 0 , 0 , 1234567           ; -1       ; -1       ; -1       ; 241 , 1bea                       , 6ab                      ,          ,          ; 672      ; 7  ; 3  ; 0           ; 1          ; 0        ; 2         ; 0        ; 77         ; 77         ; 0 ;   ;                         
+                                ' GM|+ Cellule ; Orientation ; ? ; Id Unique ; Nom       ; ID Race ; Classe+sexe ; Combat (Equipe bleu/rouge) ; Lv ; Alignement , ? , ? , ID Unique + Level ; Couleur1 ; Couleur2 ; Couleur3 ; Cac , Coiffe (ID Objet~Lv~Forme) , Cape (ID Objet~Lv~Forme) , Familier , Bouclier ; Vitalité ; PA ; PM ; %Rés neutre ; %Rés Terre ; %Rés feu ; %Rés Eau  ; %Res air ; Esquive PA ; Esquive PM ; ? ; ? ; ? 
                                 '~ = Sur une dragodinde
 
                                 Dim calculLevel As String()
                                 Dim separateEquipement As String()
 
-                                If Comptes(index).EnCombat Then
+                                If Comptes(index).Combat.EnCombat Then
 
                                     separateEquipement = Split(separate(13), ",")
                                     calculLevel = Split(separate(9), ",")
@@ -363,22 +381,26 @@
                                 .Sexe = SexeJoueur(separate(6))
                                 .Classe = ClasseJoueur(separate(6))
 
-                                If Comptes(index).EnCombat Then
-
+                                If Comptes(index).Combat.EnCombat Then
 
                                     .Alignement = AlignementJoueur(calculLevel(0))
-                                    .Combat.Vitalité = separate(14)
-                                    .Combat.PA = separate(15)
-                                    .Combat.PM = separate(16)
-                                    .Combat.RésistanceNeutre = separate(17)
-                                    .Combat.RésistanceTerre = separate(18)
-                                    .Combat.RésistanceFeu = separate(19)
-                                    .Combat.RésistanceEau = separate(20)
-                                    .Combat.RésistanceAir = separate(21)
-                                    .Combat.EsquivePA = separate(22)
-                                    .Combat.EsquivePM = separate(23)
-                                    .Combat.Equipe = separate(7)
                                     .Niveau = separate(8)
+
+                                    With newCombat
+
+                                        .Vitalite = separate(14)
+                                        .PA = separate(15)
+                                        .PM = separate(16)
+                                        .ResistanceNeutre = separate(17)
+                                        .ResistanceTerre = separate(18)
+                                        .ResistanceFeu = separate(19)
+                                        .ResistanceEau = separate(20)
+                                        .ResistanceAir = separate(21)
+                                        .EsquivePA = separate(22)
+                                        .EsquivePM = separate(23)
+                                        .Equipe = separate(7)
+
+                                    End With
 
                                 Else
 
@@ -435,6 +457,20 @@
                     Else
 
                         .Map.Entite.Add(separate(3), newMap)
+
+                    End If
+
+                    If .Combat.EnCombat Then
+
+                        If .Combat.Entite.ContainsKey(separate(3)) Then
+
+                            .Combat.Entite(separate(3)) = newCombat
+
+                        Else
+
+                            .Combat.Entite.Add(separate(3), newCombat)
+
+                        End If
 
                     End If
 
@@ -678,7 +714,7 @@
 
                     Dim separate As String() = Split(separateData(i), ";")
 
-                    Dim newMap As New ClassMapObjet
+                    Dim newMap As New CMapObjet
 
                     With newMap
 
@@ -690,8 +726,8 @@
 
                         If separate(2) = "1" Then
 
-                            .RésistanceMinimum = separate(3)
-                            .RésistanceMaximum = separate(4)
+                            .ResistanceMinimum = separate(3)
+                            .ResistanceMaximum = separate(4)
 
                         End If
 
@@ -732,6 +768,33 @@
             Catch ex As Exception
 
                 ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMapSupprimeObjet", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Sub GiMapOrientation(ByVal index As Integer, ByVal data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' eD 2594870   | 7 
+                ' eD Id Unique | Orientation
+
+                Dim separationData As String() = Split(Mid(data, 3), "|")
+
+                If .Map.Entite.ContainsKey(separationData(0)) Then
+
+                    .Map.Entite(separationData(0)).Orientation = separationData(1)
+
+                End If
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMapOrientation", data & vbCrLf & ex.Message)
 
             End Try
 
@@ -1002,19 +1065,19 @@
                 Dim g As Graphics = Graphics.FromImage(b)
                 Dim fon As Font = New Font("Arial", 8, FontStyle.Regular)
 
-                For Each Pair As KeyValuePair(Of Integer, ClassEntite) In .Map.Entite
+                For Each Pair As KeyValuePair(Of Integer, CEntite) In .Map.Entite
 
-                    If .EnCombat Then
+                    If .Combat.EnCombat Then
 
-                        If Pair.Value.Combat.Equipe = .Map.Entite(.Personnage.ID).Combat.Equipe Then
+                        '   If Pair.Value.Combat.Equipe = .Combat.Entite(.Personnage.ID).Equipe Then
 
-                            g.FillPolygon(Brushes.Cyan, New Point() { .Map.MapListeCelluleLeft(Pair.Value.Cellule), .Map.MapListeCelluleTop(Pair.Value.Cellule), .Map.MapListeCelluleRight(Pair.Value.Cellule), .Map.MapListeCelluleDown(Pair.Value.Cellule)})
+                        '       g.FillPolygon(Brushes.Cyan, New Point() { .Map.MapListeCelluleLeft(Pair.Value.Cellule), .Map.MapListeCelluleTop(Pair.Value.Cellule), .Map.MapListeCelluleRight(Pair.Value.Cellule), .Map.MapListeCelluleDown(Pair.Value.Cellule)})
 
-                        Else
+                        '  Else
 
-                            g.FillPolygon(Brushes.Red, New Point() { .Map.MapListeCelluleLeft(Pair.Value.Cellule), .Map.MapListeCelluleTop(Pair.Value.Cellule), .Map.MapListeCelluleRight(Pair.Value.Cellule), .Map.MapListeCelluleDown(Pair.Value.Cellule)})
+                        '     g.FillPolygon(Brushes.Red, New Point() { .Map.MapListeCelluleLeft(Pair.Value.Cellule), .Map.MapListeCelluleTop(Pair.Value.Cellule), .Map.MapListeCelluleRight(Pair.Value.Cellule), .Map.MapListeCelluleDown(Pair.Value.Cellule)})
 
-                        End If
+                        ' End If
 
                     Else
 
@@ -1063,3 +1126,57 @@
 #End Region
 
 End Module
+
+#Region "Class"
+
+Public Class CMap
+
+    Public Largeur As Integer
+    Public Hauteur As Integer
+    Public Handler(1280) As Cell
+    Public PathTotal As String
+    Public ID As Integer
+    Public StopDeplacement As Boolean
+    Public Haut, Bas, Gauche, Droite As Integer
+    Public EnDeplacement As Boolean
+    Public Coordonnees As String
+    Public Spectateur As Boolean
+    Public Map_Viewer_BitMap_All, Map_Viewer_BitMap As New Bitmap(1000, 1000)
+    Public MapListeCelluleLeft(1024), MapListeCelluleTop(1024), MapListeCelluleRight(1024), MapListeCelluleDown(1024) As Point
+    Public Entite As New Dictionary(Of Integer, CEntite)
+    Public Objet As New Dictionary(Of Integer, CMapObjet)
+    Public Interaction As New Dictionary(Of Integer, CInteraction)
+    Public Bloque As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+
+End Class
+
+Public Class CMapObjet
+
+    Public Cellule As Integer
+    Public IdUnique As Integer
+    Public Nom As String
+    Public ResistanceMinimum As Integer
+    Public Id As String
+    Public ResistanceMaximum As Integer
+
+End Class
+
+Public Class CEntite
+
+    Public IDCategorie As Integer
+    Public IDUnique As Integer
+    Public Cellule As Integer
+    Public Nom As String
+    Public Niveau As String
+    Public ID As String
+    Public Etoile As Integer
+    Public Classe As String
+    Public Sexe As String
+    Public Guilde As String
+    Public ModeMarchand As Boolean
+    Public Alignement As String
+    Public Orientation As Boolean
+
+End Class
+
+#End Region

@@ -12,20 +12,20 @@
 
                 LabelNomPersonnage.Text = .Personnage.NomDuPersonnage
                 LabelNiveau.Text = "Niveau " & .Personnage.Niveau
-                LabelPointVie.Text = .Personnage.Vitalité.Actuelle & " / " & .Personnage.Vitalité.Maximum
-                LabelPA.Text = .Personnage.Caractéristique("pa").Total
-                LabelPM.Text = .Personnage.Caractéristique("pm").Total
-                LabelInitiative.Text = .Personnage.Caractéristique("initiative").Total
-                LabelProspection.Text = .Personnage.Caractéristique("prospection").Total
+                LabelPointVie.Text = .Personnage.Vitaliter.Actuelle & " / " & .Personnage.Vitaliter.Maximum
+                LabelPA.Text = .Caracteristique.Caracteristique("pa").Total
+                LabelPM.Text = .Caracteristique.Caracteristique("pm").Total
+                LabelInitiative.Text = .Caracteristique.Caracteristique("initiative").Total
+                LabelProspection.Text = .Caracteristique.Caracteristique("prospection").Total
 
-                LabelVitaliter.Text = .Personnage.Caractéristique("vitaliter").Base & " (+" & .Personnage.Caractéristique("vitaliter").Equipement & ")"
-                LabelSagesse.Text = .Personnage.Caractéristique("sagesse").Base & " (+" & .Personnage.Caractéristique("sagesse").Equipement & ")"
-                LabelForce.Text = .Personnage.Caractéristique("force").Base & " (+" & .Personnage.Caractéristique("force").Equipement & ")"
-                LabelIntelligence.Text = .Personnage.Caractéristique("intelligence").Base & " (+" & .Personnage.Caractéristique("intelligence").Equipement & ")"
-                LabelChance.Text = .Personnage.Caractéristique("chance").Base & " (+" & .Personnage.Caractéristique("chance").Equipement & ")"
-                LabelAgiliter.Text = .Personnage.Caractéristique("agiliter").Base & " (+" & .Personnage.Caractéristique("agiliter").Equipement & ")"
+                LabelVitaliter.Text = .Caracteristique.Caracteristique("vitaliter").Base & " (+" & .Caracteristique.Caracteristique("vitaliter").Equipement & ")"
+                LabelSagesse.Text = .Caracteristique.Caracteristique("sagesse").Base & " (+" & .Caracteristique.Caracteristique("sagesse").Equipement & ")"
+                LabelForce.Text = .Caracteristique.Caracteristique("force").Base & " (+" & .Caracteristique.Caracteristique("force").Equipement & ")"
+                LabelIntelligence.Text = .Caracteristique.Caracteristique("intelligence").Base & " (+" & .Caracteristique.Caracteristique("intelligence").Equipement & ")"
+                LabelChance.Text = .Caracteristique.Caracteristique("chance").Base & " (+" & .Caracteristique.Caracteristique("chance").Equipement & ")"
+                LabelAgiliter.Text = .Caracteristique.Caracteristique("agiliter").Base & " (+" & .Caracteristique.Caracteristique("agiliter").Equipement & ")"
 
-                LabelCapital.Text = .Personnage.CapitalCaractéristique
+                LabelCapital.Text = .Caracteristique.Capital
 
                 With ProgressBarEnergie
 
@@ -38,16 +38,16 @@
 
                 With ProgressBarExperience
 
-                    .Minimum = Comptes(index).Personnage.Expérience.Minimum
-                    .Maximum = Comptes(index).Personnage.Expérience.Maximum
-                    .Value = Comptes(index).Personnage.Expérience.Actuelle
-                    ToolTip1.SetToolTip(ProgressBarExperience, Comptes(index).Personnage.Expérience.Pourcentage)
+                    .Minimum = Comptes(index).Personnage.Experience.Minimum
+                    .Maximum = Comptes(index).Personnage.Experience.Maximum
+                    .Value = Comptes(index).Personnage.Experience.Actuelle
+                    ToolTip1.SetToolTip(ProgressBarExperience, Comptes(index).Personnage.Experience.Pourcentage)
 
                 End With
 
                 Dim compteur As Integer = 0
 
-                For Each pair As KeyValuePair(Of String, ClassCaractéristique) In .Personnage.Caractéristique
+                For Each pair As KeyValuePair(Of String, ClassCaracteristique) In .Caracteristique.Caracteristique
 
                     With ListView_Caractéristique
 
@@ -442,7 +442,7 @@
 
             Try
 
-                If .Connecté AndAlso .Personnage.Vivant AndAlso .EnCombat = False Then
+                If .Connecté AndAlso .Personnage.Vivant AndAlso .Combat.EnCombat = False Then
 
                     Dim separate As String() = Split(LabelPointVie.Text, " / ")
 
@@ -523,9 +523,9 @@
 
                     For i = 2 To pair.Value.Count - 1
 
-                            If .Personnage.Caractéristique(pair.Key.ToLower).Base >= CInt(Split(pair.Value(i), ">")(0)) AndAlso .Personnage.Caractéristique(pair.Key.ToLower).Base <= CInt(Split(pair.Value(i), ">")(1)) Then
+                            If .Caracteristique.Caracteristique(pair.Key.ToLower).Base >= CInt(Split(pair.Value(i), ">")(0)) AndAlso .Caracteristique.Caracteristique(pair.Key.ToLower).Base <= CInt(Split(pair.Value(i), ">")(1)) Then
 
-                                If .Personnage.CapitalCaractéristique >= Split(pair.Value(i), ">")(2) Then
+                                If .Caracteristique.Capital >= Split(pair.Value(i), ">")(2) Then
 
                                     Select Case pair.Key.ToLower
 

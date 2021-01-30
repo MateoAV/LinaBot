@@ -1,5 +1,4 @@
-﻿Imports System.Web.UI
-
+﻿
 Module MdlConnexion
 
 #Region "Connexion au serveur."
@@ -268,6 +267,15 @@ Module MdlConnexion
 
                     EcritureMessage(index, "[Dofus]", "Question secréte : " & .Personnage.QuestionSecréte, Color.Green)
 
+                    If .MITM = False Then
+
+                        '  a REFAIRE
+                        .Send("Ap443")
+                        .Send("Ai" & HasardMono(index) & vbCrLf)
+                        .Send("Ax")
+
+                    End If
+
                 End If
 
             Catch ex As Exception
@@ -279,6 +287,39 @@ Module MdlConnexion
         End With
 
     End Sub
+
+    Private Function HasardMono(index As Integer) As String
+
+        Dim Minuscule As String() = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+        Dim Majuscule As String() = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
+        Dim Number As Integer() = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+        Dim Rand As New Random
+
+        Dim Resultat As String = index
+
+        For i = 0 To 195
+
+            Select Case Rand.Next(1, 3)
+
+                Case 1
+
+                    Resultat &= Minuscule(Rand.Next(0, 25))
+
+                Case 2
+
+                    Resultat &= Majuscule(Rand.Next(0, 25))
+
+                Case 3
+
+                    Resultat &= Number(Rand.Next(0, 9))
+
+            End Select
+
+        Next
+
+        Return Resultat
+
+    End Function
 
     Sub GiSelectionServeur(ByVal index As Integer, ByVal data As String)
 

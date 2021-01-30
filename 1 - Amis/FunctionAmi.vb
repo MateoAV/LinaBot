@@ -9,27 +9,25 @@
     ''' True = La liste est ouverte. <br/>
     ''' False = La liste n'est pas ouverte.
     ''' </returns>
-    Public Function Ouvre(ByVal index As String, ByVal choix As String) As Boolean
+    Public Function Ouvre(index As String, choix As String) As Boolean
 
         With Comptes(index)
 
             Try
 
-                .Ami.BloqueAmi.Reset()
-
                 Select Case choix.ToLower
 
                     Case "ami", "amie"
 
-                        .Send("FL")
+                        Return .Send("FL",
+                                    {"FL"}) ' La liste d'ami est ouverte.
 
                     Case "ennemi", "ennemie"
 
-                        .Send("iL")
+                        Return .Send("iL",
+                                    {"iL"}) ' La liste d'ennemi est ouverte.
 
                 End Select
-
-                Return .Ami.BloqueAmi.WaitOne(15000)
 
             Catch ex As Exception
 
@@ -54,41 +52,51 @@
     ''' True = Suppression réussie. <br/>
     ''' False = La suppression a échoué.
     ''' </returns>
-    Public Function Supprime(ByVal index As String, ByVal pseudoNom As String, ByVal choix As String) As Boolean
+    Public Function Supprime(index As String, pseudoNom As String, choix As String) As Boolean
 
         With Comptes(index)
 
             Try
 
-                For Each Pair As ClassAmiInformation In CopyAmi(index, If(choix.ToLower = "ami", .Ami.Ami, .Ami.Ennemi)).Values
+                For Each Pair As CAmiInformation In CopyAmi(index, If(choix.ToLower = "ami", .Ami.Ami, .Ami.Ennemi)).Values
 
                     If Pair.Pseudo.ToLower = pseudoNom.ToLower OrElse Pair.Nom.ToLower = pseudoNom.ToLower Then
 
-                        .Ami.BloqueAmi.Reset()
-
                         Select Case choix.ToLower
 
                             Case "ami", "amie"
 
-                                .Send("FD*" & Pair.Pseudo)
+                                .Send("FD*" & Pair.Pseudo,
+                                     {"FDK", ' Ami bien supprimé.
+                                      "FAEf"}) ' Impossible, ce perso ou compte n'existe pas.
 
-                            Case "ennemi", "ennemie"
-
-                                .Send("iD*" & Pair.Pseudo)
-
-                        End Select
-
-                        .Ami.BloqueAmi.WaitOne(15000)
-
-                        Select Case choix.ToLower
-
-                            Case "ami", "amie"
+                                ' Je remet à jour la liste d'ami.
+                                .Send("FL",
+                                     {"FL"}) ' Reçoit la liste d'ami
 
                                 If .Ami.Ami.ContainsKey(pseudoNom) Then Return False
 
                             Case "ennemi", "ennemie"
 
+                                .Send("iD*" & Pair.Pseudo,
+                                     {"iDK", ' Ennemi bien supprimé.
+                                      "iAEf"}) ' Impossible, ce perso ou compte n'existe pas.
+
+                                ' Je remet à jour la liste d'ennemi.
+                                .Send("iL",
+                                     {"iL"}) ' Met à jour la liste d'ennemi.
+
                                 If .Ami.Ennemi.ContainsKey(pseudoNom) Then Return False
+
+                            Case "ignore"
+
+                                If .Ami.Ignore.ContainsKey(pseudoNom) Then
+
+                                    .Ami.Ignore.Remove(pseudoNom)
+
+                                    If .Ami.Ignore.ContainsKey(pseudoNom) Then Return False
+
+                                End If
 
                         End Select
 
@@ -121,27 +129,37 @@
     ''' True = Ajout réussie. <br/>
     ''' False = Ajout échoué.
     ''' </returns>
-    Public Function Ajoute(ByVal index As String, ByVal pseudoNom As String, ByVal choix As String) As Boolean
+    Public Function Ajoute(index As String, pseudoNom As String, choix As String) As Boolean
 
         With Comptes(index)
 
             Try
 
-                .Ami.BloqueAmi.Reset()
-
                 Select Case choix.ToLower
 
                     Case "ami", "amie"
 
-                        .Send("FA" & pseudoNom)
+                        .Send("FA" & pseudoNom,
+                             {"FAEa", ' Déjà dans ta liste d'amis.
+                              "FAEf", ' Impossible, ce perso ou compte n'existe pas ou n'est pas connecté.
+                              "FAK", ' X a été ajouté à ta liste d'amis.
+                              "FL"}) ' Met à jour la liste d'amis.
 
                     Case "ennemi", "ennemie"
 
-                        .Send("iA%" & pseudoNom)
+                        .Send("iA%" & pseudoNom,
+                             {"iAEa", ' Déjà dans ta liste d'ennemis.
+                              "iAEf", ' Impossible, ce perso ou compte n'existe pas ou n'est pas connecté.
+                              "iAK", ' X a été ajouté à ta liste d'ennemis.
+                              "iL"}) ' Met à jour la liste d'ennemis.
+
+                    Case "ignore"
+
+                        .Ami.Ignore.Add(pseudoNom, New CAmiInformation)
 
                 End Select
 
-                Return .Ami.BloqueAmi.WaitOne(15000)
+                Return Exist(index, pseudoNom, choix)
 
             Catch ex As Exception
 
@@ -166,21 +184,29 @@
     ''' True = Information obtenue. <br/>
     ''' False = aucune information obtenue.
     ''' </returns>
-    Public Function Information(ByVal index As String, ByVal pseudoNom As String, ByVal choix As String) As Boolean
+    Public Function Information(index As String, pseudoNom As String, choix As String) As Boolean
 
         With Comptes(index)
 
             Try
 
-                For Each Pair As ClassAmiInformation In CopyAmi(index, If(choix.ToLower = "ami", .Ami.Ami, .Ami.Ennemi)).Values
+                For Each Pair As CAmiInformation In CopyAmi(index, If(choix.ToLower = "ami", .Ami.Ami, .Ami.Ennemi)).Values
 
                     If Pair.Pseudo.ToLower = pseudoNom.ToLower OrElse Pair.Nom.ToLower = pseudoNom.ToLower Then
 
-                        .Ami.BloqueAmi.Reset()
+                        .Send("BW" & Pair.Nom,
+                             {"BWK", ' Information reçu.
+                              "BWE"}) ' n'est pas connecté ou n'existe pas.
 
-                        .Send("BW" & Pair.Nom)
+                        If .Ami.Information.Pseudo <> "" Then
 
-                        Return .Ami.BloqueAmi.WaitOne(15000)
+                            Return True
+
+                        Else
+
+                            Return False
+
+                        End If
 
                     End If
 
@@ -208,17 +234,14 @@
     ''' True = Le bot a rejoint le joueur. <br/>
     ''' False = Le bot n'a pas réussie à rejoindre le joueur.
     ''' </returns>
-    Public Function Rejoindre(ByVal index As String, ByVal nom As String) As Boolean
+    Public Function Rejoindre(index As String, nom As String) As Boolean
 
         With Comptes(index)
 
             Try
 
-                .Ami.BloqueAmi.Reset()
-
-                .Send("FJF" & nom)
-
-                Return .Ami.BloqueAmi.WaitOne(15000)
+                Return .Send("FJF" & nom,
+                            {"GDM"})
 
             Catch ex As Exception
 
@@ -242,7 +265,7 @@
     ''' True = Le bot avertie via un message si un ami se connecte.. <br/>
     ''' False = Le bot n'avertie pas si un ami se connecte.
     ''' </returns>
-    Public Function Avertie(ByVal index As String, ByVal ouiNon As String) As Boolean
+    Public Function Avertie(index As String, ouiNon As String) As Boolean
 
         With Comptes(index)
 
@@ -252,11 +275,13 @@
 
                     Case True
 
-                        .Send("FO+")
+                        Return .Send("FO+",
+                                    {"BN"}) ' Info bien reçu par le serveur.
 
                     Case False
 
-                        .Send("FO-")
+                        Return .Send("FO-",
+                                    {"BN"}) ' Info bien reçu par le serveur.
 
                 End Select
 
@@ -274,35 +299,64 @@
 
 
     ''' <summary>
-    ''' Ignore ou supprime un joueur de la liste des ignorés.
+    ''' Vérifie si le joueur se trouve dans la liste demandé.
     ''' </summary>
     ''' <param name="index">Indique le numéro du bot.</param>
-    ''' <param name="pseudoNom">Le pseudo ou le nom de la personne.</param>
+    ''' <param name="PseudoNom">Le nom ou le pseudo du joueur à vérifier.</param>
     ''' <returns>
-    ''' True = Le bot ignore ou supprime le joueur de la liste des ignorés. <br/>
-    ''' False = Le bot n'a pas réussi à ignoré ou supprimé le joueur de la liste des ignorés.
+    ''' True = Le joueur se trouve dans la liste.<br/>
+    ''' False = Le joueur n'existe pas dans la liste..
     ''' </returns>
-    Public Function IgnoreSupprime(ByVal index As String, ByVal pseudoNom As String) As Boolean
+    Public Function Exist(index As String, pseudoNom As String, choix As String) As Boolean
 
         With Comptes(index)
 
             Try
 
-                For Each Pair As ClassAmiInformation In CopyAmi(index, .Ami.Ignore).Values
+                Select Case choix.ToLower
 
-                    If Pair.Pseudo.ToLower = pseudoNom.ToLower OrElse Pair.Nom.ToLower = pseudoNom.ToLower Then
+                    Case "ami", "amie"
 
-                        .Ami.Ignore.Remove(pseudoNom)
+                        For Each ami As KeyValuePair(Of String, CAmiInformation) In .Ami.Ami
 
-                        Return True
+                            If ami.Value.Pseudo.ToLower = pseudoNom.ToLower OrElse ami.Value.Nom.ToLower = pseudoNom.ToLower Then
 
-                    End If
+                                Return True
 
-                Next
+                            End If
+
+                        Next
+
+                    Case "ennemi", "ennemie"
+
+                        For Each ennemi As KeyValuePair(Of String, CAmiInformation) In .Ami.Ennemi
+
+                            If ennemi.Value.Pseudo.ToLower = pseudoNom.ToLower OrElse ennemi.Value.Nom.ToLower = pseudoNom.ToLower Then
+
+                                Return True
+
+                            End If
+
+                        Next
+
+                    Case "ignore"
+
+                        For Each ignore As KeyValuePair(Of String, CAmiInformation) In .Ami.Ignore
+
+                            If ignore.Value.Pseudo.ToLower = pseudoNom.ToLower OrElse ignore.Value.Nom.ToLower = pseudoNom.ToLower Then
+
+                                Return True
+
+                            End If
+
+                        Next
+
+                End Select
+
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "AmiIgnoreSupprime", ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "AmiAvertie", ex.Message)
 
             End Try
 

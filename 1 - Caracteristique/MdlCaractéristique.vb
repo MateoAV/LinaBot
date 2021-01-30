@@ -1,6 +1,6 @@
 ﻿Module MdlCaractéristique
 
-    Sub GiCaractéristique(ByVal index As Integer, ByVal data As String)
+    Sub GiCaracteristique(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -74,26 +74,22 @@
 
                 '73 = 51 (Inconnu)
 
-                data = Mid(data, 3)
-
-                Dim separateData As String() = Split(data, "|")
+                Dim separateData As String() = Split(Mid(data, 3), "|")
+                Dim separate As String()
 
                 With .Personnage
 
                     'Kamas
                     .Kamas = separateData(1)
 
-                    'Capital Caractéristique
-                    .CapitalCaractéristique = separateData(2)
-
                     'Capital Sort
                     .CapitalSort = separateData(3)
 
                     ' XP 26980    , 25200   , 32600
                     ' XP Actuelle , Minimum , Maximum
-                    Dim separate As String() = Split(separateData(0), ",")
+                    separate = Split(separateData(0), ",")
 
-                    With .Expérience
+                    With .Experience
 
                         .Minimum = separate(1)
                         .Maximum = separate(2)
@@ -107,7 +103,7 @@
 
                     '793      , 793
                     'Actuelle , Maximum
-                    With .Vitalité
+                    With .Vitaliter
 
                         .Maximum = separate(1)
                         .Actuelle = If(separate(0) < 0, 0, separate(0))
@@ -128,7 +124,12 @@
 
                     End With
 
-                    Dim nomCaractéristique As String() = {"initiative", "prospection", "pa", "pm", "force", "vitaliter",
+                End With
+
+                'Capital Caractéristique
+                .Caracteristique.Capital = separateData(2)
+
+                Dim nomCaracteristique As String() = {"initiative", "prospection", "pa", "pm", "force", "vitaliter",
                             "sagesse", "chance", "agiliter", "intelligence", "po", "creature invocable", "dommage", "dommage physique", "maitrise arme",
                             "dommage pr", "soin", "piege", "piege pr", "renvoi dommage", "coup critique", "echec critique", "esquive pa", "esquive pm",
                             "resistance neutre pvm", "resistance neutre pvm pr", "resistance neutre pvp", "resistance neutre pvp pr",
@@ -137,49 +138,41 @@
                             "resistance air pvm", "resistance air pvm pr", "resistance air pvp", "resistance air pvp pr",
                             "resistance feu pvm", "resistance feu pvm pr", "resistance feu pvp", "resistance feu pvp pr"}
 
-                    For i = 0 To 43
+                For i = 0 To 43
 
-                        separate = Split(separateData(7 + i), ",")
+                    separate = Split(separateData(7 + i), ",")
 
-                        '55   , 72         , 60   , 60
-                        'Base , Equipement , Dons , Booste
+                    '55   , 72         , 60   , 60
+                    'Base , Equipement , Dons , Booste
 
-                        With .Caractéristique(nomCaractéristique(i))
+                    With .Caracteristique.Caracteristique(nomCaracteristique(i))
 
-                            .Base = separate(0)
-                            .Equipement = If(separate.Count > 1, separate(1), "0")
-                            .Dons = If(separate.Count > 1, separate(2), "0")
-                            .Boost = If(separate.Count > 1, separate(3), "0")
+                        .Base = separate(0)
+                        .Equipement = If(separate.Count > 1, separate(1), "0")
+                        .Dons = If(separate.Count > 1, separate(2), "0")
+                        .Boost = If(separate.Count > 1, separate(3), "0")
 
-                            Select Case separate.Count
+                        Select Case separate.Count
 
-                                Case > 3
+                            Case > 3
 
-                                    .Total = CInt(separate(0)) + CInt(separate(1)) + CInt(separate(2)) + CInt(separate(3))
+                                .Total = CInt(separate(0)) + CInt(separate(1)) + CInt(separate(2)) + CInt(separate(3))
 
-                                Case Else 'Si unique, genre initiative + prospection.
+                            Case Else 'Si unique, genre initiative + prospection.
 
-                                    .Total = separate(0)
+                                .Total = separate(0)
 
-                            End Select
+                        End Select
 
-                        End With
+                    End With
 
-                    Next
+                Next
 
-                    separate = Split(separateData(5), ",")
+                separate = Split(separateData(5), ",")
 
-                    .Régénération = CInt(separate(0)) / CInt(separate(1)) * 100
+                .Personnage.Regeneration = CInt(separate(0)) / CInt(separate(1)) * 100
 
-                End With
-
-                If .MITM = False Then
-
-                    .Send("BD") 'Permet d'avoir 'BD649|6|6' = la date.
-
-                End If
-
-                .BloqueCaracteristique.Set()
+                .Send("BD") 'Permet d'avoir 'BD649|6|6' = la date.
 
             Catch ex As Exception
 
@@ -191,7 +184,7 @@
 
     End Sub
 
-    Sub GiPods(ByVal index As Integer, ByVal data As String)
+    Sub GiPods(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -200,9 +193,7 @@
                 ' Ow 750         | 3353
                 ' Ow Pods actuel | Pods Max
 
-                data = Mid(data, 3)
-
-                Dim separateData As String() = Split(data, "|")
+                Dim separateData As String() = Split(Mid(data, 3), "|")
 
                 With .Personnage.Pods
 
@@ -222,7 +213,7 @@
 
     End Sub
 
-    Sub GiRégénérationSeconde(ByVal index As Integer, ByVal data As String)
+    Sub GiRegenerationSeconde(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -251,7 +242,7 @@
 
     End Sub
 
-    Sub GiNiveauUp(ByVal index As Integer, ByVal data As String)
+    Sub GiNiveauUp(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -274,7 +265,7 @@
 
     End Sub
 
-    Sub GiPdvRestauré(ByVal index As Integer, ByVal data As String)
+    Sub GiPdvRestaure(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -285,7 +276,7 @@
 
                 EcritureMessage(index, "(Dofus)", "Tu as retrouvé " & Mid(data, 4) & " points de vie.", Color.Green)
 
-                With .Personnage.Vitalité
+                With .Personnage.Vitaliter
 
                     Dim Vitalité As Integer = .Actuelle + CInt(Mid(data, 4))
 
@@ -311,4 +302,112 @@
 
     End Sub
 
+    Sub GiCaracteristiqueUpEchec(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' ABE
+                ' Echec
+
+                EcritureMessage(index, "[Dofus]", "Impossible de up la caractéristique.", Color.Red)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiNiveauUp", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
 End Module
+
+#Region "Class"
+
+Public Class CCaracteristique
+
+    Public Caracteristique As New Dictionary(Of String, ClassCaracteristique) From
+        {
+            {"initiative", New ClassCaracteristique},
+            {"prospection", New ClassCaracteristique},
+            {"pa", New ClassCaracteristique},
+            {"pm", New ClassCaracteristique},
+            {"force", New ClassCaracteristique},
+            {"vitaliter", New ClassCaracteristique},
+            {"sagesse", New ClassCaracteristique},
+            {"chance", New ClassCaracteristique},
+            {"agiliter", New ClassCaracteristique},
+            {"intelligence", New ClassCaracteristique},
+            {"po", New ClassCaracteristique},
+            {"creature invocable", New ClassCaracteristique},
+            {"dommage", New ClassCaracteristique},
+            {"dommage physique", New ClassCaracteristique},
+            {"maitrise arme", New ClassCaracteristique},
+            {"dommage pr", New ClassCaracteristique},
+            {"soin", New ClassCaracteristique},
+            {"piege", New ClassCaracteristique},
+            {"piege pr", New ClassCaracteristique},
+            {"renvoi dommage", New ClassCaracteristique},
+            {"coup critique", New ClassCaracteristique},
+            {"echec critique", New ClassCaracteristique},
+            {"esquive pa", New ClassCaracteristique},
+            {"esquive pm", New ClassCaracteristique},
+            {"resistance neutre pvm", New ClassCaracteristique},
+            {"resistance neutre pvm pr", New ClassCaracteristique},
+            {"resistance neutre pvp", New ClassCaracteristique},
+            {"resistance neutre pvp pr", New ClassCaracteristique},
+            {"resistance terre pvm", New ClassCaracteristique},
+            {"resistance terre pvm pr", New ClassCaracteristique},
+            {"resistance terre pvp", New ClassCaracteristique},
+            {"resistance terre pvp pr", New ClassCaracteristique},
+            {"resistance eau pvm", New ClassCaracteristique},
+            {"resistance eau pvm pr", New ClassCaracteristique},
+            {"resistance eau pvp", New ClassCaracteristique},
+            {"resistance eau pvp pr", New ClassCaracteristique},
+            {"resistance air pvm", New ClassCaracteristique},
+            {"resistance air pvm pr", New ClassCaracteristique},
+            {"resistance air pvp", New ClassCaracteristique},
+            {"resistance air pvp pr", New ClassCaracteristique},
+            {"resistance feu pvm", New ClassCaracteristique},
+            {"resistance feu pvm pr", New ClassCaracteristique},
+            {"resistance feu pvp", New ClassCaracteristique},
+            {"resistance feu pvp pr", New ClassCaracteristique}
+        }
+    Public Capital As Integer
+    Public [Option] As New CCaracteristiqueOption
+
+End Class
+
+Public Class ClassCaracteristique
+
+    Public Base As String
+    Public Equipement As String
+    Public Dons As String
+    Public Boost As String
+    Public Total As String
+
+End Class
+
+Public Class CCaracteristiqueOption
+
+    Public Vitaliter As New CCaracteristiqueOptionValeur
+    Public Sagesse As New CCaracteristiqueOptionValeur
+    Public Force As New CCaracteristiqueOptionValeur
+    Public Agiliter As New CCaracteristiqueOptionValeur
+    Public Chance As New CCaracteristiqueOptionValeur
+    Public Intelligence As New CCaracteristiqueOptionValeur
+
+End Class
+
+Public Class CCaracteristiqueOptionValeur
+
+    Public Minimum As Integer
+    Public Maximum As Integer
+    Public Prioriter As Integer
+
+End Class
+
+#End Region

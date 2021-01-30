@@ -1,12 +1,17 @@
 ﻿Public Class FunctionMap
 
+    'Le mieux serai de bien separer deplacement + ineraction
+    'et d'agir uniquement selon les infos reçu/envoyé etc....
+
     ''' <summary>
     ''' Compare 2 IDs de map.
     ''' </summary>
     ''' <param name="index">Le numéro du bot.</param>
     ''' <param name="mapID">La map ID à vérifier, Exemple : 7411</param>
-    ''' <returns>True = La MapID correspond à celle du bot. <br/>
-    ''' False = La MapID ne correspond pas à celle du bot.</returns>
+    ''' <returns>
+    ''' True = La MapID correspond à celle du bot. <br/>
+    ''' False = La MapID ne correspond pas à celle du bot.
+    ''' </returns>
     Public Function ID(ByVal index As Integer, ByVal mapID As Integer) As Boolean
 
         With Comptes(index)
@@ -30,18 +35,53 @@
     End Function
 
     ''' <summary>
+    ''' Compare 2 coordonnées de map.
+    ''' </summary>
+    ''' <param name="index">Le numéro du bot.</param>
+    ''' <param name="mapCoordonnees">La map à vérifier, Exemple : 4,-16</param>
+    ''' <returns>True = La Map correspond à celle du bot. <br/>
+    ''' False = La Map ne correspond pas à celle du bot.</returns>
+    Public Function Coordonnees(ByVal index As Integer, ByVal mapCoordonnees As String) As Boolean
+
+        With Comptes(index)
+
+            Try
+
+                If mapCoordonnees = .Map.Coordonnees Then
+
+                    Return True
+
+                End If
+
+            Catch ex As Exception
+
+            End Try
+
+            Return False
+
+        End With
+
+    End Function
+
+    ''' <summary>
     ''' Déplace le bot sur une cellule/Direction indiqué.
     ''' </summary>
     ''' <param name="celluleDirection">Indique la direction ou la cellule où doit aller le bot.</param>
     ''' <param name="delaiMinimum">Temps d'attente minimum avant de pouvoir faire une autre action.</param>
     ''' <param name="delaiMaximum">Temps d'attente maximum avant de pouvoir faire une autre action.</param>
-    ''' <returns>True = Le déplacement a réussi. <br/> 
-    ''' False = Le déplacement a échoué.</returns>
+    ''' <returns>
+    ''' True = Le déplacement a réussi. <br/> 
+    ''' False = Le déplacement a échoué.
+    ''' </returns>
     ''' 
     Public Function Deplacement(ByVal index As Integer, ByVal celluleDirection As String, Optional ByVal delaiMinimum As Integer = 500, Optional ByVal delaiMaximum As Integer = 1500) As Boolean
 
         With Comptes(index)
-
+            'Faire si interaction obliger
+            'une liste de task
+            '1) celle du déplacement
+            '2) celle de l'interaction
+            ' et tchack tout a la fin
             If .Map.EnDeplacement Then StopDéplacement(index)
 
             If .Map.EnDeplacement = False Then
@@ -74,7 +114,11 @@
 
                     .BloqueDeplacement.Reset()
 
-                    .Send("GA001" & path, True)
+                    .Send("GA001" & path,
+                          {"GA;0", 'Le déplacement a échoué.
+                           "GA0;1;" & .Personnage.ID, 'Indique que je suis en plein déplacement.
+                           "GDM", 'Indique un changement de map.
+                           "GA;905;"}) 'Je suis entré en combat.
 
                     .BloqueDeplacement.WaitOne(15000)
 
@@ -146,13 +190,10 @@
 
             Try
 
-                If .EnCombat = False AndAlso .Recolte.EnRecolte = False Then
+                If .Combat.EnCombat = False AndAlso .Recolte.EnRecolte = False Then
 
-                    .Map.Bloque.Reset()
-
-                    .Socket.Envoyer("eD" & .Personnage.ID & "|" & Orientation(monOrientation))
-
-                    Return .Map.Bloque.WaitOne(15000)
+                    Return .Send("eD" & Orientation(monOrientation),
+                                 {"eD" & .Personnage.ID})
 
                 End If
 
@@ -168,7 +209,7 @@
 
     End Function
 
-    Public Function Orientation(ByVal choix As String) As String
+    Private Function Orientation(ByVal choix As String) As String
 
         Select Case choix.ToLower
 
@@ -209,6 +250,96 @@
                 Return If(IsNumeric(choix), "sud", "2")
 
         End Select
+
+    End Function
+
+    ''' <summary>
+    ''' Effectue une interaction avec un objet interactif en jeu.
+    ''' </summary>
+    ''' <param name="index">Indique le numéro du bot.</param>
+    ''' <param name="nomID">Le nom ou l'ID avec quoi intéragir.</param>
+    ''' <param name="actionID">le nom de l'action ou l'ID à faire avec l'objet interactif.</param>
+    ''' <returns>
+    ''' True = le bot à intéragit avec l'objet. <br/>
+    ''' False = Le bot n'a pas réussi à intéragir avec l'objet.
+    ''' </returns>
+    Public Function Interaction(index As Integer, nomID As String, actionID As String) As Boolean
+
+        With Comptes(index)
+
+            Try
+
+                For Each pair As CInteraction In CopyInteraction(index, .Map.Interaction).Values
+
+                    If pair.Nom.ToLower = nomID.ToLower OrElse pair.Sprite = nomID Then
+
+                        For Each pairAction As KeyValuePair(Of String, Integer) In pair.Action
+
+                            If pairAction.Key.ToLower = actionID.ToLower OrElse pairAction.Value.ToString = actionID Then
+
+                                Return .Send("GA500" & pair.Cellule & ";" & pairAction.Value,
+                                             {"GDF|" & pair.Cellule & ";"})
+
+                            End If
+
+                        Next
+
+                    End If
+
+                Next
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "Interaction", ex.Message)
+
+            End Try
+
+            Return False
+
+        End With
+
+    End Function
+
+
+    Public Function Attaquer(ByVal index As Integer, ByVal choix As String) As Boolean
+
+        With Comptes(index)
+            Try
+
+
+                For Each pair As CEntite In .Map.Entite.Values
+                    '  pair.IDCategorie = -3
+                    If pair.IDUnique < 0 AndAlso pair.Cellule <> .Map.Entite(.Personnage.ID).Cellule Then
+
+                        If Not IsNothing(pair.ID) AndAlso pair.ID.Contains(",") AndAlso Not pair.Nom.StartsWith("Mino") Then
+
+                            If .Map.Handler(pair.Cellule).layerObject1Num <> 1030 AndAlso .Map.Handler(pair.Cellule).layerObject2Num <> 1030 Then
+
+                                Return Deplacement(index, pair.Cellule)
+
+                            End If
+
+                        ElseIf pair.Classe <> "Pnj" Then
+
+                            If .Map.Handler(pair.Cellule).layerObject1Num <> 1030 AndAlso .Map.Handler(pair.Cellule).layerObject2Num <> 1030 AndAlso Not pair.Nom.StartsWith("Mino") Then
+
+                                Return Deplacement(index, pair.Cellule)
+
+                            End If
+
+                        End If
+
+
+
+                    End If
+
+                Next
+            Catch ex As Exception
+
+            End Try
+            Return False
+
+        End With
 
     End Function
 

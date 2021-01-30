@@ -74,7 +74,7 @@
 
         With Comptes(Index)
 
-            For Each pair As KeyValuePair(Of String, ClassAmiInformation) In .Ami.Ami
+            For Each pair As KeyValuePair(Of String, CAmiInformation) In .Ami.Ami
 
                 If pair.Value.Connecte Then
 
@@ -123,7 +123,7 @@
 
         With Comptes(Index)
 
-            For Each pair As KeyValuePair(Of String, ClassAmiInformation) In .Ami.Ennemi
+            For Each pair As KeyValuePair(Of String, CAmiInformation) In .Ami.Ennemi
 
                 If pair.Value.Connecte Then
 
@@ -172,7 +172,7 @@
 
         With Comptes(Index)
 
-            For Each pair As KeyValuePair(Of String, ClassAmiInformation) In .Ami.Ignore
+            For Each pair As KeyValuePair(Of String, CAmiInformation) In .Ami.Ignore
 
                 If pair.Value.Connecte Then
 
@@ -226,7 +226,7 @@
 
                         Dim separate As String() = Split(separateData(i), ";")
 
-                        Dim newFriend As New ClassAmiInformation
+                        Dim newFriend As New CAmiInformation
 
                         With newFriend
 
@@ -353,8 +353,6 @@
                     Next
 
                 End If
-
-                .Ami.BloqueAmi.Set()
 
             Catch ex As Exception
 

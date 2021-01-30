@@ -73,6 +73,16 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _Option() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Option", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property Agiliter() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Agiliter", resourceCulture)
@@ -186,6 +196,26 @@ Namespace My.Resources
         Friend ReadOnly Property Console() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Console", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property DllBlue() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("DllBlue", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property DllRed() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("DllRed", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

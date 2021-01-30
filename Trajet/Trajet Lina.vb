@@ -14,6 +14,8 @@
 
                 Dim ligneActuel As String = AsciiDecoder(swLecture.ReadLine)
 
+                ligneActuel = ligneActuel.Replace(vbTab, "")
+
                 While ligneActuel.Contains("  ")
                     ligneActuel = ligneActuel.Replace("  ", " ")
                 End While
@@ -24,41 +26,38 @@
 
                 Dim separateLecture As String() = Split(ligneActuel, " ")
 
-                Select Case Mid(separateLecture(0), 1, 1)
+                Select Case separateLecture(0).ToLower
 
-                    Case "<"
+                    Case "sub", "function"
 
-                        Select Case Mid(separateLecture(0), 2, 1)
+                        'Début balise
+                        Balise = separateLecture(1)
 
-                            Case "/"
+                    Case "end"
 
-                                'Fin balise
+                        Select Case separateLecture(1).ToLower
+
+                            Case "sub", "function"
+
                                 Balise = ""
-
-                            Case Else
-
-                                'Début balise
-                                Balise = ligneActuel
 
                         End Select
 
-                    Case "D"
+                    Case "dim"
 
-                        Select Case separateLecture(0)
+                        AddVariable(index, ligneActuel, separateLecture(1))
 
-                            Case "Dim"
+                        Select Case separateLecture(1).ToLower
 
-                                Select Case separateLecture(1).ToLower
+                            Case "pods"
 
-                                    Case "pods"
+                                .FrmGroupe.Pods = separateLecture(3)
 
-                                        '.FrmGroupe.Pods = separateLecture(3)
+                            Case "spectateur"
 
-                                    Case "spectateur"
+                                ' .FrmGroupe.Spectateur = CBool(separateLecture(3))
 
-                                        ' .FrmGroupe.Spectateur = CBool(separateLecture(3))
-
-                                End Select
+                            Case Else
 
                         End Select
 
@@ -68,11 +67,11 @@
 
                             If Not .FrmGroupe.Trajet.ContainsKey(Balise) Then
 
-                                .FrmGroupe.Trajet.Add(Balise, New List(Of String) From {ligneActuel})
+                                .FrmGroupe.Trajet.Add(Balise, New List(Of String) From {ligneActuel.Replace(vbTab, "")})
 
                             Else
 
-                                .FrmGroupe.Trajet(Balise).Add(ligneActuel)
+                                .FrmGroupe.Trajet(Balise).Add(ligneActuel.Replace(vbTab, ""))
 
                             End If
 
@@ -85,6 +84,45 @@
             swLecture.Close()
 
             TrajetLecture(index, .FrmGroupe.Trajet.Keys(0))
+
+        End With
+
+    End Sub
+
+
+    Private Sub AddVariable(index As Integer, ligne As String, nomVariable As String)
+
+        With Comptes(index)
+
+            Dim separateLigne As String()
+
+            separateLigne = Split(ligne.Replace("""", ""), "{") 'Dim Familier = {"Bworky = Pods" , "Chacha = Intelligence"}
+            separateLigne = Split(separateLigne(1), "}") ' "Bworky = Pods" , "Chacha = Intelligence"}
+            separateLigne = Split(separateLigne(0), " , ") ' "Bworky = Pods" , "Chacha = Intelligence"
+
+            For i = 0 To separateLigne.Count - 1
+
+                If separateLigne(i) <> "" Then
+
+                    Dim separate As String() = Split(separateLigne(i), " = ")
+
+                    If .FrmGroupe.Variable.ContainsKey(nomVariable.ToLower) Then
+
+                        .FrmGroupe.Variable(nomVariable.ToLower).Add(separate(0), separate)
+
+                    Else
+
+                        .FrmGroupe.Variable.Add(nomVariable.ToLower, New Dictionary(Of Object, Object) From
+                                                        {{
+                                                        separate(0), ' Nom : Bworky
+                                                        separate ' Information : Bworky  Pods  etc...
+                                                        }})
+
+                    End If
+
+                End If
+
+            Next
 
         End With
 

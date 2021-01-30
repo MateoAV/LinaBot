@@ -1,6 +1,6 @@
 ﻿Module mdlEchange
 
-    Sub GiEchangeRecu(ByVal index As Integer, ByVal data As String)
+    Sub GiEchangeRecu(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -26,6 +26,120 @@
             Catch ex As Exception
 
                 ErreurFichier(index, .Personnage.NomDuPersonnage, "GiEchangeRecu", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Sub GiEchangeDejaEnEchange(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' EREO
+
+                EcritureMessage(index, "[Dofus]", "Ce joueur est déjà en échange.", Color.Green)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiEchangeDejaEnEchange", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Sub GiEchangeAccepter(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' ECK1
+
+                With .Echange
+
+                    .EnEchange = True
+                    .EnInvitation = False
+                    .Numero = 1
+
+                End With
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiEchangeAccepter", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Sub GiEchangeAnnuler(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' EV
+
+                With .Echange
+
+                    .EnEchange = False
+                    .EnInvitation = False
+                    .Lui.Inventaire.Clear()
+                    .Lui.Kamas = 0
+                    .Lui.Valider = False
+                    .Moi.Inventaire.Clear()
+                    .Moi.Kamas = 0
+                    .Moi.Valider = False
+                    .Numero = 0
+
+                End With
+
+                EcritureMessage(index, "[Dofus]", "Echange annulé", Color.Red)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiEchangeAnnuler", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Sub GiEchangeEffectuer(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' EVa
+
+                With .Echange
+
+                    .EnEchange = False
+                    .EnInvitation = False
+                    .Lui.Inventaire.Clear()
+                    .Lui.Kamas = 0
+                    .Lui.Valider = False
+                    .Moi.Inventaire.Clear()
+                    .Moi.Kamas = 0
+                    .Moi.Valider = False
+                    .Numero = 0
+
+                End With
+
+                EcritureMessage(index, "[Dofus]", "Echange effectué", Color.Red)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiEchangeEffectuer", data & vbCrLf & ex.Message)
 
             End Try
 
@@ -78,8 +192,6 @@
 
             End Try
 
-            .Echange.Bloque.Set()
-
         End With
 
     End Sub
@@ -99,11 +211,11 @@
 
                 If .Echange.Lui.Inventaire.ContainsKey(separateData(0)) Then
 
-                    .Echange.Lui.Inventaire(separateData(0)).Quantité = separateData(1)
+                    .Echange.Lui.Inventaire(separateData(0)).Quantiter = separateData(1)
 
                 Else
 
-                    Dim newItem As New ClassItem
+                    Dim newItem As New CItem
 
                     With newItem
 
@@ -113,13 +225,13 @@
 
                         .Nom = VarItems(Convert.ToInt64(separateData(2))).Nom
 
-                        .Quantité = separateData(1)
+                        .Quantiter = separateData(1)
 
-                        .Caractéristique = ItemCaractéristique(separateData(3))
+                        .Caracteristique = ItemCaractéristique(separateData(3), separateData(2))
 
-                        .CaractéristiqueBrute = separateData(3)
+                        .CaracteristiqueBrute = separateData(3)
 
-                        .Catégorie = VarItems(.IdObjet).Catégorie
+                        .Categorie = VarItems(.IdObjet).Catégorie
 
                         .Equipement = ""
 
@@ -177,6 +289,90 @@
 #End Region
 
 #Region "Moi"
+    Sub GiEchangeAjouteItemMoiEchange(ByVal index As Integer, ByVal data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' EsKO+ 78415959  | 2        | 393      |
+                ' EsKO+ Id Unique | Quantité | Id Objet | Caracteristique
+
+                Dim separateData As String() = Split(Mid(data, 6), "|")
+
+                If .Echange.Moi.Inventaire.ContainsKey(separateData(0)) Then
+
+                    .Echange.Moi.Inventaire(separateData(0)).Quantiter = separateData(1)
+
+                Else
+
+                    Dim newItem As New CItem
+
+                    With newItem
+
+                        .IdObjet = separateData(2)
+
+                        .IdUnique = separateData(0)
+
+                        .Nom = VarItems(separateData(2)).Nom
+
+                        .Quantiter = separateData(1)
+
+                        .Caracteristique = ItemCaractéristique(separateData(3), separateData(2))
+
+                        .CaracteristiqueBrute = separateData(3)
+
+                        .Categorie = VarItems(.IdObjet).Catégorie
+
+                        .Equipement = ""
+
+                    End With
+
+                    .Echange.Moi.Inventaire.Add(separateData(0), newItem)
+
+                End If
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiEchangeAjouteItemMoiEchange", data & vbCrLf & ex.Message)
+
+            End Try
+
+            .BloqueItem.Set()
+
+        End With
+
+    End Sub
+
+    Sub GiEchangeSupprimeItemMoiEchange(ByVal index As Integer, ByVal data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' EsKO- 78415959 
+                ' EsKO- Id Unique 
+
+                Dim idUnique As String = Mid(data, 6)
+
+                If .Echange.Moi.Inventaire.ContainsKey(idUnique) Then
+
+                    .Echange.Moi.Inventaire.Remove(idUnique)
+
+                End If
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiEchangeSupprimeItemMoiEchange", data & vbCrLf & ex.Message)
+
+            End Try
+
+            .BloqueItem.Set()
+
+        End With
+
+    End Sub
+
 
     Sub GiEchangeAjouteItemMoi(ByVal index As Integer, ByVal data As String)
 
@@ -186,18 +382,18 @@
 
                 ' EMKO+ 40420233  | 20 
                 ' EMKO+ Id Unique | Quantité
-
+                ' EsKO+78415959|2|393|
                 Dim separateData As String() = Split(Mid(data, 6), "|")
 
                 If .Echange.Moi.Inventaire.ContainsKey(separateData(0)) Then
 
-                    .Echange.Moi.Inventaire(separateData(0)).Quantité = separateData(1)
+                    .Echange.Moi.Inventaire(separateData(0)).Quantiter = separateData(1)
 
                 Else
 
-                    Dim newItem As ClassItem = .Inventaire(separateData(0))
+                    Dim newItem As CItem = .Inventaire(separateData(0))
 
-                    newItem.Quantité = separateData(1)
+                    newItem.Quantiter = separateData(1)
 
                     .Echange.Moi.Inventaire.Add(separateData(0), newItem)
 
@@ -291,8 +487,6 @@
 
             End Try
 
-            .Echange.Bloque.Set()
-
         End With
 
     End Sub
@@ -309,13 +503,12 @@ Public Class CEchange
     Public EnEchange, EnInvitation As Boolean
     Public Moi As New CEchangeAll
     Public Lui As New CEchangeAll
-    Public Bloque As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
 
 End Class
 
 Public Class CEchangeAll
 
-    Public Inventaire As New Dictionary(Of Integer, ClassItem)
+    Public Inventaire As New Dictionary(Of Integer, CItem)
     Public Kamas As Integer
     Public Valider As Boolean
 

@@ -8,13 +8,41 @@ Module TrajetExecution
 
             While True
 
-                TrajetEnCours(index, balise)
+                If RetourneEnBanque(index) Then
+
+                    TrajetEnCours(index, "banque", True)
+
+                Else
+
+                    TrajetEnCours(index, balise)
+
+                End If
 
             End While
 
         End With
 
     End Sub
+
+    Private Function RetourneEnBanque(ByVal index As Integer) As Boolean
+
+        With Comptes(index)
+
+            For Each bot As Integer In .FrmGroupe.BotIndex
+
+                If Comptes(bot).Personnage.Pods.Pourcentage >= .FrmGroupe.Pods Then
+
+                    Return True
+
+                End If
+
+            Next
+
+            Return False
+
+        End With
+
+    End Function
 
     Private Sub TrajetEnCours(ByVal index As Integer, ByVal balise As String, Optional ByVal banque As Boolean = False)
 
@@ -25,14 +53,10 @@ Module TrajetExecution
             Dim whileLine As Integer = 0
             Dim SelectCase As String = ""
 
-            'If 80 >= .FrmGroupe.Pods Then
-            'If balise.ToLower <> "<banque>" AndAlso banque = False Then
-            'TrajetEnCours(index, "<Banque>", True)
-            'Return
-            'End If
-            'End If
-
             For a = 0 To .FrmGroupe.Trajet(balise).Count - 1
+
+                Dim newGroupe As New FunctionGroupe
+                newGroupe.GroupeInvite(index)
 
                 With .FrmGroupe.Trajet(balise)
 
@@ -42,23 +66,29 @@ Module TrajetExecution
 
                         For i = 0 To separateAction.Count - 1
 
+                            If banque = False AndAlso RetourneEnBanque(index) Then
+
+                                Exit Sub
+
+                            End If
+
                             Dim separatePair As String() = Split(separateAction(i), " ")
 
-                            Select Case separatePair(0)
+                            Select Case separatePair(0).ToLower
 
-                                Case "If"
+                                Case "if"
 
                                     nextLine = IfReturn(index, .Item(a))
 
                                     If nextLine Then
 
-                                        SearchEndLine = "End If"
+                                        SearchEndLine = "end if"
 
                                     End If
 
-                                Case "ElseIf"
+                                Case "elseif"
 
-                                    If SearchEndLine <> "End If" Then
+                                    If SearchEndLine <> "end if" Then
 
                                         nextLine = IfReturn(index, .Item(a))
 
@@ -66,34 +96,34 @@ Module TrajetExecution
 
                                     If nextLine Then
 
-                                        SearchEndLine = "End If"
+                                        SearchEndLine = "end if"
 
                                     End If
 
-                                Case "Else"
+                                Case "else"
 
-                                    If SearchEndLine = "End If" Then
+                                    If SearchEndLine = "end if" Then
 
                                         If nextLine Then nextLine = False
 
                                     Else
 
-                                        SearchEndLine = "End If"
+                                        SearchEndLine = "end if"
                                         nextLine = True
 
                                     End If
 
-                                Case "End"
+                                Case "end"
 
                                     SearchEndLine = ""
 
-                                    Select Case separatePair(1)
+                                    Select Case separatePair(1).ToLower
 
-                                        Case "If"
+                                        Case "if"
 
                                             nextLine = True
 
-                                        Case "While"
+                                        Case "while"
 
                                             If nextLine Then
 
@@ -106,13 +136,13 @@ Module TrajetExecution
 
                                             End If
 
-                                        Case "Sub"
+                                        Case "sub"
 
-                                        Case "Select"
+                                        Case "select"
 
                                     End Select
 
-                                Case "While"
+                                Case "while"
 
                                     If WhileReturn(index, .Item(a)) Then
 
@@ -126,37 +156,37 @@ Module TrajetExecution
 
                                     End If
 
-                                Case "Call"
+                                Case "call"
 
                                     If nextLine Then
                                         TrajetEnCours(index, separatePair(1), banque)
                                     End If
 
                                     'Select case
-                                Case "Select"
+                                Case "select"
 
                                     If SearchEndLine = "" Then SelectCase = SelectReturn(index, .Item(a))
 
-                                Case "Case"
+                                Case "case"
 
-                                    Select Case separatePair(1)
+                                    Select Case separatePair(1).ToLower
 
-                                        Case "Else"
+                                        Case "else"
 
-                                            If SearchEndLine = "End Select" Then
+                                            If SearchEndLine = "end select" Then
 
                                                 If nextLine Then nextLine = False
 
                                             Else
 
-                                                SearchEndLine = "End Select"
+                                                SearchEndLine = "end select"
                                                 nextLine = True
 
                                             End If
 
                                         Case Else
 
-                                            If SearchEndLine <> "End Select" AndAlso SearchEndLine <> "End If" Then
+                                            If SearchEndLine <> "end select" AndAlso SearchEndLine <> "end if" Then
 
                                                 nextLine = SelectCaseReturn(index, .Item(a), SelectCase)
 
@@ -164,7 +194,7 @@ Module TrajetExecution
 
                                             If nextLine Then
 
-                                                SearchEndLine = "End Select"
+                                                SearchEndLine = "end select"
 
                                             End If
 
@@ -185,11 +215,15 @@ Module TrajetExecution
 
                             End Select
 
+                            Bloque(index)
+
                         Next
 
                     End If
 
                 End With
+
+                Task.Delay(1).Wait()
 
             Next
 
@@ -197,8 +231,27 @@ Module TrajetExecution
 
     End Sub
 
+    Private Sub Bloque(ByVal index As Integer)
 
-    Private Function ReturnParametre(ByVal index As Integer, ByVal laligne As String) As String()
+        With Comptes(index)
+
+            If .Combat.EnCombat Then
+
+                While .Combat.EnCombat
+
+                    Task.Delay(1000).Wait()
+
+                End While
+
+                Task.Delay(2000).Wait()
+
+            End If
+
+        End With
+
+    End Sub
+
+    Public Function ReturnParametre(ByVal index As Integer, ByVal laligne As String) As String()
 
         Dim separateFunctionParamétre As String()
 
@@ -210,7 +263,7 @@ Module TrajetExecution
 
                 separateFunctionParamétre = Split(separateFunctionParamétre(1).Replace("""", ""), "(")
                 separateFunctionParamétre = Split(separateFunctionParamétre(1), ")")
-                separateFunctionParamétre = Split(separateFunctionParamétre(0), If(separateFunctionParamétre(0).Contains(", "), ", ", " , "))
+                separateFunctionParamétre = Split(separateFunctionParamétre(0), " , ")
 
             Else
 
@@ -226,7 +279,7 @@ Module TrajetExecution
 
                     separateFunctionParamétre = Split(laligne.Replace("""", ""), "(")
                     separateFunctionParamétre = Split(separateFunctionParamétre(1), ")")
-                    separateFunctionParamétre = Split(separateFunctionParamétre(0), If(separateFunctionParamétre(0).Contains(", "), ", ", " , "))
+                    separateFunctionParamétre = Split(separateFunctionParamétre(0), " , ")
 
                 Else
 
@@ -249,6 +302,12 @@ Module TrajetExecution
 
             For i = 0 To separateFunctionParamétre.Count - 1
 
+                If separateFunctionParamétre(i).StartsWith(" ") Then
+                    separateFunctionParamétre(i) = Mid(separateFunctionParamétre(i), 2)
+                End If
+                If separateFunctionParamétre(i).EndsWith(" ") Then
+                    separateFunctionParamétre(i) = Mid(separateFunctionParamétre(i), 1, separateFunctionParamétre(i).Length - 1)
+                End If
                 functionParamétre(i + 1) = separateFunctionParamétre(i)
 
             Next
@@ -262,11 +321,14 @@ Module TrajetExecution
 
 #Region "Action"
 
-    Private Function Action(ByVal index As Integer, ByVal laLigne As String) As Boolean
+    Public Function Action(ByVal index As Integer, ByVal laLigne As String)
 
         With Comptes(index)
 
-            Dim separateLigne As String() = Split(laLigne, "(")
+            'Ici je dois avoir seulement l'action.
+            'Exemple : Map.Interaction("Statue de Classe" , "Monter a Incarnoob")
+
+            Dim separateLigne As String() = Split(laLigne.Replace(vbTab, ""), "(")
 
             Dim separate As String() = Split(separateLigne(0), ".")
 
@@ -274,19 +336,144 @@ Module TrajetExecution
 
             Select Case separate(0).ToLower
 
-                Case "map"
-
-                    Dim newMap As New FunctionMap
+                Case "ami" ' FINI
 
                     Select Case separate(1).ToLower
 
-                        Case "id" ' Map.ID(7411)
+                        Case "ouvre"
 
-                            Return newMap.ID(index, Parametre(1))
+                            Return Ami_Ouvre(index, Parametre(1))
 
-                        Case "deplacement" ' Map.deplacement("Droite")
+                        Case "supprime"
 
-                            Return newMap.Deplacement(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 500), If(Parametre.Length > 2, Parametre(3), 1500))
+                            Return Ami_Supprime(index, Parametre(1), Parametre(2))
+
+                        Case "ajoute"
+
+                            Return Ami_Ajoute(index, Parametre(1), Parametre(2))
+
+                        Case "information"
+
+                            Return Ami_Information(index, Parametre(1), Parametre(2))
+
+                        Case "rejoindre"
+
+                            Return Ami_Rejoindre(index, Parametre(1))
+
+                        Case "avertie"
+
+                            Return Ami_Avertie(index, Parametre(1))
+
+                        Case "exist"
+
+                            Return Ami_Exist(index, Parametre(1), Parametre(2))
+
+                        Case Else
+
+                            MsgBox("Information inconnu : " & laLigne)
+
+                    End Select
+
+                Case "echange" ' FINI
+
+                    Dim newEchange As New FunctionEchange
+
+                    Select Case separate(1).ToLower
+
+                        Case "echange"
+
+                            Return newEchange.Echange(index, Parametre(1))
+
+                        Case "refuse"
+
+                            Return newEchange.Refuse(index)
+
+                        Case "arrete"
+
+                            Return newEchange.Arrete(index)
+
+                        Case "accepte"
+
+                            Return newEchange.Accepte(index)
+
+                        Case "kamas"
+
+                            Return newEchange.Kamas(index, Parametre(1))
+
+                        Case "valide"
+
+                            Return newEchange.Valide(index)
+
+                    End Select
+
+                Case "defi" ' FINI
+
+                    Dim newDefi As New FunctionDefi
+
+                    Select Case separate(1).ToLower
+
+                        Case "invite"
+
+                            Return newDefi.Invite(index, Parametre(1))
+
+                        Case "accepte"
+
+                            Return newDefi.Accepte(index)
+
+                        Case "refuse"
+
+                            Return newDefi.Refuse(index)
+
+                        Case "abandonne"
+
+                            Return newDefi.Abandonne(index)
+
+                        Case "annule"
+
+                            Return newDefi.Annule(index)
+
+                    End Select
+
+                Case "item" ' FINI
+
+                    Select Case separate(1).ToLower
+
+                        Case "supprime", "suprime"
+
+                            Groupe_Item_Supprime(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+
+                        Case "retire"
+
+                            Groupe_Item_Retire(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+
+                        Case "depose"
+
+                            Groupe_Item_Depose(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+
+                        Case "existe"
+
+                            Groupe_Item_Exist(index, Parametre(1))
+
+                        Case "equipe"
+
+                            Groupe_Item_Equipe(index, Parametre(1))
+
+                        Case "desequipe"
+
+                            Groupe_Item_Desequipe(index, Parametre(1))
+
+                        Case "jette", "jete", "jet"
+
+                            Groupe_Item_Jette(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+
+                        Case "utilise"
+
+                            Groupe_Item_Utilise(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 1))
+
+                        Case Else
+
+                            MsgBox("Action inconnu, vérifier bien d'avoir les mots correctement orthographié et que la function existe." & vbCrLf &
+                                   laLigne)
 
                     End Select
 
@@ -298,90 +485,159 @@ Module TrajetExecution
 
                         Case "parler"
 
-                            newPnj.Parler(index, Parametre(1))
+                            Return Groupe_Pnj_Parler(index, Parametre(1))
 
                         Case "quitte"
 
-                           ' newPnj.Quitte(index)
+                            Select Case separate(2).ToLower
+
+                                Case "dialogue"
+
+                                    Return Groupe_Pnj_Quitte_Dialogue(index)
+
+                            End Select
 
                         Case "reponse"
 
-                            newPnj.Reponse(index, Parametre(1))
+                            Return Groupe_Pnj_Reponse(index, Parametre(1))
+
+                        Case "acheter"
+
+                            If separate.Count > 2 Then
+
+                                '  While AcheterItem(index, Parametre(1), Parametre(2), Parametre(3))
+
+                                Task.Delay(500).Wait()
+
+                                '  End While
+
+                            Else
+
+                                'Return Acheter(index, Parametre(1))
+
+                            End If
+
+                        Case "recherche"
+
+                            '   Return Recherche(index, Parametre(1))
 
                     End Select
 
-                Case "item"
+                Case "caracteristique", "caracteristiques"
 
-                    Dim newItem As New FunctionItem
+                    Dim newCaracteristique As New FunctionCaractéristique
+
+                    With newCaracteristique
+
+                        Select Case separate(1).ToLower
+
+                            Case "up"
+
+                                Return .Up(index, Parametre(1))
+
+                            Case "return", "retourne"
+
+                                Return .Return(index, Parametre(1), Parametre(2))
+
+                            Case "energie"
+
+                                Return .Energie(index, Parametre(1))
+
+                            Case "niveau", "niveaux"
+
+                                Return .Niveau(index)
+
+                            Case "experience"
+
+                                Return .Experience(index, Parametre(1))
+
+                            Case "pointdevie", "pdv"
+
+                                Return .PointDeVie(index, Parametre(1))
+
+                        End Select
+
+                    End With
+
+                Case "map"
 
                     Select Case separate(1).ToLower
 
-                        Case "supprime", "suprime"
+                        Case "id" ' Map.ID("7411")
 
-                            newItem.Supprime(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+                            Return ID(index, Parametre(1))
 
-                        Case "retire"
+                        Case "coordonnees" ' Map.Coordonnees("4,-16")
 
-                            newItem.Retire(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+                            Return Coordonnees(index, Parametre(1))
 
-                        Case "depose"
+                        Case "deplacement" ' Map.deplacement("Droite")
 
-                            newItem.Depose(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+                            Return Deplacement(index, Parametre(1))
 
-                        Case "existe"
+                        Case "interaction" ' Map.Interaction("Statue de classe" , "Se rendre a incarnam")
 
-                            newItem.Existe(index, Parametre(1))
+                            Return Interaction(index, Parametre(1), Parametre(2))
 
-                        Case "equipe"
+                        Case "attaquer"
 
-                            newItem.Equipe(index, Parametre(1))
-
-                        Case "desequipe"
-
-                            newItem.Desequipe(index, Parametre(1))
-
-                        Case "jette", "jete", "jet"
-
-                            newItem.Jette(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
-
-                        Case "utilise"
-
-                            newItem.Utilise(index, Parametre(1))
-
-                        Case Else
-
-                            MsgBox("Action inconnu, vérifier bien d'avoir les mots correctement orthographié et que la function existe." & vbCrLf &
-                                   laLigne)
+                            Return Attaquer(index, Parametre(1), Parametre(2))
 
                     End Select
 
-                Case "echange"
+                Case "pause"
 
-                    Dim newEchange As New FunctionEchange
+                    Pause(index, Parametre(1), Parametre(2))
+
+                    Return True
+
+                Case "personnage"
 
                     Select Case separate(1).ToLower
 
-                        Case "echange"
+                        Case "niveau"
 
-                            newEchange.Echange(index, Parametre(1))
-
-                        Case "refuse", "arrete"
-
-                            newEchange.RefuseArrete(index)
-
-                        Case "accepte"
-
-                            newEchange.Accepte(index)
-
-                        Case "kamas"
-
-                            newEchange.Kamas(index, Parametre(1))
-
-                        Case "valide"
-
-                            newEchange.Valide(index)
+                            Return .Personnage.Niveau
 
                     End Select
+
+                Case "recolte"
+
+                    Dim newRecolte As New FunctionRecolte
+
+                    While newRecolte.Recolte(index, Parametre(1), Parametre(2))
+
+                        Task.Delay(500).Wait()
+
+                    End While
+
+                    Return True
+
+                Case "metier"
+
+                    Dim newMetier As New FunctionMetier
+
+                    Select Case separate(1).ToLower
+
+                        Case "existe", "exist"
+
+                            Return newMetier.Existe(index, Parametre(1))
+
+                    End Select
+
+                Case "mobs"
+
+                    Select Case separate(1).ToLower
+
+                        Case "proche"
+
+                            ' IAMobs(inde)
+
+                    End Select
+
+                Case "familier"
+
+
 
             End Select
 
@@ -395,7 +651,7 @@ Module TrajetExecution
 
 #Region "Spe"
 
-    Private Function WhileReturn(ByVal index As Integer, ByVal laLigne As String) As Boolean
+    Public Function WhileReturn(ByVal index As Integer, ByVal laLigne As String) As Boolean
 
         With Comptes(index)
 
@@ -404,7 +660,7 @@ Module TrajetExecution
             Dim nomFunction As String = ReturnNomFunction(laLigne)
             Dim ParametreFunction As String() = ReturnParametreFunction(index, laLigne)
 
-            Dim resultat1 As String '= LuaScript.GetFunction(nomFunction.ToLower).Call(ParametreFunction).First
+            Dim resultat1 As String = Action(index, nomFunction) '= LuaScript.GetFunction(nomFunction.ToLower).Call(ParametreFunction).First
 
             Select Case separate(1)
 
@@ -458,89 +714,99 @@ Module TrajetExecution
 
     End Function
 
-    Public Function CallFunction(ByVal index As Integer, ByVal laLigne As String)
-
-        With Comptes(index)
-
-            Dim nomFunction As String = ReturnNomFunction(laLigne)
-            Dim ParametreFunction As String() = ReturnParametreFunction(index, laLigne)
-
-            ' Return LuaScript.GetFunction(nomFunction.ToLower).Call(ParametreFunction).First
-
-        End With
-
-    End Function
-
-    Private Function IfReturn(ByVal index As Integer, ByVal laLigne As String) As Boolean
+    Public Function IfReturn(ByVal index As Integer, ByVal laLigne As String) As Boolean
 
         With Comptes(index)
 
             Dim separateLigne As String() = Split(laLigne, " ")
 
-            Dim nomFunction As String = ReturnNomFunction(laLigne)
-            Dim ParametreFunction As String() = ReturnParametreFunction(index, laLigne)
+            Dim resultat As String = Action(index, separateLigne(1))
 
-            Dim resultat1 As String '= LuaScript.GetFunction(nomFunction.ToLower).Call(ParametreFunction).First
+            If IsNumeric(separateLigne(3)) Then
 
-            Select Case separateLigne(1)
+                Select Case separateLigne(2)
 
-                Case "Integer"
+                    Case "<"
 
-                    Select Case separateLigne(4)
+                        If CInt(resultat) < CInt(separateLigne(3)) Then
 
-                        Case "<"
+                            Return True
 
-                            If CInt(resultat1) < CInt(separateLigne(5)) Then
+                        Else
 
-                                Return True
+                            Return False
 
-                            Else
+                        End If
 
-                                Return False
+                    Case ">"
 
-                            End If
+                        If CInt(resultat) > CInt(separateLigne(3)) Then
 
-                        Case ">"
+                            Return True
 
-                            If CInt(resultat1) > CInt(separateLigne(5)) Then
+                        Else
 
-                                Return True
+                            Return False
 
-                            Else
+                        End If
 
-                                Return False
+                    Case "="
 
-                            End If
+                        If CInt(resultat) = CInt(separateLigne(3)) Then
 
-                        Case "="
+                            Return True
 
-                            If CInt(resultat1) = CInt(separateLigne(5)) Then
+                        Else
 
-                                Return True
+                            Return False
 
-                            Else
+                        End If
 
-                                Return False
+                End Select
 
-                            End If
+            ElseIf separateLigne(3).ToLower = "true" OrElse separateLigne(3).ToLower = "false" Then
 
-                    End Select
+                If CBool(resultat) = CBool(separateLigne(3)) Then
 
-                Case "String"
+                    Return True
 
-                Case "Boolean"
+                Else
 
-                    If resultat1 = Split(laLigne, " = ")(2).Split(" ")(0) Then
+                    Return False
 
-                        Return True
+                End If
 
-                    Else
+            Else
 
-                        Return False
+                Select Case separateLigne(2)
 
-                    End If
+                    Case "<>"
 
-            End Select
+                        If resultat.ToLower <> separateLigne(3).ToLower Then
+
+                            Return True
+
+                        Else
+
+                            Return False
+
+                        End If
+
+                    Case "="
+
+                        If resultat.ToLower = separateLigne(3).ToLower Then
+
+                            Return True
+
+                        Else
+
+                            Return False
+
+                        End If
+
+                End Select
+
+            End If
 
             Return False
 
@@ -552,7 +818,7 @@ Module TrajetExecution
 
 #Region "Select Case"
 
-    Private Function SelectReturn(ByVal index As Integer, ByVal laLigne As String) As String
+    Public Function SelectReturn(ByVal index As Integer, ByVal laLigne As String) As String
 
         With Comptes(index)
 
@@ -567,7 +833,7 @@ Module TrajetExecution
 
     End Function
 
-    Private Function SelectCaseReturn(ByVal index As Integer, ByVal laLigne As String, ByVal resultat As String) As Boolean
+    Public Function SelectCaseReturn(ByVal index As Integer, ByVal laLigne As String, ByVal resultat As String) As Boolean
 
         With Comptes(index)
 
@@ -631,10 +897,41 @@ Module TrajetExecution
 
 #Region "Function"
 
+    Private Function ReturnNomFunction2(ByVal laligne As String) As String
+
+        Dim separate As String() = Split(laligne, " ")
+
+        Return separate(1)
+
+        If laligne.Contains(" = ") Then
+
+            separate = Split(laligne, " = ")
+            separate = Split(separate(1), "(")
+
+        Else
+
+            If laligne.Contains("Select") Then
+
+                separate = Split(laligne, " ")
+                separate = Split(separate(2), "(")
+
+            Else
+
+                separate = Split(laligne, "(")
+
+            End If
+
+        End If
+
+        Return separate(0)
+
+    End Function
+
     Private Function ReturnNomFunction(ByVal laligne As String) As String
 
-        Dim separate As String()
+        Dim separate As String() = Split(laligne, " ")
 
+        Return separate(1)
         If laligne.Contains(" = ") Then
 
             separate = Split(laligne, " = ")

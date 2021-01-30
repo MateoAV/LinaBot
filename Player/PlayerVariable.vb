@@ -30,38 +30,44 @@ Partial Class Player
     'Envoie
     Public _Send As String
 
+    'DLL
+    Public ThreadDll As Threading.Thread
+
     'Caractéristique
-    Public BloqueCaracteristique As New Threading.ManualResetEvent(False)
+    Public Caracteristique As New CCaracteristique
 
     'Sort
-    Public Sort As New Dictionary(Of String, ClassSort)
+    Public Sort As New Dictionary(Of String, CSort)
     Public BloqueSort As New Threading.ManualResetEvent(False)
 
     'Combat
-    Public EnCombat As Boolean
+    Public Combat As New CCombat
+
+    'IA
+    Public IntelligenceArtificielle As New Dictionary(Of String, List(Of String))
 
     'Map
     Public BloqueDeplacement As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
-    Public Map As New ClassMap
+    Public Map As New CMap
 
     'Guilde
     Public BloqueGuilde As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
 
     'Inventaire
-    Public Inventaire As New Dictionary(Of Integer, ClassItem)
+    Public Inventaire As New Dictionary(Of Integer, CItem)
     Public BloqueItem As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
-    Public BonusEquipement As New Dictionary(Of Integer, ClassBonusEquipement)
+    Public BonusEquipement As New Dictionary(Of Integer, CBonusEquipement)
 
     'Dragodinde
-    Public BloqueDragodinde As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)
+    Public Dragodinde As New CDragodinde
+
 
     'Métier
-
-    Public Metier As New CMetier
-    Public Recolte As New ClassRecolte
+    Public Metier As New Dictionary(Of Integer, CMetier)
+    Public Recolte As New CRecolte
 
     'Guilde
-    Public Guilde As New ClassGuilde
+    Public Guilde As New CGuilde
 
     'Pnj
     Public Pnj As New CPnj
@@ -70,11 +76,27 @@ Partial Class Player
     Public Echange As New CEchange
 
     'Ami
-    Public Ami As New ClassAmi
+    Public Ami As New CAmi
 
     'Tchat
-    Public Tchat As New ClassTchat
+    Public Tchat As New CTchat
 
-    Public Maison As New ClassMaison
+    'Maison
+    Public Maison As New CMaison
+
+    'Groupe
+    Public Groupe As New CGroupe
+
+    'Defi
+    Public Defi As New CDefi
+
+    'Zaap
+    Public ZaapI As New Dictionary(Of Integer, Integer)
+
+    'Enclos
+    Public Enclos As New CEnclos
+
+    'Option total
+    Public [Option] As New COption
 
 End Class

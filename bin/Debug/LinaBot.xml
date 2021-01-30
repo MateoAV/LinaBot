@@ -27,6 +27,11 @@ LinaBot
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:LinaBot.My.Resources.Resources._Option">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:LinaBot.My.Resources.Resources.Agiliter">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
@@ -83,6 +88,16 @@ LinaBot
 </summary>
 </member>
 <member name="P:LinaBot.My.Resources.Resources.Console">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:LinaBot.My.Resources.Resources.DllBlue">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:LinaBot.My.Resources.Resources.DllRed">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
@@ -251,15 +266,15 @@ LinaBot
  False = Le bot n'avertie pas si un ami se connecte.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionAmi.IgnoreSupprime(System.String,System.String)">
+<member name="M:LinaBot.FunctionAmi.Exist(System.String,System.String,System.String)">
  <summary>
- Ignore ou supprime un joueur de la liste des ignorés.
+ Vérifie si le joueur se trouve dans la liste demandé.
  </summary>
  <param name="index">Indique le numéro du bot.</param>
- <param name="pseudoNom">Le pseudo ou le nom de la personne.</param>
+ <param name="PseudoNom">Le nom ou le pseudo du joueur à vérifier.</param>
  <returns>
- True = Le bot ignore ou supprime le joueur de la liste des ignorés. <br/>
- False = Le bot n'a pas réussi à ignoré ou supprimé le joueur de la liste des ignorés.
+ True = Le joueur se trouve dans la liste.<br/>
+ False = Le joueur n'existe pas dans la liste..
  </returns>
 </member>
 <member name="M:LinaBot.FunctionCaractéristique.Up(System.String,System.String)">
@@ -342,14 +357,24 @@ LinaBot
  False = Si le bot n'a pas réussie à faire la demande d'échange.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionEchange.RefuseArrete(System.String)">
+<member name="M:LinaBot.FunctionEchange.Refuse(System.String)">
  <summary>
- Refuse ou arrête la demande d'échange en cours.
+ Refuse la demande d'échange en cours.
  </summary>
  <param name="index">Indique le numéro du bot.</param>
  <returns>
  True = Si le bot a réussie à refuser la demande d'échange. <br/>
  False = Si le bot n'a pas réussie à refuser la demande d'échange.
+ </returns>
+</member>
+<member name="M:LinaBot.FunctionEchange.Arrete(System.String)">
+ <summary>
+ Arrête la demande d'échange en cours.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <returns>
+ True = Si le bot a réussie à arrêter l'échange en cours. <br/>
+ False = Si le bot n'a pas réussie à arrêter l'échange en cours.
  </returns>
 </member>
 <member name="M:LinaBot.FunctionEchange.Accepte(System.String)">
@@ -383,12 +408,23 @@ LinaBot
  False = Si le bot n'a pas réussie à valider l'échange.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Supprime(System.String,System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.Player.Send(System.String,System.String[])">
+ <summary>
+ Envoie un message au serveur de jeu/Authentification.
+ </summary>
+ <param name="message">Le message à envoyer au serveur.</param>
+ <param name="InfoRecv">Les informations que doit recevoir le bot du serveur avant de continuer.</param>
+ <returns>
+ True = Le bot à bien reçu les informations voulu. <br/>
+ False = Le bot n'a pas reçu l'information voulu ou à temps.
+ </returns>
+</member>
+<member name="M:LinaBot.FunctionItem.Supprime(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
  <summary>
  Permet la suppression d'un item contenue dans l'inventaire du joueur.
  </summary>
  <param name="index">Indique le numéro bot.</param>
- <param name="nom">Nom/ID de l'item.</param>
+ <param name="nomID">Nom/ID de l'item.</param>
  <param name="quantite">La quantité à supprimer (de base 999.999).</param>
  <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être supprimer.</param>
  <returns>
@@ -396,12 +432,12 @@ LinaBot
  False = Le bot n'a pas réussi à supprimer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Retire(System.String,System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Retire(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
  <summary>
  Permet de retirer un item contenue dans la banque/coffre/échange/HDV/Etc...
  </summary>
  <param name="index">Indique le numéro bot.</param>
- <param name="nom">Nom/ID de l'item.</param>
+ <param name="nomID">Nom/ID de l'item.</param>
  <param name="quantite">La quantité à retirer (de base 999.999).</param>
  <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être retiré.</param>
  <returns>
@@ -409,37 +445,37 @@ LinaBot
  False = Le bot n'a pas réussi à retirer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Depose(System.String,System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Depose(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
  <summary>
  Permet de déposer un item en Banque/Echange/Coffre/Etc...
  </summary>
  <param name="index">Indique le numéro bot.</param>
- <param name="nom">Nom/ID de l'item.</param>
+ <param name="nomID">Nom/ID de l'item.</param>
  <param name="quantite">La quantité à déposer (de base 999.999).</param>
  <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être déposé.</param>
  <returns>
- True = Le bot a bien retiré l'item. <br/>
- False = Le bot n'a pas réussi à retirer l'item.
+ True = Le bot a bien déposé l'item. <br/>
+ False = Le bot n'a pas réussi à déposer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Existe(System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Existe(System.String,System.String,LinaBot.CItemCaractéristique)">
  <summary>
  Retourne un boolean si l'item existe ou non.
  </summary>
  <param name="index">Indique le numéro bot.</param>
- <param name="nom">Nom/ID de l'item.</param>
+ <param name="nomID">Nom/ID de l'item.</param>
  <param name="caracteristique">Les caractéristiques que doit avoir l'item.</param>
  <returns>
  True = L'item existe dans l'inventaire. <br/>
  False = L'item n'existe pas dans l'inventaire.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Equipe(System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Equipe(System.String,System.String,LinaBot.CItemCaractéristique)">
  <summary>
  Equipe une item selon le nom/ID et les caractéristiques.
  </summary>
  <param name="index">Indique le numéro bot.</param>
- <param name="nom">Nom/ID de l'item.</param>
+ <param name="nomID">Nom/ID de l'item.</param>
  <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être equipé.</param>
  <returns>
  True = L'item est équipé. <br/>
@@ -456,24 +492,24 @@ LinaBot
  Retourne le numéro pour savoir où est équipé l'item, si rien, retourne -1.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Desequipe(System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Desequipe(System.String,System.String,LinaBot.CItemCaractéristique)">
  <summary>
  Déséquipe un item.
  </summary>
  <param name="index">Indique le numéro bot.</param>
- <param name="nom">Nom/ID de l'item.</param>
+ <param name="nomID">Nom/ID de l'item.</param>
  <param name="caracteristique">Les caractéristiques que doit avoir l'item pour être déséquipé.</param>
  <returns>
  True = L'item est déséquipé. <br/>
  False = L'item n'est pas déséquipé.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Jette(System.String,System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Jette(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
  <summary>
  Jétte un objet au sol.
  </summary>
  <param name="index">Indique le numéro bot.</param>
- <param name="nom">Nom/ID de l'item.</param>
+ <param name="nomID">Nom/ID de l'item.</param>
  <param name="quantité">La quantité à jeter (de base 999.999).</param>
  <param name="caractéristique">Les caractéristiques que doit avoir l'item pour être jeté.</param>
  <returns>
@@ -486,7 +522,7 @@ LinaBot
  Utilise un objet de l'inventaire.
  </summary>
  <param name="index">Indique le numéro bot.</param>
- <param name="nom">Nom/ID de l'item.</param>
+ <param name="nomID">Nom/ID de l'item.</param>
  <returns>
  True = Le bot a bien utilisé l'item. <br/>
  False = Le bot n'a pas réussi à utiliser l'item.
@@ -498,8 +534,19 @@ LinaBot
  </summary>
  <param name="index">Le numéro du bot.</param>
  <param name="mapID">La map ID à vérifier, Exemple : 7411</param>
- <returns>True = La MapID correspond à celle du bot. <br/>
- False = La MapID ne correspond pas à celle du bot.</returns>
+ <returns>
+ True = La MapID correspond à celle du bot. <br/>
+ False = La MapID ne correspond pas à celle du bot.
+ </returns>
+</member>
+<member name="M:LinaBot.FunctionMap.Coordonnees(System.Int32,System.String)">
+ <summary>
+ Compare 2 coordonnées de map.
+ </summary>
+ <param name="index">Le numéro du bot.</param>
+ <param name="mapCoordonnees">La map à vérifier, Exemple : 4,-16</param>
+ <returns>True = La Map correspond à celle du bot. <br/>
+ False = La Map ne correspond pas à celle du bot.</returns>
 </member>
 <member name="M:LinaBot.FunctionMap.Deplacement(System.Int32,System.String,System.Int32,System.Int32)">
  <summary>
@@ -508,8 +555,10 @@ LinaBot
  <param name="celluleDirection">Indique la direction ou la cellule où doit aller le bot.</param>
  <param name="delaiMinimum">Temps d'attente minimum avant de pouvoir faire une autre action.</param>
  <param name="delaiMaximum">Temps d'attente maximum avant de pouvoir faire une autre action.</param>
- <returns>True = Le déplacement a réussi. <br/> 
- False = Le déplacement a échoué.</returns>
+ <returns>
+ True = Le déplacement a réussi. <br/> 
+ False = Le déplacement a échoué.
+ </returns>
  
 </member>
 <member name="M:LinaBot.FunctionMap.ChangerOrientation(System.Int32,System.String)">
@@ -520,6 +569,18 @@ LinaBot
  <param name="monOrientation">L'orientation à avoir : <br/>
  Nord , NordEst , NordOuest , Sud , SudEst , SudOuest , Est , Ouest</param>
  <returns></returns>
+</member>
+<member name="M:LinaBot.FunctionMap.Interaction(System.Int32,System.String,System.String)">
+ <summary>
+ Effectue une interaction avec un objet interactif en jeu.
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <param name="nomID">Le nom ou l'ID avec quoi intéragir.</param>
+ <param name="actionID">le nom de l'action ou l'ID à faire avec l'objet interactif.</param>
+ <returns>
+ True = le bot à intéragit avec l'objet. <br/>
+ False = Le bot n'a pas réussi à intéragir avec l'objet.
+ </returns>
 </member>
 <member name="M:LinaBot.FunctionMetier.Option(System.Int32,System.String,System.Boolean,System.Boolean,System.Boolean,System.Int32)">
  <summary>
@@ -536,7 +597,7 @@ LinaBot
  False = Option non changé.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionMetier.ModePublic(System.Int32,System.Boolean)">
+<member name="M:LinaBot.FunctionMetier.Public(System.Int32,System.Boolean)">
  <summary>
  Active/Désactive le mode public.
  </summary>
@@ -598,7 +659,7 @@ LinaBot
  Parler a un pnj présent sur la map.
  </summary>
  <param name="index">Indique le numéro du bot.</param>
- <param name="nom">Le nom ou l'ID du Pnj a parler.</param>
+ <param name="nomID">Le nom ou l'ID du Pnj a parler.</param>
  <returns>
  True = Si le bot est en dialogue. <br/>
  False = Le bot n'a pas réussi à parler au Pnj.
@@ -646,7 +707,7 @@ LinaBot
  False = Le bot n'a pas réussi à quitter le mode "Acheter/Vendre" du Pnj.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.AcheterVendreVendItem(System.Int32,System.String,System.Int32,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.AcheterVendreVendItem(System.Int32,System.String,System.Int32,LinaBot.CItemCaractéristique)">
  <summary>
  Vend un item au Pnj.
  </summary>
@@ -659,7 +720,7 @@ LinaBot
  False = Le bot n'a pas réussi à vendre l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.AcheterVendreAcheteItem(System.Int32,System.String,System.Int32,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.AcheterVendreAcheteItem(System.Int32,System.String,System.Int32,LinaBot.CItemCaractéristique)">
  <summary>
  Achète un item au Pnj.
  </summary>
@@ -704,7 +765,7 @@ LinaBot
  False = Le bot n'a pas réussi à quitter le mode "Vendre" du Pnj.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.VendreItem(System.Int32,System.String,System.Int32,System.Int32,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.VendreItem(System.Int32,System.String,System.Int32,System.Int32,LinaBot.CItemCaractéristique)">
  <summary>
  Vend un item dans l'hôtel de vente.
  </summary>
@@ -718,7 +779,7 @@ LinaBot
  False = l'item n'a pas pu être mis en vente.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.Retirer(System.String,System.String,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.Retirer(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
  <summary>
  Permet de retirer un item contenue dans l'Hôtel de vente.
  </summary>
@@ -731,7 +792,7 @@ LinaBot
  False = Le bot n'a pas réussi à retirer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.Selectionne(System.Int32,System.String,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.Selectionne(System.Int32,System.String,LinaBot.CItemCaractéristique)">
  <summary>
  Permet de sélectionner un item contenue dans l'Hôtel de vente.
  </summary>
@@ -745,7 +806,7 @@ LinaBot
 </member>
 <member name="M:LinaBot.FunctionPnj.Acheter(System.Int32,System.String)">
  <summary>
- Permet de vendre des items dans l'hôtel de vente.
+ Selectionne l'action "Acheter" du Pnj.
  </summary>
  <param name="index">Indique le numéro du bot.</param>
  <param name="nomID">Le nom ou l'ID du Pnj avec qui faire des achats en hôtel.</param>
@@ -775,7 +836,7 @@ LinaBot
  False = Le bot n'a pas trouvé l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.AcheterItem(System.Int32,System.String,System.Int32,System.Int32,LinaBot.ClassItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.AcheterItem(System.Int32,System.String,System.Int32,System.Int32,LinaBot.CItemCaractéristique)">
  <summary>
  Achète un item dans l'hôtel de vente.
  </summary>
@@ -811,15 +872,19 @@ LinaBot
  False = Le bot n'à pas sélectionné la catégorie voulu. <br/>
  </returns>
 </member>
-<member name="M:LinaBot.Class_Récolte.Recolte(System.Int32,System.String)">
+<member name="M:LinaBot.FunctionRecolte.Recolte(System.Int32,System.String,System.String)">
  <summary>
  Recolte les ressources sur la map selon le nom indiqué.
  </summary>
- <param name="index"></param>
- <param name="nom"></param>
- <returns></returns>
+ <param name="index">Le numéro du bot.</param>
+ <param name="nom">Le nom ou l'ID de la récolte, exemple : Frene</param>
+ <param name="action">Le nom de l'action à faire en jeu, exemple : couper</param>
+ <returns>
+ True = le bot à fait une récolte. <br/>
+ False = Le bot n'a plus aucune récolte disponible sur la map.
+ </returns>
 </member>
-<member name="M:LinaBot.Class_Récolte.Recherche(System.Int32,System.String)">
+<member name="M:LinaBot.FunctionRecolte.Recherche(System.Int32,System.String)">
  <summary>
  Cherche la récolte la plus proche du joueur.
  </summary>
@@ -829,7 +894,7 @@ LinaBot
  Renvoie la cellule de la récolte.
  </returns>
 </member>
-<member name="M:LinaBot.Class_Récolte.RecolteMonstre(System.Int32,System.String)">
+<member name="M:LinaBot.FunctionRecolte.RecolteMonstre(System.Int32,System.String)">
  <summary>
  Vérifie si un mob ne se trouve pas sur la cellule voulu, sinon le bot attaquera sans le vouloir le mob.
  </summary>
@@ -839,13 +904,13 @@ LinaBot
  False = Le bot ne peut pas aller sur la cellule indiqué sinon il attaque le groupe de monstre.
  </returns>
 </member>
-<member name="M:LinaBot.Class_Récolte.RecolteRaté(System.Int32,System.String)">
+<member name="M:LinaBot.FunctionRecolte.RecolteRaté(System.Int32,System.String)">
  <summary>
  Change l'information de la récolte si le bot n'a pas réussi à la récolter, évite ainsi au bot de spammer la récolte.
  </summary>
  <param name="cellule">Indique la cellule de la récolte.</param>
 </member>
-<member name="M:LinaBot.Class_Récolte.RecolteCelluleProche(System.Int32,System.String,System.Int32)">
+<member name="M:LinaBot.FunctionRecolte.RecolteCelluleProche(System.Int32,System.String,System.Int32)">
  <summary>
  Donne la cellule la plus proche pour récolter la ressource.
  </summary>

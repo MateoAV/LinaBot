@@ -6,7 +6,7 @@
     Public Comptes As New List(Of Player)
     Friend VarServeur As New Dictionary(Of String, ClassServeur)
     Public VarItems As New Dictionary(Of Integer, sItems)
-    Public VarSort As New Dictionary(Of Integer, Dictionary(Of Integer, ClassSort))
+    Public VarSort As New Dictionary(Of Integer, Dictionary(Of Integer, CSort))
     Public VarQuête As New Dictionary(Of Integer, String)
     Public VarMap As New Dictionary(Of Integer, String)
     Public VarInteraction As New Dictionary(Of Integer, sInteraction)
@@ -15,8 +15,8 @@
     Public VarPnj As New Dictionary(Of Integer, String)
     Public VarPnjRéponse As New Dictionary(Of Integer, String)
     Public VarMaison As New Dictionary(Of Integer, sMaison)
-    Public VarMétier As New Dictionary(Of Integer, sMétier)
-    Public VarFamilier As New Dictionary(Of Integer, Dictionary(Of String, sFamilier))
+    Public VarMetier As New Dictionary(Of Integer, sMetier)
+    Public VarFamilier As New Dictionary(Of Integer, sFamilier)
     Public VarCaractéristique As New Dictionary(Of String, Dictionary(Of String, String()))
     Public VarPersonnage As New Dictionary(Of String, sPersonnage)
     Public VarItemsCategorieNom As New Dictionary(Of Integer, String) From
@@ -104,7 +104,8 @@
 #Region "Structure"
     Structure sFamilier
 
-        Dim NourritureId As List(Of Integer)
+        Dim Nom As String
+        Dim Caracteristique As Dictionary(Of String, List(Of Integer))
         Dim IntervalRepasMin As Integer
         Dim IntervalRepasMax As Integer
         Dim CapacitéNormal As Integer
@@ -112,13 +113,22 @@
 
     End Structure
 
-    Structure sMétier
+    Structure sMetier
 
-        Dim IdJob As Integer
+        Dim ID As Integer
         Dim Nom As String
-        Dim Workshop As Dictionary(Of Integer, String())
+        Dim AtelierRessource As Dictionary(Of Integer, sMetierAtelierRessource)
 
     End Structure
+
+    Structure sMetierAtelierRessource
+
+        Dim ID As Integer
+        Dim Nom As String
+        Dim Action As String
+
+    End Structure
+
     Structure sMaison
 
         Dim Nom As String

@@ -1,6 +1,6 @@
 ﻿Imports System.Net.Sockets, System.Net, Org.Mentalis.Network.ProxySocket
 
-Module Divers
+Public Module Divers
 
     Private Delegate Sub dlgDivers()
     Private Delegate Function dlgFDivers()
@@ -65,6 +65,10 @@ Module Divers
 
                 Else
 
+                    .FrmUser.RichTextBox1.SelectionColor = couleur
+                    .FrmUser.RichTextBox1.AppendText("[" & TimeOfDay & "] " & indice & " " & message & vbCrLf)
+                    .FrmUser.RichTextBox1.ScrollToCaret()
+
                     .Tchat.Tchat.Add("[" & TimeOfDay & "] " & indice & " " & message, couleur)
 
                 End If
@@ -88,6 +92,9 @@ Module Divers
 
                 Else
 
+                    .FrmUser.RichTextBox2.SelectionColor = couleur
+                    .FrmUser.RichTextBox2.AppendText("[" & TimeOfDay & "] " & indice & " " & message & vbCrLf)
+                    .FrmUser.RichTextBox2.ScrollToCaret()
                     .SockSendRecv.Add("[" & TimeOfDay & "] " & indice & " " & message, couleur)
 
                 End If
@@ -165,7 +172,7 @@ Module Divers
 
     End Function
 
-    Public Function CopyItem(ByVal index As Integer, ByVal dico As Dictionary(Of Integer, ClassItem)) As Dictionary(Of Integer, ClassItem)
+    Public Function CopyItem(ByVal index As Integer, ByVal dico As Dictionary(Of Integer, CItem)) As Dictionary(Of Integer, CItem)
 
         With Comptes(index)
 
@@ -175,9 +182,9 @@ Module Divers
 
             Else
 
-                Dim newDico As New Dictionary(Of Integer, ClassItem)
+                Dim newDico As New Dictionary(Of Integer, CItem)
 
-                For Each pair As KeyValuePair(Of Integer, ClassItem) In dico
+                For Each pair As KeyValuePair(Of Integer, CItem) In dico
 
                     newDico.Add(pair.Key, pair.Value)
 
@@ -190,7 +197,7 @@ Module Divers
         End With
 
     End Function
-    Public Function CopyMap(ByVal index As Integer, ByVal dico As Dictionary(Of Integer, ClassEntite)) As Dictionary(Of Integer, ClassEntite)
+    Public Function CopyMap(ByVal index As Integer, ByVal dico As Dictionary(Of Integer, CEntite)) As Dictionary(Of Integer, CEntite)
 
         With Comptes(index)
 
@@ -200,9 +207,9 @@ Module Divers
 
             Else
 
-                Dim newDico As New Dictionary(Of Integer, ClassEntite)
+                Dim newDico As New Dictionary(Of Integer, CEntite)
 
-                For Each pair As KeyValuePair(Of Integer, ClassEntite) In dico
+                For Each pair As KeyValuePair(Of Integer, CEntite) In dico
 
                     newDico.Add(pair.Key, pair.Value)
 
@@ -216,7 +223,7 @@ Module Divers
 
     End Function
 
-    Public Function CopyAmi(ByVal index As Integer, ByVal dico As Dictionary(Of String, ClassAmiInformation)) As Dictionary(Of String, ClassAmiInformation)
+    Public Function CopyAmi(ByVal index As Integer, ByVal dico As Dictionary(Of String, CAmiInformation)) As Dictionary(Of String, CAmiInformation)
 
         With Comptes(index)
 
@@ -226,9 +233,9 @@ Module Divers
 
             Else
 
-                Dim newDico As New Dictionary(Of String, ClassAmiInformation)
+                Dim newDico As New Dictionary(Of String, CAmiInformation)
 
-                For Each pair As KeyValuePair(Of String, ClassAmiInformation) In dico
+                For Each pair As KeyValuePair(Of String, CAmiInformation) In dico
 
                     newDico.Add(pair.Key, pair.Value)
 
@@ -242,7 +249,7 @@ Module Divers
 
     End Function
 
-    Public Function CopyInteraction(ByVal index As Integer, ByVal dico As Dictionary(Of Integer, ClassInteraction)) As Dictionary(Of Integer, ClassInteraction)
+    Public Function CopyInteraction(ByVal index As Integer, ByVal dico As Dictionary(Of Integer, CInteraction)) As Dictionary(Of Integer, CInteraction)
 
         With Comptes(index)
 
@@ -252,9 +259,9 @@ Module Divers
 
             Else
 
-                Dim newDico As New Dictionary(Of Integer, ClassInteraction)
+                Dim newDico As New Dictionary(Of Integer, CInteraction)
 
-                For Each pair As KeyValuePair(Of Integer, ClassInteraction) In dico
+                For Each pair As KeyValuePair(Of Integer, CInteraction) In dico
 
                     newDico.Add(pair.Key, pair.Value)
 
@@ -267,6 +274,8 @@ Module Divers
         End With
 
     End Function
+
+
 
     ''' <summary>
     ''' Retourne l'ID ou la categorie de l'item.
@@ -302,6 +311,40 @@ Module Divers
                 End If
 
             Next
+
+        End With
+
+        Return ""
+
+    End Function
+
+    Public Sub Pause(ByVal index As String, ByVal minimum As String, ByVal maximum As String)
+
+        Dim rand As New Random
+
+        Task.Delay(rand.Next(minimum, maximum)).Wait()
+
+    End Sub
+
+    Public Function ReturnOpenFileDialog(index As Integer) As String
+
+        With Comptes(index)
+
+            If .FrmUser.InvokeRequired Then
+
+                Return .FrmUser.Invoke(New dlgFDivers(Function() ReturnOpenFileDialog(index)))
+
+            Else
+
+                Dim Ouverture_Fichier As New OpenFileDialog
+
+                If Ouverture_Fichier.ShowDialog = 1 Then
+
+                    Return Ouverture_Fichier.FileName
+
+                End If
+
+            End If
 
         End With
 

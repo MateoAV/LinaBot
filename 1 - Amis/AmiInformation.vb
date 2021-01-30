@@ -1,6 +1,6 @@
 ﻿Module AmiInformation
 
-    Sub GiAmiEnnemi(ByVal index As Integer, ByVal data As String)
+    Sub GiAmiEnnemi(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -11,8 +11,17 @@
 
                 Dim separateData As String() = Split(data, "|")
 
-                .Ami.Ami.Clear()
-                .Ami.Ennemi.Clear()
+                Select Case separateData(0)
+
+                    Case "FL"
+
+                        .Ami.Ami.Clear()
+
+                    Case "iL"
+
+                        .Ami.Ennemi.Clear()
+
+                End Select
 
                 If separateData.Length > 1 Then
 
@@ -20,13 +29,14 @@
 
                         Dim separate As String() = Split(separateData(i), ";")
 
-                        Dim newFriend As New ClassAmiInformation
+                        Dim newFriend As New CAmiInformation
 
                         With newFriend
 
+                            .Pseudo = separate(0)
+
                             If separate.Length > 1 Then
 
-                                .Pseudo = separate(0)
                                 .Connecte = separate(1)
                                 .Nom = separate(2)
                                 .Niveau = separate(3)
@@ -119,7 +129,6 @@
 
                             Else
 
-                                .Pseudo = separate(0)
                                 .Connecte = False
                                 .Nom = ""
                                 .Niveau = ""
@@ -148,8 +157,6 @@
 
                 End If
 
-                .Ami.BloqueAmi.Set()
-
             Catch ex As Exception
 
                 ErreurFichier(index, .Personnage.NomDuPersonnage, "GiAmiEnnemi", data & vbCrLf & ex.Message)
@@ -160,7 +167,7 @@
 
     End Sub
 
-    Sub GiAmiEnnemiAjoute(ByVal index As Integer, ByVal data As String)
+    Sub GiAmiEnnemiAjoute(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -171,9 +178,25 @@
 
                 Dim separateData As String() = Split(Mid(data, 4), ";")
 
-                EcritureMessage(index, "[Dofus]", "(" & separateData(0) & ") " & separateData(2) & " a été ajouté à votre liste " & If(Mid(data, 1, 1) = "F", "d'ami.", "d'ennemi"), Color.Green)
+                Select Case Mid(separateData(0), 1, 3)
 
-                .Ami.BloqueAmi.Set()
+                    Case "FAK"
+
+                        EcritureMessage(index, "[Dofus]", "(" & separateData(0) & ") " & separateData(2) & " a été ajouté à votre liste d'ami.", Color.Green)
+
+                    Case "iAK"
+
+                        EcritureMessage(index, "[Dofus]", "(" & separateData(0) & ") " & separateData(2) & " a été ajouté à votre liste d'ennemi", Color.Green)
+
+                    Case "FAEa"
+
+                        EcritureMessage(index, "[Dofus]", "Déjà dans ta liste d'amis.", Color.Red)
+
+                    Case "iAEa"
+
+                        EcritureMessage(index, "[Dofus]", "Déjà dans ta liste d'ennemis.", Color.Red)
+
+                End Select
 
             Catch ex As Exception
 
@@ -185,7 +208,7 @@
 
     End Sub
 
-    Sub GiAmiEnnemiInformation(ByVal index As Integer, ByVal data As String)
+    Sub GiAmiEnnemiInformation(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -214,11 +237,21 @@
 
                         phrase &= "Brakmar"
 
+                    Case "18"
+
+                        phrase &= "Astrub"
+
                 End Select
 
-                EcritureMessage(index, "[Dofus]", phrase, Color.Green)
+                With .Ami.Information
 
-                .Ami.BloqueAmi.Set()
+                    .Pseudo = separateData(0)
+                    .Nom = separateData(2)
+                    .Zone = separateData(3)
+
+                End With
+
+                EcritureMessage(index, "[Dofus]", phrase, Color.Green)
 
             Catch ex As Exception
 
@@ -230,4 +263,127 @@
 
     End Sub
 
+    Sub GiAmiEnnemiInformationEchec(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' BWE Linaculer 
+                ' BWE Pseudo    
+
+                .Ami.Information = New CAmiInformation
+
+                EcritureMessage(index, "[Dofus]", Mid(data, 4) & " n'est pas connecté ou n'existe pas.", Color.Green)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiAmiEnnemiInformationEchec", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Sub GiAmiEnnemiSupprimer(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                'FDK 
+                'iDK
+                'iAEf
+                'FAEf
+
+                Select Case data
+
+                    Case "FDK"
+
+                        EcritureMessage(index, "[Dofus]", "Tu viens de perdre un ami.", Color.Green)
+
+                    Case "iDK"
+
+                        EcritureMessage(index, "[Dofus]", "L'ennemi a été effacé, la paix gagne une bataille.", Color.Green)
+
+                    Case "iAEf", "FAEf"
+
+                        EcritureMessage(index, "[Dofus]", "Impossible, ce perso ou compte n'existe pas ou n'est pas connecté.", Color.Red)
+
+                End Select
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiAmiEnnemiSupprimer", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Sub GiAmiEnnemiAvertie(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' FO - ou +
+                ' FO - ou +
+
+                Select Case Mid(data, 3)
+
+                    Case "-"
+
+                        .Ami.Avertie = False
+
+                        EcritureMessage(index, "[Dofus]", "Vous serai pas avertie lors de la connexion d'un ami.", Color.Green)
+
+                    Case "+"
+
+                        .Ami.Avertie = True
+
+                        EcritureMessage(index, "[Dofus]", "Vous serai avertie lors de la connexion d'un ami.", Color.Green)
+
+                End Select
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiAmiEnnemiAvertie", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
 End Module
+
+#Region "Class"
+
+Public Class CAmi
+
+    Public Ami As New Dictionary(Of String, CAmiInformation)
+    Public Ennemi As New Dictionary(Of String, CAmiInformation)
+    Public Ignore As New Dictionary(Of String, CAmiInformation)
+    Public Information As New CAmiInformation
+    Public Avertie As Boolean
+
+End Class
+
+Public Class CAmiInformation
+
+    Public Pseudo As String
+    Public Connecte As Boolean
+    Public Nom As String
+    Public Niveau As String
+    Public Alignement As String
+    Public Classe As String
+    Public Sex As String
+    Public ClasseSex As String
+    Public Zone As Integer
+
+End Class
+
+#End Region

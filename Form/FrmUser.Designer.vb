@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmUser
     Inherits System.Windows.Forms.UserControl
 
     'UserControl remplace la méthode Dispose pour nettoyer la liste des composants.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmUser
     'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmUser))
@@ -44,9 +44,6 @@ Partial Class FrmUser
         Me.Label18 = New System.Windows.Forms.Label()
         Me.ProgressBarVitaliter = New System.Windows.Forms.ProgressBar()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.TimerRegeneration = New System.Windows.Forms.Timer(Me.components)
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.TimerStatut = New System.Windows.Forms.Timer(Me.components)
         Me.ButtonPlugInIA = New System.Windows.Forms.Button()
         Me.ButtonCaracteristique = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -60,8 +57,23 @@ Partial Class FrmUser
         Me.Button10 = New System.Windows.Forms.Button()
         Me.ButtonFamilier = New System.Windows.Forms.Button()
         Me.ButtonIA = New System.Windows.Forms.Button()
+        Me.Button_Option = New System.Windows.Forms.Button()
+        Me.TimerRegeneration = New System.Windows.Forms.Timer(Me.components)
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TimerStatut = New System.Windows.Forms.Timer(Me.components)
+        Me.ButtonDll = New System.Windows.Forms.Button()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.MenuStrip1.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -70,7 +82,7 @@ Partial Class FrmUser
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RthToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(446, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1218, 24)
         Me.MenuStrip1.TabIndex = 402
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -255,27 +267,11 @@ Partial Class FrmUser
         Me.FlowLayoutPanel1.Controls.Add(Me.Button10)
         Me.FlowLayoutPanel1.Controls.Add(Me.ButtonFamilier)
         Me.FlowLayoutPanel1.Controls.Add(Me.ButtonIA)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Button_Option)
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(163, 27)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(280, 190)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(299, 190)
         Me.FlowLayoutPanel1.TabIndex = 427
-        '
-        'TimerRegeneration
-        '
-        Me.TimerRegeneration.Enabled = True
-        Me.TimerRegeneration.Interval = 2000
-        '
-        'ToolTip1
-        '
-        Me.ToolTip1.AutomaticDelay = 1
-        Me.ToolTip1.AutoPopDelay = 60000
-        Me.ToolTip1.InitialDelay = 1
-        Me.ToolTip1.ReshowDelay = 0
-        '
-        'TimerStatut
-        '
-        Me.TimerStatut.Enabled = True
-        Me.TimerStatut.Interval = 1000
         '
         'ButtonPlugInIA
         '
@@ -433,11 +429,121 @@ Partial Class FrmUser
         Me.ButtonIA.TabIndex = 411
         Me.ButtonIA.UseVisualStyleBackColor = True
         '
+        'Button_Option
+        '
+        Me.Button_Option.BackgroundImage = Global.LinaBot.My.Resources.Resources._Option
+        Me.Button_Option.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button_Option.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button_Option.ForeColor = System.Drawing.Color.White
+        Me.Button_Option.Location = New System.Drawing.Point(171, 115)
+        Me.Button_Option.Name = "Button_Option"
+        Me.Button_Option.Size = New System.Drawing.Size(50, 50)
+        Me.Button_Option.TabIndex = 412
+        Me.Button_Option.UseVisualStyleBackColor = True
+        '
+        'TimerRegeneration
+        '
+        Me.TimerRegeneration.Enabled = True
+        Me.TimerRegeneration.Interval = 2000
+        '
+        'ToolTip1
+        '
+        Me.ToolTip1.AutomaticDelay = 1
+        Me.ToolTip1.AutoPopDelay = 60000
+        Me.ToolTip1.InitialDelay = 1
+        Me.ToolTip1.ReshowDelay = 0
+        '
+        'TimerStatut
+        '
+        Me.TimerStatut.Enabled = True
+        Me.TimerStatut.Interval = 1000
+        '
+        'ButtonDll
+        '
+        Me.ButtonDll.BackgroundImage = Global.LinaBot.My.Resources.Resources.DllBlue
+        Me.ButtonDll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.ButtonDll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonDll.ForeColor = System.Drawing.Color.White
+        Me.ButtonDll.Location = New System.Drawing.Point(386, 223)
+        Me.ButtonDll.Name = "ButtonDll"
+        Me.ButtonDll.Size = New System.Drawing.Size(76, 75)
+        Me.ButtonDll.TabIndex = 413
+        Me.ButtonDll.UseVisualStyleBackColor = True
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(468, 27)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(747, 520)
+        Me.TabControl1.TabIndex = 428
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.RichTextBox1)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(739, 494)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.RichTextBox1.Location = New System.Drawing.Point(6, 6)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(727, 482)
+        Me.RichTextBox1.TabIndex = 0
+        Me.RichTextBox1.Text = ""
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.RichTextBox2)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(739, 494)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'RichTextBox2
+        '
+        Me.RichTextBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.RichTextBox2.Location = New System.Drawing.Point(6, 6)
+        Me.RichTextBox2.Name = "RichTextBox2"
+        Me.RichTextBox2.Size = New System.Drawing.Size(727, 482)
+        Me.RichTextBox2.TabIndex = 1
+        Me.RichTextBox2.Text = ""
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(113, 380)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 429
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(194, 382)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(101, 20)
+        Me.TextBox1.TabIndex = 430
+        '
         'FrmUser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.Label20)
         Me.Controls.Add(Me.ProgressBarPods)
@@ -450,11 +556,15 @@ Partial Class FrmUser
         Me.Controls.Add(Me.LabelEtat)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.ButtonDll)
         Me.Name = "FrmUser"
-        Me.Size = New System.Drawing.Size(446, 221)
+        Me.Size = New System.Drawing.Size(1218, 550)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -496,4 +606,13 @@ Partial Class FrmUser
     Friend WithEvents TimerStatut As Timer
     Friend WithEvents ButtonFamilier As Button
     Friend WithEvents ButtonIA As Button
+    Friend WithEvents Button_Option As Button
+    Friend WithEvents ButtonDll As Button
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents RichTextBox2 As RichTextBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents TextBox1 As TextBox
 End Class

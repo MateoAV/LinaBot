@@ -13,7 +13,7 @@
     ''' True = Option bien changé. <br/>
     ''' False = Option non changé.
     ''' </returns>
-    Public Function [Option](ByVal index As Integer, ByVal nomID As String, ByVal payant As Boolean, ByVal gratuitSurEchec As Boolean, ByVal neFournitAucuneRessource As Boolean, ByVal nombreIngredientMinimum As Integer) As Boolean
+    Public Function [Option](index As Integer, nomID As String, payant As Boolean, gratuitSurEchec As Boolean, neFournitAucuneRessource As Boolean, nombreIngredientMinimum As Integer) As Boolean
 
         With Comptes(index)
 
@@ -22,9 +22,9 @@
                 Dim numeroMetier As Integer = 0
                 Dim NbrOption As Integer
 
-                For Each pair As KeyValuePair(Of String, CMetierInformation) In .Metier.Metier
+                For Each pair As CMetier In .Metier.Values
 
-                    If pair.Value.Nom.ToLower = nomID.ToLower OrElse pair.Value.ID = nomID Then
+                    If pair.Nom.ToLower = nomID.ToLower OrElse pair.ID = nomID Then
 
                         If payant Then
 
@@ -44,9 +44,8 @@
 
                         End If
 
-                        .Socket.Envoyer("JO" & numeroMetier & "|" & NbrOption & "|" & nombreIngredientMinimum)
-
-                        Return True
+                        Return .Send("JO" & numeroMetier & "|" & NbrOption & "|" & nombreIngredientMinimum,
+                                    {"JO" & numeroMetier}) ' Changement des options du métier.
 
                     End If
 
@@ -56,7 +55,7 @@
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "Metier[Option]", ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "FunctionMetier_[Option]", ex.Message)
 
             End Try
 
@@ -65,6 +64,7 @@
         End With
 
     End Function
+
 
     ''' <summary>
     ''' Active/Désactive le mode public.
@@ -78,31 +78,50 @@
     ''' True = l'action a réussie. <br/>
     ''' False = l'action a échoué.
     ''' </returns>
-    Public Function ModePublic(ByVal index As Integer, ByVal activer As Boolean) As Boolean
+    Public Function [Public](index As Integer, activer As Boolean) As Boolean
 
         With Comptes(index)
 
             Try
 
-                .Metier.Bloque.Reset()
-
                 If activer Then
 
-                    .Socket.Envoyer("EW+")
+                    Return .Send("EW+",
+                                {"EW+"}) ' Mode public activé.
 
                 Else
 
-                    .Socket.Envoyer("EW-")
+                    Return .Send("EW-",
+                                {"EW-"}) ' Mode public désactivé.
 
-            End If
-
-                Return .Metier.Bloque.WaitOne(15000)
+                End If
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "MetierModePublic", ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "FunctionMetier_Public", ex.Message)
 
             End Try
+
+            Return False
+
+        End With
+
+    End Function
+
+
+    Public Function Existe(index As Integer, nomID As String) As Boolean
+
+        With Comptes(index)
+
+            For Each pair As CMetier In .Metier.Values
+
+                If pair.Nom.ToLower = nomID.ToLower OrElse pair.ID = nomID Then
+
+                    Return True
+
+                End If
+
+            Next
 
             Return False
 

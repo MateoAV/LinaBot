@@ -118,100 +118,109 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Agiliter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AlignementNeutre" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\Neutre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Ami" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1290.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Ampoule_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\Ampoule Off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Ampoule_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\Ampoule On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Bontarien" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\46.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Brakmarien" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\47.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Caracteristique" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1294.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Chance" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Coeur" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\7 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Conquete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\581.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Console" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\Console.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Dragodinde" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\2200.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Force" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1 (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Guilde" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\63px-Guildes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Initiative" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\2184.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Intelligence" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1 (4).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Inventaire" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1292.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Map" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\56px-Rose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Neutre" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1 (5).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1151.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Parchemin_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\Parchemin Off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Parchemin_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\Parchemin On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1155.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Prospection" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\2186.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Quete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\2073.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sagesse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\2182.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sort" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\1296.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tchat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\Image\Tchat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Option" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\Option.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Vitaliter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\Image\2188.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Intelligence" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1 (4).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sagesse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\2182.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Agiliter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Initiative" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\2184.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Brakmarien" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\47.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Parchemin_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\Parchemin On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Parchemin_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\Parchemin Off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Force" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1 (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ampoule_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\Ampoule On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Prospection" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\2186.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Neutre" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1 (5).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ampoule_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\Ampoule Off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tchat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\Tchat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1155.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bontarien" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\46.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Conquete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\581.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Coeur" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\7 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Guilde" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\63px-Guildes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Chance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1151.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1296.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dragodinde" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\2200.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Inventaire" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1292.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Quete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\2073.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AlignementNeutre" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\Neutre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Console" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\Console.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="_8000" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\Image\Item\18\8000.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ami" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1290.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Map" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\56px-Rose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Caracteristique" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\1294.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DllBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\dll-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DllRed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\Image\imgonline-com-ua-ReplaceColor-qeZkZ9hQYGWz.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

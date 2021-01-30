@@ -1,6 +1,6 @@
 ﻿Module MdlMétier
 
-    Sub GiMetierModePublic(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierModePublic(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -8,9 +8,9 @@
 
                 'EW + OU -
 
-                For Each Pair As KeyValuePair(Of String, CMetierInformation) In .Metier.Metier
+                For Each Pair As CMetier In .Metier.Values
 
-                    With Pair.Value
+                    With Pair
 
                         Select Case Mid(data, 3)
 
@@ -34,13 +34,11 @@
 
             End Try
 
-            .Metier.Bloque.Set()
-
         End With
 
     End Sub
 
-    Sub GiMetierInformation(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierInformation(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -59,14 +57,14 @@
 
                     separate = Split(separate(1), ",")
 
-                    Dim newMétier As New CMetierInformation
+                    Dim newMetier As New CMetier
 
-                    With newMétier
+                    With newMetier
 
                         .ID = idJob
-                        .Nom = VarMétier(idJob).Nom
+                        .Nom = VarMetier(idJob).Nom
 
-                        .AtelierRessource = New Dictionary(Of String, CMetierAtelierRessource)
+                        .AtelierRessource = New Dictionary(Of Integer, CMetierAtelierRessource)
 
                         For a = 0 To separate.Count - 1
 
@@ -77,11 +75,11 @@
                             With newMétierAtelierRessource
 
                                 .ID = separateCraft(0)
-                                .Nom = VarMétier(idJob).Workshop(separateCraft(0)).GetValue(0)
-                                .NombreCaseRécolteMinimum = separateCraft(1)
-                                .NombreCaseRécolteMaximum = separateCraft(2)
-                                .TempsRéussite = separateCraft(4)
-                                .NomAction = VarMétier(idJob).Workshop(separateCraft(0)).GetValue(1)
+                                .Nom = VarMetier(idJob).AtelierRessource(separateCraft(0)).Nom
+                                .NombreCaseRecolteMinimum = separateCraft(1)
+                                .NombreCaseRecolteMaximum = separateCraft(2)
+                                .TempsReussite = separateCraft(4)
+                                .Action = VarMetier(idJob).AtelierRessource(separateCraft(0)).Action
 
                             End With
 
@@ -99,36 +97,19 @@
 
                     End With
 
-                    If .Metier.Metier.ContainsKey(newMétier.Nom.ToLower) Then
+                    If .Metier.ContainsKey(idJob) Then
 
-                        With .Metier.Metier(newMétier.Nom.ToLower)
-
-                            newMétier.ExpérienceActuelle = .ExpérienceActuelle
-                            newMétier.ExpérienceMaximum = .ExpérienceMaximum
-                            newMétier.ExpérienceMinimum = .ExpérienceMinimum
-                            newMétier.GratuitSurEchec = .GratuitSurEchec
-                            newMétier.ItemEquipé = .ItemEquipé
-                            newMétier.ModePublic = .ModePublic
-                            newMétier.NeFournitAucuneRessource = .NeFournitAucuneRessource
-                            newMétier.Niveau = .Niveau
-                            newMétier.NombreIngrédientMinimum = .NombreIngrédientMinimum
-                            newMétier.Payant = .Payant
-
-                        End With
-
-                        .Metier.Metier(newMétier.Nom.ToLower) = newMétier
-
-                    Else
-
-                        .Metier.Metier.Add(newMétier.Nom.ToLower, newMétier)
+                        .Metier.Remove(idJob)
 
                     End If
+
+                    .Metier.Add(idJob, newMetier)
 
                 Next
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMétierInformation", data & vbCrLf & ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMetierInformation", data & vbCrLf & ex.Message)
 
             End Try
 
@@ -136,7 +117,7 @@
 
     End Sub
 
-    Sub GiMetierUp(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierUp(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -145,21 +126,19 @@
                 'JN 28        | 73
                 'JN ID Métier | Level
 
-                data = Mid(data, 3)
+                Dim separateData As String() = Split(Mid(data, 3), "|")
 
-                Dim separateData As String() = Split(data, "|")
+                If .Metier.ContainsKey(separateData(0)) Then
 
-                If .Metier.Metier.ContainsKey(VarMétier(separateData(0)).Nom.ToLower) Then
-
-                    .Metier.Metier(VarMétier(separateData(0)).Nom.ToLower).Niveau = separateData(1)
+                    .Metier(separateData(0)).Niveau = separateData(1)
 
                 End If
 
-                EcritureMessage(index, "(Dofus)", "Ton métier " & VarMétier(separateData(0)).Nom & " passe niveau " & separateData(1) & ".", Color.Green)
+                EcritureMessage(index, "(Dofus)", "Ton métier " & VarMetier(separateData(0)).Nom & " passe niveau " & separateData(1) & ".", Color.Green)
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMétierUp", data & vbCrLf & ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMetierUp", data & vbCrLf & ex.Message)
 
             End Try
 
@@ -167,7 +146,7 @@
 
     End Sub
 
-    Sub GiMetierExperience(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierExperience(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -184,14 +163,14 @@
 
                     If separate(4) < 0 Then separate(4) = separate(3)
 
-                    If .Metier.Metier.ContainsKey(VarMétier(separate(0)).Nom.ToLower) Then
+                    If .Metier.ContainsKey(separate(0)) Then
 
-                        With .Metier.Metier(VarMétier(separate(0)).Nom.ToLower)
+                        With .Metier(separate(0))
 
                             .Niveau = separate(1)
-                            .ExpérienceMinimum = separate(2)
-                            .ExpérienceActuelle = separate(3)
-                            .ExpérienceMaximum = separate(4)
+                            .ExperienceMinimum = separate(2)
+                            .ExperienceActuelle = separate(3)
+                            .ExperienceMaximum = separate(4)
 
                         End With
 
@@ -201,7 +180,7 @@
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMétierExpèrience", data & vbCrLf & ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMetierExperience", data & vbCrLf & ex.Message)
 
             End Try
 
@@ -209,7 +188,7 @@
 
     End Sub
 
-    Sub GiMetierOption(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierOption(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -218,20 +197,18 @@
                 'JO 0             | 4                      | 5
                 'JO Numéro_Métier | Nombre_Pour_Check_Case | Nbr minimum ingrédient 
 
-                data = Mid(data, 3)
+                Dim separateData As String() = Split(Mid(data, 3), "|")
 
-                Dim separateData As String() = Split(data, "|")
-
-                For Each pair As KeyValuePair(Of String, CMetierInformation) In .Metier.Metier
+                For Each pair As CMetier In .Metier.Values
 
                     If CInt(separateData(0)) = 0 Then
 
-                        With pair.Value
+                        With pair
 
                             .Payant = False
                             .NeFournitAucuneRessource = False
                             .GratuitSurEchec = False
-                            .NombreIngrédientMinimum = separateData(2)
+                            .NombreIngredientMinimum = separateData(2)
 
                             While CInt(separateData(1)) > 0
 
@@ -258,7 +235,7 @@
 
                         End With
 
-                        Return
+                        Exit For
 
                     Else
 
@@ -270,17 +247,15 @@
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMétierOption", data & vbCrLf & ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMetierOption", data & vbCrLf & ex.Message)
 
             End Try
-
-            .Metier.Bloque.Set()
 
         End With
 
     End Sub
 
-    Sub GiMetierSupprime(ByVal index As Integer, ByVal data As String)
+    Sub GiMetierSupprime(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -289,26 +264,57 @@
                 ' JR 56
                 ' JR id métier
 
-                data = Mid(data, 3)
+                If .Metier.ContainsKey(Mid(data, 3)) Then
 
-                If .Metier.Metier.ContainsKey(VarMétier(data).Nom.ToLower) Then
-
-                    .Metier.Metier.Remove(VarMétier(data).Nom.ToLower)
+                    .Metier.Remove(Mid(data, 3))
 
                 End If
 
-                EcritureMessage(index, "[Dofus]", "Tu as désappris le métier " & VarMétier(data).Nom & ".", Color.Green)
+                EcritureMessage(index, "[Dofus]", "Tu as désappris le métier " & VarMetier(Mid(data, 3)).Nom & ".", Color.Green)
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMétierSupprime", data & vbCrLf & ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMetierSupprime", data & vbCrLf & ex.Message)
 
             End Try
-
-            .Metier.Bloque.Set()
 
         End With
 
     End Sub
 
 End Module
+
+#Region "Class"
+
+Public Class CMetier
+
+    Public Nom As String
+    Public ID As Integer
+    Public Niveau As Integer
+    Public ItemEquipe As Boolean
+    Public ExperienceMinimum As Integer
+    Public ExperienceActuelle As Integer
+    Public ExperienceMaximum As Integer
+    Public Action As String
+    Public NeFournitAucuneRessource As Boolean
+    Public GratuitSurEchec As Boolean
+    Public Payant As Boolean
+    Public NombreIngredientMinimum As Integer
+    Public ModePublic As Boolean
+
+    Public AtelierRessource As New Dictionary(Of Integer, CMetierAtelierRessource)
+
+End Class
+
+Public Class CMetierAtelierRessource
+
+    Public Nom As String
+    Public ID As Integer
+    Public Action As String
+    Public NombreCaseRecolteMinimum As Integer
+    Public NombreCaseRecolteMaximum As Integer
+    Public TempsReussite As Integer
+
+End Class
+
+#End Region

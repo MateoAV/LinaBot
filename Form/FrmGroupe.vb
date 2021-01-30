@@ -3,6 +3,10 @@
     Public BotIndex As New List(Of Integer)
     Public Trajet As New Dictionary(Of String, List(Of String))
     Public ThreadTrajet As Threading.Thread
+    Public Pods As Integer
+
+    Public Variable As New Dictionary(Of String, Dictionary(Of Object, Object))
+
     Private Delegate Sub dlgSub()
 
     Private Sub ButtonTrajet_Click(sender As Object, e As EventArgs) Handles ButtonTrajet.Click

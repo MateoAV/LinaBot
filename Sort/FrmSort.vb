@@ -91,7 +91,7 @@
 
             Try
 
-                For Each pair As KeyValuePair(Of String, ClassSort) In .Sort
+                For Each pair As KeyValuePair(Of String, CSort) In .Sort
 
                     Dim newSort As New UcSort
 

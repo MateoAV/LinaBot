@@ -6,7 +6,7 @@
 
             Try
 
-                ' hL + 556       ; 1          ; 0        ; 0
+                ' hL + 999       ; 1          ; 0        ; 0
                 ' hL + Id Maison ; Verouiller ; En Vente ; En Guilde
 
                 data = Mid(data, 4)
@@ -16,12 +16,12 @@
                 With .Maison
 
                     .ID = separate(0)
-                    .Vérouiller = separate(1)
+                    .Verouiller = separate(1)
                     .EnVente = separate(2)
                     .EnGuilde = separate(3)
-                    .CellulePorte = VarMaison(.ID).CellulePorte
+                    .Cellule = VarMaison(.ID).CellulePorte
                     .MapID = VarMaison(.ID).MapId
-                    .Coordonnées = VarMaison(.ID).Map
+                    .Coordonnees = VarMaison(.ID).Map
                     .Prix = 0
                     .Code = 0
 
@@ -58,14 +58,14 @@
 
                     separate = Split(separate(0), "_")
 
-                    Dim varCoffre As New ClassCoffre
+                    Dim varCoffre As New CCoffre
 
                     With varCoffre
 
-                        .Coordonnées = VarMap(separate(0))
+                        .Coordonnees = VarMap(separate(0))
                         .MapID = separate(0)
-                        .CelluleCoffre = separate(1)
-                        .Vérouiller = Vérouiller
+                        .Cellule = separate(1)
+                        .Verouiller = Vérouiller
                         .Code = Nothing
 
                     End With
@@ -115,18 +115,18 @@
 
                 End If
 
-                Dim newMaison As New ClassMaison
+                Dim newMaison As New CMaison
 
                 With newMaison
 
                     .ID = id
-                    .Vérouiller = False
+                    .Verouiller = False
                     .EnVente = separateData(1)
                     .EnGuilde = False
-                    .Propriétaire = separateData(0)
-                    .CellulePorte = VarMaison(id).CellulePorte
+                    .Proprietaire = separateData(0)
+                    .Cellule = VarMaison(id).CellulePorte
                     .MapID = Comptes(index).Map.ID
-                    .Coordonnées = Comptes(index).Map.Coordonnees
+                    .Coordonnees = Comptes(index).Map.Coordonnees
                     .Prix = 0
                     .Code = 0
 
@@ -245,3 +245,35 @@
     End Sub
 
 End Module
+
+
+#Region "Class"
+
+Public Class CMaison
+
+    Public Proprietaire As String
+    Public ID As Integer
+    Public Verouiller As Boolean
+    Public EnVente As Boolean
+    Public EnGuilde As Boolean
+    Public GuildeNom As String
+    Public Cellule As Integer
+    Public MapID As Integer
+    Public Coordonnees As String
+    Public Prix As Integer
+    Public Code As Integer
+    Public Coffre As New Dictionary(Of Integer, CCoffre)
+
+End Class
+
+Public Class CCoffre
+
+    Public Verouiller As Boolean
+    Public Cellule As Integer
+    Public MapID As Integer
+    Public Coordonnees As String
+    Public Code As Integer
+
+End Class
+
+#End Region

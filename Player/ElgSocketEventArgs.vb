@@ -46,7 +46,7 @@ Public Class All_CallBack
         End Get
     End Property
 
-    Public Sub Envoyer(ByVal message As String, Optional ByVal reponseAttend As Boolean = False)
+    Public Sub Envoyer(ByVal message As String, Optional reponseAttend As Boolean = False)
 
         Try
 
@@ -183,6 +183,7 @@ Public Class All_CallBack
             For i = 0 To bytesRead - 1
                 If (_Buffer(i) = 0) Then
                     RaiseEvent Reception(Me, New Socket_EventArgs(sb.ToString(), LaSocket))
+
                     sb.Clear()
                 Else
                     sb.Append(ChrW(_Buffer(i)))

@@ -105,11 +105,19 @@
     <Compile Include="Chargement\AllClass.vb" />
     <Compile Include="Chargement\Chargement.vb" />
     <Compile Include="Chargement\Divers.vb" />
+    <Compile Include="Chargement\OptionPersonnage.vb" />
     <Compile Include="Chargement\Variable.vb" />
-    <Compile Include="Connexion\Class_Connexion.vb" />
+    <Compile Include="Combat\FunctionCombat.vb" />
+    <Compile Include="Combat\MdlCombat.vb" />
+    <Compile Include="Connexion\FunctionConnexion.vb" />
     <Compile Include="Connexion\MdlConnexion.vb" />
     <Compile Include="1 - Echange\FunctionEchange.vb" />
     <Compile Include="1 - Echange\mdlEchange.vb" />
+    <Compile Include="1 - Defi\FunctionDefi.vb" />
+    <Compile Include="1 - Defi\mdlDefi.vb" />
+    <Compile Include="Dragodinde\FunctionDragodinde.vb" />
+    <Compile Include="Dragodinde\mdlDragodinde.vb" />
+    <Compile Include="Enclos\MdlEnclo.vb" />
     <Compile Include="Form\FrmDiscord.Designer.vb">
       <DependentUpon>FrmDiscord.vb</DependentUpon>
     </Compile>
@@ -153,23 +161,38 @@
       <DependentUpon>LinaBot.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Guilde\FrmGuilde.Designer.vb">
+    <Compile Include="Form\Option\OptionBot.Designer.vb">
+      <DependentUpon>OptionBot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Option\OptionBot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion\Gestion.vb" />
+    <Compile Include="1 - Groupe\FunctionGroupe.vb" />
+    <Compile Include="1 - Groupe\mdlGroupe.vb" />
+    <Compile Include="1 - Guilde\FrmGuilde.Designer.vb">
       <DependentUpon>FrmGuilde.vb</DependentUpon>
     </Compile>
-    <Compile Include="Guilde\FrmGuilde.vb">
+    <Compile Include="1 - Guilde\FrmGuilde.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Guilde\FunctionGuilde.vb" />
-    <Compile Include="Guilde\mdlGuilde.vb" />
-    <Compile Include="Inventaire\FrmInventaire.Designer.vb">
+    <Compile Include="1 - Guilde\FunctionGuilde.vb" />
+    <Compile Include="1 - Guilde\mdlGuilde.vb" />
+    <Compile Include="IA\Deplacement\Avancer.vb" />
+    <Compile Include="IA\Distance\IA Distance.vb" />
+    <Compile Include="IA\IA.vb" />
+    <Compile Include="IA\Mobs\IAMobs.vb" />
+    <Compile Include="Interaction\FunctionInteraction.vb" />
+    <Compile Include="Interaction\MdlInteraction.vb" />
+    <Compile Include="1 - Inventaire\FrmInventaire.Designer.vb">
       <DependentUpon>FrmInventaire.vb</DependentUpon>
     </Compile>
-    <Compile Include="Inventaire\FrmInventaire.vb">
+    <Compile Include="1 - Inventaire\FrmInventaire.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Item\FunctionItem.vb" />
-    <Compile Include="Inventaire\mdlInventaire.vb" />
-    <Compile Include="Item\MdlItem.vb" />
+    <Compile Include="1 - Item\FunctionItem.vb" />
+    <Compile Include="1 - Inventaire\mdlInventaire.vb" />
+    <Compile Include="1 - Item\MdlItem.vb" />
     <Compile Include="Maison\FunctionMaison.vb" />
     <Compile Include="Maison\MdlMaison.vb" />
     <Compile Include="Map\FunctionMap.vb" />
@@ -199,10 +222,10 @@
     <Compile Include="Player\ElgSocketEventArgs.vb" />
     <Compile Include="Player\Player.vb" />
     <Compile Include="Player\PlayerVariable.vb" />
-    <Compile Include="1 - Pnj\FunctionPnj.vb" />
-    <Compile Include="1 - Pnj\mdlPnj.vb" />
-    <Compile Include="Recolte\Class_Récolte.vb" />
-    <Compile Include="Recolte\mdlRecolte.vb" />
+    <Compile Include="Pnj\FunctionPnj.vb" />
+    <Compile Include="Pnj\mdlPnj.vb" />
+    <Compile Include="1 - Recolte\FunctionRecolte.vb" />
+    <Compile Include="1 - Recolte\mdlRecolte.vb" />
     <Compile Include="Sort\FrmSort.Designer.vb">
       <DependentUpon>FrmSort.vb</DependentUpon>
     </Compile>
@@ -221,6 +244,9 @@
     <Compile Include="Tchat\Tchat.vb" />
     <Compile Include="Trajet\Trajet Lina.vb" />
     <Compile Include="Trajet\TrajetExecution.vb" />
+    <Compile Include="Trajet\TrajetGroupe.vb" />
+    <Compile Include="Zaap\FunctionZaap.vb" />
+    <Compile Include="Zaap\Module_Zaap.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="1 - Amis\FrmAmi.resx">
@@ -250,10 +276,13 @@
     <EmbeddedResource Include="Form\LinaBot.resx">
       <DependentUpon>LinaBot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Guilde\FrmGuilde.resx">
+    <EmbeddedResource Include="Form\Option\OptionBot.resx">
+      <DependentUpon>OptionBot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="1 - Guilde\FrmGuilde.resx">
       <DependentUpon>FrmGuilde.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Inventaire\FrmInventaire.resx">
+    <EmbeddedResource Include="1 - Inventaire\FrmInventaire.resx">
       <DependentUpon>FrmInventaire.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -378,6 +407,14 @@
   <ItemGroup>
     <None Include="bin\Debug\Image\Item\18\8000.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="bin\Debug\Image\Option.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\dll-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\imgonline-com-ua-ReplaceColor-qeZkZ9hQYGWz.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

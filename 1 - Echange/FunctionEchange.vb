@@ -9,25 +9,23 @@
     ''' True = Si le bot a réussie à faire la demande d'échange. <br/>
     ''' False = Si le bot n'a pas réussie à faire la demande d'échange.
     ''' </returns>
-    Public Function Echange(ByVal index As String, ByVal nom As String) As Boolean
+    Public Function Echange(index As String, nom As String) As Boolean
 
         With Comptes(index)
 
             Try
 
-                If .Echange.EnEchange = False Then
+                If .Echange.EnInvitation = False AndAlso .Echange.EnEchange = False Then
 
-                    For Each pair As KeyValuePair(Of Integer, ClassEntite) In .Map.Entite
+                    For Each pair As KeyValuePair(Of Integer, CEntite) In .Map.Entite
 
-                    If pair.Value.Nom.ToLower = nom.ToLower Then
+                        If pair.Value.Nom.ToLower = nom.ToLower Then
 
-                            .Echange.Bloque.Reset()
+                            .Send("ER1|" & pair.Key,
+                                 {"ERK", ' Demande d'échange en cours...
+                                  "EREO"}) ' Ce joueur est déjà en échange.
 
-                            .Send("ER1|" & pair.Key)
-
-                            .Echange.Bloque.WaitOne(15000)
-
-                            Return .Echange.EnEchange
+                            Exit For
 
                         End If
 
@@ -37,11 +35,11 @@
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "EchangeEchange", ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "FunctionEchange_Echange", ex.Message)
 
             End Try
 
-            Return False
+            Return .Echange.EnInvitation
 
         End With
 
@@ -49,26 +47,23 @@
 
 
     ''' <summary>
-    ''' Refuse ou arrête la demande d'échange en cours.
+    ''' Refuse la demande d'échange en cours.
     ''' </summary>
     ''' <param name="index">Indique le numéro du bot.</param>
     ''' <returns>
     ''' True = Si le bot a réussie à refuser la demande d'échange. <br/>
     ''' False = Si le bot n'a pas réussie à refuser la demande d'échange.
     ''' </returns>
-    Public Function RefuseArrete(ByVal index As String) As Boolean
+    Public Function Refuse(index As String) As Boolean
 
         With Comptes(index)
 
             Try
 
-                If .Echange.EnEchange OrElse .Echange.EnInvitation Then
+                If .Echange.EnInvitation Then
 
-                    .Echange.Bloque.Reset()
-
-                    .Send("EV")
-
-                    Return .Echange.Bloque.WaitOne(15000)
+                    Return .Send("EV",
+                                {"EV"}) ' Echange Annulé/Refusé/Arrêté
 
                 End If
 
@@ -78,7 +73,41 @@
 
             End Try
 
-            Return False
+            Return Not (.Echange.EnInvitation)
+
+        End With
+
+    End Function
+
+
+    ''' <summary>
+    ''' Arrête la demande d'échange en cours.
+    ''' </summary>
+    ''' <param name="index">Indique le numéro du bot.</param>
+    ''' <returns>
+    ''' True = Si le bot a réussie à arrêter l'échange en cours. <br/>
+    ''' False = Si le bot n'a pas réussie à arrêter l'échange en cours.
+    ''' </returns>
+    Public Function Arrete(ByVal index As String) As Boolean
+
+        With Comptes(index)
+
+            Try
+
+                If .Echange.EnEchange Then
+
+                    Return .Send("EV",
+                                {"EV"}) ' Echange Annulé/Refusé/Arrêté
+
+                End If
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "EchangeRefuseArrete", ex.Message)
+
+            End Try
+
+            Return Not (.Echange.EnEchange)
 
         End With
 
@@ -93,7 +122,7 @@
     ''' True = Si le bot a accepté la demande d'échange. <br/>
     ''' False = Si le bot n'a pas réussie à accepter la demande d'échange.
     ''' </returns>
-    Public Function Accepte(ByVal index As String) As Boolean
+    Public Function Accepte(index As String) As Boolean
 
         With Comptes(index)
 
@@ -101,13 +130,9 @@
 
                 If .Echange.EnInvitation Then
 
-                    .Echange.Bloque.Reset()
-
-                    .Send("EA")
-
-                    .Echange.Bloque.WaitOne(15000)
-
-                    Return .Echange.EnEchange
+                    .Send("EA", {
+                          "ECK1", ' Echange accepté.
+                          "EV"}) ' Echange annulé.
 
                 End If
 
@@ -117,7 +142,7 @@
 
             End Try
 
-            Return False
+            Return .Echange.EnEchange
 
         End With
 
@@ -133,7 +158,7 @@
     ''' True = Si le bot a réussie à mettre les kamas dans l'échange. <br/>
     ''' False = Si le bot n'a pas réussie à mettre les kamas dans l'échange.
     ''' </returns>
-    Public Function Kamas(ByVal index As String, ByVal quantite As String) As Boolean
+    Public Function Kamas(index As String, quantite As String) As Boolean
 
         With Comptes(index)
 
@@ -141,11 +166,9 @@
 
                 If quantite > .Personnage.Kamas Then quantite = .Personnage.Kamas
 
-                .Echange.Bloque.Reset()
-
-                .Send("EMG" & quantite)
-
-                Return .Echange.Bloque.WaitOne(15000)
+                Return .Send("EMG" & quantite,
+                            {"EMKG", ' Nombre de kamas mis dans l'échange.
+                             "EsKG"}) ' Nombre de kamas mis dans la Banque/Coffre.
 
             Catch ex As Exception
 
@@ -168,7 +191,7 @@
     ''' True = Si le bot a validé l'échange. <br/>
     ''' False = Si le bot n'a pas réussie à valider l'échange.
     ''' </returns>
-    Public Function Valide(ByVal index As String) As Boolean
+    Public Function Valide(index As String) As Boolean
 
         With Comptes(index)
 
@@ -176,21 +199,19 @@
 
                 If .Echange.EnEchange Then
 
-                    .Echange.Bloque.Reset()
-
-                    .Send("EK")
-
-                    Return .Echange.Bloque.WaitOne(15000)
+                    .Send("EK",
+                          {"EK1", ' J'ai validé l'échange.
+                          "EK0"}) ' J'ai invalidé l'échange.
 
                 End If
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "EchangeValide", ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "Echange_Valide", ex.Message)
 
             End Try
 
-            Return False
+            Return .Echange.Moi.Valider
 
         End With
 

@@ -17,7 +17,7 @@
 
                     Dim separate As String() = Split(separateData(i), "~")
 
-                    Dim newSort As New ClassSort
+                    Dim newSort As New CSort
 
                     If VarSort.ContainsKey(separate(0)) AndAlso VarSort(separate(0)).ContainsKey(separate(1)) Then
 
@@ -84,7 +84,7 @@
 
                 Dim separateData As String() = Split(data, "~")
 
-                Dim newSort As New ClassSort
+                Dim newSort As New CSort
 
                 If VarSort.ContainsKey(separateData(0)) AndAlso VarSort(separateData(0)).ContainsKey(separateData(1)) Then
 
@@ -144,3 +144,33 @@
 
 
 End Module
+
+#Region "Class"
+
+Public Class CSort
+
+    Public ID As Integer
+    Public Niveau As Integer
+    Public Nom As String
+    Public POMinimum As Integer
+    Public POMaximum As Integer
+    Public PA As Integer
+    Public NombreLancerParTour As Integer
+    Public NombreLancerParTourParJoueur As Integer
+    Public NombreToursEntreDeuxLancers As Integer
+    Public POModifiable As Boolean
+    Public LigneDeVue As Boolean
+    Public LancerEnLigne As Boolean
+    Public CelluleLibre As Boolean
+    Public ECFiniTour As Boolean
+    Public ZoneMinimum As Integer
+    Public ZoneMaximum As Integer
+    Public ZoneEffet As String
+    Public NiveauRequisUp As Integer
+    Public SortClasse As String
+    Public Definition As String
+    Public BarreSort As String
+
+End Class
+
+#End Region

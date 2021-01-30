@@ -8,7 +8,7 @@
     ''' <param name="index">Indique le compte.</param>
     ''' <param name="caracteristique">Indique la caractéristique. Exemple : Vitalité, Sagesse, etc...</param>
     ''' <returns>Retourne 'True' s'il a Up, sinon 'False'</returns>
-    Public Function Up(ByVal index As String, ByVal caracteristique As String) As Boolean
+    Public Function Up(index As String, caracteristique As String) As Boolean
 
         With Comptes(index)
 
@@ -16,37 +16,63 @@
 
                 If CaracteristiqueUpPossible(index, caracteristique) Then
 
-                    .BloqueCaracteristique.Reset()
+                    Dim caracteristiqueAvant As Integer = .Caracteristique.Caracteristique(caracteristique.ToLower).Base
 
                     Select Case caracteristique.ToLower
 
-                        Case "vitalité", "vitaliter"
+                        Case "vitaliter"
 
-                            .Send("AB11")
+                            .Send("AB11",
+                                 {"BN", ' Info reçu serveur
+                                  "As", ' Caractéristique reçu
+                                  "ABE"}) ' Impossible de Up la caractéristique.
 
                         Case "sagesse"
 
-                            .Send("AB12")
+                            .Send("AB12",
+                                 {"BN", ' Info reçu serveur
+                                  "As", ' Caractéristique reçu
+                                  "ABE"}) ' Impossible de Up la caractéristique.
 
                         Case "force"
 
-                            .Send("AB10")
+                            .Send("AB10",
+                                 {"BN", ' Info reçu serveur
+                                  "As", ' Caractéristique reçu
+                                  "ABE"}) ' Impossible de Up la caractéristique.
 
                         Case "chance"
 
-                            .Send("AB13")
+                            .Send("AB13",
+                                 {"BN", ' Info reçu serveur
+                                  "As", ' Caractéristique reçu
+                                  "ABE"}) ' Impossible de Up la caractéristique.
 
                         Case "intelligence"
 
-                            .Send("AB15")
+                            .Send("AB15",
+                                 {"BN", ' Info reçu serveur
+                                  "As", ' Caractéristique reçu
+                                  "ABE"}) ' Impossible de Up la caractéristique.
 
                         Case "agilité", "agiliter"
 
-                            .Send("AB14")
+                            .Send("AB14",
+                                 {"BN", ' Info reçu serveur
+                                  "As", ' Caractéristique reçu
+                                  "ABE"}) ' Impossible de Up la caractéristique.
 
                     End Select
 
-                    Return .BloqueCaracteristique.WaitOne(15000)
+                    If caracteristiqueAvant < .Caracteristique.Caracteristique(caracteristique.ToLower).Base Then
+
+                        Return True ' Le up a réussi.
+
+                    Else
+
+                        Return False ' Le up a échoué.
+
+                    End If
 
                 End If
 
@@ -68,7 +94,7 @@
     ''' <param name="index">Indique le compte.</param>
     ''' <param name="caracteristique">Indique la caractéristique à vérifier.</param>
     ''' <returns>Retourne 'True' s'il peut Up la caractéristique, sinon 'False'</returns>
-    Private Function CaracteristiqueUpPossible(ByVal index As Integer, ByVal caracteristique As String) As Boolean
+    Private Function CaracteristiqueUpPossible(index As Integer, caracteristique As String) As Boolean
 
         With Comptes(index)
 
@@ -88,9 +114,9 @@
 
                                 If caracteristique.ToLower = pair.Key.ToLower Then
 
-                                    If .Personnage.Caractéristique(caracteristique).Base >= Split(pair.Value(i), ">")(0) AndAlso .Personnage.Caractéristique(caracteristique).Base <= Split(pair.Value(i), ">")(1) Then
+                                    If .Caracteristique.Caracteristique(caracteristique).Base >= Split(pair.Value(i), ">")(0) AndAlso .Caracteristique.Caracteristique(caracteristique).Base <= Split(pair.Value(i), ">")(1) Then
 
-                                        If .Personnage.CapitalCaractéristique >= Split(pair.Value(i), ">")(2) Then
+                                        If .Caracteristique.Capital >= Split(pair.Value(i), ">")(2) Then
 
                                             Return True
 
@@ -122,6 +148,7 @@
 
     End Function
 
+
     ''' <summary>
     ''' Retourne la valeur indiqué selon la caractéristique et le choix voulu.
     ''' </summary>
@@ -129,7 +156,7 @@
     ''' <param name="caracteristique">Indique la caractéristique. Exemple : Vitalité, Sagesse, etc...</param>
     ''' <param name="choix">Indique le choix : 'Base' , 'Equipement' , 'Dons' , 'Boosts' , 'Total'</param>
     ''' <returns>Retourne la valeur qui correspond à la caractéristique et au choix, sinon retourne '0'</returns>
-    Public Function [Return](ByVal index As String, ByVal caracteristique As String, ByVal choix As String) As String
+    Public Function [Return](index As String, caracteristique As String, choix As String) As String
 
         With Comptes(index)
 
@@ -141,33 +168,37 @@
 
                 Else
 
-                    Select Case choix.ToLower
+                    With .Caracteristique.Caracteristique(caracteristique.ToLower)
 
-                        Case "base"
+                        Select Case choix.ToLower
 
-                            Return .Personnage.Caractéristique(caracteristique).Base
+                            Case "base"
 
-                        Case "equipement", "équipement"
+                                Return .Base
 
-                            Return .Personnage.Caractéristique(caracteristique).Equipement
+                            Case "equipement", "équipement"
 
-                        Case "don", "dons"
+                                Return .Equipement
 
-                            Return .Personnage.Caractéristique(caracteristique).Dons
+                            Case "don", "dons"
 
-                        Case "boost", "boosts"
+                                Return .Dons
 
-                            Return .Personnage.Caractéristique(caracteristique).Boost
+                            Case "boost", "boosts"
 
-                        Case "total", "totals"
+                                Return .Boost
 
-                            Return .Personnage.Caractéristique(caracteristique).Total
+                            Case "total", "totals"
 
-                        Case Else
+                                Return .Total
 
-                            Return "0"
+                            Case Else
 
-                    End Select
+                                Return "0"
+
+                        End Select
+
+                    End With
 
                 End If
 
@@ -183,13 +214,14 @@
 
     End Function
 
+
     ''' <summary>
     ''' Retourne l'energie du personnage.
     ''' </summary>
     ''' <param name="index">Indique le compte.</param>
     ''' <param name="choix">'Actuelle' , 'Maximum' , 'Pr' (Pr = Pourcentage)</param>
     ''' <returns>Retourne la valeur selon le choix indiqué, sinon retourne '0'.</returns>
-    Public Function Energie(ByVal index As String, ByVal choix As String) As String
+    Public Function Energie(index As String, choix As String) As String
 
         With Comptes(index)
 
@@ -197,31 +229,35 @@
 
                 If .FrmUser.InvokeRequired Then
 
-                Return .FrmUser.Invoke(New dlgCharacteristic(Function() Energie(index, choix)))
+                    Return .FrmUser.Invoke(New dlgCharacteristic(Function() Energie(index, choix)))
 
-            Else
+                Else
 
-                Select Case choix.ToLower
+                    With .Personnage.Energie
 
-                    Case "actuelle", "actuel"
+                        Select Case choix.ToLower
 
-                        Return .Personnage.Energie.Actuelle
+                            Case "actuelle", "actuel"
 
-                    Case "maximum"
+                                Return .Actuelle
 
-                        Return .Personnage.Energie.Maximum
+                            Case "maximum"
 
-                    Case "pr"
+                                Return .Maximum
 
-                        Return .Personnage.Energie.Pourcentage
+                            Case "pr"
 
-                    Case Else
+                                Return .Pourcentage
 
-                        Return "0"
+                            Case Else
 
-                End Select
+                                Return "0"
 
-            End If
+                        End Select
+
+                    End With
+
+                End If
 
             Catch ex As Exception
 
@@ -235,12 +271,13 @@
 
     End Function
 
+
     ''' <summary>
     ''' Retourne le niveau du personnage.
     ''' </summary>
     ''' <param name="index">Indique le compte.</param>
     ''' <returns>Retourne le niveau actuelle du personnage, sinon retourne 0.</returns>
-    Public Function Niveau(ByVal index As String) As String
+    Public Function Niveau(index As String) As String
 
         With Comptes(index)
 
@@ -248,13 +285,13 @@
 
                 If .FrmUser.InvokeRequired Then
 
-                Return .FrmUser.Invoke(New dlgCharacteristic(Function() Niveau(index)))
+                    Return .FrmUser.Invoke(New dlgCharacteristic(Function() Niveau(index)))
 
-            Else
+                Else
 
-                Return .Personnage.Niveau
+                    Return .Personnage.Niveau
 
-            End If
+                End If
 
             Catch ex As Exception
 
@@ -268,13 +305,14 @@
 
     End Function
 
+
     ''' <summary>
     ''' Retourne l'expèrience du personnage.
     ''' </summary>
     ''' <param name="index">Indique le compte.</param>
     ''' <param name="choix">'Actuelle' , 'Maximum' , 'Minimum' , 'Pr' (Pr = Pourcentage)</param>
     ''' <returns>Retourne la valeur selon le choix indiqué, sinon retourne '0'.</returns>
-    Public Function Experience(ByVal index As String, ByVal choix As String) As String
+    Public Function Experience(index As String, choix As String) As String
 
         With Comptes(index)
 
@@ -286,29 +324,33 @@
 
                 Else
 
-                    Select Case choix.ToLower
+                    With .Personnage.Experience
 
-                        Case "minimum"
+                        Select Case choix.ToLower
 
-                            Return .Personnage.Expérience.Minimum
+                            Case "minimum"
 
-                        Case "actuelle", "actuel"
+                                Return .Minimum
 
-                            Return .Personnage.Expérience.Actuelle
+                            Case "actuelle", "actuel"
 
-                        Case "maximum"
+                                Return .Actuelle
 
-                            Return .Personnage.Expérience.Maximum
+                            Case "maximum"
 
-                        Case "pr"
+                                Return .Maximum
 
-                            Return .Personnage.Expérience.Pourcentage
+                            Case "pr"
 
-                        Case Else
+                                Return .Pourcentage
 
-                            Return "0"
+                            Case Else
 
-                    End Select
+                                Return "0"
+
+                        End Select
+
+                    End With
 
                 End If
 
@@ -324,13 +366,14 @@
 
     End Function
 
+
     ''' <summary>
     ''' Permet d'avoir le nombre de point de vie du personnage.
     ''' </summary>
     ''' <param name="index">Indique le compte.</param>
     ''' <param name="choix">'Actuelle' , 'Maximum' , 'Pr'</param>
     ''' <returns>Retourne la valeur selon le choix indiqué, sinon retourne '0'.</returns>
-    Public Function PointDeVie(ByVal index As String, ByVal choix As String) As String
+    Public Function PointDeVie(index As String, choix As String) As String
 
         With Comptes(index)
 
@@ -342,27 +385,31 @@
 
                 Else
 
-                    Select Case choix.ToLower
+                    With .Personnage.Vitaliter
 
-                    Case "actuelle", "actuel"
+                        Select Case choix.ToLower
 
-                        Return .Personnage.Vitalité.Actuelle
+                            Case "actuelle", "actuel"
 
-                    Case "maximum"
+                                Return .Actuelle
 
-                        Return .Personnage.Vitalité.Maximum
+                            Case "maximum"
 
-                    Case "pr"
+                                Return .Maximum
 
-                        Return .Personnage.Vitalité.Pourcentage
+                            Case "pr"
 
-                    Case Else
+                                Return .Pourcentage
 
-                        Return "0"
+                            Case Else
 
-                End Select
+                                Return "0"
 
-            End If
+                        End Select
+
+                    End With
+
+                End If
 
             Catch ex As Exception
 

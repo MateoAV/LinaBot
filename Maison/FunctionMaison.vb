@@ -4,7 +4,7 @@
 
         With Comptes(index)
 
-            For Each Pair As ClassInteraction In CopyInteraction(index, .Map.Interaction).Values
+            For Each Pair As CInteraction In CopyInteraction(index, .Map.Interaction).Values
 
                 If Pair.Nom.ToLower = "coffre" Then
 
