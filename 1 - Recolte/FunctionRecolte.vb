@@ -1,42 +1,76 @@
 ﻿
 Public Class FunctionRecolte
 
-    'faire en sorte que le bot calcul lui même la PO de la canne.
+    'FAIRE EN SORTE QUE LE BOT EQUIPE L4ARME POUR LES R2COLTES AUTOMATIQUEMENT
+
     Private Delegate Sub dlgRecolte()
-    Private Delegate Function dlgFRecolte()
 
     ''' <summary>
     ''' Recolte les ressources sur la map selon le nom indiqué.
     ''' </summary>
     ''' <param name="index">Le numéro du bot.</param>
-    ''' <param name="nom">Le nom ou l'ID de la récolte, exemple : Frene</param>
-    ''' <param name="action">Le nom de l'action à faire en jeu, exemple : couper</param>
     ''' <returns>
     ''' True = le bot à fait une récolte. <br/>
     ''' False = Le bot n'a plus aucune récolte disponible sur la map.
     ''' </returns>
 
-    Public Function Recolte(index As Integer, nom As String, action As String) As Boolean
+    Public Function Recolte(index As Integer) As Boolean
 
         With Comptes(index)
 
             Try
 
-                Dim celluleRecolte As Integer = Recherche(index, nom)
 
-                If celluleRecolte > 0 Then
+                Dim action As String = ""
+                Dim distance As Integer = 999
+                Dim cellule As Integer = 0
 
-                    ._Send = "GA500" & celluleRecolte & ";" & .Map.Interaction(celluleRecolte).Action(action.ToLower)
+                For Each PairMap As KeyValuePair(Of Integer, CInteraction) In CopyInteraction(index, .Map.Interaction)
+
+                    For Each PairRecolte As KeyValuePair(Of Object, Object) In .FrmGroupe.Variable("recolte")
+
+                        If PairMap.Value.Nom.ToLower = PairRecolte.Value(1).ToString.ToLower Then
+
+                            If PairMap.Value.Information = "disponible" Then
+
+                                Dim distanceMoiCell As Integer = goalDistance(.Map.Entite(.Personnage.ID).Cellule, PairMap.Value.Cellule, .Map.Largeur)
+
+                                If distanceMoiCell < distance AndAlso distanceMoiCell > 0 Then
+
+                                    'Je vérifie qu'aucun mobs ne bloque la récolte
+                                    If RecolteMonstre(index, PairMap.Value.Cellule) Then
+
+                                        action = PairRecolte.Value(2).ToString.ToLower
+                                        distance = distanceMoiCell
+                                        cellule = PairMap.Value.Cellule
+                                        .Personnage.InteractionCellule = cellule
+
+                                    End If
+
+                                End If
+
+
+                            End If
+
+                        End If
+
+                    Next
+
+                Next
+
+                If cellule > 0 Then
+
+                    ._Send = "GA500" & cellule & ";" & .Map.Interaction(cellule).Action(action.ToLower)
 
                     Dim newMap As New FunctionMap
 
                     If action.ToLower = "pecher" Then
 
-                        newMap.Deplacement(index, RecolteCelluleProche(index, celluleRecolte, CanneDistance(index)))
+                        newMap.Deplacement(index, RecolteCelluleProche(index, cellule, CanneDistance(index)))
 
                     Else
 
-                        newMap.Deplacement(index, celluleRecolte)
+                        newMap.Deplacement(index, cellule)
 
                     End If
 
@@ -54,7 +88,7 @@ Public Class FunctionRecolte
 
                     Else
 
-                        RecolteRaté(index, celluleRecolte)
+                        RecolteRaté(index, cellule)
 
                     End If
 
@@ -62,84 +96,17 @@ Public Class FunctionRecolte
 
                 End If
 
+                Return False
+
             Catch ex As Exception
 
                 ErreurFichier(index, .Personnage.NomDuPersonnage, "FunctionRecolte_Recolte", ex.Message)
 
             End Try
 
-            Return False
-
         End With
 
     End Function
-
-
-    ''' <summary>
-    ''' Cherche la récolte la plus proche du joueur.
-    ''' </summary>
-    ''' <param name="nom">Indique le nom de la récolte. Exemple : Ble, Orge, Pichon, etc...</param>
-    ''' <returns>
-    ''' 0 = Le bot n'a aucune cellule disponible pour faire une récolte. <br/>
-    ''' Renvoie la cellule de la récolte.
-    ''' </returns>
-    Private Function Recherche(index As Integer, nom As String) As Integer
-
-        With Comptes(index)
-
-            If .FrmUser.InvokeRequired Then
-
-                Return .FrmUser.Invoke(New dlgFRecolte(Function() Recherche(index, nom)))
-
-            Else
-
-                Dim distance As Integer = 999
-                Dim cellule As Integer = 0
-
-                For Each pair As KeyValuePair(Of Integer, CInteraction) In .Map.Interaction
-
-                    If pair.Key <> .Map.Entite(.Personnage.ID).Cellule Then
-
-                        'Exemple : Frêne = Frêne correspond à celle voulu par l'utilisateur
-                        If nom.ToLower = pair.Value.Nom.ToLower Then
-
-                            If pair.Value.Information = "disponible" Then
-
-                                Dim distanceMoiCell As Integer = goalDistance(.Map.Entite(.Personnage.ID).Cellule, pair.Value.Cellule, .Map.Largeur)
-
-                                If distanceMoiCell < distance AndAlso distanceMoiCell > 0 Then
-
-                                    'Je vérifie qu'aucun mobs ne bloque la récolte
-                                    If RecolteMonstre(index, pair.Value.Cellule) Then
-
-                                        distance = distanceMoiCell
-
-                                        cellule = pair.Value.Cellule
-
-                                    End If
-
-                                End If
-
-                            End If
-
-                        End If
-
-                    End If
-
-                Next
-
-                .Personnage.InteractionCellule = cellule
-                Return cellule
-
-            End If
-
-            .Personnage.InteractionCellule = 0
-            Return 0
-
-        End With
-
-    End Function
-
 
 
     ''' <summary>
@@ -206,6 +173,7 @@ Public Class FunctionRecolte
 
     End Sub
 
+
     ''' <summary>
     ''' Donne la cellule la plus proche pour récolter la ressource.
     ''' </summary>
@@ -247,6 +215,7 @@ Public Class FunctionRecolte
         End With
 
     End Function
+
 
     Private Function CanneDistance(index As Integer) As Integer
 

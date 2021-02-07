@@ -83,13 +83,13 @@
 
                             End With
 
-                            If .AtelierRessource.ContainsKey(newMétierAtelierRessource.Nom.ToLower) Then
+                            If .AtelierRessource.ContainsKey(separateCraft(0)) Then
 
-                                .AtelierRessource(newMétierAtelierRessource.Nom.ToLower) = newMétierAtelierRessource
+                                .AtelierRessource(separateCraft(0)) = newMétierAtelierRessource
 
                             Else
 
-                                .AtelierRessource.Add(newMétierAtelierRessource.Nom.ToLower, newMétierAtelierRessource)
+                                .AtelierRessource.Add(separateCraft(0), newMétierAtelierRessource)
 
                             End If
 

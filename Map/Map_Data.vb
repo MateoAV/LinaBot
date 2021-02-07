@@ -20,11 +20,11 @@
 
                 LoadMapInGame(index, separateData(1), separateData(2), separateData(3))
 
-                ' If .MITM = False Then
+                If .MITM = False Then
 
-                .Send("GI")
+                    .Send("GI")
 
-                ' End If
+                End If
 
                 .Map.EnDeplacement = False
                 ._Send = ""

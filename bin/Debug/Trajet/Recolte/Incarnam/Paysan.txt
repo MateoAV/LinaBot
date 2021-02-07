@@ -1,0 +1,120 @@
+
+'Pré Requis
+' Niveaux : 10
+' Kamas : 5.000 (pour ouvrir la banque)
+' Début Banque Astrub
+' Classe : Crâ
+
+Dim Pods = 80
+Dim Recolte = {"Paysan" , "Ble" , "Faucher" , "Infini"}
+
+
+'Sub Pour faire le chemin du début du jeu. (Piton rocheux + Temple)
+Sub Main()
+
+	Map.ID("7549") : Map.Deplacement("381")
+	Map.ID("7414") : Map.Deplacement("Gauche")
+	Map.Coordonnees("3,-16") : Map.Interaction("Statue de classe" , "Se rendre a incarnam")
+
+	Map.ID("10292") : Map.Deplacement("392")
+	Map.ID("10326") : Map.Deplacement("334")
+	Map.ID("10273") : Map.Deplacement("459")
+	Map.ID("10337") : Map.Deplacement("447")
+	Map.ID("10258") : Map.Deplacement("463")
+
+	Call Incarnam()
+
+End Sub
+
+Sub Incarnam()
+
+	Map.Coordonnees("0,3") : Map.Deplacement("Droite")
+	Map.Coordonnees("1,3") : Map.Deplacement("Droite")
+	Map.Coordonnees("2,3") : Map.Deplacement("Droite")
+	Map.Coordonnees("3,3") : Call ApprendPaysan() : Item.Equipe("Faux de l'apprenti paysan") : Map.Deplacement("Droite")	
+	Call Recolte()
+	
+End Sub
+
+Sub Recolte()
+
+	Map.Coordonnees("4,3") : Recolte : Map.Deplacement("Haut")
+	Map.Coordonnees("4,2") : Recolte : Map.Deplacement("Haut")
+	Map.Coordonnees("4,1") : Recolte : Map.Deplacement("Haut")
+	Map.Coordonnees("4,0") : Recolte : Map.Deplacement("Droite")
+	Map.Coordonnees("5,0") : Recolte : Map.Deplacement("Bas")
+	Map.Coordonnees("5,1") : Recolte : Map.Deplacement("Bas")
+	Map.Coordonnees("5,2") : Recolte : Map.Deplacement("Bas")
+	Map.Coordonnees("5,3") : Recolte : Map.Deplacement("Gauche")
+	
+End Sub
+
+
+Function ApprendPaysan()
+
+	If Metier.Existe("Paysan") = False Then
+
+		Pnj.Parler("Contremaitre Ikul")
+		Pnj.Reponse("Je cherche a apprendre un metier.")
+		Pnj.Reponse("Dites moi comment devenir paysan.")
+		Pnj.Reponse("Je retrousse mes manches et on y va !")
+		Pnj.Reponse("Terminer la discussion.")
+		Pnj.Quitte.Dialogue
+	
+	End If
+	
+	Return Metier.Existe("Paysan") 
+	
+End Function
+
+Sub Banque()
+
+	Map.ID("10292") : Map.Deplacement("392")
+	Map.ID("10326") : Map.Deplacement("334")
+	Map.ID("10273") : Map.Deplacement("459")
+	Map.ID("10337") : Map.Deplacement("447")
+	Map.ID("10258") : Map.Deplacement("463")
+	
+	Map.Coordonnees("0,3") : Map.Deplacement("Droite")
+	Map.Coordonnees("1,3") : Map.Deplacement("Droite")
+	Map.Coordonnees("2,3") : Map.Deplacement("Droite")
+	Map.Coordonnees("3,3") : Map.Deplacement("Droite")
+	
+	Map.Coordonnees("4,0") : Map.Deplacement("Bas")
+	Map.Coordonnees("4,1") : Map.Deplacement("Bas")
+	Map.Coordonnees("4,2") : Map.Deplacement("Bas")
+	Map.Coordonnees("5,0") : Map.Deplacement("Bas")
+	Map.Coordonnees("5,1") : Map.Deplacement("Bas")
+	Map.Coordonnees("5,2") : Map.Deplacement("Bas")
+	Map.Coordonnees("4,3") : Map.Deplacement("Droite")
+	Map.Coordonnees("5,3") : Map.Deplacement("Droite")
+	Map.Coordonnees("6,3") : Map.Deplacement("Bas")
+	Map.Coordonnees("6,4") : Map.Deplacement("Droite")
+	Map.Coordonnees("7,4") : Call PnjAvauleGanymede()
+	Map.Coordonnees("2,-20") : Map.Deplacement("Droite")
+	Map.Coordonnees("3,-20") : Map.Deplacement("Droite")
+	Map.Coordonnees("4,-20") : Map.Deplacement("Bas")
+	Map.Coordonnees("4,-19") : Map.Deplacement("Bas")
+	Map.Coordonnees("4,-18") : Map.Deplacement("Bas")
+	Map.Coordonnees("4,-17") : Map.Deplacement("Bas")
+	Map.ID("7414") : Map.Deplacement("142")
+	Map.ID("7549") : Call Banquier()
+	
+End Sub
+
+Sub Banquier()
+
+	Pnj.Parler("Al Etsop")
+	Pnj.Reponse("Consulter son coffre personnel")
+	Item.Depose("All")
+	Echange.Arrete
+
+End Sub
+
+Sub PnjAvauleGanymede()
+
+	Pnj.Parler("Avaule Ganymede")
+	Pnj.Reponse("Oui ! Je veux me rendre a Astrub.")
+	Pnj.Quitte.Dialogue
+
+End Sub

@@ -66,6 +66,12 @@
 
                 If .Pnj.EnParler Then
 
+                    If phrase.ToLower = "terminer la discussion." Then
+
+                        Return QuitteDialogue(index)
+
+                    End If
+
                     If .Pnj.Reponse.Count > 0 Then
 
                         For i = 0 To .Pnj.Reponse.Count - 1
@@ -85,7 +91,6 @@
 
                     Else
 
-                        'Il n'y a plus de réponse disponible.
                         Return QuitteDialogue(index)
 
                     End If

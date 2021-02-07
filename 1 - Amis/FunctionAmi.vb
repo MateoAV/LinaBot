@@ -265,20 +265,20 @@
     ''' True = Le bot avertie via un message si un ami se connecte.. <br/>
     ''' False = Le bot n'avertie pas si un ami se connecte.
     ''' </returns>
-    Public Function Avertie(index As String, ouiNon As String) As Boolean
+    Public Function Avertie(index As String, choix As String) As Boolean
 
         With Comptes(index)
 
             Try
 
-                Select Case CBool(ouiNon)
+                Select Case choix.ToLower
 
-                    Case True
+                    Case "oui"
 
                         Return .Send("FO+",
                                     {"BN"}) ' Info bien reçu par le serveur.
 
-                    Case False
+                    Case "non"
 
                         Return .Send("FO-",
                                     {"BN"}) ' Info bien reçu par le serveur.

@@ -44,7 +44,7 @@ Partial Class Player
     Public Combat As New CCombat
 
     'IA
-    Public IntelligenceArtificielle As New Dictionary(Of String, List(Of String))
+    Public IntelligenceArtificielle As New List(Of String)
 
     'Map
     Public BloqueDeplacement As Threading.ManualResetEvent = New Threading.ManualResetEvent(False)

@@ -172,7 +172,11 @@
 
                 .Personnage.Regeneration = CInt(separate(0)) / CInt(separate(1)) * 100
 
-                .Send("BD") 'Permet d'avoir 'BD649|6|6' = la date.
+                If .MITM = False Then
+
+                    .Send("BD") 'Permet d'avoir 'BD649|6|6' = la date.
+
+                End If
 
             Catch ex As Exception
 

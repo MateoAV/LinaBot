@@ -134,7 +134,7 @@ Public Class FunctionItem
 
                 For Each Pair As CItem In CopyItem(index, .Inventaire).Values
 
-                    If Pair.Nom.ToLower = nomID.ToLower OrElse Pair.IdObjet.ToString = nomID OrElse Pair.IdUnique = nomID Then
+                    If Pair.Nom.ToLower = nomID.ToLower OrElse Pair.IdObjet.ToString = nomID OrElse Pair.IdUnique.ToString = nomID OrElse nomID.ToLower = "all" Then
 
                         If Pair.Equipement = "" Then
 
@@ -235,18 +235,20 @@ Public Class FunctionItem
 
                 For Each Pair As CItem In CopyItem(index, .Inventaire).Values
 
-                    If Pair.Nom.ToLower = nomID.ToLower OrElse Pair.IdUnique = nomID OrElse Pair.IdObjet = nomID Then
+                    If Pair.Nom.ToLower = nomID.ToLower OrElse Pair.IdUnique.ToString = nomID OrElse Pair.IdObjet.ToString = nomID Then
 
                         If Pair.Equipement = "" Then
 
                             If IsNothing(caracteristique) OrElse ComparateurCaractéristiqueObjets(Pair.Caracteristique, caracteristique) Then
 
-                                EcritureMessage(index, "(Bot)", "Equipe item : " & Pair.Nom, Color.Gray)
-
                                 Return .Send("OM" & Pair.IdUnique & "|" & RetourneEquipementCatégorie(index, Pair.Categorie),
                                             {"OM"}) ' Un objet équipé.
 
                             End If
+
+                        Else
+
+                            Return True
 
                         End If
 

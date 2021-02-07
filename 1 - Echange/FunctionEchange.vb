@@ -9,7 +9,7 @@
     ''' True = Si le bot a réussie à faire la demande d'échange. <br/>
     ''' False = Si le bot n'a pas réussie à faire la demande d'échange.
     ''' </returns>
-    Public Function Echange(index As String, nom As String) As Boolean
+    Public Function Invite(index As String, nom As String) As Boolean
 
         With Comptes(index)
 
@@ -35,7 +35,7 @@
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDuPersonnage, "FunctionEchange_Echange", ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "FunctionEchange_Invite", ex.Message)
 
             End Try
 

@@ -2,7 +2,7 @@
 
     'Faire en orte que le bot cherche linteraction la plus proche selon ou se trouve le joueur, qui correspond à celle voulu.
 
-    Public Sub InteractionEnJeu(ByVal index As String, ByVal nomInteraction As String, ByVal action As String)
+    Public Sub InteractionEnJeu(index As String, nomInteraction As String, action As String)
 
         With Comptes(index)
 
@@ -44,10 +44,6 @@
                 .Map.Bloque.Reset()
 
                 Select Case choix.ToLower
-
-                    Case "zaap"
-
-                        .Send("WV")
 
                     Case Else
 

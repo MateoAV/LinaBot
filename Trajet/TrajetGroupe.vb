@@ -607,9 +607,9 @@
 
                 For Each compte In .FrmGroupe.BotIndex
 
-                newTask.Add(Task.Run(Function() NewDeplacement.Deplacement(compte, direction)))
+                    newTask.Add(Task.Run(Function() newDeplacement.Deplacement(compte, direction)))
 
-                    Task.Delay(Rand.Next(750, 1750)).Wait()
+                    Task.Delay(rand.Next(750, 1750)).Wait()
 
                 Next
 
@@ -650,9 +650,9 @@
 
                 For Each compte In .FrmGroupe.BotIndex
 
-                newTask.Add(Task.Run(Function() NewDeplacement.ID(compte, mapID)))
+                    newTask.Add(Task.Run(Function() NewDeplacement.ID(compte, mapID)))
 
-            Next
+                Next
 
                 Task.WaitAll(newTask.ToArray)
 

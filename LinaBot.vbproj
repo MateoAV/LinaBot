@@ -245,8 +245,8 @@
     <Compile Include="Trajet\Trajet Lina.vb" />
     <Compile Include="Trajet\TrajetExecution.vb" />
     <Compile Include="Trajet\TrajetGroupe.vb" />
-    <Compile Include="Zaap\FunctionZaap.vb" />
-    <Compile Include="Zaap\Module_Zaap.vb" />
+    <Compile Include="1 - Zaap\FunctionZaap.vb" />
+    <Compile Include="1 - Zaap\Module_Zaap.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="1 - Amis\FrmAmi.resx">

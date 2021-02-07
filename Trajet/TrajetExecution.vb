@@ -1,6 +1,4 @@
-﻿
-
-Module TrajetExecution
+﻿Module TrajetExecution
 
     Public Sub TrajetLecture(ByVal index As Integer, ByVal balise As String)
 
@@ -10,7 +8,7 @@ Module TrajetExecution
 
                 If RetourneEnBanque(index) Then
 
-                    TrajetEnCours(index, "banque", True)
+                    TrajetEnCours(index, "banque()", True)
 
                 Else
 
@@ -44,7 +42,7 @@ Module TrajetExecution
 
     End Function
 
-    Private Sub TrajetEnCours(ByVal index As Integer, ByVal balise As String, Optional ByVal banque As Boolean = False)
+    Private Function TrajetEnCours(ByVal index As Integer, ByVal balise As String, Optional ByVal banque As Boolean = False) As Boolean
 
         With Comptes(index)
 
@@ -68,7 +66,7 @@ Module TrajetExecution
 
                             If banque = False AndAlso RetourneEnBanque(index) Then
 
-                                Exit Sub
+                                Exit Function
 
                             End If
 
@@ -159,7 +157,7 @@ Module TrajetExecution
                                 Case "call"
 
                                     If nextLine Then
-                                        TrajetEnCours(index, separatePair(1), banque)
+                                        nextLine = TrajetEnCours(index, separatePair(1).ToLower, banque)
                                     End If
 
                                     'Select case
@@ -201,6 +199,11 @@ Module TrajetExecution
                                     End Select
                                     '/Select case
 
+                                Case "return"
+
+                                    Dim retourneValeur As String = separateAction(i).ToLower
+                                    Return Action(index, Split(retourneValeur, "return ")(1))
+
                                 Case Else
 
                                     If nextLine Then
@@ -229,7 +232,7 @@ Module TrajetExecution
 
         End With
 
-    End Sub
+    End Function
 
     Private Sub Bloque(ByVal index As Integer)
 
@@ -321,7 +324,7 @@ Module TrajetExecution
 
 #Region "Action"
 
-    Public Function Action(ByVal index As Integer, ByVal laLigne As String)
+    Public Function Action(index As Integer, laLigne As String)
 
         With Comptes(index)
 
@@ -335,6 +338,15 @@ Module TrajetExecution
             Dim Parametre As String() = ReturnParametre(index, laLigne)
 
             Select Case separate(0).ToLower
+
+                'finir
+                '-Groupoe
+                '-Guilde
+                '-Metier
+                '-Zaap
+                '-Map
+                '-Interaction
+                '-Pnj
 
                 Case "ami" ' FINI
 
@@ -364,7 +376,7 @@ Module TrajetExecution
 
                             Return Ami_Avertie(index, Parametre(1))
 
-                        Case "exist"
+                        Case "exist", "existe"
 
                             Return Ami_Exist(index, Parametre(1), Parametre(2))
 
@@ -380,9 +392,9 @@ Module TrajetExecution
 
                     Select Case separate(1).ToLower
 
-                        Case "echange"
+                        Case "invite"
 
-                            Return newEchange.Echange(index, Parametre(1))
+                            Return newEchange.Invite(index, Parametre(1))
 
                         Case "refuse"
 
@@ -440,40 +452,280 @@ Module TrajetExecution
 
                         Case "supprime", "suprime"
 
-                            Groupe_Item_Supprime(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+                            Return Groupe_Item_Supprime(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
 
                         Case "retire"
 
-                            Groupe_Item_Retire(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+                            Return Groupe_Item_Retire(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
 
                         Case "depose"
 
-                            Groupe_Item_Depose(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+                            Return Groupe_Item_Depose(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
 
                         Case "existe"
 
-                            Groupe_Item_Exist(index, Parametre(1))
+                            Return Groupe_Item_Exist(index, Parametre(1))
 
                         Case "equipe"
 
-                            Groupe_Item_Equipe(index, Parametre(1))
+                            Return Groupe_Item_Equipe(index, Parametre(1))
 
                         Case "desequipe"
 
-                            Groupe_Item_Desequipe(index, Parametre(1))
+                            Return Groupe_Item_Desequipe(index, Parametre(1))
 
                         Case "jette", "jete", "jet"
 
-                            Groupe_Item_Jette(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
+                            Return Groupe_Item_Jette(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 999999))
 
                         Case "utilise"
 
-                            Groupe_Item_Utilise(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 1))
+                            Return Groupe_Item_Utilise(index, Parametre(1), If(Parametre.Length > 2, Parametre(2), 1))
 
                         Case Else
 
                             MsgBox("Action inconnu, vérifier bien d'avoir les mots correctement orthographié et que la function existe." & vbCrLf &
                                    laLigne)
+
+                    End Select
+
+                Case "groupe" ' FINI
+
+                    Dim newGroupe As New FunctionGroupe
+
+                    Select Case separate(1).ToLower
+
+                        Case "invite"
+
+                            Return newGroupe.Invite(index, Parametre(1))
+
+                        Case "refuse"
+
+                            Return newGroupe.RefuseArrete(index)
+
+                        Case "arrete"
+
+                            Return newGroupe.RefuseArrete(index)
+
+                        Case "accepte"
+
+                            Return newGroupe.Accepte(index)
+
+                        Case "quitte"
+
+                            Return newGroupe.Quitte(index)
+
+                        Case "suivezmoitous"
+
+                            Return newGroupe.SuivezMoiTous(index)
+
+                        Case "arreteztousdemesuivre"
+
+                            Return newGroupe.ArretezTousDeMeSuivre(index)
+
+                        Case "suivreledeplacement"
+
+                            Return newGroupe.SuivreLeDeplacement(index, Parametre(1))
+
+                        Case "neplussuivreledeplacement"
+
+                            Return newGroupe.NePlusSuivreLeDeplacement(index, Parametre(1))
+
+                        Case "suivezletous"
+
+                            Return newGroupe.SuivezLeTous(index, Parametre(1))
+
+                        Case "arreteztousdelesuivre"
+
+                            Return newGroupe.ArretezTousDeLeSuivre(index, Parametre(1))
+
+                        Case "exclure"
+
+                            Return newGroupe.Exclure(index, Parametre(1))
+
+                        Case Else
+
+                            MsgBox("La ligne n'est pas connu : " & laLigne)
+
+                    End Select
+
+                Case "guilde" ' FINI
+
+                    Dim newGuilde As New FunctionGuilde
+
+                    Select Case separate(1).ToLower
+
+                        Case "ouvre"
+
+                            newGuilde.Ouvre(index)
+
+                            Select Case separate(2).ToLower
+
+                                Case "membre", "membres"
+
+                                    Return newGuilde.Membres(index)
+
+                                Case "personnalisation"
+
+                                    Return newGuilde.Personnalisation(index)
+
+                                Case "percepteur", "percepteurs"
+
+                                    Return newGuilde.Percepteurs(index)
+
+                                Case "enclos", "enclo"
+
+                                    Return newGuilde.Enclos(index)
+
+                                Case "maisons", "maison"
+
+                                    Return newGuilde.Maisons(index)
+
+                                Case Else
+
+                                    MsgBox("Ligne inconnu : " & laLigne)
+
+                            End Select
+
+                        Case "membre", "membres"
+
+                            Select Case separate(2).ToLower
+
+                                Case "exclure"
+
+                                    Return newGuilde.Exclure(index, Parametre(1))
+
+                                Case "invite"
+
+                                    Return newGuilde.Invite(index, Parametre(1))
+
+                                Case "refuse"
+
+                                    Return newGuilde.Refuse(index)
+
+                                Case "rang"
+
+                                    Return newGuilde.Rang(index, Parametre(1), Parametre(2))
+
+                                Case "droits", "droit"
+
+                                    Return newGuilde.Droits(index, Parametre(1), Parametre(2), Parametre(3))
+
+                                Case "experience"
+
+                                    Return newGuilde.Experience(index, Parametre(1), Parametre(2))
+
+                                Case Else
+
+                                    MsgBox("Ligne inconnu : " & laLigne)
+
+                            End Select
+
+                        Case "personnalisation"
+
+                            Select Case separate(2).ToLower
+
+                                Case "up"
+
+                                    Return newGuilde.Up(index, Parametre(1), Parametre(2))
+
+                                Case "poserunpercepteur"
+
+                                    Return newGuilde.PoserPercepteur(index)
+
+                                Case "retirerunpercepteur"
+
+                                    Return newGuilde.RetirerPercepteur(index)
+
+                                Case "releverunpercepteur"
+
+                                    Return newGuilde.ReleverPercepteur(index)
+
+                                Case Else
+
+                                    MsgBox("Ligne inconnu : " & laLigne)
+
+                            End Select
+
+                        Case "enclos", "enclo"
+
+                            Select Case separate(2).ToLower
+
+                                Case "teleporter"
+
+                                    Return newGuilde.EnclosTeleporter(index, Parametre(1))
+
+                                Case Else
+
+                                    MsgBox("Ligne inconnu : " & laLigne)
+
+                            End Select
+
+                        Case "maisons", "maison"
+
+                            Select Case separate(2).ToLower
+
+                                Case "teleporter"
+
+                                    Return newGuilde.MaisonsTeleporter(index, Parametre(1))
+
+                                Case Else
+
+                                    MsgBox("Ligne inconnu : " & laLigne)
+
+                            End Select
+
+                        Case Else
+
+                            MsgBox("Ligne inconnu : " & laLigne)
+
+                    End Select
+
+                Case "metier" ' FINI
+
+                    Dim newMetier As New FunctionMetier
+
+                    Select Case separate(1).ToLower
+
+                        Case "existe", "exist"
+
+                            Return newMetier.Existe(index, Parametre(1))
+
+                        Case "public"
+
+                            Return newMetier.Public(index, Parametre(1))
+
+                        Case "option"
+
+                            Return newMetier.Option(index, Parametre(1), Parametre(2), Parametre(3), Parametre(4), Parametre(5))
+
+                    End Select
+
+                Case "zaap", "zaapi"
+
+                    Dim newZaap As New FunctionZaap
+
+                    Select Case separate(1).ToLower
+
+                        Case "utiliser"
+
+                            Return newZaap.Utiliser(index)
+
+                        Case "sauvegarder"
+
+                            Return newZaap.Sauvegarder(index)
+
+                        Case "destination"
+
+                            Return newZaap.Destination(index, Parametre(1))
+
+                        Case "quitte"
+
+                            Return newZaap.Quitte(index)
+
+                        Case Else
+
+                            MsgBox("Ligne inconnu : " & laLigne)
 
                     End Select
 
@@ -605,25 +857,19 @@ Module TrajetExecution
 
                     Dim newRecolte As New FunctionRecolte
 
-                    While newRecolte.Recolte(index, Parametre(1), Parametre(2))
+                    While newRecolte.Recolte(index)
+
+                        If RetourneEnBanque(index) Then
+
+                            Return False
+
+                        End If
 
                         Task.Delay(500).Wait()
 
                     End While
 
                     Return True
-
-                Case "metier"
-
-                    Dim newMetier As New FunctionMetier
-
-                    Select Case separate(1).ToLower
-
-                        Case "existe", "exist"
-
-                            Return newMetier.Existe(index, Parametre(1))
-
-                    End Select
 
                 Case "mobs"
 
@@ -636,8 +882,6 @@ Module TrajetExecution
                     End Select
 
                 Case "familier"
-
-
 
             End Select
 

@@ -45,8 +45,6 @@
 
                     Case "dim"
 
-                        AddVariable(index, ligneActuel, separateLecture(1))
-
                         Select Case separateLecture(1).ToLower
 
                             Case "pods"
@@ -59,19 +57,21 @@
 
                             Case Else
 
+                                AddVariable(index, ligneActuel, separateLecture(1))
+
                         End Select
 
                     Case Else
 
                         If Balise <> "" AndAlso ligneActuel <> "" AndAlso Not ligneActuel.StartsWith("'") Then
 
-                            If Not .FrmGroupe.Trajet.ContainsKey(Balise) Then
+                            If Not .FrmGroupe.Trajet.ContainsKey(Balise.ToLower) Then
 
-                                .FrmGroupe.Trajet.Add(Balise, New List(Of String) From {ligneActuel.Replace(vbTab, "")})
+                                .FrmGroupe.Trajet.Add(Balise.ToLower, New List(Of String) From {ligneActuel.Replace(vbTab, "")})
 
                             Else
 
-                                .FrmGroupe.Trajet(Balise).Add(ligneActuel.Replace(vbTab, ""))
+                                .FrmGroupe.Trajet(Balise.ToLower).Add(ligneActuel.Replace(vbTab, ""))
 
                             End If
 
@@ -100,29 +100,19 @@
             separateLigne = Split(separateLigne(1), "}") ' "Bworky = Pods" , "Chacha = Intelligence"}
             separateLigne = Split(separateLigne(0), " , ") ' "Bworky = Pods" , "Chacha = Intelligence"
 
-            For i = 0 To separateLigne.Count - 1
+            If .FrmGroupe.Variable.ContainsKey(nomVariable.ToLower) Then
 
-                If separateLigne(i) <> "" Then
+                .FrmGroupe.Variable(nomVariable.ToLower).Add(separateLigne(0), separateLigne)
 
-                    Dim separate As String() = Split(separateLigne(i), " = ")
+            Else
 
-                    If .FrmGroupe.Variable.ContainsKey(nomVariable.ToLower) Then
-
-                        .FrmGroupe.Variable(nomVariable.ToLower).Add(separate(0), separate)
-
-                    Else
-
-                        .FrmGroupe.Variable.Add(nomVariable.ToLower, New Dictionary(Of Object, Object) From
+                .FrmGroupe.Variable.Add(nomVariable.ToLower, New Dictionary(Of Object, Object) From
                                                         {{
-                                                        separate(0), ' Nom : Bworky
-                                                        separate ' Information : Bworky  Pods  etc...
+                                                        separateLigne(0), ' Nom : Bworky
+                                                        separateLigne ' Information : Bworky  Pods  etc...
                                                         }})
 
-                    End If
-
-                End If
-
-            Next
+            End If
 
         End With
 

@@ -382,6 +382,11 @@
 
     End Function
 
+
+
+
+
+
     Public Function GroupeInvite(ByVal index As Integer) As Boolean
 
         With Comptes(index)

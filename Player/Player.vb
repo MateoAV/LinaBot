@@ -395,11 +395,11 @@ Public Class Player
                                                     Connecté = True
                                                     EnConnexion = False
 
-                                                    ' If MITM = False Then
+                                                    If MITM = False Then
 
-                                                    Send("GC1")
+                                                        Send("GC1")
 
-                                                    ' End If
+                                                    End If
 
                                                     GiInventaire(Index, e.Message)
 
@@ -3671,22 +3671,25 @@ Public Class Player
 
                                     Select Case e.Message(1)
 
-                                        Case "C", "c" ' WC ' Wc
+                                        Case "C" ' WC
 
                                             GiZaapInformation(Index, e.Message)
+
+                                        Case "c" ' Wc = Zaapi
 
                                         Case "V"
 
                                             If e.Message = "WV" Then
 
-                                                Map.Bloque.Set()
-                                                Personnage.EnInteraction = False
+                                                GiZaapFin(Index, e.Message)
 
                                             Else
 
                                                 ErreurFichier(Index, Personnage.NomDuPersonnage, "WV", e.Message)
 
                                             End If
+
+                                        Case "v" ' Wv = Zaapi
 
                                         Case Else
 
@@ -3767,6 +3770,7 @@ Public Class Player
                         Try
 
                             Dim _bufferClient() As Byte = Encoding.ASCII.GetBytes(e.Message & vbNullChar)
+
                             Client.BeginSend(_bufferClient, 0, _bufferClient.Length, SocketFlags.None, New AsyncCallback(AddressOf SendCallBack), Client)
 
                         Catch ex As Exception
@@ -3944,19 +3948,25 @@ Public Class Player
 
                         Else
 
-                            If EnAuthentification Then
+                            If sbClient.ToString.StartsWith("GÐ") Then
 
-                                Socket_Authentification.LaSocket.BeginSend(bufferServer, 0, bufferServer.Length, SocketFlags.None, New AsyncCallback(AddressOf SendCallBack), Socket_Authentification.LaSocket)
-
-                            ElseIf Connecté OrElse EnConnexion Then
-
-                                Socket.LaSocket.BeginSend(bufferServer, 0, bufferServer.Length, SocketFlags.None, New AsyncCallback(AddressOf SendCallBack), Socket.LaSocket)
+                                bufferServer = Encoding.UTF8.GetBytes("GI" & vbCrLf)
 
                             End If
 
-                        End If
+                            If EnAuthentification Then
 
-                        sbClient.Clear()
+                                    Socket_Authentification.LaSocket.BeginSend(bufferServer, 0, bufferServer.Length, SocketFlags.None, New AsyncCallback(AddressOf SendCallBack), Socket_Authentification.LaSocket)
+
+                                ElseIf Connecté OrElse EnConnexion Then
+
+                                    Socket.LaSocket.BeginSend(bufferServer, 0, bufferServer.Length, SocketFlags.None, New AsyncCallback(AddressOf SendCallBack), Socket.LaSocket)
+
+                                End If
+
+                            End If
+
+                            sbClient.Clear()
 
                     Else
 

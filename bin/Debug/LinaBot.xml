@@ -872,26 +872,14 @@ LinaBot
  False = Le bot n'à pas sélectionné la catégorie voulu. <br/>
  </returns>
 </member>
-<member name="M:LinaBot.FunctionRecolte.Recolte(System.Int32,System.String,System.String)">
+<member name="M:LinaBot.FunctionRecolte.Recolte(System.Int32)">
  <summary>
  Recolte les ressources sur la map selon le nom indiqué.
  </summary>
  <param name="index">Le numéro du bot.</param>
- <param name="nom">Le nom ou l'ID de la récolte, exemple : Frene</param>
- <param name="action">Le nom de l'action à faire en jeu, exemple : couper</param>
  <returns>
  True = le bot à fait une récolte. <br/>
  False = Le bot n'a plus aucune récolte disponible sur la map.
- </returns>
-</member>
-<member name="M:LinaBot.FunctionRecolte.Recherche(System.Int32,System.String)">
- <summary>
- Cherche la récolte la plus proche du joueur.
- </summary>
- <param name="nom">Indique le nom de la récolte. Exemple : Ble, Orge, Pichon, etc...</param>
- <returns>
- 0 = Le bot n'a aucune cellule disponible pour faire une récolte. <br/>
- Renvoie la cellule de la récolte.
  </returns>
 </member>
 <member name="M:LinaBot.FunctionRecolte.RecolteMonstre(System.Int32,System.String)">

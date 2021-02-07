@@ -88,6 +88,7 @@
 
     End Function
 
+
     ''' <summary>
     ''' Vérifier si le personnage a assé de point pour up la caractéristique.
     ''' </summary>

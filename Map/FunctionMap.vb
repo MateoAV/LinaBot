@@ -1,8 +1,5 @@
 ﻿Public Class FunctionMap
 
-    'Le mieux serai de bien separer deplacement + ineraction
-    'et d'agir uniquement selon les infos reçu/envoyé etc....
-
     ''' <summary>
     ''' Compare 2 IDs de map.
     ''' </summary>
@@ -12,7 +9,7 @@
     ''' True = La MapID correspond à celle du bot. <br/>
     ''' False = La MapID ne correspond pas à celle du bot.
     ''' </returns>
-    Public Function ID(ByVal index As Integer, ByVal mapID As Integer) As Boolean
+    Public Function ID(index As Integer, mapID As Integer) As Boolean
 
         With Comptes(index)
 
@@ -41,7 +38,7 @@
     ''' <param name="mapCoordonnees">La map à vérifier, Exemple : 4,-16</param>
     ''' <returns>True = La Map correspond à celle du bot. <br/>
     ''' False = La Map ne correspond pas à celle du bot.</returns>
-    Public Function Coordonnees(ByVal index As Integer, ByVal mapCoordonnees As String) As Boolean
+    Public Function Coordonnees(index As Integer, mapCoordonnees As String) As Boolean
 
         With Comptes(index)
 
@@ -74,14 +71,10 @@
     ''' False = Le déplacement a échoué.
     ''' </returns>
     ''' 
-    Public Function Deplacement(ByVal index As Integer, ByVal celluleDirection As String, Optional ByVal delaiMinimum As Integer = 500, Optional ByVal delaiMaximum As Integer = 1500) As Boolean
+    Public Function Deplacement(index As Integer, celluleDirection As String, Optional delaiMinimum As Integer = 500, Optional delaiMaximum As Integer = 1500) As Boolean
 
         With Comptes(index)
-            'Faire si interaction obliger
-            'une liste de task
-            '1) celle du déplacement
-            '2) celle de l'interaction
-            ' et tchack tout a la fin
+
             If .Map.EnDeplacement Then StopDéplacement(index)
 
             If .Map.EnDeplacement = False Then
@@ -115,10 +108,10 @@
                     .BloqueDeplacement.Reset()
 
                     .Send("GA001" & path,
-                          {"GA;0", 'Le déplacement a échoué.
-                           "GA0;1;" & .Personnage.ID, 'Indique que je suis en plein déplacement.
-                           "GDM", 'Indique un changement de map.
-                           "GA;905;"}) 'Je suis entré en combat.
+                         {"GA;0", 'Le déplacement a échoué.
+                          "GA0;1;" & .Personnage.ID, 'Indique que je suis en plein déplacement.
+                          "GDM", 'Indique un changement de map.
+                          "GA;905;"}) 'Je suis entré en combat.
 
                     .BloqueDeplacement.WaitOne(15000)
 
@@ -311,7 +304,7 @@
                     '  pair.IDCategorie = -3
                     If pair.IDUnique < 0 AndAlso pair.Cellule <> .Map.Entite(.Personnage.ID).Cellule Then
 
-                        If Not IsNothing(pair.ID) AndAlso pair.ID.Contains(",") AndAlso Not pair.Nom.StartsWith("Mino") Then
+                        If Not IsNothing(pair.ID) AndAlso pair.ID.Contains(",") Then
 
                             If .Map.Handler(pair.Cellule).layerObject1Num <> 1030 AndAlso .Map.Handler(pair.Cellule).layerObject2Num <> 1030 Then
 

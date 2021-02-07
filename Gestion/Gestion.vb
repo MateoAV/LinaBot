@@ -31,6 +31,21 @@
 
                                 End Select
 
+                            Case "T"
+
+                                Select Case e.Message(2)
+                                    Case "S"
+
+                                        Dim separate As String() = Split(Mid(e.Message, 4), "|")
+
+                                        If separate(0) = Comptes(Index).Personnage.ID Then
+
+                                            Task.Run(Function() AvanceMobsProche(Index))
+
+                                        End If
+
+                                End Select
+
                             Case "t"
 
                                 If .ThreadCombat IsNot Nothing AndAlso .ThreadCombat.IsAlive Then

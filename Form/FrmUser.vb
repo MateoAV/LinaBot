@@ -310,13 +310,8 @@
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) 
 
-    End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        Task.Run(Sub() Comptes(index).Socket.Envoyer(TextBox1.Text))
-    End Sub
 
     Dim compteur1, compteur2 As Integer
 

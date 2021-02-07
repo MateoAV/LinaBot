@@ -114,9 +114,13 @@
 
                         .Equipement = separateData(1)
 
+                        EcritureMessage(index, "(Equipement)", "Vous avez équipé l'item : " & .Nom, Color.Gray)
+
                     Else
 
                         .Equipement = ""
+
+                        EcritureMessage(index, "(Equipement)", "Vous avez déséquipé l'item : " & .Nom, Color.Gray)
 
                     End If
 

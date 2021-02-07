@@ -427,8 +427,8 @@
 
                     .Combat.MonTour = True
 
-                    ' Dim threadIA As Threading.Thread = New Threading.Thread(Sub() IABase(index)) With {.IsBackground = True}
-                    ' threadIA.Start()
+                    Dim threadIA As Threading.Thread = New Threading.Thread(Sub() IABase(index)) With {.IsBackground = True}
+                    threadIA.Start()
 
                 End If
 
