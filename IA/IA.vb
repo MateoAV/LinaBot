@@ -55,7 +55,7 @@
 
     End Sub
 
-    Private Sub lancesort(ByVal index As Integer, ByVal sort As Integer)
+    Private Sub lancesort(ByVal index As Integer, ByVal sort As String)
 
         With Comptes(index)
 
@@ -79,6 +79,10 @@
                     End If
 
                 Next
+
+                sort = ReturnIDSort(index, sort)
+
+                AddBarreSort(index, sort)
 
                 If goalDistance(.Map.Entite(.Personnage.ID).Cellule, meilleurCellule, .Map.Largeur) < 10 Then
                     .Combat.Bloque.Reset()
@@ -105,5 +109,50 @@
 
     End Sub
 
+
+    Private Function ReturnIDSort(index As Integer, sort As String) As Integer
+
+        With Comptes(index)
+
+            For Each pair As Dictionary(Of Integer, CSort) In VarSort.Values
+
+                If pair.Values(0).ID.ToString = sort OrElse pair.Values(0).Nom.ToLower = sort.ToLower Then
+
+                    Return pair.Values(0).ID
+
+                End If
+
+            Next
+
+        End With
+
+        Return 0
+
+    End Function
+
+    Private Function AddBarreSort(index As Integer, sort As String) As Boolean
+
+        With Comptes(index)
+
+            For Each pair As KeyValuePair(Of String, CSort) In .Sort
+
+                If pair.Value.Nom.ToLower = sort.ToLower OrElse pair.Value.ID.ToString = sort Then
+
+                    If pair.Value.BarreSort = "_" Then
+
+                        Return .Send("SM" & pair.Value.ID & "|1",
+                                    {"BN"})
+
+                    End If
+
+                End If
+
+            Next
+
+        End With
+
+        Return True
+
+    End Function
 
 End Module

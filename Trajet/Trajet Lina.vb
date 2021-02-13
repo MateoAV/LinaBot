@@ -1,5 +1,7 @@
 ﻿Module Trajet_Lina
 
+    'ADD CHARGEMENT CRAFT
+
     Public Sub TrajetLoad(ByVal index As Integer, ByVal chemin As String)
 
         With Comptes(index)
@@ -106,11 +108,23 @@
 
             Else
 
-                .FrmGroupe.Variable.Add(nomVariable.ToLower, New Dictionary(Of Object, Object) From
+                If .FrmGroupe.Variable(nomVariable.ToLower).ContainsKey(separateLigne(0)) Then
+
+                    .FrmGroupe.Variable.Add(nomVariable.ToLower, New Dictionary(Of Object, Object) From
+                                                        {{
+                                                        separateLigne(0) & .FrmGroupe.Variable(nomVariable.ToLower).Count, ' Nom : Bworky
+                                                        separateLigne ' Information : Bworky  Pods  etc...
+                                                        }})
+
+                Else
+
+                    .FrmGroupe.Variable.Add(nomVariable.ToLower, New Dictionary(Of Object, Object) From
                                                         {{
                                                         separateLigne(0), ' Nom : Bworky
                                                         separateLigne ' Information : Bworky  Pods  etc...
                                                         }})
+
+                End If
 
             End If
 

@@ -1,0 +1,107 @@
+'Le trajet peut se lancer depuis Incarnam.
+'Trajet fait pour un crâ.
+'Sort d'incarnam et va en direction d'Amakna.
+'Si a 80% pods il retourne à la banque d'amakna.
+
+Dim Pods = 80
+
+Sub Main()
+
+	Map.ID("7549") : Map.Direction("381")
+	Map.ID("7414") : Map.Direction("Haut")
+	Map.Coordonnees("4,-17") : Map.Direction("Haut")
+	Map.Coordonnees("4,-18") : Map.Direction("Haut")
+	Map.Coordonnees("4,-19") : Map.Direction("Haut")
+	Map.Coordonnees("4,-20") : Map.Direction("Haut")
+	Map.Coordonnees("4,-21") : Map.Direction("Haut")
+	Map.Coordonnees("4,-22") : Map.Direction("Droite")
+	Map.Coordonnees("5,-22") : Map.Direction("Haut")
+	Map.Coordonnees("5,-23") : Map.Direction("Gauche")
+	Map.Coordonnees("4,-23") : Map.Direction("Haut")
+
+	Call Combat()
+
+End Sub
+
+Sub Combat()
+	
+	Map.Coordonnees("4,-24") : Map.Attaquer("All" , "1") : Map.Direction("Haut")
+	Map.Coordonnees("4,-25") : Map.Attaquer("All" , "1") : Map.Direction("Haut")
+	Map.Coordonnees("4,-26") : Map.Attaquer("All" , "1") : Map.Direction("Haut")
+	Map.Coordonnees("4,-27") : Map.Attaquer("All" , "1") : Map.Direction("Haut")
+	Map.Coordonnees("4,-28") : Map.Attaquer("All" , "1") : Map.Direction("Droite")
+	
+	Map.Coordonnees("5,-28") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("5,-27") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("5,-26") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("5,-25") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("5,-24") : Map.Attaquer("All" , "1") : Map.Direction("Droite")
+	
+	Map.Coordonnees("6,-24") : Map.Attaquer("All" , "1") : Map.Direction("Haut")
+	Map.Coordonnees("6,-25") : Map.Attaquer("All" , "1") : Map.Direction("Haut")
+	Map.Coordonnees("6,-26") : Map.Attaquer("All" , "1") : Map.Direction("Haut")
+	Map.Coordonnees("6,-27") : Map.Attaquer("All" , "1") : Map.Direction("Haut")
+	Map.Coordonnees("6,-28") : Map.Attaquer("All" , "1") : Map.Direction("Droite")
+	
+	Map.Coordonnees("7,-28") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("7,-27") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("7,-26") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("7,-25") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("7,-24") : Map.Attaquer("All" , "1") : Map.Direction("Gauche")
+	Map.Coordonnees("6,-24") : Map.Attaquer("All" , "1") : Map.Direction("Gauche")
+	Map.Coordonnees("5,-24") : Map.Attaquer("All" , "1") : Map.Direction("Gauche")
+	Map.Coordonnees("4,-24") : Map.Attaquer("All" , "1") : Map.Direction("Gauche")
+	
+End Sub
+
+Sub Banque()
+
+	Map.Coordonnees("4,-24") : Map.Attaquer("All" , "1") : Map.Direction("Droite")
+	Map.Coordonnees("4,-25") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("4,-26") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("4,-27") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("4,-28") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	
+	Map.Coordonnees("5,-28") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("5,-27") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("5,-26") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("5,-25") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("5,-24") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	
+	Map.Coordonnees("6,-24") : Map.Attaquer("All" , "1") : Map.Direction("Gauche")
+	Map.Coordonnees("6,-25") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("6,-26") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("6,-27") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("6,-28") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	
+	Map.Coordonnees("7,-28") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("7,-27") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("7,-26") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("7,-25") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("7,-24") : Map.Attaquer("All" , "1") : Map.Direction("Gauche")
+	Map.Coordonnees("6,-24") : Map.Attaquer("All" , "1") : Map.Direction("Gauche")
+	Map.Coordonnees("5,-24") : Map.Attaquer("All" , "1") : Map.Direction("Bas")
+	Map.Coordonnees("4,-24") : Map.Attaquer("All" , "1") : Map.Direction("Droite")
+		
+	Map.Coordonnees("4,-23") : Map.Direction("Droite")
+	Map.Coordonnees("5,-23") : Map.Direction("Bas")
+	Map.Coordonnees("5,-22") : Map.Direction("Gauche")
+	Map.Coordonnees("4,-22") : Map.Direction("Bas")
+	Map.Coordonnees("4,-21") : Map.Direction("Bas")
+	Map.Coordonnees("4,-20") : Map.Direction("Bas")
+	Map.Coordonnees("4,-19") : Map.Direction("Bas")
+	Map.Coordonnees("4,-18") : Map.Direction("Bas")
+	Map.Coordonnees("4,-17") : Map.Direction("Bas")
+	Map.ID("7414") : Map.Direction("142")
+	Map.ID("7549") : Call PnjBanquier()
+
+End Sub
+
+Sub PnjBanquier()
+
+	Pnj.Parler("Al Etsop")
+	Pnj.Reponse("Consulter son coffre personnel")
+	Item.Depose("All")
+	Echange.Arrete
+
+End Sub

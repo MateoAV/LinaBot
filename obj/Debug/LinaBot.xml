@@ -346,7 +346,7 @@ LinaBot
  Retourne l'ID ou la categorie selon le nom ou l'ID de l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionEchange.Echange(System.String,System.String)">
+<member name="M:LinaBot.FunctionEchange.Invite(System.String,System.String)">
  <summary>
  Lance un echange avec le joueur.
  </summary>

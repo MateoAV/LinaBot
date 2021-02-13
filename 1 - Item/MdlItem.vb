@@ -21,7 +21,9 @@
 
                         Dim newItem As New CItem
 
-                        With newItem
+                        Try
+
+                            With newItem
 
                             .IdObjet = Convert.ToInt64(separateItem(1), 16)
 
@@ -52,6 +54,12 @@
                             End If
 
                         End With
+
+                        Catch ex As Exception
+
+                            ErreurFichier(index, .Personnage.NomDuPersonnage, "GiItemAjouteNewItem", data & vbCrLf & ex.Message)
+
+                        End Try
 
                         If dico.ContainsKey(newItem.IdUnique) Then
 
