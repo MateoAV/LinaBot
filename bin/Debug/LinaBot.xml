@@ -117,6 +117,11 @@ LinaBot
   Recherche une ressource localisée de type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:LinaBot.My.Resources.Resources.icons8_email_send_48">
+<summary>
+  Recherche une ressource localisée de type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:LinaBot.My.Resources.Resources.Initiative">
 <summary>
   Recherche une ressource localisée de type System.Drawing.Bitmap.
@@ -408,6 +413,16 @@ LinaBot
  False = Si le bot n'a pas réussie à valider l'échange.
  </returns>
 </member>
+<member name="M:LinaBot.FunctionEchange.Verification(System.String)">
+ <summary>
+ Vérifie si la personne correspond à celle voulu..
+ </summary>
+ <param name="index">Indique le numéro du bot.</param>
+ <returns>
+ True = il s'agit de la bonne personne. <br/>
+ False = La personne ne correspond pas à celui demandé.
+ </returns>
+</member>
 <member name="M:LinaBot.Player.Send(System.String,System.String[])">
  <summary>
  Envoie un message au serveur de jeu/Authentification.
@@ -419,7 +434,7 @@ LinaBot
  False = Le bot n'a pas reçu l'information voulu ou à temps.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Supprime(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Supprime(System.String,System.String,System.String,System.String)">
  <summary>
  Permet la suppression d'un item contenue dans l'inventaire du joueur.
  </summary>
@@ -432,7 +447,7 @@ LinaBot
  False = Le bot n'a pas réussi à supprimer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Retire(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Retire(System.String,System.String,System.String,System.String)">
  <summary>
  Permet de retirer un item contenue dans la banque/coffre/échange/HDV/Etc...
  </summary>
@@ -445,7 +460,7 @@ LinaBot
  False = Le bot n'a pas réussi à retirer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Depose(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Depose(System.String,System.String,System.String,System.String)">
  <summary>
  Permet de déposer un item en Banque/Echange/Coffre/Etc...
  </summary>
@@ -458,7 +473,7 @@ LinaBot
  False = Le bot n'a pas réussi à déposer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Existe(System.String,System.String,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Existe(System.String,System.String,System.String)">
  <summary>
  Retourne un boolean si l'item existe ou non.
  </summary>
@@ -470,7 +485,7 @@ LinaBot
  False = L'item n'existe pas dans l'inventaire.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Equipe(System.String,System.String,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Equipe(System.String,System.String,System.String)">
  <summary>
  Equipe une item selon le nom/ID et les caractéristiques.
  </summary>
@@ -492,7 +507,7 @@ LinaBot
  Retourne le numéro pour savoir où est équipé l'item, si rien, retourne -1.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Desequipe(System.String,System.String,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Desequipe(System.String,System.String,System.String)">
  <summary>
  Déséquipe un item.
  </summary>
@@ -504,7 +519,7 @@ LinaBot
  False = L'item n'est pas déséquipé.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionItem.Jette(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionItem.Jette(System.String,System.String,System.String,System.String)">
  <summary>
  Jétte un objet au sol.
  </summary>
@@ -707,7 +722,7 @@ LinaBot
  False = Le bot n'a pas réussi à quitter le mode "Acheter/Vendre" du Pnj.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.AcheterVendreVendItem(System.Int32,System.String,System.Int32,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.AcheterVendreVendItem(System.Int32,System.String,System.Int32,System.String)">
  <summary>
  Vend un item au Pnj.
  </summary>
@@ -720,7 +735,7 @@ LinaBot
  False = Le bot n'a pas réussi à vendre l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.AcheterVendreAcheteItem(System.Int32,System.String,System.Int32,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.AcheterVendreAcheteItem(System.Int32,System.String,System.Int32,System.String)">
  <summary>
  Achète un item au Pnj.
  </summary>
@@ -765,7 +780,7 @@ LinaBot
  False = Le bot n'a pas réussi à quitter le mode "Vendre" du Pnj.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.VendreItem(System.Int32,System.String,System.Int32,System.Int32,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.VendreItem(System.Int32,System.String,System.Int32,System.Int32,System.String)">
  <summary>
  Vend un item dans l'hôtel de vente.
  </summary>
@@ -779,7 +794,7 @@ LinaBot
  False = l'item n'a pas pu être mis en vente.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.Retirer(System.String,System.String,System.String,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.Retirer(System.String,System.String,System.String,System.String)">
  <summary>
  Permet de retirer un item contenue dans l'Hôtel de vente.
  </summary>
@@ -792,7 +807,7 @@ LinaBot
  False = Le bot n'a pas réussi à retirer l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.Selectionne(System.Int32,System.String,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.Selectionne(System.Int32,System.String,System.String)">
  <summary>
  Permet de sélectionner un item contenue dans l'Hôtel de vente.
  </summary>
@@ -836,7 +851,7 @@ LinaBot
  False = Le bot n'a pas trouvé l'item.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionPnj.AcheterItem(System.Int32,System.String,System.Int32,System.Int32,LinaBot.CItemCaractéristique)">
+<member name="M:LinaBot.FunctionPnj.AcheterItem(System.Int32,System.String,System.Int32,System.Int32,System.String)">
  <summary>
  Achète un item dans l'hôtel de vente.
  </summary>

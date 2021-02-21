@@ -1,6 +1,6 @@
 ﻿Module IA
 
-    Public Sub IAChargement(ByVal index As Integer, ByVal chemin As String)
+    Public Sub IAChargement(index As Integer, chemin As String)
 
         With Comptes(index)
 
@@ -34,17 +34,19 @@
 
     End Sub
 
-    Public Sub IABase(ByVal index As Integer)
+    Public Sub IABase(index As Integer)
 
         With Comptes(index)
 
-            For i = 0 To .IntelligenceArtificielle.Count - 1
+            For Each pair As String In .IntelligenceArtificielle
 
-                Select Case Mid(.IntelligenceArtificielle(i).ToLower, 3)
+                Dim euh = Mid(pair, 3)
+
+                Select Case Mid(pair.ToLower, 1, 3)
                     Case "ava"
-                        AvanceMobsProche(index)
+                        Avance(index)
                     Case "lan"
-                        lancesort(index, Split(.IntelligenceArtificielle(i), " = ")(1))
+                        lancesort(index, Split(pair, " = ")(1))
                     Case "fin"
 
                 End Select
@@ -55,7 +57,7 @@
 
     End Sub
 
-    Private Sub lancesort(ByVal index As Integer, ByVal sort As String)
+    Private Sub lancesort(index As Integer, sort As String)
 
         With Comptes(index)
 

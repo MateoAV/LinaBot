@@ -2,7 +2,7 @@
 
 #Region "Ajoute"
 
-    Sub GiItemAjoute(ByVal index As Integer, ByVal data As String, ByVal dico As Dictionary(Of Integer, CItem))
+    Sub GiItemAjoute(index As Integer, data As String, dico As Dictionary(Of Integer, CItem))
 
         With Comptes(index)
 
@@ -25,35 +25,35 @@
 
                             With newItem
 
-                            .IdObjet = Convert.ToInt64(separateItem(1), 16)
+                                .IdObjet = Convert.ToInt64(separateItem(1), 16)
 
-                            .IdUnique = Convert.ToInt64(separateItem(0), 16)
+                                .IdUnique = Convert.ToInt64(separateItem(0), 16)
 
-                            .Nom = VarItems(Convert.ToInt64(separateItem(1), 16)).Nom
+                                .Nom = VarItems(Convert.ToInt64(separateItem(1), 16)).Nom
 
-                            .Quantiter = Convert.ToInt64(separateItem(2), 16)
+                                .Quantiter = Convert.ToInt64(separateItem(2), 16)
 
-                            .Caracteristique = ItemCaractéristique(separateItem(4), Convert.ToInt64(separateItem(1), 16))
+                                .Caracteristique = ItemCaractéristique(separateItem(4), Convert.ToInt64(separateItem(1), 16))
 
-                            .CaracteristiqueBrute = separateItem(4)
+                                .CaracteristiqueBrute = separateItem(4)
 
-                            .Categorie = VarItems(.IdObjet).Catégorie
+                                .Categorie = VarItems(.IdObjet).Catégorie
 
-                            If separateItem(3) <> "" Then
+                                If separateItem(3) <> "" Then
 
-                                .Equipement = Convert.ToInt64(separateItem(3), 16)
+                                    .Equipement = Convert.ToInt64(separateItem(3), 16)
 
-                            ElseIf VarItems(Convert.ToInt64(separateItem(1), 16)).Catégorie = "24" Then
+                                ElseIf VarItems(Convert.ToInt64(separateItem(1), 16)).Catégorie = "24" Then
 
-                                .Equipement = "Quete"
+                                    .Equipement = "Quete"
 
-                            Else
+                                Else
 
-                                .Equipement = ""
+                                    .Equipement = ""
 
-                            End If
+                                End If
 
-                        End With
+                            End With
 
                         Catch ex As Exception
 
@@ -768,6 +768,18 @@
 
                                     .ResistanceItem = valeur1 & "/" & valeur3
 
+                                    Select Case VarItems(id).Catégorie
+
+                                        Case 5, 19, 8, 22, 7, 3, 4, 6, 20, 21, 83
+
+                                            .Etheree = True
+
+                                        Case Else
+
+                                            .Etheree = False
+
+                                    End Select
+
                                 Case 830
 
                                     '  resultat &= "Potion de : "
@@ -881,213 +893,250 @@
 
     End Function
 
-    Public Function ComparateurCaractéristiqueObjets(ByVal Item As CItemCaractéristique, ByVal Voulu As CItemCaractéristique) As Boolean
+    Private Function ReturnCaracteristique(caracteristique As String) As CItemCaractéristique
 
-        If Item.DommageEau < Split(Voulu.DommageEau, " à ")(0) OrElse Item.DommageEau > Split(Voulu.DommageEau, " à ")(1) Then
+        'Caract =
+        'Puissance = 80 a 100 | Etheree = True
+        Dim NewCaracteristique As New CItemCaractéristique
+        Dim separateCaracteristique As String() = Split(caracteristique, " | ")
 
-            Return False
+        For i = 0 To separateCaracteristique.Count - 1
 
-        End If
+            Dim separate As String() = Split(separateCaracteristique(i), " = ")
 
-        If Item.DommageFeu < Split(Voulu.DommageFeu, " à ")(0) OrElse Item.DommageFeu > Split(Voulu.DommageFeu, " à ")(1) Then
+            Select Case separate(0).ToLower
 
-            Return False
+                Case "puissance"
 
-        End If
+                    NewCaracteristique.Puissance = separate(1)
 
-        If Item.DommageTerre < Split(Voulu.DommageTerre, " à ")(0) OrElse Item.DommageTerre > Split(Voulu.DommageTerre, " à ")(1) Then
+                Case "etheree"
 
-            Return False
+                    NewCaracteristique.Etheree = CBool(separate(1))
 
-        End If
+            End Select
 
-        If Item.DommageAir < Split(Voulu.DommageAir, " à ")(0) OrElse Item.DommageAir > Split(Voulu.DommageAir, " à ")(1) Then
+        Next
 
-            Return False
+        Return NewCaracteristique
 
-        End If
+    End Function
 
-        If Item.DommageNeutre < Split(Voulu.DommageNeutre, " à ")(0) OrElse Item.DommageNeutre > Split(Voulu.DommageNeutre, " à ")(1) Then
+    Public Function ComparateurCaractéristiqueObjets(ByVal Item As CItemCaractéristique, ByVal CaracteristiqueVoulu As String) As Boolean
 
-            Return False
+        Dim voulu As CItemCaractéristique = ReturnCaracteristique(CaracteristiqueVoulu)
 
-        End If
-
-        If Item.Force < Split(Voulu.Force, " à ")(0) OrElse Item.Force > Split(Voulu.Force, " à ")(1) Then
-
-            Return False
-
-        End If
-
-        If Item.Vitalité < Split(Voulu.Vitalité, " à ")(0) OrElse Item.Vitalité > Split(Voulu.Vitalité, " à ")(1) Then
+        If Item.DommageEau < Split(voulu.DommageEau, " à ")(0) OrElse Item.DommageEau > Split(voulu.DommageEau, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Agilité < Split(Voulu.Agilité, " à ")(0) OrElse Item.Agilité > Split(Voulu.Agilité, " à ")(1) Then
+        If Item.DommageFeu < Split(voulu.DommageFeu, " à ")(0) OrElse Item.DommageFeu > Split(voulu.DommageFeu, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Sagesse < Split(Voulu.Sagesse, " à ")(0) OrElse Item.Sagesse > Split(Voulu.Sagesse, " à ")(1) Then
+        If Item.DommageTerre < Split(voulu.DommageTerre, " à ")(0) OrElse Item.DommageTerre > Split(voulu.DommageTerre, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Intelligence < Split(Voulu.Intelligence, " à ")(0) OrElse Item.Intelligence > Split(Voulu.Intelligence, " à ")(1) Then
+        If Item.DommageAir < Split(voulu.DommageAir, " à ")(0) OrElse Item.DommageAir > Split(voulu.DommageAir, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Chance < Split(Voulu.Chance, " à ")(0) OrElse Item.Chance > Split(Voulu.Chance, " à ")(1) Then
+        If Item.DommageNeutre < Split(voulu.DommageNeutre, " à ")(0) OrElse Item.DommageNeutre > Split(voulu.DommageNeutre, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PA < Split(Voulu.PA, " à ")(0) OrElse Item.PA > Split(Voulu.PA, " à ")(1) Then
+        If Item.Force < Split(voulu.Force, " à ")(0) OrElse Item.Force > Split(voulu.Force, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PM < Split(Voulu.PM, " à ")(0) OrElse Item.PM > Split(Voulu.PM, " à ")(1) Then
+        If Item.Vitalité < Split(voulu.Vitalité, " à ")(0) OrElse Item.Vitalité > Split(voulu.Vitalité, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PO < Split(Voulu.PO, " à ")(0) OrElse Item.PO > Split(Voulu.PO, " à ")(1) Then
+        If Item.Agilité < Split(voulu.Agilité, " à ")(0) OrElse Item.Agilité > Split(voulu.Agilité, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Invocation < Split(Voulu.Invocation, " à ")(0) OrElse Item.Invocation > Split(Voulu.Invocation, " à ")(1) Then
+        If Item.Sagesse < Split(voulu.Sagesse, " à ")(0) OrElse Item.Sagesse > Split(voulu.Sagesse, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Initiative < Split(Voulu.Initiative, " à ")(0) OrElse Item.Initiative > Split(Voulu.Initiative, " à ")(1) Then
+        If Item.Intelligence < Split(voulu.Intelligence, " à ")(0) OrElse Item.Intelligence > Split(voulu.Intelligence, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Prospection < Split(Voulu.Prospection, " à ")(0) OrElse Item.Prospection > Split(Voulu.Prospection, " à ")(1) Then
+        If Item.Chance < Split(voulu.Chance, " à ")(0) OrElse Item.Chance > Split(voulu.Chance, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Pods < Split(Voulu.Pods, " à ")(0) OrElse Item.Pods > Split(Voulu.Pods, " à ")(1) Then
+        If Item.PA < Split(voulu.PA, " à ")(0) OrElse Item.PA > Split(voulu.PA, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.CC < Split(Voulu.CC, " à ")(0) OrElse Item.CC > Split(Voulu.CC, " à ")(1) Then
+        If Item.PM < Split(voulu.PM, " à ")(0) OrElse Item.PM > Split(voulu.PM, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Dommage < Split(Voulu.Dommage, " à ")(0) OrElse Item.Dommage > Split(Voulu.Dommage, " à ")(1) Then
+        If Item.PO < Split(voulu.PO, " à ")(0) OrElse Item.PO > Split(voulu.PO, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PcDommage < Split(Voulu.PcDommage, " à ")(0) OrElse Item.PcDommage > Split(Voulu.PcDommage, " à ")(1) Then
+        If Item.Invocation < Split(voulu.Invocation, " à ")(0) OrElse Item.Invocation > Split(voulu.Invocation, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.DommagePiege < Split(Voulu.DommagePiege, " à ")(0) OrElse Item.DommagePiege > Split(Voulu.DommagePiege, " à ")(1) Then
+        If Item.Initiative < Split(voulu.Initiative, " à ")(0) OrElse Item.Initiative > Split(voulu.Initiative, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PcDommagePiege < Split(Voulu.PcDommagePiege, " à ")(0) OrElse Item.PcDommagePiege > Split(Voulu.PcDommagePiege, " à ")(1) Then
+        If Item.Prospection < Split(voulu.Prospection, " à ")(0) OrElse Item.Prospection > Split(voulu.Prospection, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Soin < Split(Voulu.Soin, " à ")(0) OrElse Item.Soin > Split(Voulu.Soin, " à ")(1) Then
+        If Item.Pods < Split(voulu.Pods, " à ")(0) OrElse Item.Pods > Split(voulu.Pods, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.ResistanceTerre < Split(Voulu.ResistanceTerre, " à ")(0) OrElse Item.ResistanceTerre > Split(Voulu.ResistanceTerre, " à ")(1) Then
+        If Item.CC < Split(voulu.CC, " à ")(0) OrElse Item.CC > Split(voulu.CC, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.ResistanceEau < Split(Voulu.ResistanceEau, " à ")(0) OrElse Item.ResistanceEau > Split(Voulu.ResistanceEau, " à ")(1) Then
+        If Item.Dommage < Split(voulu.Dommage, " à ")(0) OrElse Item.Dommage > Split(voulu.Dommage, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.ResistanceFeu < Split(Voulu.ResistanceFeu, " à ")(0) OrElse Item.ResistanceFeu > Split(Voulu.ResistanceFeu, " à ")(1) Then
+        If Item.PcDommage < Split(voulu.PcDommage, " à ")(0) OrElse Item.PcDommage > Split(voulu.PcDommage, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.ResistanceAir < Split(Voulu.ResistanceAir, " à ")(0) OrElse Item.ResistanceAir > Split(Voulu.ResistanceAir, " à ")(1) Then
+        If Item.DommagePiege < Split(voulu.DommagePiege, " à ")(0) OrElse Item.DommagePiege > Split(voulu.DommagePiege, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.ResistanceNeutre < Split(Voulu.ResistanceNeutre, " à ")(0) OrElse Item.ResistanceNeutre > Split(Voulu.ResistanceNeutre, " à ")(1) Then
+        If Item.PcDommagePiege < Split(voulu.PcDommagePiege, " à ")(0) OrElse Item.PcDommagePiege > Split(voulu.PcDommagePiege, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PcResistanceTerre < Split(Voulu.PcResistanceTerre, " à ")(0) OrElse Item.PcResistanceTerre > Split(Voulu.PcResistanceTerre, " à ")(1) Then
+        If Item.Soin < Split(voulu.Soin, " à ")(0) OrElse Item.Soin > Split(voulu.Soin, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PcResistanceEau < Split(Voulu.PcResistanceEau, " à ")(0) OrElse Item.PcResistanceEau > Split(Voulu.PcResistanceEau, " à ")(1) Then
+        If Item.ResistanceTerre < Split(voulu.ResistanceTerre, " à ")(0) OrElse Item.ResistanceTerre > Split(voulu.ResistanceTerre, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PcResistanceFeu < Split(Voulu.PcResistanceFeu, " à ")(0) OrElse Item.PcResistanceFeu > Split(Voulu.PcResistanceFeu, " à ")(1) Then
+        If Item.ResistanceEau < Split(voulu.ResistanceEau, " à ")(0) OrElse Item.ResistanceEau > Split(voulu.ResistanceEau, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PcResistanceAir < Split(Voulu.PcResistanceAir, " à ")(0) OrElse Item.PcResistanceAir > Split(Voulu.PcResistanceAir, " à ")(1) Then
+        If Item.ResistanceFeu < Split(voulu.ResistanceFeu, " à ")(0) OrElse Item.ResistanceFeu > Split(voulu.ResistanceFeu, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.PcResistanceNeutre < Split(Voulu.PcResistanceNeutre, " à ")(0) OrElse Item.PcResistanceNeutre > Split(Voulu.PcResistanceNeutre, " à ")(1) Then
+        If Item.ResistanceAir < Split(voulu.ResistanceAir, " à ")(0) OrElse Item.ResistanceAir > Split(voulu.ResistanceAir, " à ")(1) Then
 
             Return False
 
         End If
 
-        If Item.Puissance < Split(Voulu.Puissance, " à ")(0) OrElse Item.Puissance > Split(Voulu.Puissance, " à ")(1) Then
+        If Item.ResistanceNeutre < Split(voulu.ResistanceNeutre, " à ")(0) OrElse Item.ResistanceNeutre > Split(voulu.ResistanceNeutre, " à ")(1) Then
+
+            Return False
+
+        End If
+
+        If Item.PcResistanceTerre < Split(voulu.PcResistanceTerre, " à ")(0) OrElse Item.PcResistanceTerre > Split(voulu.PcResistanceTerre, " à ")(1) Then
+
+            Return False
+
+        End If
+
+        If Item.PcResistanceEau < Split(voulu.PcResistanceEau, " à ")(0) OrElse Item.PcResistanceEau > Split(voulu.PcResistanceEau, " à ")(1) Then
+
+            Return False
+
+        End If
+
+        If Item.PcResistanceFeu < Split(voulu.PcResistanceFeu, " à ")(0) OrElse Item.PcResistanceFeu > Split(voulu.PcResistanceFeu, " à ")(1) Then
+
+            Return False
+
+        End If
+
+        If Item.PcResistanceAir < Split(voulu.PcResistanceAir, " à ")(0) OrElse Item.PcResistanceAir > Split(voulu.PcResistanceAir, " à ")(1) Then
+
+            Return False
+
+        End If
+
+        If Item.PcResistanceNeutre < Split(voulu.PcResistanceNeutre, " à ")(0) OrElse Item.PcResistanceNeutre > Split(voulu.PcResistanceNeutre, " à ")(1) Then
+
+            Return False
+
+        End If
+
+        If Item.Puissance < Split(voulu.Puissance, " à ")(0) OrElse Item.Puissance > Split(voulu.Puissance, " à ")(1) Then
+
+            Return False
+
+        End If
+
+        If Item.Etheree <> voulu.Etheree Then
 
             Return False
 
@@ -1171,6 +1220,7 @@ Public Class CItemCaractéristique
     Public DragodindePossesseur As String = ""
     Public DragodindeNom As String = ""
     Public DragodindeDateEnParchemin As Date = TimeOfDay
+    Public Etheree As Boolean = False
 
 End Class
 

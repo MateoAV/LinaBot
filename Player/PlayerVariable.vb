@@ -80,6 +80,7 @@ Partial Class Player
 
     'Tchat
     Public Tchat As New CTchat
+    Public FrmTchat As New FrmTchat(Index)
 
     'Maison
     Public Maison As New CMaison

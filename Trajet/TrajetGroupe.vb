@@ -810,7 +810,7 @@
 
 #Region "Item"
 
-    Private Function Groupe_Item_Supprime(index As Integer, nomID As String, Optional quantiter As Integer = 999999, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Private Function Groupe_Item_Supprime(index As Integer, nomID As String, Optional quantiter As Integer = 999999, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -855,7 +855,7 @@
 
     End Function
 
-    Private Function Groupe_Item_Retire(index As Integer, nomID As String, Optional quantiter As Integer = 999999, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Private Function Groupe_Item_Retire(index As Integer, nomID As String, Optional quantiter As Integer = 999999, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -900,7 +900,7 @@
 
     End Function
 
-    Private Function Groupe_Item_Depose(index As Integer, nomID As String, Optional quantiter As Integer = 999999, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Private Function Groupe_Item_Depose(index As Integer, nomID As String, Optional quantiter As Integer = 999999, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -945,7 +945,7 @@
 
     End Function
 
-    Private Function Groupe_Item_Equipe(index As Integer, nomID As String, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Private Function Groupe_Item_Equipe(index As Integer, nomID As String, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -990,7 +990,7 @@
 
     End Function
 
-    Private Function Groupe_Item_Desequipe(index As Integer, nomID As String, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Private Function Groupe_Item_Desequipe(index As Integer, nomID As String, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -1035,7 +1035,7 @@
 
     End Function
 
-    Private Function Groupe_Item_Jette(index As Integer, nomID As String, Optional quantiter As Integer = 999999, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Private Function Groupe_Item_Jette(index As Integer, nomID As String, Optional quantiter As Integer = 999999, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -1129,7 +1129,7 @@
 
     End Function
 
-    Private Function Groupe_Item_Exist(index As Integer, nomID As String, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Private Function Groupe_Item_Exist(index As Integer, nomID As String, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 

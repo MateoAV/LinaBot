@@ -1,6 +1,5 @@
-'Le trajet peut se lancer depuis Incarnam.
+'Le trajet peut se lancer depuis la banque d'Astrub
 'Trajet fait pour un crâ.
-'Sort d'incarnam et va en direction d'Amakna.
 'Si a 80% pods il retourne à la banque d'amakna.
 
 Dim Pods = 80

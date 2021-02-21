@@ -310,34 +310,13 @@
 
     End Sub
 
+    Private Sub ButtonTchat_Click(sender As Object, e As EventArgs) Handles ButtonTchat.Click
 
-
-
-    Dim compteur1, compteur2 As Integer
-
-    Private Sub RichTextBox2_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox2.TextChanged
-
-        If compteur2 > 600 Then
-
-            RichTextBox2.Text = ""
-
-        End If
-
-        compteur2 += 1
+        Comptes(index).FrmTchat.Show()
 
     End Sub
 
-    Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
 
-        If compteur1 > 300 Then
-
-            RichTextBox1.Text = ""
-
-        End If
-
-        compteur1 += 1
-
-    End Sub
 
 #End Region
 

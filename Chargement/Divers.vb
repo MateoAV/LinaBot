@@ -47,8 +47,6 @@ Public Module Divers
 
         Catch ex As Exception
 
-            MsgBox("erreur fichier, impossible de créer le fichier erreur : " & nomErreur & vbCrLf & ex.ToString)
-
         End Try
 
     End Sub
@@ -65,9 +63,9 @@ Public Module Divers
 
                 Else
 
-                    .FrmUser.RichTextBox1.SelectionColor = couleur
-                    .FrmUser.RichTextBox1.AppendText("[" & TimeOfDay & "] " & indice & " " & message & vbCrLf)
-                    .FrmUser.RichTextBox1.ScrollToCaret()
+                    .FrmTchat.RichTextBoxTchat.SelectionColor = couleur
+                    .FrmTchat.RichTextBoxTchat.AppendText("[" & TimeOfDay & "] " & indice & " " & message & vbCrLf)
+                    .FrmTchat.RichTextBoxTchat.ScrollToCaret()
 
                     .Tchat.Tchat.Add("[" & TimeOfDay & "] " & indice & " " & message, couleur)
 
@@ -92,9 +90,10 @@ Public Module Divers
 
                 Else
 
-                    .FrmUser.RichTextBox2.SelectionColor = couleur
-                    .FrmUser.RichTextBox2.AppendText("[" & TimeOfDay & "] " & indice & " " & message & vbCrLf)
-                    .FrmUser.RichTextBox2.ScrollToCaret()
+                    .FrmTchat.RichTextBoxSocket.SelectionColor = couleur
+                    .FrmTchat.RichTextBoxSocket.AppendText("[" & TimeOfDay & "] " & indice & " " & message & vbCrLf)
+                    .FrmTchat.RichTextBoxSocket.ScrollToCaret()
+
                     .SockSendRecv.Add("[" & TimeOfDay & "] " & indice & " " & message, couleur)
 
                 End If

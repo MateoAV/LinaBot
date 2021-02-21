@@ -237,7 +237,7 @@
     ''' True = Le bot a vendu l'item <br/>
     ''' False = Le bot n'a pas réussi à vendre l'item.
     ''' </returns>
-    Public Function AcheterVendreVendItem(index As Integer, nomID As String, quantite As Integer, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function AcheterVendreVendItem(index As Integer, nomID As String, quantite As Integer, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -247,7 +247,7 @@
 
                     For Each pair As CItem In CopyItem(index, .Inventaire).Values
 
-                        If pair.Nom.ToLower = nomID.ToLower OrElse pair.IdObjet = nomID Then
+                        If pair.Nom.ToLower = nomID.ToLower OrElse pair.IdObjet = nomID OrElse nomID.ToLower = "all" Then
 
                             If IsNothing(caracteristique) OrElse ComparateurCaractéristiqueObjets(pair.Caracteristique, caracteristique) Then
 
@@ -288,7 +288,7 @@
     ''' True = Le bot a acheté l'item <br/>
     ''' False = Le bot n'a pas réussi à acheter l'item.
     ''' </returns>
-    Public Function AcheterVendreAcheteItem(ByVal index As Integer, ByVal nomID As String, ByVal quantite As Integer, Optional ByVal caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function AcheterVendreAcheteItem(ByVal index As Integer, ByVal nomID As String, ByVal quantite As Integer, Optional ByVal caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -480,7 +480,7 @@
     ''' True = L'objet est mis en vente. <br/>
     ''' False = l'item n'a pas pu être mis en vente.
     ''' </returns>
-    Public Function VendreItem(ByVal index As Integer, ByVal nomID As String, ByVal quantite As Integer, ByVal prix As Integer, Optional ByVal caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function VendreItem(ByVal index As Integer, ByVal nomID As String, ByVal quantite As Integer, ByVal prix As Integer, Optional ByVal caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -567,7 +567,7 @@
     ''' True = Le bot a bien retiré l'item. <br/>
     ''' False = Le bot n'a pas réussi à retirer l'item.
     ''' </returns>
-    Public Function Retirer(ByVal index As String, ByVal nomID As String, ByVal quantite As String, Optional ByVal caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function Retirer(ByVal index As String, ByVal nomID As String, ByVal quantite As String, Optional ByVal caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -618,7 +618,7 @@
     ''' True = Le bot a bien sélectionné l'item. <br/>
     ''' False = Le bot n'a pas réussi à sélectionner l'item.
     ''' </returns>
-    Public Function Selectionne(ByVal index As Integer, ByVal nomID As String, Optional ByVal caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function Selectionne(ByVal index As Integer, ByVal nomID As String, Optional ByVal caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -812,7 +812,7 @@
     ''' True = L'objet est acheté. <br/>
     ''' False = l'item n'a pas pu être acheter.
     ''' </returns>
-    Public Function AcheterItem(ByVal index As Integer, ByVal nomID As String, ByVal quantite As Integer, ByVal prix As Integer, Optional ByVal caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function AcheterItem(ByVal index As Integer, ByVal nomID As String, ByVal quantite As Integer, ByVal prix As Integer, Optional ByVal caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 

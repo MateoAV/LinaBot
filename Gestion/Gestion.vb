@@ -40,7 +40,7 @@
 
                                         If separate(0) = Comptes(Index).Personnage.ID Then
 
-                                            Task.Run(Function() AvanceMobsProche(Index))
+                                            '  Task.Run(Function() Avance(Index))
 
                                         End If
 

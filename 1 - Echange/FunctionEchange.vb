@@ -217,4 +217,50 @@
 
     End Function
 
+    ''' <summary>
+    ''' Vérifie si la personne correspond à celle voulu..
+    ''' </summary>
+    ''' <param name="index">Indique le numéro du bot.</param>
+    ''' <returns>
+    ''' True = il s'agit de la bonne personne. <br/>
+    ''' False = La personne ne correspond pas à celui demandé.
+    ''' </returns>
+    Public Function Verification(index As String) As Boolean
+
+        With Comptes(index)
+
+            Try
+
+                Dim Map As Dictionary(Of Integer, CEntite) = CopyMap(index, .Map.Entite)
+
+                If .Echange.EnInvitation Then
+
+                    For Each pair As KeyValuePair(Of Object, Object) In .FrmGroupe.Variable("echange_accepte")
+
+                        For Each pairMap As KeyValuePair(Of Integer, CEntite) In Map
+
+                            If pair.Value.ToString.ToLower = pairMap.Value.ID.ToString OrElse pair.Value.ToString.ToLower = pairMap.Value.Nom.ToLower Then
+
+                                Return True
+
+                            End If
+
+                        Next
+
+                    Next
+
+                End If
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "EchangeAccepte", ex.Message)
+
+            End Try
+
+            Return False
+
+        End With
+
+    End Function
+
 End Class

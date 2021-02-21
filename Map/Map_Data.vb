@@ -481,6 +481,26 @@
 
                     End If
 
+                    'Archi
+                    If separate(5) = -3 Then
+
+                        Dim separateMobs As String() = Split(separate(4), ",")
+
+                        For a = 0 To separateMobs.Count - 1
+
+                            If Liste_Archimonstre.Contains(separateMobs(a)) Then
+                                LinaBot.sendMsg("```Serveur : " & Comptes(index).Personnage.Serveur & vbCrLf &
+                                                "Archimonstre : " & VarMobs(separateMobs(a))(0).Nom & vbCrLf &
+                                                "Coordonnees : " & Comptes(index).Map.Coordonnees & vbCrLf &
+                                                "MapID : " & Comptes(index).Map.ID & vbCrLf &
+                                                "Vue le : " & Date.Now & "```")
+                            End If
+
+                        Next
+
+                    End If
+                    '/Archi
+
                 Next
 
             Catch ex As Exception

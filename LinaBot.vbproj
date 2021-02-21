@@ -48,8 +48,29 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Discord.Net.Commands, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Commands.2.3.0\lib\net461\Discord.Net.Commands.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.Core, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Core.2.3.0\lib\net461\Discord.Net.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.Rest, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Rest.2.3.0\lib\net461\Discord.Net.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.Webhook, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.Webhook.2.3.0\lib\netstandard2.0\Discord.Net.Webhook.dll</HintPath>
+    </Reference>
+    <Reference Include="Discord.Net.WebSocket, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Discord.Net.WebSocket.2.3.0\lib\net461\Discord.Net.WebSocket.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\Linabot1\Linabot\bin\Debug\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ProxySocket, Version=1.1.2.0, Culture=neutral, PublicKeyToken=966874d7118d1436, processorArchitecture=MSIL">
       <HintPath>..\packages\ProxySocket.1.1.2\lib\net40\ProxySocket.dll</HintPath>
@@ -61,9 +82,24 @@
       <HintPath>..\..\Linabot1\Linabot\bin\Debug\SwfDotNet.IO.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Interactive.Async, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.4.0.0\lib\net461\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Async, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Async.4.0.0\lib\net461\System.Linq.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -226,19 +262,25 @@
     <Compile Include="Pnj\mdlPnj.vb" />
     <Compile Include="1 - Recolte\FunctionRecolte.vb" />
     <Compile Include="1 - Recolte\mdlRecolte.vb" />
-    <Compile Include="Sort\FrmSort.Designer.vb">
+    <Compile Include="1 - Sort\FrmSort.Designer.vb">
       <DependentUpon>FrmSort.vb</DependentUpon>
     </Compile>
-    <Compile Include="Sort\FrmSort.vb">
+    <Compile Include="1 - Sort\FrmSort.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sort\FunctionSort.vb" />
-    <Compile Include="Sort\MdlSort.vb" />
-    <Compile Include="Sort\UcSort.Designer.vb">
+    <Compile Include="1 - Sort\FunctionSort.vb" />
+    <Compile Include="1 - Sort\MdlSort.vb" />
+    <Compile Include="1 - Sort\UcSort.Designer.vb">
       <DependentUpon>UcSort.vb</DependentUpon>
     </Compile>
-    <Compile Include="Sort\UcSort.vb">
+    <Compile Include="1 - Sort\UcSort.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tchat\FrmTchat.Designer.vb">
+      <DependentUpon>FrmTchat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tchat\FrmTchat.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Tchat\MdlCanal.vb" />
     <Compile Include="Tchat\Tchat.vb" />
@@ -291,11 +333,14 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sort\FrmSort.resx">
+    <EmbeddedResource Include="1 - Sort\FrmSort.resx">
       <DependentUpon>FrmSort.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sort\UcSort.resx">
+    <EmbeddedResource Include="1 - Sort\UcSort.resx">
       <DependentUpon>UcSort.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tchat\FrmTchat.resx">
+      <DependentUpon>FrmTchat.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -415,6 +460,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Image\imgonline-com-ua-ReplaceColor-qeZkZ9hQYGWz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Familier\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Image\icons8-email-send-48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

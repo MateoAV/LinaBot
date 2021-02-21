@@ -137,7 +137,7 @@ Public Class Player
 
                     End If
 
-                    With FrmUser.RichTextBox2
+                    With FrmTchat.RichTextBoxSocket
 
                         .SelectionColor = Color.Red
                         .AppendText("[" & TimeOfDay & "] " & "Send : " & e.Message & vbCrLf)
@@ -178,7 +178,7 @@ Public Class Player
 
                     End If
 
-                    With FrmUser.RichTextBox2
+                    With FrmTchat.RichTextBoxSocket
 
                         .SelectionColor = Color.Cyan
                         .AppendText("[" & TimeOfDay & "] " & "Recv : " & e.Message & vbCrLf)
@@ -3827,7 +3827,6 @@ Public Class Player
             Catch ex As Exception
 
                 ErreurFichier(Index, Comptes(Index).Personnage.NomDuPersonnage, "E_Reception", e.Message & vbCrLf & ex.Message)
-
 
             End Try
 

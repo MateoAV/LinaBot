@@ -416,6 +416,14 @@
 
                             Return newEchange.Valide(index)
 
+                        Case "verification"
+
+                            Return newEchange.Verification(index)
+
+                        Case "enechange"
+
+                            Return .Echange.EnEchange
+
                     End Select
 
                 Case "defi" ' FINI
@@ -701,6 +709,22 @@
 
                     End Select
 
+                Case "chargement"
+
+                    Select Case separate(1).ToLower
+
+                        Case "trajet"
+
+                            Task.Run(Sub() TrajetLoad(index, Parametre(1))).Wait()
+
+                    End Select
+
+                Case "connexion"
+
+                    Connexion(index, Parametre(1), Parametre(2), Parametre(3), Parametre(4))
+
+                    Task.Delay(30000).Wait()
+
                 Case "zaap", "zaapi"
 
                     Dim newZaap As New FunctionZaap
@@ -752,6 +776,20 @@
                         Case "reponse"
 
                             Return Groupe_Pnj_Reponse(index, Parametre(1))
+
+                        Case "achetervendre"
+
+                            Select Case separate(2).ToLower
+
+                                Case "parler"
+
+                                    Return newPnj.AcheterVendre(index, Parametre(1))
+
+                                Case "vendre"
+
+                                    Return newPnj.AcheterVendreVendItem(index, Parametre(1), Parametre(2), Parametre(3))
+
+                            End Select
 
                         Case "acheter"
 

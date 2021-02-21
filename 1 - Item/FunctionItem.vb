@@ -12,7 +12,7 @@ Public Class FunctionItem
     ''' True = Le bot a bien supprimé l'item. <br/>
     ''' False = Le bot n'a pas réussi à supprimer l'item.
     ''' </returns>
-    Public Function Supprime(index As String, nomID As String, Optional quantite As String = "999999", Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function Supprime(index As String, nomID As String, Optional quantite As String = "999999", Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -31,8 +31,8 @@ Public Class FunctionItem
                                 EcritureMessage(index, "(Bot)", "Suppression de l'item " & Pair.Nom & " x " & quantite, Color.Gray)
 
                                 Return .Send("Od" & Pair.IdUnique & "|" & quantite,
-                                            {"OR" & Pair.IdUnique, ' Item supprimé.
-                                             "OQ" & Pair.IdUnique}) ' Quantité supprimé.
+                                            {"OR", ' Item supprimé.
+                                             "OQ"}) ' Quantité supprimé.
 
                             End If
 
@@ -68,7 +68,7 @@ Public Class FunctionItem
     ''' True = Le bot a bien retiré l'item. <br/>
     ''' False = Le bot n'a pas réussi à retirer l'item.
     ''' </returns>
-    Public Function Retire(index As String, nomID As String, Optional quantite As String = "999999", Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function Retire(index As String, nomID As String, Optional quantite As String = "999999", Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -87,9 +87,9 @@ Public Class FunctionItem
                                 EcritureMessage(index, "(Bot)", "Retire l'item " & Pair.Nom & " x " & quantite, Color.Gray)
 
                                 Return .Send("EMO-" & Pair.IdUnique & "|" & quantite,
-                                            {"OQ" & Pair.IdUnique, ' Quantité changé.
-                                             "EsKO-" & Pair.IdUnique, ' supprime item de l'échange.
-                                             "EMKO-" & Pair.IdUnique, ' Supprime item de l'échange.
+                                            {"OQ", ' Quantité changé.
+                                             "EsKO-", ' supprime item de l'échange.
+                                             "EMKO-", ' Supprime item de l'échange.
                                              "OAKO"}) ' Ajoute un item.
 
                             End If
@@ -126,7 +126,7 @@ Public Class FunctionItem
     ''' True = Le bot a bien déposé l'item. <br/>
     ''' False = Le bot n'a pas réussi à déposer l'item.
     ''' </returns>
-    Public Function Depose(index As String, nomID As String, Optional quantite As String = "999999", Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function Depose(index As String, nomID As String, Optional quantite As String = "999999", Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -145,10 +145,10 @@ Public Class FunctionItem
                                 EcritureMessage(index, "(Bot)", "Dépose l'item " & Pair.Nom & " x " & quantite, Color.Gray)
 
                                 Return .Send("EMO+" & Pair.IdUnique & "|" & quantite,
-                                            {"OR" & Pair.IdUnique, ' Supprime item inventaire.
-                                             "OQ" & Pair.IdUnique, ' Change quantité inventaire.
-                                             "EMKO+" & Pair.IdUnique, ' Item déposé en échange.
-                                             "EsKO+" & Pair.IdUnique}) ' Dépose item (banque/coffre)
+                                            {"OR", ' Supprime item inventaire.
+                                             "OQ", ' Change quantité inventaire.
+                                             "EMKO+", ' Item déposé en échange.
+                                             "EsKO+"}) ' Dépose item (banque/coffre)
 
                             End If
 
@@ -183,7 +183,7 @@ Public Class FunctionItem
     ''' True = L'item existe dans l'inventaire. <br/>
     ''' False = L'item n'existe pas dans l'inventaire.
     ''' </returns>
-    Public Function Existe(index As String, nomID As String, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function Existe(index As String, nomID As String, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -227,7 +227,7 @@ Public Class FunctionItem
     ''' True = L'item est équipé. <br/>
     ''' False = L'item n'est pas équipé.
     ''' </returns>
-    Public Function Equipe(index As String, nomID As String, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function Equipe(index As String, nomID As String, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -420,7 +420,7 @@ Public Class FunctionItem
     ''' True = L'item est déséquipé. <br/>
     ''' False = L'item n'est pas déséquipé.
     ''' </returns>
-    Public Function Desequipe(index As String, nomID As String, Optional caracteristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function Desequipe(index As String, nomID As String, Optional caracteristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -472,7 +472,7 @@ Public Class FunctionItem
     ''' True = Le bot a bien jeté l'item. <br/>
     ''' False = Le bot n'a pas réussi à jeter l'item.
     ''' </returns>
-    Public Function Jette(index As String, nomID As String, Optional quantité As String = "999999", Optional caractéristique As CItemCaractéristique = Nothing) As Boolean
+    Public Function Jette(index As String, nomID As String, Optional quantité As String = "999999", Optional caractéristique As String = Nothing) As Boolean
 
         With Comptes(index)
 
@@ -491,8 +491,8 @@ Public Class FunctionItem
                                 EcritureMessage(index, "(Bot)", "Jette l'item " & Pair.Nom & " x " & quantité, Color.Gray)
 
                                 Return .Send("OD" & Pair.IdUnique & "|" & quantité,
-                                            {"OR" & Pair.IdUnique, ' Supprime item.
-                                             "OQ" & Pair.IdUnique, ' Change quantité.
+                                            {"OR", ' Supprime item.
+                                             "OQ", ' Change quantité.
                                              "GDO+"}) ' Dépose au sol.
 
                             End If
@@ -539,8 +539,8 @@ Public Class FunctionItem
                         EcritureMessage(index, "(Bot)", "Utilise l'item " & Pair.Nom, Color.Gray)
 
                         Return .Send("OU" & Pair.IdUnique & "|",
-                                    {"OQ" & Pair.IdUnique, ' change quantité.
-                                     "OR" & Pair.IdUnique, ' Suppime item
+                                    {"OQ", ' change quantité.
+                                     "OR", ' Suppime item
                                      "GDM"}) ' Change Map
 
                     End If

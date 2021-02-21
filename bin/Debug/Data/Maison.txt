@@ -377,3 +377,10 @@ hP : 1116 | Porte : 0 | Map : -23,40 | Mapid : 5332 | Nom : Maison
 hP : 1094 | Porte : 0 | Map : -23,40 | Mapid : 5332 | Nom : Maison
 hP : 1088 | Porte : 0 | Map : -25,40 | Mapid : 5295 | Nom : Maison
 hP : 1087 | Porte : 0 | Map : -25,40 | Mapid : 5295 | Nom : Maison
+hP : 684 | Porte : 0 | Map : 1,-19 | Mapid : 7363 | Nom : Maison
+hP : 685 | Porte : 0 | Map : 1,-19 | Mapid : 7363 | Nom : Maison
+hP : 686 | Porte : 0 | Map : 1,-19 | Mapid : 7363 | Nom : Maison
+hP : 539 | Porte : 0 | Map : -6,-40 | Mapid : 6249 | Nom : Maison
+hP : 125 | Porte : 0 | Map : 6,21 | Mapid : 1144 | Nom : Maison
+hP : 126 | Porte : 0 | Map : 6,21 | Mapid : 1144 | Nom : Maison
+hP : 124 | Porte : 0 | Map : 5,31 | Mapid : 1391 | Nom : Maison

@@ -2,7 +2,7 @@
 
     'ADD CHARGEMENT CRAFT
 
-    Public Sub TrajetLoad(ByVal index As Integer, ByVal chemin As String)
+    Public Sub TrajetLoad(index As Integer, chemin As String)
 
         With Comptes(index)
 
@@ -104,10 +104,6 @@
 
             If .FrmGroupe.Variable.ContainsKey(nomVariable.ToLower) Then
 
-                .FrmGroupe.Variable(nomVariable.ToLower).Add(separateLigne(0), separateLigne)
-
-            Else
-
                 If .FrmGroupe.Variable(nomVariable.ToLower).ContainsKey(separateLigne(0)) Then
 
                     .FrmGroupe.Variable.Add(nomVariable.ToLower, New Dictionary(Of Object, Object) From
@@ -118,13 +114,17 @@
 
                 Else
 
-                    .FrmGroupe.Variable.Add(nomVariable.ToLower, New Dictionary(Of Object, Object) From
+                    .FrmGroupe.Variable(nomVariable.ToLower).Add(separateLigne(0), separateLigne)
+
+                End If
+
+            Else
+
+                .FrmGroupe.Variable.Add(nomVariable.ToLower, New Dictionary(Of Object, Object) From
                                                         {{
                                                         separateLigne(0), ' Nom : Bworky
                                                         separateLigne ' Information : Bworky  Pods  etc...
                                                         }})
-
-                End If
 
             End If
 

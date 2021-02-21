@@ -8,7 +8,7 @@
 
                 .Tchat.BloqueTchat.Reset()
 
-                Dim envoyer As String = "cC" & If(choix.ToLower = "!active", "+", "-")
+                Dim envoyer As String = "cC" & If(choix = True, "+", "-")
 
                 Select Case canal.ToLower
 
@@ -72,7 +72,7 @@
 
     End Function
 
-    Public Function CanalEnvoieMessage(ByVal index As Integer, ByVal canal As String, ByVal message As String) As String
+    Public Function CanalEnvoieMessage(ByVal index As Integer, ByVal message As String) As String
 
         With Comptes(index)
 
@@ -82,7 +82,9 @@
 
                     If message <> "" Then
 
-                        message = Mid(Split(message, canal)(1), 2)
+                        Dim canal As String = Split(message, " ")(0)
+
+                        message = message.Replace(canal & " ", "")
 
                         .Tchat.BloqueTchat.Reset()
 

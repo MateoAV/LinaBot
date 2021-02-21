@@ -536,7 +536,7 @@
 
                     Case "|"
 
-                        EcritureMessage(index, "[General]", "[" & separateData(1) & "] " & separateData(2) & " : " & separateData(3), Color.Black)  'General
+                        EcritureMessage(index, "[General]", "[" & separateData(1) & "] " & separateData(2) & " : " & separateData(3), Color.White)  'General
 
                     Case "$"
 

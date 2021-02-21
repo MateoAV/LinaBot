@@ -15,6 +15,7 @@
 
                 If separateData(0) <> .Personnage.ID Then
 
+                    .Echange.IdJoueur = separateData(0)
                     EcritureMessage(index, "[Dofus]", .Map.Entite(separateData(0)).Nom & " te propose de faire un échange. acceptes-tu ?", Color.Green)
 
                 Else
@@ -66,6 +67,7 @@
                     .EnEchange = True
                     .EnInvitation = False
                     .Numero = 1
+                    .IdJoueur = ""
 
                 End With
 
@@ -98,6 +100,7 @@
                     .Moi.Kamas = 0
                     .Moi.Valider = False
                     .Numero = 0
+                    .IdJoueur = ""
 
                 End With
 
@@ -132,6 +135,7 @@
                     .Moi.Kamas = 0
                     .Moi.Valider = False
                     .Numero = 0
+                    .IdJoueur = ""
 
                 End With
 
@@ -501,6 +505,7 @@ Public Class CEchange
 
     Public Numero As Integer
     Public EnEchange, EnInvitation As Boolean
+    Public IdJoueur As String
     Public Moi As New CEchangeAll
     Public Lui As New CEchangeAll
 

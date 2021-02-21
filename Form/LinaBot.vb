@@ -1,9 +1,12 @@
-﻿Public Class LinaBot
+﻿Imports Discord.WebSocket
+
+Public Class LinaBot
 
     Public CompteurCompte As Integer
     Public PathMITM As String
     Public TokenDiscord As String
     Dim _FrmDiscord As New FrmDiscord
+    Dim WithEvents DiscordBot As New DiscordSocketClient
 
     Private Sub LinaBot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -59,6 +62,7 @@
 
         LoadPersonage()
 
+        startup()
 
     End Sub
 
@@ -100,5 +104,75 @@
         swEcriture.Close()
 
     End Sub
+
+#Region "Discord"
+
+    'EN COURS DE CREATION / TEST
+
+    Public Async Sub startup()
+
+        Try
+            Dim swLecture As New IO.StreamReader(Application.StartupPath + "\Data\TokenDiscord.txt")
+
+            TokenDiscord = swLecture.ReadLine()
+
+            'Puis je le ferme.
+            swLecture.Close()
+
+            ''this is the function that login the bot and start it
+            If DiscordBot.LoginState() = 2 Then
+                Await DiscordBot.LogoutAsync()
+            End If
+
+
+
+            DiscordBot = New DiscordSocketClient()
+
+
+
+            ' Label3.ForeColor = Color.Red
+            '  Label3.Text = "Status: login in"
+            Try
+                Await DiscordBot.LoginAsync(tokenType:=Discord.TokenType.Bot, TokenDiscord)
+            Catch ex As Exception
+                Dim ErrorValue = DirectCast(ex, Discord.Net.HttpException).HttpCode
+                If ErrorValue = 401 Then
+                    '  Label3.ForeColor = Color.Red
+                    '  Label3.Text = "Status: Invalid Token"
+                    Return
+                End If
+
+            End Try
+
+            '  Label3.ForeColor = Color.Orange
+            '  Label3.Text = "Status: starting bot"
+            Await DiscordBot.StartAsync()
+
+        Catch ex As Exception
+            ' MsgBox(ex.Message)
+
+        End Try
+    End Sub
+
+    Private Function onMsg(msg As SocketMessage) As Task Handles DiscordBot.MessageReceived
+
+        Dim monchannel As String = msg.Channel.Name
+
+        ' sendMsg("tghqdfhqdfh")
+
+    End Function
+
+    Public Sub sendMsg(monmessage As String)
+
+        Try
+
+            Dim channel1 As Discord.IMessageChannel = DiscordBot.GetChannel("729320217653805086")
+            channel1.SendMessageAsync(monmessage)
+
+        Catch ex As Exception
+            '  MsgBox("you must select a channel ID in the box")
+        End Try
+    End Sub
+#End Region
 
 End Class

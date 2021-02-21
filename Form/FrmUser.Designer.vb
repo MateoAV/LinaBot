@@ -44,7 +44,7 @@ Partial Class FrmUser
         Me.Label18 = New System.Windows.Forms.Label()
         Me.ProgressBarVitaliter = New System.Windows.Forms.ProgressBar()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.ButtonPlugInIA = New System.Windows.Forms.Button()
+        Me.ButtonTchat = New System.Windows.Forms.Button()
         Me.ButtonCaracteristique = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -58,20 +58,13 @@ Partial Class FrmUser
         Me.ButtonFamilier = New System.Windows.Forms.Button()
         Me.ButtonIA = New System.Windows.Forms.Button()
         Me.Button_Option = New System.Windows.Forms.Button()
+        Me.ButtonDll = New System.Windows.Forms.Button()
         Me.TimerRegeneration = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TimerStatut = New System.Windows.Forms.Timer(Me.components)
-        Me.ButtonDll = New System.Windows.Forms.Button()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -80,7 +73,7 @@ Partial Class FrmUser
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RthToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(635, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(523, 24)
         Me.MenuStrip1.TabIndex = 402
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -252,7 +245,7 @@ Partial Class FrmUser
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.AutoScroll = True
-        Me.FlowLayoutPanel1.Controls.Add(Me.ButtonPlugInIA)
+        Me.FlowLayoutPanel1.Controls.Add(Me.ButtonTchat)
         Me.FlowLayoutPanel1.Controls.Add(Me.ButtonCaracteristique)
         Me.FlowLayoutPanel1.Controls.Add(Me.Button2)
         Me.FlowLayoutPanel1.Controls.Add(Me.Button3)
@@ -267,22 +260,23 @@ Partial Class FrmUser
         Me.FlowLayoutPanel1.Controls.Add(Me.ButtonIA)
         Me.FlowLayoutPanel1.Controls.Add(Me.Button_Option)
         Me.FlowLayoutPanel1.Controls.Add(Me.ButtonDll)
+        Me.FlowLayoutPanel1.Controls.Add(Me.Button1)
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(163, 27)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(466, 190)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(355, 190)
         Me.FlowLayoutPanel1.TabIndex = 427
         '
-        'ButtonPlugInIA
+        'ButtonTchat
         '
-        Me.ButtonPlugInIA.BackgroundImage = Global.LinaBot.My.Resources.Resources.Tchat
-        Me.ButtonPlugInIA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.ButtonPlugInIA.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonPlugInIA.ForeColor = System.Drawing.Color.White
-        Me.ButtonPlugInIA.Location = New System.Drawing.Point(3, 3)
-        Me.ButtonPlugInIA.Name = "ButtonPlugInIA"
-        Me.ButtonPlugInIA.Size = New System.Drawing.Size(50, 50)
-        Me.ButtonPlugInIA.TabIndex = 399
-        Me.ButtonPlugInIA.UseVisualStyleBackColor = True
+        Me.ButtonTchat.BackgroundImage = Global.LinaBot.My.Resources.Resources.Tchat
+        Me.ButtonTchat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.ButtonTchat.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonTchat.ForeColor = System.Drawing.Color.White
+        Me.ButtonTchat.Location = New System.Drawing.Point(3, 3)
+        Me.ButtonTchat.Name = "ButtonTchat"
+        Me.ButtonTchat.Size = New System.Drawing.Size(50, 50)
+        Me.ButtonTchat.TabIndex = 399
+        Me.ButtonTchat.UseVisualStyleBackColor = True
         '
         'ButtonCaracteristique
         '
@@ -350,7 +344,7 @@ Partial Class FrmUser
         Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button6.ForeColor = System.Drawing.Color.White
-        Me.Button6.Location = New System.Drawing.Point(339, 3)
+        Me.Button6.Location = New System.Drawing.Point(3, 59)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(50, 50)
         Me.Button6.TabIndex = 405
@@ -362,7 +356,7 @@ Partial Class FrmUser
         Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button7.ForeColor = System.Drawing.Color.White
-        Me.Button7.Location = New System.Drawing.Point(395, 3)
+        Me.Button7.Location = New System.Drawing.Point(59, 59)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(50, 50)
         Me.Button7.TabIndex = 406
@@ -374,7 +368,7 @@ Partial Class FrmUser
         Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button8.ForeColor = System.Drawing.Color.White
-        Me.Button8.Location = New System.Drawing.Point(3, 59)
+        Me.Button8.Location = New System.Drawing.Point(115, 59)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(50, 50)
         Me.Button8.TabIndex = 407
@@ -386,7 +380,7 @@ Partial Class FrmUser
         Me.Button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button9.ForeColor = System.Drawing.Color.White
-        Me.Button9.Location = New System.Drawing.Point(59, 59)
+        Me.Button9.Location = New System.Drawing.Point(171, 59)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(50, 50)
         Me.Button9.TabIndex = 408
@@ -398,7 +392,7 @@ Partial Class FrmUser
         Me.Button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button10.ForeColor = System.Drawing.Color.White
-        Me.Button10.Location = New System.Drawing.Point(115, 59)
+        Me.Button10.Location = New System.Drawing.Point(227, 59)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(50, 50)
         Me.Button10.TabIndex = 409
@@ -410,7 +404,7 @@ Partial Class FrmUser
         Me.ButtonFamilier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonFamilier.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonFamilier.ForeColor = System.Drawing.Color.White
-        Me.ButtonFamilier.Location = New System.Drawing.Point(171, 59)
+        Me.ButtonFamilier.Location = New System.Drawing.Point(283, 59)
         Me.ButtonFamilier.Name = "ButtonFamilier"
         Me.ButtonFamilier.Size = New System.Drawing.Size(50, 50)
         Me.ButtonFamilier.TabIndex = 410
@@ -422,7 +416,7 @@ Partial Class FrmUser
         Me.ButtonIA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ButtonIA.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonIA.ForeColor = System.Drawing.Color.White
-        Me.ButtonIA.Location = New System.Drawing.Point(227, 59)
+        Me.ButtonIA.Location = New System.Drawing.Point(3, 115)
         Me.ButtonIA.Name = "ButtonIA"
         Me.ButtonIA.Size = New System.Drawing.Size(50, 50)
         Me.ButtonIA.TabIndex = 411
@@ -434,11 +428,23 @@ Partial Class FrmUser
         Me.Button_Option.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button_Option.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button_Option.ForeColor = System.Drawing.Color.White
-        Me.Button_Option.Location = New System.Drawing.Point(283, 59)
+        Me.Button_Option.Location = New System.Drawing.Point(59, 115)
         Me.Button_Option.Name = "Button_Option"
         Me.Button_Option.Size = New System.Drawing.Size(50, 50)
         Me.Button_Option.TabIndex = 412
         Me.Button_Option.UseVisualStyleBackColor = True
+        '
+        'ButtonDll
+        '
+        Me.ButtonDll.BackgroundImage = Global.LinaBot.My.Resources.Resources.DllBlue
+        Me.ButtonDll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.ButtonDll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonDll.ForeColor = System.Drawing.Color.White
+        Me.ButtonDll.Location = New System.Drawing.Point(115, 115)
+        Me.ButtonDll.Name = "ButtonDll"
+        Me.ButtonDll.Size = New System.Drawing.Size(50, 50)
+        Me.ButtonDll.TabIndex = 413
+        Me.ButtonDll.UseVisualStyleBackColor = True
         '
         'TimerRegeneration
         '
@@ -457,80 +463,20 @@ Partial Class FrmUser
         Me.TimerStatut.Enabled = True
         Me.TimerStatut.Interval = 1000
         '
-        'ButtonDll
+        'Button1
         '
-        Me.ButtonDll.BackgroundImage = Global.LinaBot.My.Resources.Resources.DllBlue
-        Me.ButtonDll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.ButtonDll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonDll.ForeColor = System.Drawing.Color.White
-        Me.ButtonDll.Location = New System.Drawing.Point(339, 59)
-        Me.ButtonDll.Name = "ButtonDll"
-        Me.ButtonDll.Size = New System.Drawing.Size(50, 50)
-        Me.ButtonDll.TabIndex = 413
-        Me.ButtonDll.UseVisualStyleBackColor = True
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(3, 223)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(626, 427)
-        Me.TabControl1.TabIndex = 428
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Controls.Add(Me.RichTextBox1)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(739, 494)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Tchat"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RichTextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(60, Byte), Integer))
-        Me.RichTextBox1.Location = New System.Drawing.Point(6, 6)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(727, 482)
-        Me.RichTextBox1.TabIndex = 0
-        Me.RichTextBox1.Text = ""
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.RichTextBox2)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(618, 401)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "socket"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'RichTextBox2
-        '
-        Me.RichTextBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RichTextBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(60, Byte), Integer))
-        Me.RichTextBox2.Location = New System.Drawing.Point(6, 6)
-        Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.Size = New System.Drawing.Size(606, 389)
-        Me.RichTextBox2.TabIndex = 1
-        Me.RichTextBox2.Text = ""
+        Me.Button1.Location = New System.Drawing.Point(171, 115)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 414
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'FrmUser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(60, Byte), Integer))
-        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.Label20)
         Me.Controls.Add(Me.ProgressBarPods)
@@ -544,13 +490,10 @@ Partial Class FrmUser
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Name = "FrmUser"
-        Me.Size = New System.Drawing.Size(635, 653)
+        Me.Size = New System.Drawing.Size(523, 224)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.FlowLayoutPanel1.ResumeLayout(False)
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -576,7 +519,7 @@ Partial Class FrmUser
     Friend WithEvents Label18 As Label
     Friend WithEvents ProgressBarVitaliter As ProgressBar
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-    Friend WithEvents ButtonPlugInIA As Button
+    Friend WithEvents ButtonTchat As Button
     Friend WithEvents ButtonCaracteristique As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
@@ -594,9 +537,5 @@ Partial Class FrmUser
     Friend WithEvents ButtonIA As Button
     Friend WithEvents Button_Option As Button
     Friend WithEvents ButtonDll As Button
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents RichTextBox1 As RichTextBox
-    Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents RichTextBox2 As RichTextBox
+    Friend WithEvents Button1 As Button
 End Class

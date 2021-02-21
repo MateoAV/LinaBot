@@ -1,0 +1,7 @@
+Dim Pods = 80
+
+Sub Main()
+
+	Map.Attaquer("All" , "1")
+
+End Sub

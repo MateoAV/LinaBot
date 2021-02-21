@@ -1,6 +1,6 @@
 ﻿Module MdlSort
 
-    Public Sub GiSortAjoute(ByVal index As Integer, ByVal data As String)
+    Public Sub GiSortAjoute(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -63,7 +63,7 @@
 
             Catch ex As Exception
 
-                MsgBox(ex.Message)
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiSortAjoute", data & vbCrLf & ex.Message)
 
             End Try
 
@@ -71,7 +71,7 @@
 
     End Sub
 
-    Public Sub GiSortUp(ByVal index As Integer, ByVal data As String)
+    Public Sub GiSortUp(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -80,9 +80,7 @@
 
             Try
 
-                data = Mid(data, 4)
-
-                Dim separateData As String() = Split(data, "~")
+                Dim separateData As String() = Split(Mid(data, 4), "~")
 
                 Dim newSort As New CSort
 
@@ -135,8 +133,6 @@
                 ErreurFichier(index, .Personnage.NomDuPersonnage, "GiSortUp", ex.Message)
 
             End Try
-
-            .BloqueSort.Set()
 
         End With
 
