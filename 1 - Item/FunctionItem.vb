@@ -76,7 +76,7 @@ Public Class FunctionItem
 
                 For Each Pair As CItem In .Echange.Moi.Inventaire.Values
 
-                    If Pair.Nom.ToLower = nomID.ToLower OrElse Pair.IdObjet.ToString = nomID OrElse Pair.IdUnique = nomID Then
+                    If Pair.Nom.ToLower = nomID.ToLower OrElse Pair.IdObjet.ToString = nomID OrElse Pair.IdUnique.ToString = nomID Then
 
                         If Pair.Equipement = "" Then
 
@@ -242,7 +242,8 @@ Public Class FunctionItem
                             If IsNothing(caracteristique) OrElse ComparateurCaractéristiqueObjets(Pair.Caracteristique, caracteristique) Then
 
                                 Return .Send("OM" & Pair.IdUnique & "|" & RetourneEquipementCatégorie(index, Pair.Categorie),
-                                            {"OM"}) ' Un objet équipé.
+                                            {"OM", ' Un objet équipé.
+                                             "OCO"})
 
                             End If
 

@@ -84,3 +84,5 @@ C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Interactive.Async.xml
 C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Linq.Async.xml
 C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.CreateurTrajet.resources
+C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.FrmMetier.resources

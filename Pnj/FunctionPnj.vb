@@ -19,7 +19,6 @@
             Try
 
                 If .Pnj.EnParler = False Then
-
                     For Each Pair As CEntite In CopyMap(index, .Map.Entite).Values
 
                         If Pair.Nom.ToLower = nomID.ToLower OrElse Pair.ID = nomID Then

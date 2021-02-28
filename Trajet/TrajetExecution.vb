@@ -230,6 +230,8 @@
 
             Next
 
+            Return True
+
         End With
 
     End Function
@@ -247,6 +249,18 @@
                 End While
 
                 Task.Delay(2000).Wait()
+
+            End If
+
+            If .Personnage.Regeneration < .FrmGroupe.Regeneration Then
+
+                Dim pause As Integer = (.Personnage.Vitaliter.Maximum * .FrmGroupe.Regeneration) / 100
+                pause = pause - .Personnage.Vitaliter.Actuelle
+                .Send("eU1",
+                     {"ILF",
+                      "ILS",
+                      "eUK" & .Personnage.ID})
+                Task.Delay(pause * 1000).Wait()
 
             End If
 

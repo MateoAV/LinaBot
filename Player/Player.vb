@@ -5,6 +5,8 @@ Imports System.Text
 
 Public Class Player
 
+    Public PourTrajet As New List(Of String)
+
 #Region "Socket"
 
     Public Sub CreateSocketAuthentification(ByVal IP As String, ByVal Port As String)

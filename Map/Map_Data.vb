@@ -493,7 +493,7 @@
                                                 "Archimonstre : " & VarMobs(separateMobs(a))(0).Nom & vbCrLf &
                                                 "Coordonnees : " & Comptes(index).Map.Coordonnees & vbCrLf &
                                                 "MapID : " & Comptes(index).Map.ID & vbCrLf &
-                                                "Vue le : " & Date.Now & "```")
+                                                "Vue le : " & Date.Now & "```", "729320217653805086")
                             End If
 
                         Next
@@ -562,6 +562,12 @@
 
                 If separateData(2) = .Personnage.ID Then
 
+                    If .CreateurTrajetBot.CheckBoxActiver.Checked Then
+
+                        .CreateurTrajetBot.CreateurTrajetBase(index, cellule)
+
+                    End If
+
                     Task.Run(Sub() PauseDéplacement(index))
 
                 End If
@@ -575,6 +581,8 @@
         End With
 
     End Sub
+
+
 
     Friend Async Sub PauseDéplacement(ByVal index As Integer)
 

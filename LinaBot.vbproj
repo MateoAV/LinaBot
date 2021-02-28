@@ -138,6 +138,12 @@
     </Compile>
     <Compile Include="1 - Caracteristique\FunctionCaractéristique.vb" />
     <Compile Include="1 - Caracteristique\MdlCaractéristique.vb" />
+    <Compile Include="1 - Metier\FrmMetier.Designer.vb">
+      <DependentUpon>FrmMetier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="1 - Metier\FrmMetier.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Chargement\AllClass.vb" />
     <Compile Include="Chargement\Chargement.vb" />
     <Compile Include="Chargement\Divers.vb" />
@@ -284,6 +290,12 @@
     </Compile>
     <Compile Include="Tchat\MdlCanal.vb" />
     <Compile Include="Tchat\Tchat.vb" />
+    <Compile Include="Trajet\CreateurTrajet.Designer.vb">
+      <DependentUpon>CreateurTrajet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Trajet\CreateurTrajet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Trajet\Trajet Lina.vb" />
     <Compile Include="Trajet\TrajetExecution.vb" />
     <Compile Include="Trajet\TrajetGroupe.vb" />
@@ -296,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="1 - Caracteristique\FrmCaracteristique.resx">
       <DependentUpon>FrmCaracteristique.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="1 - Metier\FrmMetier.resx">
+      <DependentUpon>FrmMetier.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FrmDiscord.resx">
       <DependentUpon>FrmDiscord.vb</DependentUpon>
@@ -341,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tchat\FrmTchat.resx">
       <DependentUpon>FrmTchat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trajet\CreateurTrajet.resx">
+      <DependentUpon>CreateurTrajet.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

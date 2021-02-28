@@ -4,6 +4,7 @@
     Public Trajet As New Dictionary(Of String, List(Of String))
     Public ThreadTrajet As Threading.Thread
     Public Pods As Integer
+    Public Regeneration As Integer
 
     Public Variable As New Dictionary(Of String, Dictionary(Of Object, Object))
 

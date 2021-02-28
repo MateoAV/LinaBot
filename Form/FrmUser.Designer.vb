@@ -59,10 +59,11 @@ Partial Class FrmUser
         Me.ButtonIA = New System.Windows.Forms.Button()
         Me.Button_Option = New System.Windows.Forms.Button()
         Me.ButtonDll = New System.Windows.Forms.Button()
+        Me.ButtonCreateurTrajet = New System.Windows.Forms.Button()
         Me.TimerRegeneration = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TimerStatut = New System.Windows.Forms.Timer(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.ButtonMetier = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -260,7 +261,8 @@ Partial Class FrmUser
         Me.FlowLayoutPanel1.Controls.Add(Me.ButtonIA)
         Me.FlowLayoutPanel1.Controls.Add(Me.Button_Option)
         Me.FlowLayoutPanel1.Controls.Add(Me.ButtonDll)
-        Me.FlowLayoutPanel1.Controls.Add(Me.Button1)
+        Me.FlowLayoutPanel1.Controls.Add(Me.ButtonCreateurTrajet)
+        Me.FlowLayoutPanel1.Controls.Add(Me.ButtonMetier)
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(163, 27)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(355, 190)
@@ -276,6 +278,7 @@ Partial Class FrmUser
         Me.ButtonTchat.Name = "ButtonTchat"
         Me.ButtonTchat.Size = New System.Drawing.Size(50, 50)
         Me.ButtonTchat.TabIndex = 399
+        Me.ToolTip1.SetToolTip(Me.ButtonTchat, "Tchat")
         Me.ButtonTchat.UseVisualStyleBackColor = True
         '
         'ButtonCaracteristique
@@ -288,6 +291,7 @@ Partial Class FrmUser
         Me.ButtonCaracteristique.Name = "ButtonCaracteristique"
         Me.ButtonCaracteristique.Size = New System.Drawing.Size(50, 50)
         Me.ButtonCaracteristique.TabIndex = 400
+        Me.ToolTip1.SetToolTip(Me.ButtonCaracteristique, "Caracteristique")
         Me.ButtonCaracteristique.UseVisualStyleBackColor = True
         '
         'Button2
@@ -300,6 +304,7 @@ Partial Class FrmUser
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(50, 50)
         Me.Button2.TabIndex = 401
+        Me.ToolTip1.SetToolTip(Me.Button2, "Sort")
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
@@ -312,6 +317,7 @@ Partial Class FrmUser
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(50, 50)
         Me.Button3.TabIndex = 402
+        Me.ToolTip1.SetToolTip(Me.Button3, "Inventaire")
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button4
@@ -324,6 +330,7 @@ Partial Class FrmUser
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(50, 50)
         Me.Button4.TabIndex = 403
+        Me.ToolTip1.SetToolTip(Me.Button4, "Quete")
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button5
@@ -336,6 +343,7 @@ Partial Class FrmUser
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(50, 50)
         Me.Button5.TabIndex = 404
+        Me.ToolTip1.SetToolTip(Me.Button5, "Map")
         Me.Button5.UseVisualStyleBackColor = True
         '
         'Button6
@@ -348,6 +356,7 @@ Partial Class FrmUser
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(50, 50)
         Me.Button6.TabIndex = 405
+        Me.ToolTip1.SetToolTip(Me.Button6, "Ami")
         Me.Button6.UseVisualStyleBackColor = True
         '
         'Button7
@@ -360,6 +369,7 @@ Partial Class FrmUser
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(50, 50)
         Me.Button7.TabIndex = 406
+        Me.ToolTip1.SetToolTip(Me.Button7, "Guilde")
         Me.Button7.UseVisualStyleBackColor = True
         '
         'Button8
@@ -372,6 +382,7 @@ Partial Class FrmUser
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(50, 50)
         Me.Button8.TabIndex = 407
+        Me.ToolTip1.SetToolTip(Me.Button8, "Dragodinde")
         Me.Button8.UseVisualStyleBackColor = True
         '
         'Button9
@@ -396,6 +407,7 @@ Partial Class FrmUser
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(50, 50)
         Me.Button10.TabIndex = 409
+        Me.ToolTip1.SetToolTip(Me.Button10, "Mode Développeur")
         Me.Button10.UseVisualStyleBackColor = True
         '
         'ButtonFamilier
@@ -408,6 +420,7 @@ Partial Class FrmUser
         Me.ButtonFamilier.Name = "ButtonFamilier"
         Me.ButtonFamilier.Size = New System.Drawing.Size(50, 50)
         Me.ButtonFamilier.TabIndex = 410
+        Me.ToolTip1.SetToolTip(Me.ButtonFamilier, "Familier")
         Me.ButtonFamilier.UseVisualStyleBackColor = True
         '
         'ButtonIA
@@ -420,6 +433,7 @@ Partial Class FrmUser
         Me.ButtonIA.Name = "ButtonIA"
         Me.ButtonIA.Size = New System.Drawing.Size(50, 50)
         Me.ButtonIA.TabIndex = 411
+        Me.ToolTip1.SetToolTip(Me.ButtonIA, "IA (Intelligence artificielle)")
         Me.ButtonIA.UseVisualStyleBackColor = True
         '
         'Button_Option
@@ -432,6 +446,7 @@ Partial Class FrmUser
         Me.Button_Option.Name = "Button_Option"
         Me.Button_Option.Size = New System.Drawing.Size(50, 50)
         Me.Button_Option.TabIndex = 412
+        Me.ToolTip1.SetToolTip(Me.Button_Option, "Option")
         Me.Button_Option.UseVisualStyleBackColor = True
         '
         'ButtonDll
@@ -444,7 +459,21 @@ Partial Class FrmUser
         Me.ButtonDll.Name = "ButtonDll"
         Me.ButtonDll.Size = New System.Drawing.Size(50, 50)
         Me.ButtonDll.TabIndex = 413
+        Me.ToolTip1.SetToolTip(Me.ButtonDll, "Dll")
         Me.ButtonDll.UseVisualStyleBackColor = True
+        '
+        'ButtonCreateurTrajet
+        '
+        Me.ButtonCreateurTrajet.BackgroundImage = CType(resources.GetObject("ButtonCreateurTrajet.BackgroundImage"), System.Drawing.Image)
+        Me.ButtonCreateurTrajet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.ButtonCreateurTrajet.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonCreateurTrajet.ForeColor = System.Drawing.Color.White
+        Me.ButtonCreateurTrajet.Location = New System.Drawing.Point(171, 115)
+        Me.ButtonCreateurTrajet.Name = "ButtonCreateurTrajet"
+        Me.ButtonCreateurTrajet.Size = New System.Drawing.Size(50, 50)
+        Me.ButtonCreateurTrajet.TabIndex = 415
+        Me.ToolTip1.SetToolTip(Me.ButtonCreateurTrajet, "Createur de trajet")
+        Me.ButtonCreateurTrajet.UseVisualStyleBackColor = True
         '
         'TimerRegeneration
         '
@@ -463,14 +492,18 @@ Partial Class FrmUser
         Me.TimerStatut.Enabled = True
         Me.TimerStatut.Interval = 1000
         '
-        'Button1
+        'ButtonMetier
         '
-        Me.Button1.Location = New System.Drawing.Point(171, 115)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 414
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.ButtonMetier.BackgroundImage = CType(resources.GetObject("ButtonMetier.BackgroundImage"), System.Drawing.Image)
+        Me.ButtonMetier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.ButtonMetier.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonMetier.ForeColor = System.Drawing.Color.White
+        Me.ButtonMetier.Location = New System.Drawing.Point(227, 115)
+        Me.ButtonMetier.Name = "ButtonMetier"
+        Me.ButtonMetier.Size = New System.Drawing.Size(50, 50)
+        Me.ButtonMetier.TabIndex = 416
+        Me.ToolTip1.SetToolTip(Me.ButtonMetier, "Metier")
+        Me.ButtonMetier.UseVisualStyleBackColor = True
         '
         'FrmUser
         '
@@ -537,5 +570,6 @@ Partial Class FrmUser
     Friend WithEvents ButtonIA As Button
     Friend WithEvents Button_Option As Button
     Friend WithEvents ButtonDll As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents ButtonCreateurTrajet As Button
+    Friend WithEvents ButtonMetier As Button
 End Class

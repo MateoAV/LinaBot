@@ -100,4 +100,7 @@ Partial Class Player
     'Option total
     Public [Option] As New COption
 
+    'Trajet
+    Public CreateurTrajetBot As New CreateurTrajet(Index)
+
 End Class

@@ -74,7 +74,9 @@
 
                 .Map.Entite.Clear()
 
-                .Send("GC1")
+                If .MITM = False Then
+                    .Send("GC1")
+                End If
 
                 EcritureMessage(index, "[Dofus]", "Fin du combat.", Color.Sienna)
 

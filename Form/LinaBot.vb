@@ -9,61 +9,65 @@ Public Class LinaBot
     Dim WithEvents DiscordBot As New DiscordSocketClient
 
     Private Sub LinaBot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         Try
 
-            Dim swLecture As New IO.StreamReader(Application.StartupPath + "\Data/PathMITM.txt")
 
-            Do Until swLecture.EndOfStream
+            Try
 
-                Dim ligne As String = swLecture.ReadLine
+                Dim swLecture As New IO.StreamReader(Application.StartupPath + "\Data/PathMITM.txt")
 
-                If ligne <> "" Then
+                Do Until swLecture.EndOfStream
 
-                    PathMITM = ligne
+                    Dim ligne As String = swLecture.ReadLine
 
-                End If
+                    If ligne <> "" Then
 
-            Loop
+                        PathMITM = ligne
 
-            swLecture.Close()
+                    End If
 
+                Loop
+
+                swLecture.Close()
+
+            Catch ex As Exception
+
+            End Try
+
+            ChargeServeur()
+
+            ChargeItems()
+
+            ChargeSort()
+
+            ChargeQuête()
+
+            ChargeMap()
+
+            ChargeRecolte()
+
+            ChargeDivers()
+
+            ChargeMobs()
+
+            ChargePnj()
+
+            ChargePnjRéponse()
+
+            ChargeMaison()
+
+            ChargeMetier()
+
+            ChargeFamilier()
+
+            ChargeCaractéristique()
+
+            LoadPersonage()
+
+            startup()
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
-
-        ChargeServeur()
-
-        ChargeItems()
-
-        ChargeSort()
-
-        ChargeQuête()
-
-        ChargeMap()
-
-        ChargeRecolte()
-
-        ChargeDivers()
-
-        ChargeMobs()
-
-        ChargePnj()
-
-        ChargePnjRéponse()
-
-        ChargeMaison()
-
-        ChargeMetier()
-
-        ChargeFamilier()
-
-        ChargeCaractéristique()
-
-        LoadPersonage()
-
-        startup()
-
     End Sub
 
     Private Sub DiscordBotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiscordBotToolStripMenuItem.Click
@@ -93,7 +97,7 @@ Public Class LinaBot
 
     Private Sub MITMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MITMToolStripMenuItem.Click
 
-        PathMITM = InputBox("Veuillez indiquer le chemin vers l'executable de dofus, exemple : ""D:\DOFUS RETRO\resources\app\retroclient""", "Path", "")
+        PathMITM = InputBox("Veuillez indiquer le chemin vers l'executable de dofus, exemple : ""D:\DOFUS RETRO\""", "Path", "")
 
         'J'ouvre le fichier pour y écrire se que je souhaite
         Dim swEcriture As New IO.StreamWriter(Application.StartupPath + "\Data/PathMITM.txt")
@@ -143,7 +147,7 @@ Public Class LinaBot
                 End If
 
             End Try
-
+            'rre
             '  Label3.ForeColor = Color.Orange
             '  Label3.Text = "Status: starting bot"
             Await DiscordBot.StartAsync()
@@ -162,11 +166,11 @@ Public Class LinaBot
 
     End Function
 
-    Public Sub sendMsg(monmessage As String)
+    Public Sub sendMsg(monmessage As String, channel As String)
 
         Try
 
-            Dim channel1 As Discord.IMessageChannel = DiscordBot.GetChannel("729320217653805086")
+            Dim channel1 As Discord.IMessageChannel = DiscordBot.GetChannel(channel)
             channel1.SendMessageAsync(monmessage)
 
         Catch ex As Exception

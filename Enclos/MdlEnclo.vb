@@ -19,6 +19,19 @@
                     .NbrMaxDragodinde = separateData(2)
                     .NbrMaxObjet = separateData(3)
 
+                    If CInt(separateData(1)) > 0 Then
+
+                        LinaBot.sendMsg("```Serveur : " & Comptes(index).Personnage.Serveur & vbCrLf &
+                                    "Guilde : " & separateData(4) & vbCrLf &
+                                    "Prix : " & separateData(1) & vbCrLf &
+                                    "Nombre de dragodinde maximum : " & separateData(2) & vbCrLf &
+                                    "Nombre d'objets maximum : " & separateData(3) & vbCrLf &
+                                    "Coordonnees : " & Comptes(index).Map.Coordonnees & vbCrLf &
+                                    "MapID : " & Comptes(index).Map.ID & vbCrLf &
+                                    "Vue le : " & Date.Now & "```", "815122410340483073")
+
+                    End If
+
                 End With
 
             Catch ex As Exception

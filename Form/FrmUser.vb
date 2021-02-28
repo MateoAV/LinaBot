@@ -316,6 +316,34 @@
 
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
+
+        Dim swEcriture As New IO.StreamWriter(Application.StartupPath + "\Trajet/Nouveau document texte.txt")
+
+        For i = 0 To Comptes(index).PourTrajet.Count - 1
+
+            swEcriture.Write(vbTab & Comptes(index).PourTrajet(i) & vbCrLf)
+
+        Next
+
+        'Puis je le ferme.
+        swEcriture.Close()
+
+        Comptes(index).PourTrajet.Clear()
+
+    End Sub
+
+    Private Sub ButtonCreateurTrajet_Click(sender As Object, e As EventArgs) Handles ButtonCreateurTrajet.Click
+        Comptes(index).CreateurTrajetBot.Show()
+    End Sub
+
+    Private Sub ButtonMetier_Click(sender As Object, e As EventArgs) Handles ButtonMetier.Click
+
+        Dim frm As New FrmMetier(index)
+        frm.Show()
+
+    End Sub
+
 
 
 #End Region

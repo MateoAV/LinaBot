@@ -53,6 +53,10 @@
 
                                 .FrmGroupe.Pods = separateLecture(3)
 
+                            Case "regeneration"
+
+
+
                             Case "spectateur"
 
                                 ' .FrmGroupe.Spectateur = CBool(separateLecture(3))
