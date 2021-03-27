@@ -1,6 +1,6 @@
 ﻿Module MdlCanal
 
-    Sub GiCanalDofus(ByVal index As Integer, ByVal data As String)
+    Sub GiCanalDofus(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -33,7 +33,7 @@
 
                                     .General = checked
 
-                                Case "#" ', "$", "p" 'groupe/privée/équipe
+                                Case "#", "$", "p" 'groupe/privée/équipe
 
                                     .GroupePriveeEquipe = checked
 
@@ -73,7 +73,7 @@
 
     End Sub
 
-    Public Sub GiDofusInformation(ByVal index As Integer, ByVal data As String)
+    Public Sub GiDofusInformation(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -171,6 +171,10 @@
                         Case "128" 'Im128;Linaculer
 
                             EcritureMessage(index, "[Combat]", "En attente du joueur " & Separation(1) & "...", Color.Red)
+
+                        Case "120"
+
+                            EcritureMessage(index, "[Dofus]", "Cet emplacement de stockage est déjà utilisé.", Color.Red)
 
                         Case "116" 'Im116;[Seydlex]~Bot tchatJoueur
 
@@ -520,7 +524,7 @@
 
     End Sub
 
-    Sub GiDofusTchat(ByVal index As Integer, ByVal data As String)
+    Sub GiDofusTchat(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -546,6 +550,10 @@
 
                         EcritureMessage(index, "[Privée de]", "[" & separateData(1) & "] " & separateData(2) & " : " & separateData(3), Color.Blue) 'Privée de 
 
+                    Case "f" ' cMEf
+
+                        EcritureMessage(index, "[Alignement]", "Le joueur " & Mid(data, 5) & " n'est pas connecté.", Color.Red)  'Commerce
+
                     Case "T"
 
                         EcritureMessage(index, "[Privée à]", "[" & separateData(1) & "] " & separateData(2) & " : " & separateData(3), Color.Blue)  'Privée à
@@ -565,6 +573,10 @@
                     Case ":"
 
                         EcritureMessage(index, "[Commerce]", "[" & separateData(1) & "] " & separateData(2) & " : " & separateData(3), Color.Sienna)  'Commerce
+
+                    Case "A" ' cMEA
+
+                        EcritureMessage(index, "[Alignement]", "Impossible d'utilise ce canal.", Color.Red)  'Commerce
 
                 End Select
 

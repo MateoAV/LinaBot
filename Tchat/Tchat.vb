@@ -1,78 +1,80 @@
 ﻿Public Module Tchat
 
-    Public Function CanalActiveDesactive(ByVal index As Integer, ByVal canal As String, ByVal choix As String) As String
+    Public Function CanalActiveDesactive(index As Integer, canal As String, choix As String) As Boolean
 
         With Comptes(index)
 
-            If .Connecté Then
+            Try
 
-                .Tchat.BloqueTchat.Reset()
+                If .Connecté Then
 
-                Dim envoyer As String = "cC" & If(choix = True, "+", "-")
+                    Dim envoyer As String = "cC" & If(CBool(choix) = True, "+", "-")
 
-                Select Case canal.ToLower
+                    Select Case canal.ToLower
 
-                    Case "information"
+                        Case "information"
 
-                        .Send(envoyer & "i")
+                            Return .Send(envoyer & "i",
+ _                                       ' Bonnes Informations
+                                         {If(envoyer = "cC+", "cC+i", "cC-i")})
 
-                    Case "communs", "commun"
+                        Case "communs", "commun"
 
-                        .Send(envoyer & "*")
+                            Return .Send(envoyer & "*",
+ _                                       ' Bonnes Informations
+                                         {If(envoyer = "cC+", "cC+*", "cC-*")})
 
-                    Case "groupe"
+                        Case "groupe"
 
-                        .Send(envoyer & "#$p")
+                            Return .Send(envoyer & "#$p",
+ _                                       ' Bonnes Informations
+                                         {If(envoyer = "cC+", "cC+#$p", "cC-#$p")})
 
-                    Case "guilde"
+                        Case "guilde"
 
-                        .Send(envoyer & "%")
+                            Return .Send(envoyer & "%",
+ _                                       ' Bonnes Informations
+                                         {If(envoyer = "cC+", "cC+%", "cC-%")})
 
-                    Case "alignement"
+                        Case "alignement"
 
-                        .Send(envoyer & "!")
+                            Return .Send(envoyer & "!",
+ _                                       ' Bonnes Informations
+                                         {If(envoyer = "cC+", "cC+!", "cC-!")})
 
-                    Case "recrutement"
+                        Case "recrutement"
 
-                        .Send(envoyer & "?")
+                            Return .Send(envoyer & "?",
+ _                                       ' Bonnes Informations
+                                         {If(envoyer = "cC+", "cC+?", "cC-?")})
 
-                    Case "commerce"
+                        Case "commerce"
 
-                        .Send(envoyer & ":")
+                            Return .Send(envoyer & ":",
+ _                                       ' Bonnes Informations
+                                         {If(envoyer = "cC+", "cC+:", "cC-:")})
 
-                    Case Else
+                        Case Else
 
-                        Return "Impossible de trouver le canal indiqué, vérifier qu'il est bien orthographié ou existant."
+                            Return False
 
-                End Select
+                    End Select
 
-                Select Case .Tchat.BloqueTchat.WaitOne(15000)
+                End If
 
-                    Case True
+            Catch ex As Exception
 
-                        Return "[Tchat] : Action réussi !"
+            End Try
 
-                    Case False
-
-                        .Tchat.BloqueTchat.Set()
-
-                        Return "[Tchat] : Action échoué !"
-
-                End Select
-
-            Else
-
-                Return "Le bot n'est pas connecté."
-
-            End If
-
-            Return "Aucune action possible. " & "Canal : " & canal & ", Choix : " & choix
+            Return False
 
         End With
 
     End Function
 
-    Public Function CanalEnvoieMessage(ByVal index As Integer, ByVal message As String) As String
+
+
+    Public Function CanalEnvoieMessage(index As Integer, message As String) As Boolean
 
         With Comptes(index)
 
@@ -86,76 +88,84 @@
 
                         message = message.Replace(canal & " ", "")
 
-                        .Tchat.BloqueTchat.Reset()
-
                         Select Case canal.ToLower
 
                             Case "/c" ' Communs
 
-                                .Send("BM*|" & message & "|")
+                                Return .Send("BM*|" & message & "|",
+ _                                           ' Bonnes Informations
+                                             {"cMK|" & .Personnage.ID},
+ _                                           ' Mauvaises informations
+                                             {"BN"})
 
                             Case "/w" ' Message Privée
 
                                 Dim joueur As String = Split(message, " ")(0)
-                                .Send("BM" & joueur & "|" & message.Replace(joueur & " ", "") & "|")
+                                Return .Send("BM" & joueur & "|" & message.Replace(joueur & " ", "") & "|",
+ _                                           ' Bonnes Informations
+                                             {"cMKT" & .Personnage.ID},
+ _                                           ' Mauvaises informations
+                                             {"BN",
+                                              "cMEf"}) ' Le joueur X n'est pas connecté.
 
                             Case "/p" ' Groupe
 
-                                .Send("BM$|" & message & "|")
+                                Return .Send("BM$|" & message & "|",
+ _                                           ' Bonnes Informations
+                                             {"cMK$" & .Personnage.ID},
+ _                                           ' Mauvaises informations
+                                             {"BN"})
 
                             Case "/g" ' Guilde
 
-                                .Send("BM%|" & message & "|")
+                                Return .Send("BM%|" & message & "|",
+ _                                           ' Bonnes Informations
+                                             {"cMK%" & .Personnage.ID},
+ _                                           ' Mauvaises informations
+                                             {"BN"})
 
                             Case "/r" ' Recrutement
 
-                                .Send("BM?|" & message & "|")
+                                Return .Send("BM?|" & message & "|",
+ _                                           ' Bonnes Informations
+                                             {"cMK?" & .Personnage.ID},
+ _                                           ' Mauvaises informations
+                                             {"BN"})
 
                             Case "/b" ' Commerce
 
-                                .Send("BM:|" & message & "|")
+                                Return .Send("BM:|" & message & "|",
+ _                                           ' Bonnes Informations
+                                             {"cMK:" & .Personnage.ID},
+ _                                           ' Mauvaises informations
+                                             {"BN"})
 
                             Case "/a" ' Alignement
 
-                                .Send("BM!|" & message & "|")
+                                Return .Send("BM!|" & message & "|",
+ _                                           ' Bonnes Informations
+                                             {"cMK!" & .Personnage.ID},
+ _                                           ' Mauvaises informations
+                                             {"BN",
+                                              "cMEA", ' Impossible d'utilise ce canal
+                                              "Im0106", 'Alignement pas asse important.
+                                              "Im0115;"}) ' Il faut attendre avant de pouvoir remettre un message.
 
                             Case Else
 
-                        End Select
-
-                        Select Case .Tchat.BloqueTchat.WaitOne(15000)
-
-                            Case True
-
-                                Return "[Tchat - Réussi] - L'envoie du message à bien été effectué."
-
-                            Case False
-
-                                .Tchat.BloqueTchat.Set()
-
-                                Return "[Tchat - Erreur] - Malheureusement personne vous entend :/"
+                                Return False
 
                         End Select
-
-                    Else
-
-                        Return "Vous devez mettre un message pour que le bot l'envoie en jeu."
 
                     End If
-
-                Else
-
-                    Return "Le bot n'est pas connecté."
 
                 End If
 
             Catch ex As Exception
 
-                ErreurFichier(index, .Personnage.NomDeCompte, "CanalEnvoieMessage", ex.Message)
-
             End Try
 
-            Return "impossible d'envoyer le message, soit le message contient une erreur, soit le bot n'a pas réussi à envoyer le message pour diverse raison."
+            Return False
 
         End With
 

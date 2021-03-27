@@ -161,7 +161,7 @@
                             .Quantiter = Convert.ToInt64(separateItem(2), 16)
 
                             'Caractéristique
-                            .Caracteristique = ItemCaractéristique(separateItem(4), .IdObjet)
+                            .Caracteristique = ItemCaracteristique(separateItem(4), .IdObjet)
                             .CaracteristiqueBrute = separateItem(4)
 
                             If separateItem(3) <> "" Then
@@ -227,10 +227,10 @@ End Module
 
 Public Class CBonusEquipement
 
-    Public NuméroPanoplie As Integer
+    Public NumeroPanoplie As Integer
     Public IDObjet As String()
-    Public Caractéristique As CItemCaractéristique
-    Public CaractéristiqueBrute As String
+    Public Caracteristique As CItemCaractéristique
+    Public CaracteristiqueBrute As String
 
 End Class
 

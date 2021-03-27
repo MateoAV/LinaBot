@@ -17,6 +17,8 @@ Module mdlGuilde
 
                 .Guilde.EnGuilde = True
 
+                .Guilde.Nom = Mid(separateData(0), 3)
+
                 If .Guilde.Invitation Then
 
                     .Guilde.Invitation = False
@@ -264,7 +266,7 @@ Module mdlGuilde
 
     End Sub
 
-    Private Function GuildeClasseAlignement(Valeur As Integer) As String
+    Public Function GuildeClasseAlignement(Valeur As Integer) As String
 
         Try
 
@@ -298,7 +300,7 @@ Module mdlGuilde
 
     End Function
 
-    Private Function GuildeDroits(Index As Integer, Name_Joueur As String, Information As Integer) As CGuildeDroit
+    Public Function GuildeDroits(Index As Integer, Name_Joueur As String, Information As Integer) As CGuildeDroit
 
         With Comptes(Index)
 
@@ -409,6 +411,9 @@ Module mdlGuilde
         With Comptes(index)
 
             Try
+
+                ' gIM- Linaculer
+                ' gIM- nom du joueur
 
                 Dim nom As String = Mid(data, 5)
 
@@ -548,6 +553,27 @@ Module mdlGuilde
 
     End Sub
 
+    Public Sub GiGuildePercepteur(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' gITM+ 2ki ; b , 28 , Linaculer1    , 1516232486517 ,   , 0 , 0 ; 2ki ; 0 
+                ' gITM+     ; ? , ?  , Nom du poseur , ?             , ? , ? , ? ; ?   ; ?
+
+                'Inconnu actuellement
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiGuildePercepteurPosee", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
     Public Sub GiGuildePercepteurPoseEchec(index As Integer, data As String)
 
         With Comptes(index)
@@ -567,7 +593,6 @@ Module mdlGuilde
         End With
 
     End Sub
-
 
     Public Sub GiGuildePercepteurRetire(index As Integer, data As String)
 
@@ -858,6 +883,7 @@ Public Class CGuilde
     Public ExpActuelle As String
     Public EnGuilde As Boolean
     Public Invitation As Boolean
+    Public Nom As String
     Public JoueurQuiInvite, JoueurQuiEstInvite As String
     Public Membre As New Dictionary(Of String, CGuildeJoueur)
     Public Percepteur As CGuildePercepteur

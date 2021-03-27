@@ -1,0 +1,54 @@
+Dim Pods = {"80"}
+Dim Recolte = {"Pecheur" , "Pichon" , "Pecher" , "Infini"}
+Dim Supprime = {"Pichon Eud'Compet"}
+
+Sub Main()
+
+	
+
+	If Map.ID("6265") = True Then
+				
+		If Item.Equipe("Canne a pichon") = True Then
+		
+			If Metier.Niveau("Pecheur") <= 20 Then
+				
+				Recolte
+			
+			End If
+	
+		else
+	
+			Call PnjMer()
+			
+		End If
+	
+	End If
+
+
+End Sub
+
+Sub PnjMer()
+
+	If Pnj.Parler("Mer") = True Then
+	
+		Pnj.Reponse("Louer une canne a pichon")
+		Pnj.Reponse("Louer la canne")
+		Pnj.Reponse("Terminer la discussion.")
+		Pnj.Quitte.Dialogue
+	
+	End If
+
+End Sub
+
+'Simple precaution
+Sub Banque()
+
+	While Item.Existe("Pichon Eud'Compet") = True
+	
+		Item.Supprime("Pichon Eud'Compet")
+		
+	End While
+
+End Sub
+	
+	

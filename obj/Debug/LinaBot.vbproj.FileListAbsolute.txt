@@ -86,3 +86,14 @@ C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Runtime.CompilerServices
 C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.CreateurTrajet.resources
 C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.FrmMetier.resources
+C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Buffers.dll
+C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Memory.dll
+C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Buffers.xml
+C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Memory.xml
+C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.FrmMsgPrivee.resources
+C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\LinaBot.exe.manifest
+C:\Users\jessy\Desktop\LinaBot\LinaBot\bin\Debug\LinaBot.application
+C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.exe.manifest
+C:\Users\jessy\Desktop\LinaBot\LinaBot\obj\Debug\LinaBot.application

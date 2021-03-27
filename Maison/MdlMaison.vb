@@ -1,6 +1,60 @@
 ﻿Module MdlMaison
 
-    Public Sub GiMaMaison(ByVal index As Integer, ByVal data As String)
+    Public Sub GiMaisonAucunCodePorte(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' hX 999 | 0
+                ' hX Id  | Vérouillé (oui ou non)
+
+                Dim separateData As String() = Split(Mid(data, 3), "|")
+
+                If .MaisonMap.ContainsKey(separateData(0)) Then
+
+                    .MaisonMap(separateData(0)).Verouiller = separateData(1) IsNot "0"
+
+                End If
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonChangeCodeReussie", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaisonAucunCodeCoffre(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' sX 9999   _ 999     | 0
+                ' sX Id map _ cellule | Vérouillé (oui ou non)
+
+                Dim separateData As String() = Split(Mid(data, 3), "|")
+
+                If .Maison.Coffre.ContainsKey(separateData(0)) Then
+
+                    .Maison.Coffre(separateData(0)).Verouiller = separateData(1) IsNot "0"
+
+                End If
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonAucunCodeCoffre", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaMaison(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -37,7 +91,54 @@
 
     End Sub
 
-    Public Sub GiMesCoffres(ByVal index As Integer, ByVal data As String)
+    Public Sub GiMaMaisonSupprime(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' hL -
+                ' hL -
+
+                .Maison = New CMaison
+
+                EcritureMessage(index, "[Dofus]", "Vous n'avez plus de maison.", Color.Green)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaMaisonSupprime", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaMaisonVendu(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' M15 | 1000 ; slider 
+                ' M15 | Prix ; Pseudo 
+
+                Dim separateData As String() = Split(data, "|")
+                separateData = Split(separateData(1), ";")
+
+                EcritureMessage(index, "[Dofus]", "L'une de vos maisons vient d'être achetée " & separateData(0) & " kamas par " & separateData(1) & ". La somme a été placée sur votre compte en banque.", Color.Green)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaMaisonVendu", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMesCoffres(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -70,13 +171,13 @@
 
                     End With
 
-                    If .Maison.Coffre.ContainsKey(separate(0)) Then
+                    If .Maison.Coffre.ContainsKey(separate(0) & "_" & separate(1)) Then
 
-                        .Maison.Coffre(separate(0)) = varCoffre
+                        .Maison.Coffre(separate(0) & "_" & separate(1)) = varCoffre
 
                     Else
 
-                        .Maison.Coffre.Add(separate(0), varCoffre)
+                        .Maison.Coffre.Add(separate(0) & "_" & separate(1), varCoffre)
 
                     End If
 
@@ -92,7 +193,7 @@
 
     End Sub
 
-    Public Sub GiMaisonMap(ByVal index As Integer, ByVal data As String)
+    Public Sub GiMaisonMap(index As Integer, data As String)
 
         With Comptes(index)
 
@@ -137,6 +238,16 @@
                     End If
 
                 End With
+
+                If .MaisonMap.ContainsKey(id) Then
+
+                    .MaisonMap(id) = newMaison
+
+                Else
+
+                    .MaisonMap.Add(id, newMaison)
+
+                End If
 
                 If VarMaison(id).Map = "[X,Y]" OrElse VarMaison(id).MapId = "0" Then
 
@@ -244,6 +355,244 @@
 
     End Sub
 
+    Public Sub GiMaisonQuitteAchat(ByVal index As Integer, ByVal data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' hV
+
+                .Personnage.EnInteraction = False
+
+                EcritureMessage(index, "[Dofus]", "Le bot n'est plus en achat de maison.", Color.Green)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonQuitteAchat", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaisonPrix(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' hCK 607 | 8999999
+                ' hCK Id  | Prix
+
+                Dim separateData As String() = Split(Mid(data, 4), "|")
+
+                If .MaisonMap.ContainsKey(separateData(0)) Then
+
+                    .MaisonMap(separateData(0)).Prix = separateData(1)
+
+                End If
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonQuitteAchat", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaisonAchete(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' hBK 999 | 10000000 
+                ' hBK ID  | Prix 
+
+                Dim separateData As String() = Split(Mid(data, 4), "|")
+
+                EcritureMessage(index, "[Dofus]", "Tu viens d'acheter 'Maison' pour " & separateData(1) & " kamas.", Color.Green)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonAchete", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaisonMisEnVente(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' hSK 999 |10000000 
+                ' hSK ID  | Prix 
+
+                Dim separateData As String() = Split(Mid(data, 4), "|")
+
+                EcritureMessage(index, "[Dofus]", "'Maison' est mise en vente au prix de " & separateData(1) & " kamas.", Color.Green)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonAchete", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaisonCode(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' KCK 1 | 8 
+                ' KCK 1 | lenombre de chiffre maximum  
+
+                .Maison.EnCode = True
+
+                Dim separateData As String() = Split(Mid(data, 4), "|")
+
+                Select Case separateData(0)
+
+                    Case "0"
+
+                        EcritureMessage(index, "[Dofus]", "Veuillez saisir le code.", Color.Green)
+
+                    Case "1"
+
+                        EcritureMessage(index, "[Dofus]", "Veuillez saisir le nouveau code (maximum de " & separateData(1) & " chiffres).", Color.Green)
+
+                End Select
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonChangeCode", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaisonChangeCodeReussie(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' KKK
+
+                EcritureMessage(index, "[Dofus]", "Code changé", Color.Green)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonChangeCodeReussie", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaisonGuilde(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' hG 999
+                ' hG ID
+
+                EcritureMessage(index, "[Dofus]", "Vous pouvez changer les droits de la maison de guilde.", Color.Green)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonChangeCodeReussie", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaisonCodeEchec(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' KKE
+
+                EcritureMessage(index, "[Dofus]", "Code erroné", Color.Red)
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonChangeCodeReussie", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Public Sub GiMaisonEnCodeFin(index As Integer, data As String)
+
+        With Comptes(index)
+
+            Try
+
+                ' KV
+
+                .Maison.EnCode = False
+
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiMaisonEnCodeFin", data & vbCrLf & ex.Message)
+
+            End Try
+
+        End With
+
+    End Sub
+
+    Private Delegate Function dlgFMaisonMap()
+    Public Function CopyMaisonMap(index As Integer, dico As Dictionary(Of Integer, CMaison)) As Dictionary(Of Integer, CMaison)
+
+        With Comptes(index)
+
+            If .FrmUser.InvokeRequired Then
+
+                Return .FrmUser.Invoke(New dlgFMaisonMap(Function() CopyMaisonMap(index, dico)))
+
+            Else
+
+                Dim newDico As New Dictionary(Of Integer, CMaison)
+
+                For Each pair As KeyValuePair(Of Integer, CMaison) In dico
+
+                    newDico.Add(pair.Key, pair.Value)
+
+                Next
+
+                Return newDico
+
+            End If
+
+        End With
+
+    End Function
+
 End Module
 
 
@@ -264,6 +613,7 @@ Public Class CMaison
     Public Code As Integer
     Public Coffre As New Dictionary(Of Integer, CCoffre)
 
+    Public EnCode As Boolean
 End Class
 
 Public Class CCoffre

@@ -1,0 +1,33 @@
+26|Alchimiste|23:Alambic:Preparer une Potion|68:Ceuillir:Lin|69:Ceuillir:Chanvre|71:Ceuillir:Trefle a 5 feuilles|72:Ceuillir:Menthe Sauvage|73:Ceuillir:Orchidee Freyesque|74:Ceuillir:Edelweiss|160:Ceuillir:Pandouille
+48|Sculptemage d'Arcs|118:Enclume magique:Resculpter un Arc
+49|Sculptemage de baguette|119:Enclume magique:Resculpter une Baguette
+50|Sculptemage de Bâton|120:Enclume magique:Resculpter un Baton
+43|Forgemage de dague|1:Enclume magique:Reforger une Dague
+47|Forgemage de Hache|115:Enclume magique:Reforger une Hache
+45|Forgemage de marteaux|116:Enclume magique:Reforger un Marteau
+46|Forgemage de Pelle|117:Enclume magique:Reforger une Pelle
+44|Forgemage d'Epees|113:Enclume magique:Reforger une Epee
+16|Bijoutier|11:Atelier:Creer un Anneau|12:Atelier:Creer une Amulette
+56|Boucher|134:Plan de Travail:Preparer une viande
+25|Boulanger|109:Four:Faire des bonbons|27:Four:Cuire du pain
+65|Bricoleur|171:Atelier de Bricolage:Bricoler|182:Atelier de Bricolage:Confectionner une clef
+41|Chasseur|132:Plan de Travail:Preparer
+62|Cordomage|163:Table Magique:Ameliorer des Bottes|164:Table Magique:Ameliorer une Ceinture
+15|Cordonnier|13:Table de confection:Confectionner des Bottes|14:Table de confection:Confectionner une Ceinture
+64|Costumage|167:Machine a Coudre Magique:Ameliorer un Sac|166:Machine a Coudre Magique:Ameliorer un Chapeau|165:Machine a Coudre Magique:Ameliorer une Cape
+60|Forgeur de Bouclier|0:Inconnu:Inconnu
+17|Forgeur de dague|18:Enclume:Forger une Dague|142:Enclume:Reparer une Dague
+31|Forgeur de Hache|65:Enclume:Forger une Hache|143:Enclume:Reparer une Hache
+14|Forgeur de marteaux|19:Enclume:Forger un Marteau|144:Enclume:Reparer un Marteau
+20|Forgeur de Pelle|21:Enclume:Forger une Pelle|146:Enclume:Reparer une Pelle
+11|Forgeur d'epees|20:Enclume:Forger une Epee|145:Enclume:Reparer une Epee
+13|Sculpteur d'Arcs|15:Etabli:Sculpter un Arc|149:Etabli:Reparer un Arc
+19|Sculpteur de baguette|16:Etabli:Sculpter une Baguette|148:Etabli:Reparer une Baguette
+18|Sculpteur de bâton|17:Etabli:Sculpter un Baton|147:Etabli:Reparer un Baton
+63|Joaillomage|168:Atelier Magique:Ameliorer un Anneau|169:Atelier Magique:Ameliorer une Amulette
+27|Tailleur|63:Machine a Coudre:Coudre un Chapeau|123:Machine a Coudre:Coudre un Sac|64:Machine a Coudre:Coudre une Cape|95:Filer:Fileuse
+2|Bucheron|101:Scie:Scier|6:Couper:Frene|10:Couper:Chene|33:Couper:If|34:Couper:Ebene|35:Couper:Orme|37:Couper:Erable|38:Couper:Charme|39:Couper:Chataignier|40:Couper:Noyer|41:Couper:Merisier|139:Couper:Bombu|141:Couper:Oliviolet|154:Couper:Bambou|158:Couper:Bambou sacre|155:Couper:Bambou sombre|174:Couper:Kaliptus
+28|Paysan|47:Concasseur:Moudre|122:Concasseur:Egrener|45:Faucher:Ble|46:Faucher:Houblon|50:Faucher:Lin|52:Faucher:Seigle|53:Faucher:Orge|54:Faucher:Chanvre|57:Faucher:Avoine|58:Faucher:Malt|159:Faucher:Riz
+58|Poissonnier|135:Plan de Travail:Preparer un poisson
+24|Mineur|48:Meule:Polir une Pierre|32:Moule:Fondre|24:Collecter:Fer|25:Collecter:Cuivre|26:Collecter:Bronze|28:Collecter:Kobalte|29:Collecter:Argent|30:Collecter:Or|31:Collecter:Bauxite|55:Collecter:Etain|56:Collecter:Manganese|161:Collecter:Dolomite|162:Collecter:Silicate
+36|Pecheur|133:Plan de Travail:Vider|124:Pecher:Petits poissons (riviere)|128:Pecher:Petits poissons (mer)|129:Pecher:Poissons (mer)|125:Pecher:Poissons (riviere)|126:Pecher:Gros poissons (riviere)|130:Pecher:Gros poissons (mer)|127:Pecher:Poissons geants (riviere)|131:Pecher:Poissons geants (mer)|140:Pecher:Ombre Etrange|136:Pecher:Pichon

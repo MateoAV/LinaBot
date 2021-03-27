@@ -1,68 +1,77 @@
 ﻿
 Module MdlInteraction
 
-    Public Sub GiInteractionEnJeu(ByVal index As Integer, ByVal data As String)
+    Public Sub GiInteractionEnJeu(index As Integer, data As String)
 
         With Comptes(index)
 
-            'GDF | 206     ; 3    ; 0
-            'GDF | Cellule ; Etat ; Utilisation                
+            Try
 
-            ' I separate the data by this sign "|"
-            Dim separateData As String() = Split(data, "|")
+                'GDF | 206     ; 3    ; 0
+                'GDF | Cellule ; Etat ; Utilisation                
 
-            For i = 1 To separateData.Count - 1
+                ' I separate the data by this sign "|"
+                Dim separateData As String() = Split(data, "|")
 
-                ' I separate the data by this sign ";"
-                Dim separate As String() = Split(separateData(i), ";")
+                For i = 1 To separateData.Count - 1
 
-                If .Map.Interaction.ContainsKey(separate(0)) Then
+                    ' I separate the data by this sign ";"
+                    Dim separate As String() = Split(separateData(i), ";")
 
-                    With .Map.Interaction(separate(0))
+                    If .Map.Interaction.ContainsKey(separate(0)) Then
 
-                        Select Case separate(2)
+                        With .Map.Interaction(separate(0))
 
-                            Case "0" ' Utilisation une personne
+                            Select Case separate(2)
 
-                                Select Case separate(1) 'State now
+                                Case "0" ' Utilisation une personne
 
-                                    Case 2 'In Cut
+                                    Select Case separate(1) 'State now
 
-                                        .Information = "en utilisation"
+                                        Case 2 'In Cut
 
-                                    Case 3, 4 'Cut
+                                            .Information = "en utilisation"
 
-                                        .Information = "indisponible"
+                                        Case 3, 4 'Cut
 
-                                        If separate(0) = Comptes(index).Personnage.InteractionCellule Then
+                                            .Information = "indisponible"
 
-                                            Comptes(index).Recolte.EnRecolte = False
+                                            If separate(0) = Comptes(index).Personnage.InteractionCellule Then
 
-                                        End If
+                                                Comptes(index).Recolte.EnRecolte = False
+                                                Comptes(index).Personnage.EnInteraction = False
 
-                                End Select
+                                            End If
 
-                            Case "1" 'Utilisation possible
+                                    End Select
 
-                                .Information = "disponible"
+                                Case "1" 'Utilisation possible
 
-                            Case Else
+                                    .Information = "disponible"
 
-                                EcritureMessage(index, "[Récolte]", "L'état de la ressource '" & .Nom & "' est inconnu, cellid : " & separate(0) & " Etat : " & separate(2), Color.Red)
+                                Case Else
 
-                        End Select
+                                    EcritureMessage(index, "[Récolte]", "L'état de la ressource '" & .Nom & "' est inconnu, cellid : " & separate(0) & " Etat : " & separate(2), Color.Red)
 
-                    End With
+                            End Select
 
-                    If separate(0) = .Personnage.InteractionCellule Then
+                        End With
 
-                        .Map.Bloque.Set()
+                        If separate(0) = .Personnage.InteractionCellule Then
+
+                            .Map.Bloque.Set()
+
+                        End If
 
                     End If
 
-                End If
+                Next
 
-            Next
+            Catch ex As Exception
+
+                ErreurFichier(index, .Personnage.NomDuPersonnage, "GiInteractionEnJeu", data & vbCrLf & ex.Message)
+
+            End Try
 
         End With
 

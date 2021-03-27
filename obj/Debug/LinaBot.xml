@@ -423,15 +423,40 @@ LinaBot
  False = La personne ne correspond pas à celui demandé.
  </returns>
 </member>
-<member name="M:LinaBot.Player.Send(System.String,System.String[])">
+<member name="M:LinaBot.Player.Send(System.String,System.String[],System.String[])">
  <summary>
  Envoie un message au serveur de jeu/Authentification.
  </summary>
  <param name="message">Le message à envoyer au serveur.</param>
- <param name="InfoRecv">Les informations que doit recevoir le bot du serveur avant de continuer.</param>
+ <param name="goodData">Les 'Bonnes" informations que doit recevoir le bot du serveur avant de continuer.</param>
+ <param name="badData">Les 'Mauvaises' informations que doit recevoir le bot du serveur avant de continuer.</param>
  <returns>
  True = Le bot à bien reçu les informations voulu. <br/>
  False = Le bot n'a pas reçu l'information voulu ou à temps.
+ </returns>
+</member>
+<member name="M:LinaBot.FunctionInteraction.Interaction(System.String,System.String,System.String,System.String)">
+ <summary>
+ Permet de faire une interaction avec un élément de la map.
+ </summary>
+ <param name="index">Le numéro du bot.</param>
+ <param name="nomInteraction">Lr nom de l'interaction, exemple : "Statue de Classe"</param>
+ <param name="action">Le nom de l'action à faire , exemple : "Se teleporter à Incarnam"</param>
+ <param name="cellule">La cellule visé, si rien, le bot prend l'interaction voulu qu'il trouve en premier.</param>
+ <returns>
+ True = Le bot a bien effectué l'interaction voulu. <br/>
+ False = Le bot n'a pas réussi à faire l'interaction demandé.
+ </returns>
+</member>
+<member name="M:LinaBot.FunctionInteraction.Quitte(System.Int32,System.String)">
+ <summary>
+ Quitte l'interaction en cours.
+ </summary>
+ <param name="index">Le numéro du bot.</param>
+ <param name="choix">Le nom de l'interaction à quitter, exemple : "Zaap"</param>
+ <returns>
+ True = Le bot a bien quitté l'interaction <br/>
+ False = Le bot n'a pas réussie à quitter l'interaction en cours.
  </returns>
 </member>
 <member name="M:LinaBot.FunctionItem.Supprime(System.String,System.String,System.String,System.String)">
@@ -563,11 +588,12 @@ LinaBot
  <returns>True = La Map correspond à celle du bot. <br/>
  False = La Map ne correspond pas à celle du bot.</returns>
 </member>
-<member name="M:LinaBot.FunctionMap.Deplacement(System.Int32,System.String,System.Int32,System.Int32)">
+<member name="M:LinaBot.FunctionMap.Deplacement(System.Int32,System.String,System.Boolean,System.Int32,System.Int32)">
  <summary>
  Déplace le bot sur une cellule/Direction indiqué.
  </summary>
  <param name="celluleDirection">Indique la direction ou la cellule où doit aller le bot.</param>
+ <param name="EviteAgression">Indique si le bot doit éviter les monstres qui agresse.</param>
  <param name="delaiMinimum">Temps d'attente minimum avant de pouvoir faire une autre action.</param>
  <param name="delaiMaximum">Temps d'attente maximum avant de pouvoir faire une autre action.</param>
  <returns>
@@ -585,17 +611,13 @@ LinaBot
  Nord , NordEst , NordOuest , Sud , SudEst , SudOuest , Est , Ouest</param>
  <returns></returns>
 </member>
-<member name="M:LinaBot.FunctionMap.Interaction(System.Int32,System.String,System.String)">
+<member name="M:LinaBot.FunctionMap.Agresser(System.Int32,System.String)">
  <summary>
- Effectue une interaction avec un objet interactif en jeu.
+ 
  </summary>
- <param name="index">Indique le numéro du bot.</param>
- <param name="nomID">Le nom ou l'ID avec quoi intéragir.</param>
- <param name="actionID">le nom de l'action ou l'ID à faire avec l'objet interactif.</param>
- <returns>
- True = le bot à intéragit avec l'objet. <br/>
- False = Le bot n'a pas réussi à intéragir avec l'objet.
- </returns>
+ <param name="index"></param>
+ <param name="nomIDJoueur"></param>
+ <returns></returns>
 </member>
 <member name="M:LinaBot.FunctionMetier.Option(System.Int32,System.String,System.Boolean,System.Boolean,System.Boolean,System.Int32)">
  <summary>
@@ -897,7 +919,7 @@ LinaBot
  False = Le bot n'a plus aucune récolte disponible sur la map.
  </returns>
 </member>
-<member name="M:LinaBot.FunctionRecolte.RecolteMonstre(System.Int32,System.String)">
+<member name="M:LinaBot.FunctionRecolte.EviteMonstre(System.Int32,System.String)">
  <summary>
  Vérifie si un mob ne se trouve pas sur la cellule voulu, sinon le bot attaquera sans le vouloir le mob.
  </summary>
@@ -913,13 +935,22 @@ LinaBot
  </summary>
  <param name="cellule">Indique la cellule de la récolte.</param>
 </member>
-<member name="M:LinaBot.FunctionRecolte.RecolteCelluleProche(System.Int32,System.String,System.Int32)">
+<member name="M:LinaBot.FunctionRecolte.CelluleProche(System.Int32,System.String,System.Int32)">
  <summary>
  Donne la cellule la plus proche pour récolter la ressource.
  </summary>
  <param name="cellule">Indique la cellule de la récolte.</param>
  <param name="portée">Indique la portée maximum, utile seulement pour le métier de pêcheur.</param>
  <returns>Retourne la cellule ou doit se trouver le personnage pour récolter la ressource.</returns>
+</member>
+<member name="M:LinaBot.FunctionRecolte.CanneDistance(System.Int32)">
+ <summary>
+ Retourne la distance maximum de la canne selon l'ID de la canne équipé.
+ </summary>
+ <param name="index">Le numéro du bot.</param>
+ <returns>
+ Retourne la distance maximum de la canne.
+ </returns>
 </member>
 </members>
 </doc>

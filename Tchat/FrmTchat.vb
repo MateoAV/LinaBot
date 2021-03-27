@@ -14,17 +14,17 @@
 
 #Region "Chargement + Socket"
 
-    Private Sub FrmTchat_Load(sender As Object, e As EventArgs) Handles MyBase.FormClosing
+    Private Sub FrmTchat_Closing(sender As Object, e As EventArgs) Handles MyBase.FormClosing
 
         With Comptes(index)
-
-            .FrmTchat = New FrmTchat(index)
 
             If .Connecté Then
 
                 RemoveHandler .Socket.Reception, AddressOf Reception
 
             End If
+
+            .FrmTchat = New FrmTchat(index)
 
         End With
 
